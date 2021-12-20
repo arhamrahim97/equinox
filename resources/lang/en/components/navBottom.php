@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'beranda' => 'Home',
+    'beranda' => 'Dashboard',
 ];
