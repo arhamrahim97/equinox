@@ -28,7 +28,7 @@
                             <li>
                                 <div class="notif-scroll scrollbar-outer">
                                     <div class="notif-center">
-                                        <a href="lang/id">
+                                        <a href="/lang/id">
                                             <div
                                                 class="notif-icon {{ session()->get('locale') == 'id' ? 'notif-primary' : 'notif-ligth' }} ">
                                                 <span class="flag-icon flag-icon-id"></span>
@@ -38,7 +38,7 @@
                                                 Indonesia
                                             </div>
                                         </a>
-                                        <a href="lang/en">
+                                        <a href="/lang/en">
                                             <div
                                                 class="notif-icon {{ session()->get('locale') == 'en' ? 'notif-primary' : 'notif-ligth' }}">
                                                 <span class="flag-icon flag-icon-us"></span>

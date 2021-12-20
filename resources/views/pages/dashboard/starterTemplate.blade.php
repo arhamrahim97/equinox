@@ -1,19 +1,20 @@
 @extends('templates/dashboard')
 
 @section('title')
-{{__('pages/mou/starterTemplate.title')}}
+{{__('pages/dashboard/starterTemplate.title')}}
 @endsection
 
 @section('subTitle')
-MOU
+{{__('pages/dashboard/starterTemplate.subTitle')}}
 @endsection
+
 
 @push('style')
 
 @endpush
 
 @section('content')
-<h1>{{__('pages/mou/starterTemplate.content')}}</h1>
+<h1>{{__('pages/dashboard/starterTemplate.content')}}</h1>
 @endsection
 
 @push('script')

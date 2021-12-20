@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Atlantis Bootstrap 4 Admin Dashboard</title>
+    <title>SIMOU @yield('title-tab')</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <link rel="icon" href="{{asset('assets/dashboard')}}/img/icon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.5/css/flag-icons.css"
@@ -25,6 +25,11 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{asset('assets/dashboard')}}/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{asset('assets/dashboard')}}/css/atlantis2.css">
+    <style>
+        .btn{
+            color: white !important
+        }
+    </style>
     @stack('style')
 
 </head>
@@ -44,7 +49,7 @@
                         <h4 class="page-title">@yield('title')</h4>
                         <ul class="breadcrumbs">
                             <li class="nav-home">
-                                <a href="#">
+                                <a href="/">
                                     <i class="flaticon-home"></i>
                                 </a>
                             </li>
@@ -58,7 +63,7 @@
                                 <i class="flaticon-right-arrow"></i>
                             </li>
                             <li class="nav-item">
-                                <a href="#">@yield('title')</a>
+                                <a>@yield('title')</a>
                             </li>
                         </ul>
                     </div>

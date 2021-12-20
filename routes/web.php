@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MouController;
+use App\Http\Controllers\LocalizationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.mou.starterTemplate');
+    return view('pages.dashboard.starterTemplate');
 });
 
+Route::resource('/mou', MouController::class);
+
 Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);
+// Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'create']);

@@ -12,44 +12,44 @@
                     <span class="menu-title">{{__('components/navBottom.beranda')}}</span>
                 </a>
             </li>
-            <li class="nav-item submenu">
-                <a class="nav-link" href="#">
+            <li class="nav-item menu">
+                <a class="nav-link" href="/mou">
                     <i class="link-icon icon-docs"></i>
                     <span class="menu-title">MOU</span>
                 </a>
-                <div class="navbar-dropdown animated fadeIn">
+                {{-- <div class="navbar-dropdown animated fadeIn">
                     <ul>
                         <li>
                             <a href="boards.html">MOU 1</a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
             </li>
-            <li class="nav-item submenu">
+            <li class="nav-item menu">
                 <a class="nav-link" href="#">
                     <i class="link-icon icon-docs"></i>
                     <span class="menu-title">MOA</span>
                 </a>
-                <div class="navbar-dropdown animated fadeIn">
+                {{-- <div class="navbar-dropdown animated fadeIn">
                     <ul>
                         <li>
                             <a href="boards.html">MOA 1</a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
             </li>
-            <li class="nav-item submenu">
+            <li class="nav-item menu">
                 <a class="nav-link" href="#">
                     <i class="link-icon icon-docs"></i>
                     <span class="menu-title">IA</span>
                 </a>
-                <div class="navbar-dropdown animated fadeIn">
+                {{-- <div class="navbar-dropdown animated fadeIn">
                     <ul>
                         <li>
                             <a href="boards.html">IA 1</a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
             </li>
 
             <li class="nav-item submenu">
