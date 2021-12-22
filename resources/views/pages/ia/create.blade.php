@@ -1,18 +1,19 @@
 @extends('templates/dashboard')
 
 @section('title-tab')
-| {{__('pages/mou/create.title')}}
+| {{__('pages/ia/create.title')}}
 @endsection
 
 @section('title')
-{{__('pages/mou/create.title')}}
+{{__('pages/ia/create.title')}}
 @endsection
 
 @section('subTitle')
-{{__('pages/mou/create.subTitle')}}
+{{__('pages/ia/create.subTitle')}}
 @endsection
 
 @push('style')
+
 @endpush
 
 @section('content')
@@ -21,22 +22,22 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">{{__('pages/mou/create.card-title')}}
+                    <div class="card-title">{{__('pages/ia/create.card-title')}}
                     </div>
-                    <div class="card-category">{{__('pages/mou/create.card-category')}}</div>                    
+                    <div class="card-category">{{__('pages/ia/create.card-category')}}</div>                    
                 </div>
                 @component('components/forms/mou_moa_ia')
                     @slot('form_method')
                         POST                    
                     @endslot
                     @slot('form_id')
-                        form_mou
-                    @endslot                    
+                        form_ia
+                    @endslot
                     @slot('form_action')
                         
                     @endslot
                     @slot('document_category')
-                        MOU
+                        IA
                     @endslot
                 @endcomponent
             </div>
@@ -46,5 +47,6 @@
 
 @endsection
 
-@push('script')   
+@push('script')
+
 @endpush

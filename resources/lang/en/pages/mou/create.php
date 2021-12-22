@@ -1,7 +1,11 @@
 <?php
 
 return [
-    'title' => 'Create MOU',
+    'title' => 'Add MOU',
     'subTitle' => 'MOU',
-    'content' => 'MOU'
+    'category' => 'MOU',
+    'content' => 'MOU',
+
+    'card-title' => 'Form MOU',
+    'card-category' => ' Please complete all the information below to make a MOU'
 ];

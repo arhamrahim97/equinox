@@ -2,5 +2,5 @@
     <span class="btn-label">
         <i class="fa fa-plus"></i>
     </span>
-    {{__('components/button.create')}}
+    {{__('components/button.add')}}
 </a>

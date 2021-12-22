@@ -1,6 +1,6 @@
-{{-- <a class="btn btn-primary" href="{{$href}}">
+<button class="btn btn-success" type="submit">
     <span class="btn-label">
-        <i class="fa fa-plus"></i>
+        <i class="fa fa-save"></i>
     </span>
-    {{__('components/button.create')}}
-</a> --}}
+    {{__('components/button.save')}}
+</button>

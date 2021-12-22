@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IaController;
+use App\Http\Controllers\MoaController;
 use App\Http\Controllers\MouController;
 use App\Http\Controllers\LocalizationController;
 
@@ -20,6 +22,8 @@ Route::get('/', function () {
 });
 
 Route::resource('/mou', MouController::class);
+Route::resource('/moa', MoaController::class);
+Route::resource('/ia', IaController::class);
 
 Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);
 // Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'create']);

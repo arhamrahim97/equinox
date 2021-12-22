@@ -168,6 +168,12 @@
 
     <!-- Atlantis JS -->
     <script src="{{asset('assets/dashboard')}}/js/atlantis2.min.js"></script>
+
+    <script>
+        $('.select2').select2({
+            theme: "bootstrap"
+        })
+    </script>
     @stack('script')
 </body>
 

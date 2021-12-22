@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'create' => 'Buat',
+    'add' => 'Tambah',
     'view' => 'Lihat',
-    'simpan' => 'Simpan',
+    'save' => 'Simpan',
     'update' => 'Ubah',
     'delete' => 'Hapus'
 ];
