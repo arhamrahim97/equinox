@@ -6,7 +6,7 @@
         </h3>
         <ul class="nav page-navigation page-navigation-info bg-white">
 
-            <li class="nav-item menu active">
+            <li class="nav-item menu">
                 <a class="nav-link" href="#">
                     <i class="link-icon icon-screen-desktop"></i>
                     <span class="menu-title">{{__('components/navBottom.beranda')}}</span>
@@ -52,7 +52,7 @@
                 </div> --}}
             </li>
 
-            <li class="nav-item submenu">
+            <li class="nav-item submenu" id="nav-master">
                 <a class="nav-link" href="#">
                     <i class="link-icon icon-grid"></i>
                     <span class="menu-title">Master</span>
@@ -60,13 +60,16 @@
                 <div class="navbar-dropdown animated fadeIn">
                     <ul>
                         <li>
-                            <a href="boards.html">User</a>
+                            <a href="{{url('negara')}}">{{__('components/navBottom.negara')}}</a>
+                        </li>
+                        <li>
+                            <a href="{{url('fakultas')}}">{{__('components/navBottom.fakultas')}}</a>
+                        </li>
+                        <li>
+                            <a href="{{url('akun')}}">{{__('components/navBottom.akun')}}</a>
                         </li>
                         <li>
                             <a href="projects.html">Pengusul</a>
-                        </li>
-                        <li>
-                            <a href="email-inbox.html">Fakultas</a>
                         </li>
 
                     </ul>

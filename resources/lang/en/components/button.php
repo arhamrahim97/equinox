@@ -1,9 +1,10 @@
 <?php
 
 return [
-    'create' => 'Create',
+    'add' => 'Add',
     'view' => 'View',
     'save' => 'Save',
     'update' => 'Update',
-    'delete' => 'Delete'
+    'delete' => 'Delete',
+    'detail' => 'Detail'
 ];
