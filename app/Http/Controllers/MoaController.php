@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Moa;
 use App\Http\Requests\StoreMoaRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateMoaRequest;
+use App\Models\Pengusul;
+
 
 class MoaController extends Controller
 {
@@ -26,7 +29,10 @@ class MoaController extends Controller
      */
     public function create()
     {
-        return view('pages/moa/create');
+        $data = [
+            'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->get()            
+        ];   
+        return view('pages/moa/create', $data);
         
     }
 
@@ -36,7 +42,7 @@ class MoaController extends Controller
      * @param  \App\Http\Requests\StoreMoaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMoaRequest $request)
+    public function store(Request $request)
     {
         //
     }

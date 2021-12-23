@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'pilih_salah_satu' => '- Select One -',
     'pengusul' => 'Proposer',
     'daerah' => 'Regional',
     'negara' => 'Country',

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Ia;
 use App\Http\Requests\StoreIaRequest;
 use App\Http\Requests\UpdateIaRequest;
+use App\Models\Pengusul;
+use Illuminate\Http\Request;
+
+
 
 class IaController extends Controller
 {
@@ -25,7 +29,10 @@ class IaController extends Controller
      */
     public function create()
     {
-        return view('pages/ia/create');                
+        $data = [
+            'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->get()            
+        ];   
+        return view('pages/ia/create', $data);                
     }
 
     /**
@@ -34,9 +41,9 @@ class IaController extends Controller
      * @param  \App\Http\Requests\StoreIaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreIaRequest $request)
+    public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
