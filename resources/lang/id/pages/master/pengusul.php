@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'title' => 'Akun',
+    'title' => 'Pengusul',
     'subTitle' => 'Master',
-    'modalTitleTambah' => 'Tambah Akun',
-    'placeHolderTambah' => 'Masukkan Akun',
-    'modalTitleUbah' => 'Ubah Akun',
+    'modalTitleTambah' => 'Tambah Pengusul',
+    'placeHolderTambah' => 'Masukkan Pengusul',
+    'modalTitleUbah' => 'Ubah Pengusul',
     'role' => 'Role',
 
     'titleCreate' => 'Tambah',

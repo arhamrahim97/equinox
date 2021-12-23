@@ -1,7 +1,7 @@
 @extends('templates/dashboard')
 
 @section('title')
-{{__('pages/master/akun.titleCreate')}}
+{{__('pages/master/akun.titleEdit')}}
 @endsection
 
 @section('subTitle')
@@ -14,23 +14,25 @@
 @endpush
 
 @section('content')
-<form id="form-tambah">
+<form id="form-ubah">
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="nama">{{__('pages/master/akun.nama')}}</label>
-            <input type="text" class="form-control" id="nama" placeholder="{{__('pages/master/akun.placeholderNama')}}">
+            <input type="text" class="form-control" id="nama" placeholder="{{__('pages/master/akun.placeholderNama')}}"
+                value="{{$user->nama}}">
             <span class="text-danger error-text nama-error"></span>
         </div>
         <div class="form-group col-md-4">
             <label for="username">{{__('pages/master/akun.username')}}</label>
             <input type="text" class="form-control" id="username"
-                placeholder="{{__('pages/master/akun.placeholderUsername')}}">
+                placeholder="{{__('pages/master/akun.placeholderUsername')}}" value="{{$user->username}}">
             <span class="text-danger error-text username-error"></span>
         </div>
         <div class="form-group col-md-4">
             <label for="password">{{__('pages/master/akun.password')}}</label>
             <input type="text" class="form-control" id="password"
                 placeholder="{{__('pages/master/akun.placeholderPassword')}}">
+            <small id="emailHelp" class="form-text text-muted">{{__('pages/master/akun.notifPassword')}}</small>
             <span class="text-danger error-text password-error"></span>
         </div>
     </div>
@@ -85,15 +87,36 @@
 
 @push('script')
 <script>
+    var role = "{{$user->role}}";
+    var fakultas = "{{$user->fakultas_id}}";
+    var prodi = "{{$user->prodi_id}}";
+    var statusAktif = "{{$user->status}}";
+
     $(document).ready(function () {
-        roleSelection();
+        $('#role').val(role);
+        $('#statusAktif').val(statusAktif);
+
+
         $('#role').select2({
             placeholder: "{{__('pages/master/akun.placeholderRole')}}",
             theme: "bootstrap"
         });
+        roleSelection();
+
+        setTimeout(
+            function () {
+                setFakultas();
+            }, 2000
+        );
+
+        setTimeout(
+            function () {
+                setProdi();
+            }, 4000
+        );
     })
 
-    $('#form-tambah').on('submit', function (e) {
+    $('#form-ubah').on('submit', function (e) {
         e.preventDefault();
 
         resetForm();
@@ -108,10 +131,11 @@
         var statusAktif = $('#statusAktif').val();
 
         $.ajax({
-            url: "/akun",
+            url: "/akun/" + "{{$user->id}}",
             type: "POST",
             data: {
                 _token: _token,
+                _method: 'PUT',
                 nama: nama,
                 username: username,
                 password: password,
@@ -123,7 +147,7 @@
             success: function (data) {
                 if ($.isEmptyObject(data.error)) {
                     swal("{{__('components/sweetalert.alertBerhasil')}}",
-                        "{{__('components/sweetalert.msgTambahBerhasil',['nama' => __('pages/master/akun.title')])}}", {
+                        "{{__('components/sweetalert.msgUbahBerhasil',['nama' => __('pages/master/akun.title')])}}", {
                             icon: "success",
                             buttons: false,
                         });
@@ -214,6 +238,19 @@
                     }
                 },
             })
+        }
+    }
+
+    function setFakultas() {
+        if (role == 'Fakultas' || role == 'Pascasarjana' || role == 'PSDKU' || role == 'Prodi' || role ==
+            'Unit Kerja') {
+            $('#fakultas').val(fakultas).trigger('change');
+        }
+    }
+
+    function setProdi() {
+        if (role == 'Prodi' || role == 'Unit Kerja') {
+            $('#prodi').val(prodi).trigger('change');
         }
     }
 

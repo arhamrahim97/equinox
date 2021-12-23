@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IaController;
 use App\Http\Controllers\MoaController;
@@ -9,7 +10,9 @@ use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\master\AkunController;
 use App\Http\Controllers\master\FakultasController;
 use App\Http\Controllers\master\NegaraController;
+use App\Http\Controllers\master\PengusulController;
 use App\Http\Controllers\master\ProdiController;
+use App\Http\Controllers\ProfilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,11 +43,22 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/akun', AkunController::class)->parameters([
         'akun' => 'user'
     ]);
+
+    Route::resource('/pengusul', PengusulController::class)->parameters([
+        'pengusul' => 'pengusul'
+    ]);
+
+    Route::get('/', function () {
+        return view('pages.dashboard.starterTemplate');
+    });
+
+    Route::get('/profil', [ProfilController::class, 'index']);
+    Route::put('/profil/{user}', [ProfilController::class, 'updateProfil']);
 });
 
-Route::get('/', function () {
-    return view('pages.dashboard.starterTemplate');
-});
+
+Route::get('/listFakultas', [ListController::class, 'listFakultas']);
+Route::get('/listProdi', [ListController::class, 'listProdi']);
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

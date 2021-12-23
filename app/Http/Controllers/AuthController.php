@@ -21,16 +21,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            // if ((Auth::user()->role == 'Guru') || (Auth::user()->role == 'Pegawai')) {
-            //     if ((User::find(Auth::user()->id)->profile) != null) {
             return redirect('/');
-            //     } else {
-            //         return redirect()->intended('/lengkapi-data');
-            //     }
-            // }
-            // else { // ROLE SELAIN GURU dan PEGAWAI
-            //     return redirect()->intended('/');
-            // }
         }
         return back()->with('loginError', __('pages/login.gagalLogin'));
     }
@@ -38,11 +29,8 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
         return redirect('/');
     }
 }

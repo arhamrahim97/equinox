@@ -8,5 +8,14 @@ return [
     'unitKerja' => 'Unit Kerja',
     'role' => 'Role',
     'fakultas' => 'Fakultas',
-    'prodi' => 'Program Studi'
+    'prodi' => 'Program Studi',
+
+    'alamat' => 'Alamat',
+    'region' => 'Region',
+    'negara' => 'Negara',
+    'provinsi' => 'Provinsi',
+    'kota' => 'Kota',
+    'kecamatan' => 'Kecamatan',
+    'kelurahan' => 'Kelurahan/Desa',
+    'telepon' => 'Telepon'
 ];

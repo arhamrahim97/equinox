@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'title' => 'Account',
+    'title' => 'Proposer',
     'subTitle' => 'Master',
-    'modalTitleTambah' => 'Add Account',
-    'placeHolderTambah' => 'Enter Account',
-    'modalTitleUbah' => 'Update Account',
+    'modalTitleTambah' => 'Add Proposer',
+    'placeHolderTambah' => 'Enter Proposer',
+    'modalTitleUbah' => 'Update Proposer',
     'role' => 'Role',
 
     'titleCreate' => 'Add',

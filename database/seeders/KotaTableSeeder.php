@@ -16,14 +16,13 @@ class KotaTableSeeder extends Seeder
     public function run()
     {
 
-
         DB::table('kota')->delete();
 
         DB::table('kota')->insert(array(
             0 =>
             array(
                 'id' => 1,
-                'nama' => 'PIDIE JAYA',
+                'nama' => 'pidie jaya',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -32,7 +31,7 @@ class KotaTableSeeder extends Seeder
             1 =>
             array(
                 'id' => 2,
-                'nama' => 'SIMEULUE',
+                'nama' => 'simeulue',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -41,7 +40,7 @@ class KotaTableSeeder extends Seeder
             2 =>
             array(
                 'id' => 3,
-                'nama' => 'BIREUEN',
+                'nama' => 'bireuen',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -50,7 +49,7 @@ class KotaTableSeeder extends Seeder
             3 =>
             array(
                 'id' => 4,
-                'nama' => 'ACEH TIMUR',
+                'nama' => 'aceh timur',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -59,7 +58,7 @@ class KotaTableSeeder extends Seeder
             4 =>
             array(
                 'id' => 5,
-                'nama' => 'ACEH UTARA',
+                'nama' => 'aceh utara',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -68,7 +67,7 @@ class KotaTableSeeder extends Seeder
             5 =>
             array(
                 'id' => 6,
-                'nama' => 'PIDIE',
+                'nama' => 'pidie',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -77,7 +76,7 @@ class KotaTableSeeder extends Seeder
             6 =>
             array(
                 'id' => 7,
-                'nama' => 'ACEH BARAT DAYA',
+                'nama' => 'aceh barat daya',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -86,7 +85,7 @@ class KotaTableSeeder extends Seeder
             7 =>
             array(
                 'id' => 8,
-                'nama' => 'GAYO LUES',
+                'nama' => 'gayo lues',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -95,7 +94,7 @@ class KotaTableSeeder extends Seeder
             8 =>
             array(
                 'id' => 9,
-                'nama' => 'ACEH SELATAN',
+                'nama' => 'aceh selatan',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -104,7 +103,7 @@ class KotaTableSeeder extends Seeder
             9 =>
             array(
                 'id' => 10,
-                'nama' => 'ACEH TAMIANG',
+                'nama' => 'aceh tamiang',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -113,7 +112,7 @@ class KotaTableSeeder extends Seeder
             10 =>
             array(
                 'id' => 11,
-                'nama' => 'ACEH BESAR',
+                'nama' => 'aceh besar',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -122,7 +121,7 @@ class KotaTableSeeder extends Seeder
             11 =>
             array(
                 'id' => 12,
-                'nama' => 'ACEH TENGGARA',
+                'nama' => 'aceh tenggara',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -131,7 +130,7 @@ class KotaTableSeeder extends Seeder
             12 =>
             array(
                 'id' => 13,
-                'nama' => 'BENER MERIAH',
+                'nama' => 'bener meriah',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -140,7 +139,7 @@ class KotaTableSeeder extends Seeder
             13 =>
             array(
                 'id' => 14,
-                'nama' => 'ACEH JAYA',
+                'nama' => 'aceh jaya',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -149,7 +148,7 @@ class KotaTableSeeder extends Seeder
             14 =>
             array(
                 'id' => 15,
-                'nama' => 'LHOKSEUMAWE',
+                'nama' => 'lhokseumawe',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -158,7 +157,7 @@ class KotaTableSeeder extends Seeder
             15 =>
             array(
                 'id' => 16,
-                'nama' => 'ACEH BARAT',
+                'nama' => 'aceh barat',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -167,7 +166,7 @@ class KotaTableSeeder extends Seeder
             16 =>
             array(
                 'id' => 17,
-                'nama' => 'NAGAN RAYA',
+                'nama' => 'nagan raya',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -176,7 +175,7 @@ class KotaTableSeeder extends Seeder
             17 =>
             array(
                 'id' => 18,
-                'nama' => 'LANGSA',
+                'nama' => 'langsa',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -185,7 +184,7 @@ class KotaTableSeeder extends Seeder
             18 =>
             array(
                 'id' => 19,
-                'nama' => 'BANDA ACEH',
+                'nama' => 'banda aceh',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -194,7 +193,7 @@ class KotaTableSeeder extends Seeder
             19 =>
             array(
                 'id' => 20,
-                'nama' => 'ACEH SINGKIL',
+                'nama' => 'aceh singkil',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -203,7 +202,7 @@ class KotaTableSeeder extends Seeder
             20 =>
             array(
                 'id' => 21,
-                'nama' => 'SABANG',
+                'nama' => 'sabang',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -212,7 +211,7 @@ class KotaTableSeeder extends Seeder
             21 =>
             array(
                 'id' => 22,
-                'nama' => 'ACEH TENGAH',
+                'nama' => 'aceh tengah',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -221,7 +220,7 @@ class KotaTableSeeder extends Seeder
             22 =>
             array(
                 'id' => 23,
-                'nama' => 'SUBULUSSALAM',
+                'nama' => 'subulussalam',
                 'provinsi_id' => 1,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -230,7 +229,7 @@ class KotaTableSeeder extends Seeder
             23 =>
             array(
                 'id' => 24,
-                'nama' => 'NIAS SELATAN',
+                'nama' => 'nias selatan',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -239,7 +238,7 @@ class KotaTableSeeder extends Seeder
             24 =>
             array(
                 'id' => 25,
-                'nama' => 'MANDAILING NATAL',
+                'nama' => 'mandailing natal',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -248,7 +247,7 @@ class KotaTableSeeder extends Seeder
             25 =>
             array(
                 'id' => 26,
-                'nama' => 'DAIRI',
+                'nama' => 'dairi',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -257,7 +256,7 @@ class KotaTableSeeder extends Seeder
             26 =>
             array(
                 'id' => 27,
-                'nama' => 'LABUHAN BATU UTARA',
+                'nama' => 'labuhan batu utara',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -266,7 +265,7 @@ class KotaTableSeeder extends Seeder
             27 =>
             array(
                 'id' => 28,
-                'nama' => 'TAPANULI UTARA',
+                'nama' => 'tapanuli utara',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -275,7 +274,7 @@ class KotaTableSeeder extends Seeder
             28 =>
             array(
                 'id' => 29,
-                'nama' => 'SIMALUNGUN',
+                'nama' => 'simalungun',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -284,7 +283,7 @@ class KotaTableSeeder extends Seeder
             29 =>
             array(
                 'id' => 30,
-                'nama' => 'LANGKAT',
+                'nama' => 'langkat',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -293,7 +292,7 @@ class KotaTableSeeder extends Seeder
             30 =>
             array(
                 'id' => 31,
-                'nama' => 'SERDANG BEDAGAI',
+                'nama' => 'serdang bedagai',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -302,7 +301,7 @@ class KotaTableSeeder extends Seeder
             31 =>
             array(
                 'id' => 32,
-                'nama' => 'TAPANULI SELATAN',
+                'nama' => 'tapanuli selatan',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -311,7 +310,7 @@ class KotaTableSeeder extends Seeder
             32 =>
             array(
                 'id' => 33,
-                'nama' => 'ASAHAN',
+                'nama' => 'asahan',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -320,7 +319,7 @@ class KotaTableSeeder extends Seeder
             33 =>
             array(
                 'id' => 34,
-                'nama' => 'PADANG LAWAS UTARA',
+                'nama' => 'padang lawas utara',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -329,7 +328,7 @@ class KotaTableSeeder extends Seeder
             34 =>
             array(
                 'id' => 35,
-                'nama' => 'PADANG LAWAS',
+                'nama' => 'padang lawas',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -338,7 +337,7 @@ class KotaTableSeeder extends Seeder
             35 =>
             array(
                 'id' => 36,
-                'nama' => 'LABUHAN BATU SELATAN',
+                'nama' => 'labuhan batu selatan',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -347,7 +346,7 @@ class KotaTableSeeder extends Seeder
             36 =>
             array(
                 'id' => 37,
-                'nama' => 'PADANG SIDEMPUAN',
+                'nama' => 'padang sidempuan',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -356,7 +355,7 @@ class KotaTableSeeder extends Seeder
             37 =>
             array(
                 'id' => 38,
-                'nama' => 'TOBA SAMOSIR',
+                'nama' => 'toba samosir',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -365,7 +364,7 @@ class KotaTableSeeder extends Seeder
             38 =>
             array(
                 'id' => 39,
-                'nama' => 'TAPANULI TENGAH',
+                'nama' => 'tapanuli tengah',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -374,7 +373,7 @@ class KotaTableSeeder extends Seeder
             39 =>
             array(
                 'id' => 40,
-                'nama' => 'HUMBANG HASUNDUTAN',
+                'nama' => 'humbang hasundutan',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -383,7 +382,7 @@ class KotaTableSeeder extends Seeder
             40 =>
             array(
                 'id' => 41,
-                'nama' => 'SIBOLGA',
+                'nama' => 'sibolga',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -392,7 +391,7 @@ class KotaTableSeeder extends Seeder
             41 =>
             array(
                 'id' => 42,
-                'nama' => 'BATU BARA',
+                'nama' => 'batu bara',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -401,7 +400,7 @@ class KotaTableSeeder extends Seeder
             42 =>
             array(
                 'id' => 43,
-                'nama' => 'SAMOSIR',
+                'nama' => 'samosir',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -410,7 +409,7 @@ class KotaTableSeeder extends Seeder
             43 =>
             array(
                 'id' => 44,
-                'nama' => 'PEMATANG SIANTAR',
+                'nama' => 'pematang siantar',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -419,7 +418,7 @@ class KotaTableSeeder extends Seeder
             44 =>
             array(
                 'id' => 45,
-                'nama' => 'LABUHAN BATU',
+                'nama' => 'labuhan batu',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -428,7 +427,7 @@ class KotaTableSeeder extends Seeder
             45 =>
             array(
                 'id' => 46,
-                'nama' => 'DELI SERDANG',
+                'nama' => 'deli serdang',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -437,7 +436,7 @@ class KotaTableSeeder extends Seeder
             46 =>
             array(
                 'id' => 47,
-                'nama' => 'GUNUNGSITOLI',
+                'nama' => 'gunungsitoli',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -446,7 +445,7 @@ class KotaTableSeeder extends Seeder
             47 =>
             array(
                 'id' => 48,
-                'nama' => 'NIAS UTARA',
+                'nama' => 'nias utara',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -455,7 +454,7 @@ class KotaTableSeeder extends Seeder
             48 =>
             array(
                 'id' => 49,
-                'nama' => 'NIAS',
+                'nama' => 'nias',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -464,7 +463,7 @@ class KotaTableSeeder extends Seeder
             49 =>
             array(
                 'id' => 50,
-                'nama' => 'KARO',
+                'nama' => 'karo',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -473,7 +472,7 @@ class KotaTableSeeder extends Seeder
             50 =>
             array(
                 'id' => 51,
-                'nama' => 'NIAS BARAT',
+                'nama' => 'nias barat',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -482,7 +481,7 @@ class KotaTableSeeder extends Seeder
             51 =>
             array(
                 'id' => 52,
-                'nama' => 'MEDAN',
+                'nama' => 'medan',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -491,7 +490,7 @@ class KotaTableSeeder extends Seeder
             52 =>
             array(
                 'id' => 53,
-                'nama' => 'PAKPAK BHARAT',
+                'nama' => 'pakpak bharat',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -500,7 +499,7 @@ class KotaTableSeeder extends Seeder
             53 =>
             array(
                 'id' => 54,
-                'nama' => 'TEBING TINGGI',
+                'nama' => 'tebing tinggi',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -509,7 +508,7 @@ class KotaTableSeeder extends Seeder
             54 =>
             array(
                 'id' => 55,
-                'nama' => 'BINJAI',
+                'nama' => 'binjai',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -518,7 +517,7 @@ class KotaTableSeeder extends Seeder
             55 =>
             array(
                 'id' => 56,
-                'nama' => 'TANJUNG BALAI',
+                'nama' => 'tanjung balai',
                 'provinsi_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -527,7 +526,7 @@ class KotaTableSeeder extends Seeder
             56 =>
             array(
                 'id' => 57,
-                'nama' => 'DHARMASRAYA',
+                'nama' => 'dharmasraya',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -536,7 +535,7 @@ class KotaTableSeeder extends Seeder
             57 =>
             array(
                 'id' => 58,
-                'nama' => 'SOLOK SELATAN',
+                'nama' => 'solok selatan',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -545,7 +544,7 @@ class KotaTableSeeder extends Seeder
             58 =>
             array(
                 'id' => 59,
-                'nama' => 'SIJUNJUNG (SAWAH LUNTO SIJUNJUNG)',
+                'nama' => 'sijunjung (sawah lunto sijunjung)',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -554,7 +553,7 @@ class KotaTableSeeder extends Seeder
             59 =>
             array(
                 'id' => 60,
-                'nama' => 'PASAMAN BARAT',
+                'nama' => 'pasaman barat',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -563,7 +562,7 @@ class KotaTableSeeder extends Seeder
             60 =>
             array(
                 'id' => 61,
-                'nama' => 'SOLOK',
+                'nama' => 'solok',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -572,7 +571,7 @@ class KotaTableSeeder extends Seeder
             61 =>
             array(
                 'id' => 62,
-                'nama' => 'PASAMAN',
+                'nama' => 'pasaman',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -581,7 +580,7 @@ class KotaTableSeeder extends Seeder
             62 =>
             array(
                 'id' => 63,
-                'nama' => 'PARIAMAN',
+                'nama' => 'pariaman',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -590,7 +589,7 @@ class KotaTableSeeder extends Seeder
             63 =>
             array(
                 'id' => 64,
-                'nama' => 'TANAH DATAR',
+                'nama' => 'tanah datar',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -599,7 +598,7 @@ class KotaTableSeeder extends Seeder
             64 =>
             array(
                 'id' => 65,
-                'nama' => 'PADANG PARIAMAN',
+                'nama' => 'padang pariaman',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -608,7 +607,7 @@ class KotaTableSeeder extends Seeder
             65 =>
             array(
                 'id' => 66,
-                'nama' => 'PESISIR SELATAN',
+                'nama' => 'pesisir selatan',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -617,7 +616,7 @@ class KotaTableSeeder extends Seeder
             66 =>
             array(
                 'id' => 67,
-                'nama' => 'PADANG',
+                'nama' => 'padang',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -626,7 +625,7 @@ class KotaTableSeeder extends Seeder
             67 =>
             array(
                 'id' => 68,
-                'nama' => 'SAWAH LUNTO',
+                'nama' => 'sawah lunto',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -635,7 +634,7 @@ class KotaTableSeeder extends Seeder
             68 =>
             array(
                 'id' => 69,
-                'nama' => 'LIMA PULUH KOTO / KOTA',
+                'nama' => 'lima puluh koto / kota',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -644,7 +643,7 @@ class KotaTableSeeder extends Seeder
             69 =>
             array(
                 'id' => 70,
-                'nama' => 'AGAM',
+                'nama' => 'agam',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -653,7 +652,7 @@ class KotaTableSeeder extends Seeder
             70 =>
             array(
                 'id' => 71,
-                'nama' => 'PAYAKUMBUH',
+                'nama' => 'payakumbuh',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -662,7 +661,7 @@ class KotaTableSeeder extends Seeder
             71 =>
             array(
                 'id' => 72,
-                'nama' => 'BUKITTINGGI',
+                'nama' => 'bukittinggi',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -671,7 +670,7 @@ class KotaTableSeeder extends Seeder
             72 =>
             array(
                 'id' => 73,
-                'nama' => 'PADANG PANJANG',
+                'nama' => 'padang panjang',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -680,7 +679,7 @@ class KotaTableSeeder extends Seeder
             73 =>
             array(
                 'id' => 74,
-                'nama' => 'KEPULAUAN MENTAWAI',
+                'nama' => 'kepulauan mentawai',
                 'provinsi_id' => 3,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -689,7 +688,7 @@ class KotaTableSeeder extends Seeder
             74 =>
             array(
                 'id' => 75,
-                'nama' => 'INDRAGIRI HILIR',
+                'nama' => 'indragiri hilir',
                 'provinsi_id' => 4,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -698,7 +697,7 @@ class KotaTableSeeder extends Seeder
             75 =>
             array(
                 'id' => 76,
-                'nama' => 'KUANTAN SINGINGI',
+                'nama' => 'kuantan singingi',
                 'provinsi_id' => 4,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -707,7 +706,7 @@ class KotaTableSeeder extends Seeder
             76 =>
             array(
                 'id' => 77,
-                'nama' => 'PELALAWAN',
+                'nama' => 'pelalawan',
                 'provinsi_id' => 4,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -716,7 +715,7 @@ class KotaTableSeeder extends Seeder
             77 =>
             array(
                 'id' => 78,
-                'nama' => 'PEKANBARU',
+                'nama' => 'pekanbaru',
                 'provinsi_id' => 4,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -725,7 +724,7 @@ class KotaTableSeeder extends Seeder
             78 =>
             array(
                 'id' => 79,
-                'nama' => 'ROKAN HILIR',
+                'nama' => 'rokan hilir',
                 'provinsi_id' => 4,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -734,7 +733,7 @@ class KotaTableSeeder extends Seeder
             79 =>
             array(
                 'id' => 80,
-                'nama' => 'BENGKALIS',
+                'nama' => 'bengkalis',
                 'provinsi_id' => 4,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -743,7 +742,7 @@ class KotaTableSeeder extends Seeder
             80 =>
             array(
                 'id' => 81,
-                'nama' => 'INDRAGIRI HULU',
+                'nama' => 'indragiri hulu',
                 'provinsi_id' => 4,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -752,7 +751,7 @@ class KotaTableSeeder extends Seeder
             81 =>
             array(
                 'id' => 82,
-                'nama' => 'ROKAN HULU',
+                'nama' => 'rokan hulu',
                 'provinsi_id' => 4,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -761,7 +760,7 @@ class KotaTableSeeder extends Seeder
             82 =>
             array(
                 'id' => 83,
-                'nama' => 'KAMPAR',
+                'nama' => 'kampar',
                 'provinsi_id' => 4,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -770,7 +769,7 @@ class KotaTableSeeder extends Seeder
             83 =>
             array(
                 'id' => 84,
-                'nama' => 'KEPULAUAN MERANTI',
+                'nama' => 'kepulauan meranti',
                 'provinsi_id' => 4,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -779,7 +778,7 @@ class KotaTableSeeder extends Seeder
             84 =>
             array(
                 'id' => 85,
-                'nama' => 'DUMAI',
+                'nama' => 'dumai',
                 'provinsi_id' => 4,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -788,7 +787,7 @@ class KotaTableSeeder extends Seeder
             85 =>
             array(
                 'id' => 86,
-                'nama' => 'SIAK',
+                'nama' => 'siak',
                 'provinsi_id' => 4,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -797,7 +796,7 @@ class KotaTableSeeder extends Seeder
             86 =>
             array(
                 'id' => 87,
-                'nama' => 'TEBO',
+                'nama' => 'tebo',
                 'provinsi_id' => 5,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -806,7 +805,7 @@ class KotaTableSeeder extends Seeder
             87 =>
             array(
                 'id' => 88,
-                'nama' => 'TANJUNG JABUNG BARAT',
+                'nama' => 'tanjung jabung barat',
                 'provinsi_id' => 5,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -815,7 +814,7 @@ class KotaTableSeeder extends Seeder
             88 =>
             array(
                 'id' => 89,
-                'nama' => 'MUARO JAMBI',
+                'nama' => 'muaro jambi',
                 'provinsi_id' => 5,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -824,7 +823,7 @@ class KotaTableSeeder extends Seeder
             89 =>
             array(
                 'id' => 90,
-                'nama' => 'KERINCI',
+                'nama' => 'kerinci',
                 'provinsi_id' => 5,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -833,7 +832,7 @@ class KotaTableSeeder extends Seeder
             90 =>
             array(
                 'id' => 91,
-                'nama' => 'MERANGIN',
+                'nama' => 'merangin',
                 'provinsi_id' => 5,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -842,7 +841,7 @@ class KotaTableSeeder extends Seeder
             91 =>
             array(
                 'id' => 92,
-                'nama' => 'BUNGO',
+                'nama' => 'bungo',
                 'provinsi_id' => 5,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -851,7 +850,7 @@ class KotaTableSeeder extends Seeder
             92 =>
             array(
                 'id' => 93,
-                'nama' => 'TANJUNG JABUNG TIMUR',
+                'nama' => 'tanjung jabung timur',
                 'provinsi_id' => 5,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -860,7 +859,7 @@ class KotaTableSeeder extends Seeder
             93 =>
             array(
                 'id' => 94,
-                'nama' => 'SUNGAIPENUH',
+                'nama' => 'sungaipenuh',
                 'provinsi_id' => 5,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -869,7 +868,7 @@ class KotaTableSeeder extends Seeder
             94 =>
             array(
                 'id' => 95,
-                'nama' => 'BATANG HARI',
+                'nama' => 'batang hari',
                 'provinsi_id' => 5,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -878,7 +877,7 @@ class KotaTableSeeder extends Seeder
             95 =>
             array(
                 'id' => 96,
-                'nama' => 'JAMBI',
+                'nama' => 'jambi',
                 'provinsi_id' => 5,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -887,7 +886,7 @@ class KotaTableSeeder extends Seeder
             96 =>
             array(
                 'id' => 97,
-                'nama' => 'SAROLANGUN',
+                'nama' => 'sarolangun',
                 'provinsi_id' => 5,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -896,7 +895,7 @@ class KotaTableSeeder extends Seeder
             97 =>
             array(
                 'id' => 98,
-                'nama' => 'PALEMBANG',
+                'nama' => 'palembang',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -905,7 +904,7 @@ class KotaTableSeeder extends Seeder
             98 =>
             array(
                 'id' => 99,
-                'nama' => 'LAHAT',
+                'nama' => 'lahat',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -914,7 +913,7 @@ class KotaTableSeeder extends Seeder
             99 =>
             array(
                 'id' => 100,
-                'nama' => 'OGAN KOMERING ULU TIMUR',
+                'nama' => 'ogan komering ulu timur',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -923,7 +922,7 @@ class KotaTableSeeder extends Seeder
             100 =>
             array(
                 'id' => 101,
-                'nama' => 'MUSI BANYUASIN',
+                'nama' => 'musi banyuasin',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -932,7 +931,7 @@ class KotaTableSeeder extends Seeder
             101 =>
             array(
                 'id' => 102,
-                'nama' => 'PAGAR ALAM',
+                'nama' => 'pagar alam',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -941,7 +940,7 @@ class KotaTableSeeder extends Seeder
             102 =>
             array(
                 'id' => 103,
-                'nama' => 'OGAN KOMERING ULU SELATAN',
+                'nama' => 'ogan komering ulu selatan',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -950,7 +949,7 @@ class KotaTableSeeder extends Seeder
             103 =>
             array(
                 'id' => 104,
-                'nama' => 'BANYUASIN',
+                'nama' => 'banyuasin',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -959,7 +958,7 @@ class KotaTableSeeder extends Seeder
             104 =>
             array(
                 'id' => 105,
-                'nama' => 'MUSI RAWAS',
+                'nama' => 'musi rawas',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -968,7 +967,7 @@ class KotaTableSeeder extends Seeder
             105 =>
             array(
                 'id' => 106,
-                'nama' => 'MUARA ENIM',
+                'nama' => 'muara enim',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -977,7 +976,7 @@ class KotaTableSeeder extends Seeder
             106 =>
             array(
                 'id' => 107,
-                'nama' => 'OGAN KOMERING ULU',
+                'nama' => 'ogan komering ulu',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -986,7 +985,7 @@ class KotaTableSeeder extends Seeder
             107 =>
             array(
                 'id' => 108,
-                'nama' => 'OGAN KOMERING ILIR',
+                'nama' => 'ogan komering ilir',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -995,7 +994,7 @@ class KotaTableSeeder extends Seeder
             108 =>
             array(
                 'id' => 109,
-                'nama' => 'EMPAT LAWANG',
+                'nama' => 'empat lawang',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1004,7 +1003,7 @@ class KotaTableSeeder extends Seeder
             109 =>
             array(
                 'id' => 110,
-                'nama' => 'LUBUK LINGGAU',
+                'nama' => 'lubuk linggau',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1013,7 +1012,7 @@ class KotaTableSeeder extends Seeder
             110 =>
             array(
                 'id' => 111,
-                'nama' => 'PRABUMULIH',
+                'nama' => 'prabumulih',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1022,7 +1021,7 @@ class KotaTableSeeder extends Seeder
             111 =>
             array(
                 'id' => 112,
-                'nama' => 'OGAN ILIR',
+                'nama' => 'ogan ilir',
                 'provinsi_id' => 6,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1031,7 +1030,7 @@ class KotaTableSeeder extends Seeder
             112 =>
             array(
                 'id' => 113,
-                'nama' => 'BENGKULU TENGAH',
+                'nama' => 'bengkulu tengah',
                 'provinsi_id' => 7,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1040,7 +1039,7 @@ class KotaTableSeeder extends Seeder
             113 =>
             array(
                 'id' => 114,
-                'nama' => 'REJANG LEBONG',
+                'nama' => 'rejang lebong',
                 'provinsi_id' => 7,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1049,7 +1048,7 @@ class KotaTableSeeder extends Seeder
             114 =>
             array(
                 'id' => 115,
-                'nama' => 'MUKO MUKO',
+                'nama' => 'muko muko',
                 'provinsi_id' => 7,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1058,7 +1057,7 @@ class KotaTableSeeder extends Seeder
             115 =>
             array(
                 'id' => 116,
-                'nama' => 'KAUR',
+                'nama' => 'kaur',
                 'provinsi_id' => 7,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1067,7 +1066,7 @@ class KotaTableSeeder extends Seeder
             116 =>
             array(
                 'id' => 117,
-                'nama' => 'BENGKULU UTARA',
+                'nama' => 'bengkulu utara',
                 'provinsi_id' => 7,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1076,7 +1075,7 @@ class KotaTableSeeder extends Seeder
             117 =>
             array(
                 'id' => 118,
-                'nama' => 'LEBONG',
+                'nama' => 'lebong',
                 'provinsi_id' => 7,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1085,7 +1084,7 @@ class KotaTableSeeder extends Seeder
             118 =>
             array(
                 'id' => 119,
-                'nama' => 'KEPAHIANG',
+                'nama' => 'kepahiang',
                 'provinsi_id' => 7,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1094,7 +1093,7 @@ class KotaTableSeeder extends Seeder
             119 =>
             array(
                 'id' => 120,
-                'nama' => 'BENGKULU SELATAN',
+                'nama' => 'bengkulu selatan',
                 'provinsi_id' => 7,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1103,7 +1102,7 @@ class KotaTableSeeder extends Seeder
             120 =>
             array(
                 'id' => 121,
-                'nama' => 'SELUMA',
+                'nama' => 'seluma',
                 'provinsi_id' => 7,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1112,7 +1111,7 @@ class KotaTableSeeder extends Seeder
             121 =>
             array(
                 'id' => 122,
-                'nama' => 'BENGKULU',
+                'nama' => 'bengkulu',
                 'provinsi_id' => 7,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1121,7 +1120,7 @@ class KotaTableSeeder extends Seeder
             122 =>
             array(
                 'id' => 123,
-                'nama' => 'LAMPUNG UTARA',
+                'nama' => 'lampung utara',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1130,7 +1129,7 @@ class KotaTableSeeder extends Seeder
             123 =>
             array(
                 'id' => 124,
-                'nama' => 'WAY KANAN',
+                'nama' => 'way kanan',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1139,7 +1138,7 @@ class KotaTableSeeder extends Seeder
             124 =>
             array(
                 'id' => 125,
-                'nama' => 'LAMPUNG TENGAH',
+                'nama' => 'lampung tengah',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1148,7 +1147,7 @@ class KotaTableSeeder extends Seeder
             125 =>
             array(
                 'id' => 126,
-                'nama' => 'MESUJI',
+                'nama' => 'mesuji',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1157,7 +1156,7 @@ class KotaTableSeeder extends Seeder
             126 =>
             array(
                 'id' => 127,
-                'nama' => 'PRINGSEWU',
+                'nama' => 'pringsewu',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1166,7 +1165,7 @@ class KotaTableSeeder extends Seeder
             127 =>
             array(
                 'id' => 128,
-                'nama' => 'LAMPUNG TIMUR',
+                'nama' => 'lampung timur',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1175,7 +1174,7 @@ class KotaTableSeeder extends Seeder
             128 =>
             array(
                 'id' => 129,
-                'nama' => 'LAMPUNG SELATAN',
+                'nama' => 'lampung selatan',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1184,7 +1183,7 @@ class KotaTableSeeder extends Seeder
             129 =>
             array(
                 'id' => 130,
-                'nama' => 'TULANG BAWANG',
+                'nama' => 'tulang bawang',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1193,7 +1192,7 @@ class KotaTableSeeder extends Seeder
             130 =>
             array(
                 'id' => 131,
-                'nama' => 'TULANG BAWANG BARAT',
+                'nama' => 'tulang bawang barat',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1202,7 +1201,7 @@ class KotaTableSeeder extends Seeder
             131 =>
             array(
                 'id' => 132,
-                'nama' => 'TANGGAMUS',
+                'nama' => 'tanggamus',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1211,7 +1210,7 @@ class KotaTableSeeder extends Seeder
             132 =>
             array(
                 'id' => 133,
-                'nama' => 'LAMPUNG BARAT',
+                'nama' => 'lampung barat',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1220,7 +1219,7 @@ class KotaTableSeeder extends Seeder
             133 =>
             array(
                 'id' => 134,
-                'nama' => 'PESISIR BARAT',
+                'nama' => 'pesisir barat',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1229,7 +1228,7 @@ class KotaTableSeeder extends Seeder
             134 =>
             array(
                 'id' => 135,
-                'nama' => 'PESAWARAN',
+                'nama' => 'pesawaran',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1238,7 +1237,7 @@ class KotaTableSeeder extends Seeder
             135 =>
             array(
                 'id' => 136,
-                'nama' => 'BANDAR LAMPUNG',
+                'nama' => 'bandar lampung',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1247,7 +1246,7 @@ class KotaTableSeeder extends Seeder
             136 =>
             array(
                 'id' => 137,
-                'nama' => 'METRO',
+                'nama' => 'metro',
                 'provinsi_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1256,7 +1255,7 @@ class KotaTableSeeder extends Seeder
             137 =>
             array(
                 'id' => 138,
-                'nama' => 'BELITUNG',
+                'nama' => 'belitung',
                 'provinsi_id' => 9,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1265,7 +1264,7 @@ class KotaTableSeeder extends Seeder
             138 =>
             array(
                 'id' => 139,
-                'nama' => 'BELITUNG TIMUR',
+                'nama' => 'belitung timur',
                 'provinsi_id' => 9,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1274,7 +1273,7 @@ class KotaTableSeeder extends Seeder
             139 =>
             array(
                 'id' => 140,
-                'nama' => 'BANGKA',
+                'nama' => 'bangka',
                 'provinsi_id' => 9,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1283,7 +1282,7 @@ class KotaTableSeeder extends Seeder
             140 =>
             array(
                 'id' => 141,
-                'nama' => 'BANGKA SELATAN',
+                'nama' => 'bangka selatan',
                 'provinsi_id' => 9,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1292,7 +1291,7 @@ class KotaTableSeeder extends Seeder
             141 =>
             array(
                 'id' => 142,
-                'nama' => 'BANGKA BARAT',
+                'nama' => 'bangka barat',
                 'provinsi_id' => 9,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1301,7 +1300,7 @@ class KotaTableSeeder extends Seeder
             142 =>
             array(
                 'id' => 143,
-                'nama' => 'PANGKAL PINANG',
+                'nama' => 'pangkal pinang',
                 'provinsi_id' => 9,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1310,7 +1309,7 @@ class KotaTableSeeder extends Seeder
             143 =>
             array(
                 'id' => 144,
-                'nama' => 'BANGKA TENGAH',
+                'nama' => 'bangka tengah',
                 'provinsi_id' => 9,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1319,7 +1318,7 @@ class KotaTableSeeder extends Seeder
             144 =>
             array(
                 'id' => 145,
-                'nama' => 'KEPULAUAN ANAMBAS',
+                'nama' => 'kepulauan anambas',
                 'provinsi_id' => 10,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1328,7 +1327,7 @@ class KotaTableSeeder extends Seeder
             145 =>
             array(
                 'id' => 146,
-                'nama' => 'BINTAN',
+                'nama' => 'bintan',
                 'provinsi_id' => 10,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1337,7 +1336,7 @@ class KotaTableSeeder extends Seeder
             146 =>
             array(
                 'id' => 147,
-                'nama' => 'NATUNA',
+                'nama' => 'natuna',
                 'provinsi_id' => 10,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1346,7 +1345,7 @@ class KotaTableSeeder extends Seeder
             147 =>
             array(
                 'id' => 148,
-                'nama' => 'BATAM',
+                'nama' => 'batam',
                 'provinsi_id' => 10,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1355,7 +1354,7 @@ class KotaTableSeeder extends Seeder
             148 =>
             array(
                 'id' => 149,
-                'nama' => 'TANJUNG PINANG',
+                'nama' => 'tanjung pinang',
                 'provinsi_id' => 10,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1364,7 +1363,7 @@ class KotaTableSeeder extends Seeder
             149 =>
             array(
                 'id' => 150,
-                'nama' => 'KARIMUN',
+                'nama' => 'karimun',
                 'provinsi_id' => 10,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1373,7 +1372,7 @@ class KotaTableSeeder extends Seeder
             150 =>
             array(
                 'id' => 151,
-                'nama' => 'LINGGA',
+                'nama' => 'lingga',
                 'provinsi_id' => 10,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1382,7 +1381,7 @@ class KotaTableSeeder extends Seeder
             151 =>
             array(
                 'id' => 152,
-                'nama' => 'JAKARTA UTARA',
+                'nama' => 'jakarta utara',
                 'provinsi_id' => 11,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1391,7 +1390,7 @@ class KotaTableSeeder extends Seeder
             152 =>
             array(
                 'id' => 153,
-                'nama' => 'JAKARTA BARAT',
+                'nama' => 'jakarta barat',
                 'provinsi_id' => 11,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1400,7 +1399,7 @@ class KotaTableSeeder extends Seeder
             153 =>
             array(
                 'id' => 154,
-                'nama' => 'JAKARTA TIMUR',
+                'nama' => 'jakarta timur',
                 'provinsi_id' => 11,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1409,7 +1408,7 @@ class KotaTableSeeder extends Seeder
             154 =>
             array(
                 'id' => 155,
-                'nama' => 'JAKARTA SELATAN',
+                'nama' => 'jakarta selatan',
                 'provinsi_id' => 11,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1418,7 +1417,7 @@ class KotaTableSeeder extends Seeder
             155 =>
             array(
                 'id' => 156,
-                'nama' => 'JAKARTA PUSAT',
+                'nama' => 'jakarta pusat',
                 'provinsi_id' => 11,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1427,7 +1426,7 @@ class KotaTableSeeder extends Seeder
             156 =>
             array(
                 'id' => 157,
-                'nama' => 'KEPULAUAN SERIBU',
+                'nama' => 'kepulauan seribu',
                 'provinsi_id' => 11,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1436,7 +1435,7 @@ class KotaTableSeeder extends Seeder
             157 =>
             array(
                 'id' => 158,
-                'nama' => 'DEPOK',
+                'nama' => 'depok',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1445,7 +1444,7 @@ class KotaTableSeeder extends Seeder
             158 =>
             array(
                 'id' => 159,
-                'nama' => 'KARAWANG',
+                'nama' => 'karawang',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1454,7 +1453,7 @@ class KotaTableSeeder extends Seeder
             159 =>
             array(
                 'id' => 160,
-                'nama' => 'CIREBON',
+                'nama' => 'cirebon',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1463,7 +1462,7 @@ class KotaTableSeeder extends Seeder
             160 =>
             array(
                 'id' => 161,
-                'nama' => 'BANDUNG',
+                'nama' => 'bandung',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1472,7 +1471,7 @@ class KotaTableSeeder extends Seeder
             161 =>
             array(
                 'id' => 162,
-                'nama' => 'SUKABUMI',
+                'nama' => 'sukabumi',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1481,7 +1480,7 @@ class KotaTableSeeder extends Seeder
             162 =>
             array(
                 'id' => 163,
-                'nama' => 'SUMEDANG',
+                'nama' => 'sumedang',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1490,7 +1489,7 @@ class KotaTableSeeder extends Seeder
             163 =>
             array(
                 'id' => 164,
-                'nama' => 'INDRAMAYU',
+                'nama' => 'indramayu',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1499,7 +1498,7 @@ class KotaTableSeeder extends Seeder
             164 =>
             array(
                 'id' => 165,
-                'nama' => 'MAJALENGKA',
+                'nama' => 'majalengka',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1508,7 +1507,7 @@ class KotaTableSeeder extends Seeder
             165 =>
             array(
                 'id' => 166,
-                'nama' => 'KUNINGAN',
+                'nama' => 'kuningan',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1517,7 +1516,7 @@ class KotaTableSeeder extends Seeder
             166 =>
             array(
                 'id' => 167,
-                'nama' => 'TASIKMALAYA',
+                'nama' => 'tasikmalaya',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1526,7 +1525,7 @@ class KotaTableSeeder extends Seeder
             167 =>
             array(
                 'id' => 168,
-                'nama' => 'CIAMIS',
+                'nama' => 'ciamis',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1535,7 +1534,7 @@ class KotaTableSeeder extends Seeder
             168 =>
             array(
                 'id' => 169,
-                'nama' => 'SUBANG',
+                'nama' => 'subang',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1544,7 +1543,7 @@ class KotaTableSeeder extends Seeder
             169 =>
             array(
                 'id' => 170,
-                'nama' => 'PURWAKARTA',
+                'nama' => 'purwakarta',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1553,7 +1552,7 @@ class KotaTableSeeder extends Seeder
             170 =>
             array(
                 'id' => 171,
-                'nama' => 'BOGOR',
+                'nama' => 'bogor',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1562,7 +1561,7 @@ class KotaTableSeeder extends Seeder
             171 =>
             array(
                 'id' => 172,
-                'nama' => 'BEKASI',
+                'nama' => 'bekasi',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1571,7 +1570,7 @@ class KotaTableSeeder extends Seeder
             172 =>
             array(
                 'id' => 173,
-                'nama' => 'GARUT',
+                'nama' => 'garut',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1580,7 +1579,7 @@ class KotaTableSeeder extends Seeder
             173 =>
             array(
                 'id' => 174,
-                'nama' => 'PANGANDARAN',
+                'nama' => 'pangandaran',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1589,7 +1588,7 @@ class KotaTableSeeder extends Seeder
             174 =>
             array(
                 'id' => 175,
-                'nama' => 'CIANJUR',
+                'nama' => 'cianjur',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1598,7 +1597,7 @@ class KotaTableSeeder extends Seeder
             175 =>
             array(
                 'id' => 176,
-                'nama' => 'BANJAR',
+                'nama' => 'banjar',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1607,7 +1606,7 @@ class KotaTableSeeder extends Seeder
             176 =>
             array(
                 'id' => 177,
-                'nama' => 'BANDUNG BARAT',
+                'nama' => 'bandung barat',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1616,7 +1615,7 @@ class KotaTableSeeder extends Seeder
             177 =>
             array(
                 'id' => 178,
-                'nama' => 'CIMAHI',
+                'nama' => 'cimahi',
                 'provinsi_id' => 12,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1625,7 +1624,7 @@ class KotaTableSeeder extends Seeder
             178 =>
             array(
                 'id' => 179,
-                'nama' => 'PURBALINGGA',
+                'nama' => 'purbalingga',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1634,7 +1633,7 @@ class KotaTableSeeder extends Seeder
             179 =>
             array(
                 'id' => 180,
-                'nama' => 'KEBUMEN',
+                'nama' => 'kebumen',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1643,7 +1642,7 @@ class KotaTableSeeder extends Seeder
             180 =>
             array(
                 'id' => 181,
-                'nama' => 'MAGELANG',
+                'nama' => 'magelang',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1652,7 +1651,7 @@ class KotaTableSeeder extends Seeder
             181 =>
             array(
                 'id' => 182,
-                'nama' => 'CILACAP',
+                'nama' => 'cilacap',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1661,7 +1660,7 @@ class KotaTableSeeder extends Seeder
             182 =>
             array(
                 'id' => 183,
-                'nama' => 'BATANG',
+                'nama' => 'batang',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1670,7 +1669,7 @@ class KotaTableSeeder extends Seeder
             183 =>
             array(
                 'id' => 184,
-                'nama' => 'BANJARNEGARA',
+                'nama' => 'banjarnegara',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1679,7 +1678,7 @@ class KotaTableSeeder extends Seeder
             184 =>
             array(
                 'id' => 185,
-                'nama' => 'BLORA',
+                'nama' => 'blora',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1688,7 +1687,7 @@ class KotaTableSeeder extends Seeder
             185 =>
             array(
                 'id' => 186,
-                'nama' => 'BREBES',
+                'nama' => 'brebes',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1697,7 +1696,7 @@ class KotaTableSeeder extends Seeder
             186 =>
             array(
                 'id' => 187,
-                'nama' => 'BANYUMAS',
+                'nama' => 'banyumas',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1706,7 +1705,7 @@ class KotaTableSeeder extends Seeder
             187 =>
             array(
                 'id' => 188,
-                'nama' => 'WONOSOBO',
+                'nama' => 'wonosobo',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1715,7 +1714,7 @@ class KotaTableSeeder extends Seeder
             188 =>
             array(
                 'id' => 189,
-                'nama' => 'TEGAL',
+                'nama' => 'tegal',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1724,7 +1723,7 @@ class KotaTableSeeder extends Seeder
             189 =>
             array(
                 'id' => 190,
-                'nama' => 'PURWOREJO',
+                'nama' => 'purworejo',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1733,7 +1732,7 @@ class KotaTableSeeder extends Seeder
             190 =>
             array(
                 'id' => 191,
-                'nama' => 'PATI',
+                'nama' => 'pati',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1742,7 +1741,7 @@ class KotaTableSeeder extends Seeder
             191 =>
             array(
                 'id' => 192,
-                'nama' => 'SUKOHARJO',
+                'nama' => 'sukoharjo',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1751,7 +1750,7 @@ class KotaTableSeeder extends Seeder
             192 =>
             array(
                 'id' => 193,
-                'nama' => 'KARANGANYAR',
+                'nama' => 'karanganyar',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1760,7 +1759,7 @@ class KotaTableSeeder extends Seeder
             193 =>
             array(
                 'id' => 194,
-                'nama' => 'PEKALONGAN',
+                'nama' => 'pekalongan',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1769,7 +1768,7 @@ class KotaTableSeeder extends Seeder
             194 =>
             array(
                 'id' => 195,
-                'nama' => 'PEMALANG',
+                'nama' => 'pemalang',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1778,7 +1777,7 @@ class KotaTableSeeder extends Seeder
             195 =>
             array(
                 'id' => 196,
-                'nama' => 'BOYOLALI',
+                'nama' => 'boyolali',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1787,7 +1786,7 @@ class KotaTableSeeder extends Seeder
             196 =>
             array(
                 'id' => 197,
-                'nama' => 'GROBOGAN',
+                'nama' => 'grobogan',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1796,7 +1795,7 @@ class KotaTableSeeder extends Seeder
             197 =>
             array(
                 'id' => 198,
-                'nama' => 'SEMARANG',
+                'nama' => 'semarang',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1805,7 +1804,7 @@ class KotaTableSeeder extends Seeder
             198 =>
             array(
                 'id' => 199,
-                'nama' => 'DEMAK',
+                'nama' => 'demak',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1814,7 +1813,7 @@ class KotaTableSeeder extends Seeder
             199 =>
             array(
                 'id' => 200,
-                'nama' => 'REMBANG',
+                'nama' => 'rembang',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1823,7 +1822,7 @@ class KotaTableSeeder extends Seeder
             200 =>
             array(
                 'id' => 201,
-                'nama' => 'KLATEN',
+                'nama' => 'klaten',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1832,7 +1831,7 @@ class KotaTableSeeder extends Seeder
             201 =>
             array(
                 'id' => 202,
-                'nama' => 'KUDUS',
+                'nama' => 'kudus',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1841,7 +1840,7 @@ class KotaTableSeeder extends Seeder
             202 =>
             array(
                 'id' => 203,
-                'nama' => 'TEMANGGUNG',
+                'nama' => 'temanggung',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1850,7 +1849,7 @@ class KotaTableSeeder extends Seeder
             203 =>
             array(
                 'id' => 204,
-                'nama' => 'SRAGEN',
+                'nama' => 'sragen',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1859,7 +1858,7 @@ class KotaTableSeeder extends Seeder
             204 =>
             array(
                 'id' => 205,
-                'nama' => 'JEPARA',
+                'nama' => 'jepara',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1868,7 +1867,7 @@ class KotaTableSeeder extends Seeder
             205 =>
             array(
                 'id' => 206,
-                'nama' => 'WONOGIRI',
+                'nama' => 'wonogiri',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1877,7 +1876,7 @@ class KotaTableSeeder extends Seeder
             206 =>
             array(
                 'id' => 207,
-                'nama' => 'KENDAL',
+                'nama' => 'kendal',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1886,7 +1885,7 @@ class KotaTableSeeder extends Seeder
             207 =>
             array(
                 'id' => 208,
-                'nama' => 'SURAKARTA (SOLO)',
+                'nama' => 'surakarta (solo)',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1895,7 +1894,7 @@ class KotaTableSeeder extends Seeder
             208 =>
             array(
                 'id' => 209,
-                'nama' => 'SALATIGA',
+                'nama' => 'salatiga',
                 'provinsi_id' => 13,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1904,7 +1903,7 @@ class KotaTableSeeder extends Seeder
             209 =>
             array(
                 'id' => 210,
-                'nama' => 'SLEMAN',
+                'nama' => 'sleman',
                 'provinsi_id' => 14,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1913,7 +1912,7 @@ class KotaTableSeeder extends Seeder
             210 =>
             array(
                 'id' => 211,
-                'nama' => 'BANTUL',
+                'nama' => 'bantul',
                 'provinsi_id' => 14,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1922,7 +1921,7 @@ class KotaTableSeeder extends Seeder
             211 =>
             array(
                 'id' => 212,
-                'nama' => 'YOGYAKARTA',
+                'nama' => 'yogyakarta',
                 'provinsi_id' => 14,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1931,7 +1930,7 @@ class KotaTableSeeder extends Seeder
             212 =>
             array(
                 'id' => 213,
-                'nama' => 'GUNUNG KIDUL',
+                'nama' => 'gunung kidul',
                 'provinsi_id' => 14,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1940,7 +1939,7 @@ class KotaTableSeeder extends Seeder
             213 =>
             array(
                 'id' => 214,
-                'nama' => 'KULON PROGO',
+                'nama' => 'kulon progo',
                 'provinsi_id' => 14,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1949,7 +1948,7 @@ class KotaTableSeeder extends Seeder
             214 =>
             array(
                 'id' => 215,
-                'nama' => 'GRESIK',
+                'nama' => 'gresik',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1958,7 +1957,7 @@ class KotaTableSeeder extends Seeder
             215 =>
             array(
                 'id' => 216,
-                'nama' => 'KEDIRI',
+                'nama' => 'kediri',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1967,7 +1966,7 @@ class KotaTableSeeder extends Seeder
             216 =>
             array(
                 'id' => 217,
-                'nama' => 'SAMPANG',
+                'nama' => 'sampang',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1976,7 +1975,7 @@ class KotaTableSeeder extends Seeder
             217 =>
             array(
                 'id' => 218,
-                'nama' => 'BANGKALAN',
+                'nama' => 'bangkalan',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1985,7 +1984,7 @@ class KotaTableSeeder extends Seeder
             218 =>
             array(
                 'id' => 219,
-                'nama' => 'SUMENEP',
+                'nama' => 'sumenep',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -1994,7 +1993,7 @@ class KotaTableSeeder extends Seeder
             219 =>
             array(
                 'id' => 220,
-                'nama' => 'SITUBONDO',
+                'nama' => 'situbondo',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2003,7 +2002,7 @@ class KotaTableSeeder extends Seeder
             220 =>
             array(
                 'id' => 221,
-                'nama' => 'SURABAYA',
+                'nama' => 'surabaya',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2012,7 +2011,7 @@ class KotaTableSeeder extends Seeder
             221 =>
             array(
                 'id' => 222,
-                'nama' => 'JEMBER',
+                'nama' => 'jember',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2021,7 +2020,7 @@ class KotaTableSeeder extends Seeder
             222 =>
             array(
                 'id' => 223,
-                'nama' => 'PAMEKASAN',
+                'nama' => 'pamekasan',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2030,7 +2029,7 @@ class KotaTableSeeder extends Seeder
             223 =>
             array(
                 'id' => 224,
-                'nama' => 'JOMBANG',
+                'nama' => 'jombang',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2039,7 +2038,7 @@ class KotaTableSeeder extends Seeder
             224 =>
             array(
                 'id' => 225,
-                'nama' => 'PROBOLINGGO',
+                'nama' => 'probolinggo',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2048,7 +2047,7 @@ class KotaTableSeeder extends Seeder
             225 =>
             array(
                 'id' => 226,
-                'nama' => 'BANYUWANGI',
+                'nama' => 'banyuwangi',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2057,7 +2056,7 @@ class KotaTableSeeder extends Seeder
             226 =>
             array(
                 'id' => 227,
-                'nama' => 'PASURUAN',
+                'nama' => 'pasuruan',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2066,7 +2065,7 @@ class KotaTableSeeder extends Seeder
             227 =>
             array(
                 'id' => 228,
-                'nama' => 'BOJONEGORO',
+                'nama' => 'bojonegoro',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2075,7 +2074,7 @@ class KotaTableSeeder extends Seeder
             228 =>
             array(
                 'id' => 229,
-                'nama' => 'BONDOWOSO',
+                'nama' => 'bondowoso',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2084,7 +2083,7 @@ class KotaTableSeeder extends Seeder
             229 =>
             array(
                 'id' => 230,
-                'nama' => 'MAGETAN',
+                'nama' => 'magetan',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2093,7 +2092,7 @@ class KotaTableSeeder extends Seeder
             230 =>
             array(
                 'id' => 231,
-                'nama' => 'LUMAJANG',
+                'nama' => 'lumajang',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2102,7 +2101,7 @@ class KotaTableSeeder extends Seeder
             231 =>
             array(
                 'id' => 232,
-                'nama' => 'MALANG',
+                'nama' => 'malang',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2111,7 +2110,7 @@ class KotaTableSeeder extends Seeder
             232 =>
             array(
                 'id' => 233,
-                'nama' => 'BLITAR',
+                'nama' => 'blitar',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2120,7 +2119,7 @@ class KotaTableSeeder extends Seeder
             233 =>
             array(
                 'id' => 234,
-                'nama' => 'SIDOARJO',
+                'nama' => 'sidoarjo',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2129,7 +2128,7 @@ class KotaTableSeeder extends Seeder
             234 =>
             array(
                 'id' => 235,
-                'nama' => 'LAMONGAN',
+                'nama' => 'lamongan',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2138,7 +2137,7 @@ class KotaTableSeeder extends Seeder
             235 =>
             array(
                 'id' => 236,
-                'nama' => 'PACITAN',
+                'nama' => 'pacitan',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2147,7 +2146,7 @@ class KotaTableSeeder extends Seeder
             236 =>
             array(
                 'id' => 237,
-                'nama' => 'TULUNGAGUNG',
+                'nama' => 'tulungagung',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2156,7 +2155,7 @@ class KotaTableSeeder extends Seeder
             237 =>
             array(
                 'id' => 238,
-                'nama' => 'MOJOKERTO',
+                'nama' => 'mojokerto',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2165,7 +2164,7 @@ class KotaTableSeeder extends Seeder
             238 =>
             array(
                 'id' => 239,
-                'nama' => 'MADIUN',
+                'nama' => 'madiun',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2174,7 +2173,7 @@ class KotaTableSeeder extends Seeder
             239 =>
             array(
                 'id' => 240,
-                'nama' => 'PONOROGO',
+                'nama' => 'ponorogo',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2183,7 +2182,7 @@ class KotaTableSeeder extends Seeder
             240 =>
             array(
                 'id' => 241,
-                'nama' => 'NGAWI',
+                'nama' => 'ngawi',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2192,7 +2191,7 @@ class KotaTableSeeder extends Seeder
             241 =>
             array(
                 'id' => 242,
-                'nama' => 'NGANJUK',
+                'nama' => 'nganjuk',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2201,7 +2200,7 @@ class KotaTableSeeder extends Seeder
             242 =>
             array(
                 'id' => 243,
-                'nama' => 'TUBAN',
+                'nama' => 'tuban',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2210,7 +2209,7 @@ class KotaTableSeeder extends Seeder
             243 =>
             array(
                 'id' => 244,
-                'nama' => 'TRENGGALEK',
+                'nama' => 'trenggalek',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2219,7 +2218,7 @@ class KotaTableSeeder extends Seeder
             244 =>
             array(
                 'id' => 245,
-                'nama' => 'BATU',
+                'nama' => 'batu',
                 'provinsi_id' => 15,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2228,7 +2227,7 @@ class KotaTableSeeder extends Seeder
             245 =>
             array(
                 'id' => 246,
-                'nama' => 'TANGERANG',
+                'nama' => 'tangerang',
                 'provinsi_id' => 16,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2237,7 +2236,7 @@ class KotaTableSeeder extends Seeder
             246 =>
             array(
                 'id' => 247,
-                'nama' => 'SERANG',
+                'nama' => 'serang',
                 'provinsi_id' => 16,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2246,7 +2245,7 @@ class KotaTableSeeder extends Seeder
             247 =>
             array(
                 'id' => 248,
-                'nama' => 'PANDEGLANG',
+                'nama' => 'pandeglang',
                 'provinsi_id' => 16,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2255,7 +2254,7 @@ class KotaTableSeeder extends Seeder
             248 =>
             array(
                 'id' => 249,
-                'nama' => 'LEBAK',
+                'nama' => 'lebak',
                 'provinsi_id' => 16,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2264,7 +2263,7 @@ class KotaTableSeeder extends Seeder
             249 =>
             array(
                 'id' => 250,
-                'nama' => 'TANGERANG SELATAN',
+                'nama' => 'tangerang selatan',
                 'provinsi_id' => 16,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2273,7 +2272,7 @@ class KotaTableSeeder extends Seeder
             250 =>
             array(
                 'id' => 251,
-                'nama' => 'CILEGON',
+                'nama' => 'cilegon',
                 'provinsi_id' => 16,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2282,7 +2281,7 @@ class KotaTableSeeder extends Seeder
             251 =>
             array(
                 'id' => 252,
-                'nama' => 'KLUNGKUNG',
+                'nama' => 'klungkung',
                 'provinsi_id' => 17,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2291,7 +2290,7 @@ class KotaTableSeeder extends Seeder
             252 =>
             array(
                 'id' => 253,
-                'nama' => 'KARANGASEM',
+                'nama' => 'karangasem',
                 'provinsi_id' => 17,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2300,7 +2299,7 @@ class KotaTableSeeder extends Seeder
             253 =>
             array(
                 'id' => 254,
-                'nama' => 'BANGLI',
+                'nama' => 'bangli',
                 'provinsi_id' => 17,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2309,7 +2308,7 @@ class KotaTableSeeder extends Seeder
             254 =>
             array(
                 'id' => 255,
-                'nama' => 'TABANAN',
+                'nama' => 'tabanan',
                 'provinsi_id' => 17,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2318,7 +2317,7 @@ class KotaTableSeeder extends Seeder
             255 =>
             array(
                 'id' => 256,
-                'nama' => 'GIANYAR',
+                'nama' => 'gianyar',
                 'provinsi_id' => 17,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2327,7 +2326,7 @@ class KotaTableSeeder extends Seeder
             256 =>
             array(
                 'id' => 257,
-                'nama' => 'BADUNG',
+                'nama' => 'badung',
                 'provinsi_id' => 17,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2336,7 +2335,7 @@ class KotaTableSeeder extends Seeder
             257 =>
             array(
                 'id' => 258,
-                'nama' => 'JEMBRANA',
+                'nama' => 'jembrana',
                 'provinsi_id' => 17,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2345,7 +2344,7 @@ class KotaTableSeeder extends Seeder
             258 =>
             array(
                 'id' => 259,
-                'nama' => 'BULELENG',
+                'nama' => 'buleleng',
                 'provinsi_id' => 17,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2354,7 +2353,7 @@ class KotaTableSeeder extends Seeder
             259 =>
             array(
                 'id' => 260,
-                'nama' => 'DENPASAR',
+                'nama' => 'denpasar',
                 'provinsi_id' => 17,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2363,7 +2362,7 @@ class KotaTableSeeder extends Seeder
             260 =>
             array(
                 'id' => 261,
-                'nama' => 'MATARAM',
+                'nama' => 'mataram',
                 'provinsi_id' => 18,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2372,7 +2371,7 @@ class KotaTableSeeder extends Seeder
             261 =>
             array(
                 'id' => 262,
-                'nama' => 'DOMPU',
+                'nama' => 'dompu',
                 'provinsi_id' => 18,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2381,7 +2380,7 @@ class KotaTableSeeder extends Seeder
             262 =>
             array(
                 'id' => 263,
-                'nama' => 'SUMBAWA BARAT',
+                'nama' => 'sumbawa barat',
                 'provinsi_id' => 18,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2390,7 +2389,7 @@ class KotaTableSeeder extends Seeder
             263 =>
             array(
                 'id' => 264,
-                'nama' => 'SUMBAWA',
+                'nama' => 'sumbawa',
                 'provinsi_id' => 18,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2399,7 +2398,7 @@ class KotaTableSeeder extends Seeder
             264 =>
             array(
                 'id' => 265,
-                'nama' => 'LOMBOK TENGAH',
+                'nama' => 'lombok tengah',
                 'provinsi_id' => 18,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2408,7 +2407,7 @@ class KotaTableSeeder extends Seeder
             265 =>
             array(
                 'id' => 266,
-                'nama' => 'LOMBOK TIMUR',
+                'nama' => 'lombok timur',
                 'provinsi_id' => 18,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2417,7 +2416,7 @@ class KotaTableSeeder extends Seeder
             266 =>
             array(
                 'id' => 267,
-                'nama' => 'LOMBOK UTARA',
+                'nama' => 'lombok utara',
                 'provinsi_id' => 18,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2426,7 +2425,7 @@ class KotaTableSeeder extends Seeder
             267 =>
             array(
                 'id' => 268,
-                'nama' => 'LOMBOK BARAT',
+                'nama' => 'lombok barat',
                 'provinsi_id' => 18,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2435,7 +2434,7 @@ class KotaTableSeeder extends Seeder
             268 =>
             array(
                 'id' => 269,
-                'nama' => 'BIMA',
+                'nama' => 'bima',
                 'provinsi_id' => 18,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2444,7 +2443,7 @@ class KotaTableSeeder extends Seeder
             269 =>
             array(
                 'id' => 270,
-                'nama' => 'TIMOR TENGAH SELATAN',
+                'nama' => 'timor tengah selatan',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2453,7 +2452,7 @@ class KotaTableSeeder extends Seeder
             270 =>
             array(
                 'id' => 271,
-                'nama' => 'FLORES TIMUR',
+                'nama' => 'flores timur',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2462,7 +2461,7 @@ class KotaTableSeeder extends Seeder
             271 =>
             array(
                 'id' => 272,
-                'nama' => 'ALOR',
+                'nama' => 'alor',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2471,7 +2470,7 @@ class KotaTableSeeder extends Seeder
             272 =>
             array(
                 'id' => 273,
-                'nama' => 'ENDE',
+                'nama' => 'ende',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2480,7 +2479,7 @@ class KotaTableSeeder extends Seeder
             273 =>
             array(
                 'id' => 274,
-                'nama' => 'NAGEKEO',
+                'nama' => 'nagekeo',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2489,7 +2488,7 @@ class KotaTableSeeder extends Seeder
             274 =>
             array(
                 'id' => 275,
-                'nama' => 'KUPANG',
+                'nama' => 'kupang',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2498,7 +2497,7 @@ class KotaTableSeeder extends Seeder
             275 =>
             array(
                 'id' => 276,
-                'nama' => 'SIKKA',
+                'nama' => 'sikka',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2507,7 +2506,7 @@ class KotaTableSeeder extends Seeder
             276 =>
             array(
                 'id' => 277,
-                'nama' => 'NGADA',
+                'nama' => 'ngada',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2516,7 +2515,7 @@ class KotaTableSeeder extends Seeder
             277 =>
             array(
                 'id' => 278,
-                'nama' => 'TIMOR TENGAH UTARA',
+                'nama' => 'timor tengah utara',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2525,7 +2524,7 @@ class KotaTableSeeder extends Seeder
             278 =>
             array(
                 'id' => 279,
-                'nama' => 'BELU',
+                'nama' => 'belu',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2534,7 +2533,7 @@ class KotaTableSeeder extends Seeder
             279 =>
             array(
                 'id' => 280,
-                'nama' => 'LEMBATA',
+                'nama' => 'lembata',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2543,7 +2542,7 @@ class KotaTableSeeder extends Seeder
             280 =>
             array(
                 'id' => 281,
-                'nama' => 'SUMBA BARAT DAYA',
+                'nama' => 'sumba barat daya',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2552,7 +2551,7 @@ class KotaTableSeeder extends Seeder
             281 =>
             array(
                 'id' => 282,
-                'nama' => 'SUMBA BARAT',
+                'nama' => 'sumba barat',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2561,7 +2560,7 @@ class KotaTableSeeder extends Seeder
             282 =>
             array(
                 'id' => 283,
-                'nama' => 'SUMBA TENGAH',
+                'nama' => 'sumba tengah',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2570,7 +2569,7 @@ class KotaTableSeeder extends Seeder
             283 =>
             array(
                 'id' => 284,
-                'nama' => 'SUMBA TIMUR',
+                'nama' => 'sumba timur',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2579,7 +2578,7 @@ class KotaTableSeeder extends Seeder
             284 =>
             array(
                 'id' => 285,
-                'nama' => 'ROTE NDAO',
+                'nama' => 'rote ndao',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2588,7 +2587,7 @@ class KotaTableSeeder extends Seeder
             285 =>
             array(
                 'id' => 286,
-                'nama' => 'MANGGARAI TIMUR',
+                'nama' => 'manggarai timur',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2597,7 +2596,7 @@ class KotaTableSeeder extends Seeder
             286 =>
             array(
                 'id' => 287,
-                'nama' => 'MANGGARAI',
+                'nama' => 'manggarai',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2606,7 +2605,7 @@ class KotaTableSeeder extends Seeder
             287 =>
             array(
                 'id' => 288,
-                'nama' => 'SABU RAIJUA',
+                'nama' => 'sabu raijua',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2615,7 +2614,7 @@ class KotaTableSeeder extends Seeder
             288 =>
             array(
                 'id' => 289,
-                'nama' => 'MANGGARAI BARAT',
+                'nama' => 'manggarai barat',
                 'provinsi_id' => 19,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2624,7 +2623,7 @@ class KotaTableSeeder extends Seeder
             289 =>
             array(
                 'id' => 290,
-                'nama' => 'LANDAK',
+                'nama' => 'landak',
                 'provinsi_id' => 20,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2633,7 +2632,7 @@ class KotaTableSeeder extends Seeder
             290 =>
             array(
                 'id' => 291,
-                'nama' => 'KETAPANG',
+                'nama' => 'ketapang',
                 'provinsi_id' => 20,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2642,7 +2641,7 @@ class KotaTableSeeder extends Seeder
             291 =>
             array(
                 'id' => 292,
-                'nama' => 'SINTANG',
+                'nama' => 'sintang',
                 'provinsi_id' => 20,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2651,7 +2650,7 @@ class KotaTableSeeder extends Seeder
             292 =>
             array(
                 'id' => 293,
-                'nama' => 'KUBU RAYA',
+                'nama' => 'kubu raya',
                 'provinsi_id' => 20,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2660,7 +2659,7 @@ class KotaTableSeeder extends Seeder
             293 =>
             array(
                 'id' => 294,
-                'nama' => 'PONTIANAK',
+                'nama' => 'pontianak',
                 'provinsi_id' => 20,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2669,7 +2668,7 @@ class KotaTableSeeder extends Seeder
             294 =>
             array(
                 'id' => 295,
-                'nama' => 'KAYONG UTARA',
+                'nama' => 'kayong utara',
                 'provinsi_id' => 20,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2678,7 +2677,7 @@ class KotaTableSeeder extends Seeder
             295 =>
             array(
                 'id' => 296,
-                'nama' => 'BENGKAYANG',
+                'nama' => 'bengkayang',
                 'provinsi_id' => 20,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2687,7 +2686,7 @@ class KotaTableSeeder extends Seeder
             296 =>
             array(
                 'id' => 297,
-                'nama' => 'KAPUAS HULU',
+                'nama' => 'kapuas hulu',
                 'provinsi_id' => 20,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2696,7 +2695,7 @@ class KotaTableSeeder extends Seeder
             297 =>
             array(
                 'id' => 298,
-                'nama' => 'SAMBAS',
+                'nama' => 'sambas',
                 'provinsi_id' => 20,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2705,7 +2704,7 @@ class KotaTableSeeder extends Seeder
             298 =>
             array(
                 'id' => 299,
-                'nama' => 'SINGKAWANG',
+                'nama' => 'singkawang',
                 'provinsi_id' => 20,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2714,7 +2713,7 @@ class KotaTableSeeder extends Seeder
             299 =>
             array(
                 'id' => 300,
-                'nama' => 'SANGGAU',
+                'nama' => 'sanggau',
                 'provinsi_id' => 20,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2723,7 +2722,7 @@ class KotaTableSeeder extends Seeder
             300 =>
             array(
                 'id' => 301,
-                'nama' => 'MELAWI',
+                'nama' => 'melawi',
                 'provinsi_id' => 20,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2732,7 +2731,7 @@ class KotaTableSeeder extends Seeder
             301 =>
             array(
                 'id' => 302,
-                'nama' => 'SEKADAU',
+                'nama' => 'sekadau',
                 'provinsi_id' => 20,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2741,7 +2740,7 @@ class KotaTableSeeder extends Seeder
             302 =>
             array(
                 'id' => 303,
-                'nama' => 'KOTAWARINGIN TIMUR',
+                'nama' => 'kotawaringin timur',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2750,7 +2749,7 @@ class KotaTableSeeder extends Seeder
             303 =>
             array(
                 'id' => 304,
-                'nama' => 'SUKAMARA',
+                'nama' => 'sukamara',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2759,7 +2758,7 @@ class KotaTableSeeder extends Seeder
             304 =>
             array(
                 'id' => 305,
-                'nama' => 'KOTAWARINGIN BARAT',
+                'nama' => 'kotawaringin barat',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2768,7 +2767,7 @@ class KotaTableSeeder extends Seeder
             305 =>
             array(
                 'id' => 306,
-                'nama' => 'BARITO TIMUR',
+                'nama' => 'barito timur',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2777,7 +2776,7 @@ class KotaTableSeeder extends Seeder
             306 =>
             array(
                 'id' => 307,
-                'nama' => 'KAPUAS',
+                'nama' => 'kapuas',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2786,7 +2785,7 @@ class KotaTableSeeder extends Seeder
             307 =>
             array(
                 'id' => 308,
-                'nama' => 'PULANG PISAU',
+                'nama' => 'pulang pisau',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2795,7 +2794,7 @@ class KotaTableSeeder extends Seeder
             308 =>
             array(
                 'id' => 309,
-                'nama' => 'LAMANDAU',
+                'nama' => 'lamandau',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2804,7 +2803,7 @@ class KotaTableSeeder extends Seeder
             309 =>
             array(
                 'id' => 310,
-                'nama' => 'SERUYAN',
+                'nama' => 'seruyan',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2813,7 +2812,7 @@ class KotaTableSeeder extends Seeder
             310 =>
             array(
                 'id' => 311,
-                'nama' => 'KATINGAN',
+                'nama' => 'katingan',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2822,7 +2821,7 @@ class KotaTableSeeder extends Seeder
             311 =>
             array(
                 'id' => 312,
-                'nama' => 'BARITO SELATAN',
+                'nama' => 'barito selatan',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2831,7 +2830,7 @@ class KotaTableSeeder extends Seeder
             312 =>
             array(
                 'id' => 313,
-                'nama' => 'MURUNG RAYA',
+                'nama' => 'murung raya',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2840,7 +2839,7 @@ class KotaTableSeeder extends Seeder
             313 =>
             array(
                 'id' => 314,
-                'nama' => 'BARITO UTARA',
+                'nama' => 'barito utara',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2849,7 +2848,7 @@ class KotaTableSeeder extends Seeder
             314 =>
             array(
                 'id' => 315,
-                'nama' => 'GUNUNG MAS',
+                'nama' => 'gunung mas',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2858,7 +2857,7 @@ class KotaTableSeeder extends Seeder
             315 =>
             array(
                 'id' => 316,
-                'nama' => 'PALANGKA RAYA',
+                'nama' => 'palangka raya',
                 'provinsi_id' => 21,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2867,7 +2866,7 @@ class KotaTableSeeder extends Seeder
             316 =>
             array(
                 'id' => 317,
-                'nama' => 'TAPIN',
+                'nama' => 'tapin',
                 'provinsi_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2876,7 +2875,7 @@ class KotaTableSeeder extends Seeder
             317 =>
             array(
                 'id' => 318,
-                'nama' => 'BANJAR',
+                'nama' => 'banjar',
                 'provinsi_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2885,7 +2884,7 @@ class KotaTableSeeder extends Seeder
             318 =>
             array(
                 'id' => 319,
-                'nama' => 'HULU SUNGAI TENGAH',
+                'nama' => 'hulu sungai tengah',
                 'provinsi_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2894,7 +2893,7 @@ class KotaTableSeeder extends Seeder
             319 =>
             array(
                 'id' => 320,
-                'nama' => 'TABALONG',
+                'nama' => 'tabalong',
                 'provinsi_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2903,7 +2902,7 @@ class KotaTableSeeder extends Seeder
             320 =>
             array(
                 'id' => 321,
-                'nama' => 'HULU SUNGAI UTARA',
+                'nama' => 'hulu sungai utara',
                 'provinsi_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2912,7 +2911,7 @@ class KotaTableSeeder extends Seeder
             321 =>
             array(
                 'id' => 322,
-                'nama' => 'BALANGAN',
+                'nama' => 'balangan',
                 'provinsi_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2921,7 +2920,7 @@ class KotaTableSeeder extends Seeder
             322 =>
             array(
                 'id' => 323,
-                'nama' => 'TANAH BUMBU',
+                'nama' => 'tanah bumbu',
                 'provinsi_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2930,7 +2929,7 @@ class KotaTableSeeder extends Seeder
             323 =>
             array(
                 'id' => 324,
-                'nama' => 'BANJARMASIN',
+                'nama' => 'banjarmasin',
                 'provinsi_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2939,7 +2938,7 @@ class KotaTableSeeder extends Seeder
             324 =>
             array(
                 'id' => 325,
-                'nama' => 'KOTABARU',
+                'nama' => 'kotabaru',
                 'provinsi_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2948,7 +2947,7 @@ class KotaTableSeeder extends Seeder
             325 =>
             array(
                 'id' => 326,
-                'nama' => 'TANAH LAUT',
+                'nama' => 'tanah laut',
                 'provinsi_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2957,7 +2956,7 @@ class KotaTableSeeder extends Seeder
             326 =>
             array(
                 'id' => 327,
-                'nama' => 'HULU SUNGAI SELATAN',
+                'nama' => 'hulu sungai selatan',
                 'provinsi_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2966,7 +2965,7 @@ class KotaTableSeeder extends Seeder
             327 =>
             array(
                 'id' => 328,
-                'nama' => 'BARITO KUALA',
+                'nama' => 'barito kuala',
                 'provinsi_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2975,7 +2974,7 @@ class KotaTableSeeder extends Seeder
             328 =>
             array(
                 'id' => 329,
-                'nama' => 'BANJARBARU',
+                'nama' => 'banjarbaru',
                 'provinsi_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2984,7 +2983,7 @@ class KotaTableSeeder extends Seeder
             329 =>
             array(
                 'id' => 330,
-                'nama' => 'KUTAI BARAT',
+                'nama' => 'kutai barat',
                 'provinsi_id' => 23,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -2993,7 +2992,7 @@ class KotaTableSeeder extends Seeder
             330 =>
             array(
                 'id' => 331,
-                'nama' => 'SAMARINDA',
+                'nama' => 'samarinda',
                 'provinsi_id' => 23,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3002,7 +3001,7 @@ class KotaTableSeeder extends Seeder
             331 =>
             array(
                 'id' => 332,
-                'nama' => 'PASER',
+                'nama' => 'paser',
                 'provinsi_id' => 23,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3011,7 +3010,7 @@ class KotaTableSeeder extends Seeder
             332 =>
             array(
                 'id' => 333,
-                'nama' => 'KUTAI KARTANEGARA',
+                'nama' => 'kutai kartanegara',
                 'provinsi_id' => 23,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3020,7 +3019,7 @@ class KotaTableSeeder extends Seeder
             333 =>
             array(
                 'id' => 334,
-                'nama' => 'BERAU',
+                'nama' => 'berau',
                 'provinsi_id' => 23,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3029,7 +3028,7 @@ class KotaTableSeeder extends Seeder
             334 =>
             array(
                 'id' => 335,
-                'nama' => 'PENAJAM PASER UTARA',
+                'nama' => 'penajam paser utara',
                 'provinsi_id' => 23,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3038,7 +3037,7 @@ class KotaTableSeeder extends Seeder
             335 =>
             array(
                 'id' => 336,
-                'nama' => 'BONTANG',
+                'nama' => 'bontang',
                 'provinsi_id' => 23,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3047,7 +3046,7 @@ class KotaTableSeeder extends Seeder
             336 =>
             array(
                 'id' => 337,
-                'nama' => 'KUTAI TIMUR',
+                'nama' => 'kutai timur',
                 'provinsi_id' => 23,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3056,7 +3055,7 @@ class KotaTableSeeder extends Seeder
             337 =>
             array(
                 'id' => 338,
-                'nama' => 'BALIKPAPAN',
+                'nama' => 'balikpapan',
                 'provinsi_id' => 23,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3065,7 +3064,7 @@ class KotaTableSeeder extends Seeder
             338 =>
             array(
                 'id' => 339,
-                'nama' => 'MALINAU',
+                'nama' => 'malinau',
                 'provinsi_id' => 24,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3074,7 +3073,7 @@ class KotaTableSeeder extends Seeder
             339 =>
             array(
                 'id' => 340,
-                'nama' => 'NUNUKAN',
+                'nama' => 'nunukan',
                 'provinsi_id' => 24,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3083,7 +3082,7 @@ class KotaTableSeeder extends Seeder
             340 =>
             array(
                 'id' => 341,
-                'nama' => 'BULUNGAN (BULONGAN)',
+                'nama' => 'bulungan (bulongan)',
                 'provinsi_id' => 24,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3092,7 +3091,7 @@ class KotaTableSeeder extends Seeder
             341 =>
             array(
                 'id' => 342,
-                'nama' => 'TANA TIDUNG',
+                'nama' => 'tana tidung',
                 'provinsi_id' => 24,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3101,7 +3100,7 @@ class KotaTableSeeder extends Seeder
             342 =>
             array(
                 'id' => 343,
-                'nama' => 'TARAKAN',
+                'nama' => 'tarakan',
                 'provinsi_id' => 24,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3110,7 +3109,7 @@ class KotaTableSeeder extends Seeder
             343 =>
             array(
                 'id' => 344,
-                'nama' => 'BOLAANG MONGONDOW (BOLMONG)',
+                'nama' => 'bolaang mongondow (bolmong)',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3119,7 +3118,7 @@ class KotaTableSeeder extends Seeder
             344 =>
             array(
                 'id' => 345,
-                'nama' => 'BOLAANG MONGONDOW SELATAN',
+                'nama' => 'bolaang mongondow selatan',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3128,7 +3127,7 @@ class KotaTableSeeder extends Seeder
             345 =>
             array(
                 'id' => 346,
-                'nama' => 'MINAHASA SELATAN',
+                'nama' => 'minahasa selatan',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3137,7 +3136,7 @@ class KotaTableSeeder extends Seeder
             346 =>
             array(
                 'id' => 347,
-                'nama' => 'BITUNG',
+                'nama' => 'bitung',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3146,7 +3145,7 @@ class KotaTableSeeder extends Seeder
             347 =>
             array(
                 'id' => 348,
-                'nama' => 'MINAHASA',
+                'nama' => 'minahasa',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3155,7 +3154,7 @@ class KotaTableSeeder extends Seeder
             348 =>
             array(
                 'id' => 349,
-                'nama' => 'KEPULAUAN SANGIHE',
+                'nama' => 'kepulauan sangihe',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3164,7 +3163,7 @@ class KotaTableSeeder extends Seeder
             349 =>
             array(
                 'id' => 350,
-                'nama' => 'MINAHASA UTARA',
+                'nama' => 'minahasa utara',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3173,7 +3172,7 @@ class KotaTableSeeder extends Seeder
             350 =>
             array(
                 'id' => 351,
-                'nama' => 'KEPULAUAN TALAUD',
+                'nama' => 'kepulauan talaud',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3182,7 +3181,7 @@ class KotaTableSeeder extends Seeder
             351 =>
             array(
                 'id' => 352,
-                'nama' => 'KEPULAUAN SIAU TAGULANDANG BIARO (SITARO)',
+                'nama' => 'kepulauan siau tagulandang biaro (sitaro)',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3191,7 +3190,7 @@ class KotaTableSeeder extends Seeder
             352 =>
             array(
                 'id' => 353,
-                'nama' => 'MANADO',
+                'nama' => 'manado',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3200,7 +3199,7 @@ class KotaTableSeeder extends Seeder
             353 =>
             array(
                 'id' => 354,
-                'nama' => 'BOLAANG MONGONDOW UTARA',
+                'nama' => 'bolaang mongondow utara',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3209,7 +3208,7 @@ class KotaTableSeeder extends Seeder
             354 =>
             array(
                 'id' => 355,
-                'nama' => 'BOLAANG MONGONDOW TIMUR',
+                'nama' => 'bolaang mongondow timur',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3218,7 +3217,7 @@ class KotaTableSeeder extends Seeder
             355 =>
             array(
                 'id' => 356,
-                'nama' => 'MINAHASA TENGGARA',
+                'nama' => 'minahasa tenggara',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3227,7 +3226,7 @@ class KotaTableSeeder extends Seeder
             356 =>
             array(
                 'id' => 357,
-                'nama' => 'KOTAMOBAGU',
+                'nama' => 'kotamobagu',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3236,7 +3235,7 @@ class KotaTableSeeder extends Seeder
             357 =>
             array(
                 'id' => 358,
-                'nama' => 'TOMOHON',
+                'nama' => 'tomohon',
                 'provinsi_id' => 25,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3245,7 +3244,7 @@ class KotaTableSeeder extends Seeder
             358 =>
             array(
                 'id' => 359,
-                'nama' => 'BANGGAI KEPULAUAN',
+                'nama' => 'banggai kepulauan',
                 'provinsi_id' => 26,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3254,7 +3253,7 @@ class KotaTableSeeder extends Seeder
             359 =>
             array(
                 'id' => 360,
-                'nama' => 'TOLI-TOLI',
+                'nama' => 'toli-toli',
                 'provinsi_id' => 26,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3263,7 +3262,7 @@ class KotaTableSeeder extends Seeder
             360 =>
             array(
                 'id' => 361,
-                'nama' => 'PARIGI MOUTONG',
+                'nama' => 'parigi moutong',
                 'provinsi_id' => 26,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3272,7 +3271,7 @@ class KotaTableSeeder extends Seeder
             361 =>
             array(
                 'id' => 362,
-                'nama' => 'BUOL',
+                'nama' => 'buol',
                 'provinsi_id' => 26,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3281,7 +3280,7 @@ class KotaTableSeeder extends Seeder
             362 =>
             array(
                 'id' => 363,
-                'nama' => 'DONGGALA',
+                'nama' => 'donggala',
                 'provinsi_id' => 26,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3290,7 +3289,7 @@ class KotaTableSeeder extends Seeder
             363 =>
             array(
                 'id' => 364,
-                'nama' => 'POSO',
+                'nama' => 'poso',
                 'provinsi_id' => 26,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3299,7 +3298,7 @@ class KotaTableSeeder extends Seeder
             364 =>
             array(
                 'id' => 365,
-                'nama' => 'MOROWALI',
+                'nama' => 'morowali',
                 'provinsi_id' => 26,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3308,7 +3307,7 @@ class KotaTableSeeder extends Seeder
             365 =>
             array(
                 'id' => 366,
-                'nama' => 'TOJO UNA-UNA',
+                'nama' => 'tojo una-una',
                 'provinsi_id' => 26,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3317,7 +3316,7 @@ class KotaTableSeeder extends Seeder
             366 =>
             array(
                 'id' => 367,
-                'nama' => 'BANGGAI',
+                'nama' => 'banggai',
                 'provinsi_id' => 26,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3326,7 +3325,7 @@ class KotaTableSeeder extends Seeder
             367 =>
             array(
                 'id' => 368,
-                'nama' => 'SIGI',
+                'nama' => 'sigi',
                 'provinsi_id' => 26,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3335,7 +3334,7 @@ class KotaTableSeeder extends Seeder
             368 =>
             array(
                 'id' => 369,
-                'nama' => 'PALU',
+                'nama' => 'palu',
                 'provinsi_id' => 26,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3344,7 +3343,7 @@ class KotaTableSeeder extends Seeder
             369 =>
             array(
                 'id' => 370,
-                'nama' => 'MAROS',
+                'nama' => 'maros',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3353,7 +3352,7 @@ class KotaTableSeeder extends Seeder
             370 =>
             array(
                 'id' => 371,
-                'nama' => 'WAJO',
+                'nama' => 'wajo',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3362,7 +3361,7 @@ class KotaTableSeeder extends Seeder
             371 =>
             array(
                 'id' => 372,
-                'nama' => 'BONE',
+                'nama' => 'bone',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3371,7 +3370,7 @@ class KotaTableSeeder extends Seeder
             372 =>
             array(
                 'id' => 373,
-                'nama' => 'SOPPENG',
+                'nama' => 'soppeng',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3380,7 +3379,7 @@ class KotaTableSeeder extends Seeder
             373 =>
             array(
                 'id' => 374,
-                'nama' => 'SIDENRENG RAPPANG / RAPANG',
+                'nama' => 'sidenreng rappang / rapang',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3389,7 +3388,7 @@ class KotaTableSeeder extends Seeder
             374 =>
             array(
                 'id' => 375,
-                'nama' => 'TAKALAR',
+                'nama' => 'takalar',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3398,7 +3397,7 @@ class KotaTableSeeder extends Seeder
             375 =>
             array(
                 'id' => 376,
-                'nama' => 'BARRU',
+                'nama' => 'barru',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3407,7 +3406,7 @@ class KotaTableSeeder extends Seeder
             376 =>
             array(
                 'id' => 377,
-                'nama' => 'LUWU TIMUR',
+                'nama' => 'luwu timur',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3416,7 +3415,7 @@ class KotaTableSeeder extends Seeder
             377 =>
             array(
                 'id' => 378,
-                'nama' => 'SINJAI',
+                'nama' => 'sinjai',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3425,7 +3424,7 @@ class KotaTableSeeder extends Seeder
             378 =>
             array(
                 'id' => 379,
-                'nama' => 'PANGKAJENE KEPULAUAN',
+                'nama' => 'pangkajene kepulauan',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3434,7 +3433,7 @@ class KotaTableSeeder extends Seeder
             379 =>
             array(
                 'id' => 380,
-                'nama' => 'PINRANG',
+                'nama' => 'pinrang',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3443,7 +3442,7 @@ class KotaTableSeeder extends Seeder
             380 =>
             array(
                 'id' => 381,
-                'nama' => 'JENEPONTO',
+                'nama' => 'jeneponto',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3452,7 +3451,7 @@ class KotaTableSeeder extends Seeder
             381 =>
             array(
                 'id' => 382,
-                'nama' => 'PALOPO',
+                'nama' => 'palopo',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3461,7 +3460,7 @@ class KotaTableSeeder extends Seeder
             382 =>
             array(
                 'id' => 383,
-                'nama' => 'TORAJA UTARA',
+                'nama' => 'toraja utara',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3470,7 +3469,7 @@ class KotaTableSeeder extends Seeder
             383 =>
             array(
                 'id' => 384,
-                'nama' => 'LUWU',
+                'nama' => 'luwu',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3479,7 +3478,7 @@ class KotaTableSeeder extends Seeder
             384 =>
             array(
                 'id' => 385,
-                'nama' => 'BULUKUMBA',
+                'nama' => 'bulukumba',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3488,7 +3487,7 @@ class KotaTableSeeder extends Seeder
             385 =>
             array(
                 'id' => 386,
-                'nama' => 'MAKASSAR',
+                'nama' => 'makassar',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3497,7 +3496,7 @@ class KotaTableSeeder extends Seeder
             386 =>
             array(
                 'id' => 387,
-                'nama' => 'SELAYAR (KEPULAUAN SELAYAR)',
+                'nama' => 'selayar (kepulauan selayar)',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3506,7 +3505,7 @@ class KotaTableSeeder extends Seeder
             387 =>
             array(
                 'id' => 388,
-                'nama' => 'TANA TORAJA',
+                'nama' => 'tana toraja',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3515,7 +3514,7 @@ class KotaTableSeeder extends Seeder
             388 =>
             array(
                 'id' => 389,
-                'nama' => 'LUWU UTARA',
+                'nama' => 'luwu utara',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3524,7 +3523,7 @@ class KotaTableSeeder extends Seeder
             389 =>
             array(
                 'id' => 390,
-                'nama' => 'BANTAENG',
+                'nama' => 'bantaeng',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3533,7 +3532,7 @@ class KotaTableSeeder extends Seeder
             390 =>
             array(
                 'id' => 391,
-                'nama' => 'GOWA',
+                'nama' => 'gowa',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3542,7 +3541,7 @@ class KotaTableSeeder extends Seeder
             391 =>
             array(
                 'id' => 392,
-                'nama' => 'ENREKANG',
+                'nama' => 'enrekang',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3551,7 +3550,7 @@ class KotaTableSeeder extends Seeder
             392 =>
             array(
                 'id' => 393,
-                'nama' => 'PAREPARE',
+                'nama' => 'parepare',
                 'provinsi_id' => 27,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3560,7 +3559,7 @@ class KotaTableSeeder extends Seeder
             393 =>
             array(
                 'id' => 394,
-                'nama' => 'KOLAKA',
+                'nama' => 'kolaka',
                 'provinsi_id' => 28,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3569,7 +3568,7 @@ class KotaTableSeeder extends Seeder
             394 =>
             array(
                 'id' => 395,
-                'nama' => 'MUNA',
+                'nama' => 'muna',
                 'provinsi_id' => 28,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3578,7 +3577,7 @@ class KotaTableSeeder extends Seeder
             395 =>
             array(
                 'id' => 396,
-                'nama' => 'KONAWE SELATAN',
+                'nama' => 'konawe selatan',
                 'provinsi_id' => 28,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3587,7 +3586,7 @@ class KotaTableSeeder extends Seeder
             396 =>
             array(
                 'id' => 397,
-                'nama' => 'KENDARI',
+                'nama' => 'kendari',
                 'provinsi_id' => 28,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3596,7 +3595,7 @@ class KotaTableSeeder extends Seeder
             397 =>
             array(
                 'id' => 398,
-                'nama' => 'KONAWE',
+                'nama' => 'konawe',
                 'provinsi_id' => 28,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3605,7 +3604,7 @@ class KotaTableSeeder extends Seeder
             398 =>
             array(
                 'id' => 399,
-                'nama' => 'KONAWE UTARA',
+                'nama' => 'konawe utara',
                 'provinsi_id' => 28,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3614,7 +3613,7 @@ class KotaTableSeeder extends Seeder
             399 =>
             array(
                 'id' => 400,
-                'nama' => 'KOLAKA UTARA',
+                'nama' => 'kolaka utara',
                 'provinsi_id' => 28,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3623,7 +3622,7 @@ class KotaTableSeeder extends Seeder
             400 =>
             array(
                 'id' => 401,
-                'nama' => 'BUTON',
+                'nama' => 'buton',
                 'provinsi_id' => 28,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3632,7 +3631,7 @@ class KotaTableSeeder extends Seeder
             401 =>
             array(
                 'id' => 402,
-                'nama' => 'BOMBANA',
+                'nama' => 'bombana',
                 'provinsi_id' => 28,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3641,7 +3640,7 @@ class KotaTableSeeder extends Seeder
             402 =>
             array(
                 'id' => 403,
-                'nama' => 'WAKATOBI',
+                'nama' => 'wakatobi',
                 'provinsi_id' => 28,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3650,7 +3649,7 @@ class KotaTableSeeder extends Seeder
             403 =>
             array(
                 'id' => 404,
-                'nama' => 'BAU-BAU',
+                'nama' => 'bau-bau',
                 'provinsi_id' => 28,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3659,7 +3658,7 @@ class KotaTableSeeder extends Seeder
             404 =>
             array(
                 'id' => 405,
-                'nama' => 'BUTON UTARA',
+                'nama' => 'buton utara',
                 'provinsi_id' => 28,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3668,7 +3667,7 @@ class KotaTableSeeder extends Seeder
             405 =>
             array(
                 'id' => 406,
-                'nama' => 'GORONTALO UTARA',
+                'nama' => 'gorontalo utara',
                 'provinsi_id' => 29,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3677,7 +3676,7 @@ class KotaTableSeeder extends Seeder
             406 =>
             array(
                 'id' => 407,
-                'nama' => 'BONE BOLANGO',
+                'nama' => 'bone bolango',
                 'provinsi_id' => 29,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3686,7 +3685,7 @@ class KotaTableSeeder extends Seeder
             407 =>
             array(
                 'id' => 408,
-                'nama' => 'GORONTALO',
+                'nama' => 'gorontalo',
                 'provinsi_id' => 29,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3695,7 +3694,7 @@ class KotaTableSeeder extends Seeder
             408 =>
             array(
                 'id' => 409,
-                'nama' => 'BOALEMO',
+                'nama' => 'boalemo',
                 'provinsi_id' => 29,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3704,7 +3703,7 @@ class KotaTableSeeder extends Seeder
             409 =>
             array(
                 'id' => 410,
-                'nama' => 'POHUWATO',
+                'nama' => 'pohuwato',
                 'provinsi_id' => 29,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3713,7 +3712,7 @@ class KotaTableSeeder extends Seeder
             410 =>
             array(
                 'id' => 411,
-                'nama' => 'MAJENE',
+                'nama' => 'majene',
                 'provinsi_id' => 30,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3722,7 +3721,7 @@ class KotaTableSeeder extends Seeder
             411 =>
             array(
                 'id' => 412,
-                'nama' => 'MAMUJU',
+                'nama' => 'mamuju',
                 'provinsi_id' => 30,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3731,7 +3730,7 @@ class KotaTableSeeder extends Seeder
             412 =>
             array(
                 'id' => 413,
-                'nama' => 'MAMUJU UTARA',
+                'nama' => 'mamuju utara',
                 'provinsi_id' => 30,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3740,7 +3739,7 @@ class KotaTableSeeder extends Seeder
             413 =>
             array(
                 'id' => 414,
-                'nama' => 'POLEWALI MANDAR',
+                'nama' => 'polewali mandar',
                 'provinsi_id' => 30,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3749,7 +3748,7 @@ class KotaTableSeeder extends Seeder
             414 =>
             array(
                 'id' => 415,
-                'nama' => 'MAMASA',
+                'nama' => 'mamasa',
                 'provinsi_id' => 30,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3758,7 +3757,7 @@ class KotaTableSeeder extends Seeder
             415 =>
             array(
                 'id' => 416,
-                'nama' => 'MALUKU TENGGARA BARAT',
+                'nama' => 'maluku tenggara barat',
                 'provinsi_id' => 31,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3767,7 +3766,7 @@ class KotaTableSeeder extends Seeder
             416 =>
             array(
                 'id' => 417,
-                'nama' => 'MALUKU TENGGARA',
+                'nama' => 'maluku tenggara',
                 'provinsi_id' => 31,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3776,7 +3775,7 @@ class KotaTableSeeder extends Seeder
             417 =>
             array(
                 'id' => 418,
-                'nama' => 'SERAM BAGIAN BARAT',
+                'nama' => 'seram bagian barat',
                 'provinsi_id' => 31,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3785,7 +3784,7 @@ class KotaTableSeeder extends Seeder
             418 =>
             array(
                 'id' => 419,
-                'nama' => 'MALUKU TENGAH',
+                'nama' => 'maluku tengah',
                 'provinsi_id' => 31,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3794,7 +3793,7 @@ class KotaTableSeeder extends Seeder
             419 =>
             array(
                 'id' => 420,
-                'nama' => 'SERAM BAGIAN TIMUR',
+                'nama' => 'seram bagian timur',
                 'provinsi_id' => 31,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3803,7 +3802,7 @@ class KotaTableSeeder extends Seeder
             420 =>
             array(
                 'id' => 421,
-                'nama' => 'MALUKU BARAT DAYA',
+                'nama' => 'maluku barat daya',
                 'provinsi_id' => 31,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3812,7 +3811,7 @@ class KotaTableSeeder extends Seeder
             421 =>
             array(
                 'id' => 422,
-                'nama' => 'AMBON',
+                'nama' => 'ambon',
                 'provinsi_id' => 31,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3821,7 +3820,7 @@ class KotaTableSeeder extends Seeder
             422 =>
             array(
                 'id' => 423,
-                'nama' => 'BURU',
+                'nama' => 'buru',
                 'provinsi_id' => 31,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3830,7 +3829,7 @@ class KotaTableSeeder extends Seeder
             423 =>
             array(
                 'id' => 424,
-                'nama' => 'BURU SELATAN',
+                'nama' => 'buru selatan',
                 'provinsi_id' => 31,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3839,7 +3838,7 @@ class KotaTableSeeder extends Seeder
             424 =>
             array(
                 'id' => 425,
-                'nama' => 'KEPULAUAN ARU',
+                'nama' => 'kepulauan aru',
                 'provinsi_id' => 31,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3848,7 +3847,7 @@ class KotaTableSeeder extends Seeder
             425 =>
             array(
                 'id' => 426,
-                'nama' => 'TUAL',
+                'nama' => 'tual',
                 'provinsi_id' => 31,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3857,7 +3856,7 @@ class KotaTableSeeder extends Seeder
             426 =>
             array(
                 'id' => 427,
-                'nama' => 'HALMAHERA BARAT',
+                'nama' => 'halmahera barat',
                 'provinsi_id' => 32,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3866,7 +3865,7 @@ class KotaTableSeeder extends Seeder
             427 =>
             array(
                 'id' => 428,
-                'nama' => 'TIDORE KEPULAUAN',
+                'nama' => 'tidore kepulauan',
                 'provinsi_id' => 32,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3875,7 +3874,7 @@ class KotaTableSeeder extends Seeder
             428 =>
             array(
                 'id' => 429,
-                'nama' => 'TERNATE',
+                'nama' => 'ternate',
                 'provinsi_id' => 32,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3884,7 +3883,7 @@ class KotaTableSeeder extends Seeder
             429 =>
             array(
                 'id' => 430,
-                'nama' => 'PULAU MOROTAI',
+                'nama' => 'pulau morotai',
                 'provinsi_id' => 32,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3893,7 +3892,7 @@ class KotaTableSeeder extends Seeder
             430 =>
             array(
                 'id' => 431,
-                'nama' => 'KEPULAUAN SULA',
+                'nama' => 'kepulauan sula',
                 'provinsi_id' => 32,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3902,7 +3901,7 @@ class KotaTableSeeder extends Seeder
             431 =>
             array(
                 'id' => 432,
-                'nama' => 'HALMAHERA SELATAN',
+                'nama' => 'halmahera selatan',
                 'provinsi_id' => 32,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3911,7 +3910,7 @@ class KotaTableSeeder extends Seeder
             432 =>
             array(
                 'id' => 433,
-                'nama' => 'HALMAHERA TENGAH',
+                'nama' => 'halmahera tengah',
                 'provinsi_id' => 32,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3920,7 +3919,7 @@ class KotaTableSeeder extends Seeder
             433 =>
             array(
                 'id' => 434,
-                'nama' => 'HALMAHERA TIMUR',
+                'nama' => 'halmahera timur',
                 'provinsi_id' => 32,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3929,7 +3928,7 @@ class KotaTableSeeder extends Seeder
             434 =>
             array(
                 'id' => 435,
-                'nama' => 'HALMAHERA UTARA',
+                'nama' => 'halmahera utara',
                 'provinsi_id' => 32,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3938,7 +3937,7 @@ class KotaTableSeeder extends Seeder
             435 =>
             array(
                 'id' => 436,
-                'nama' => 'YALIMO',
+                'nama' => 'yalimo',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3947,7 +3946,7 @@ class KotaTableSeeder extends Seeder
             436 =>
             array(
                 'id' => 437,
-                'nama' => 'DOGIYAI',
+                'nama' => 'dogiyai',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3956,7 +3955,7 @@ class KotaTableSeeder extends Seeder
             437 =>
             array(
                 'id' => 438,
-                'nama' => 'ASMAT',
+                'nama' => 'asmat',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3965,7 +3964,7 @@ class KotaTableSeeder extends Seeder
             438 =>
             array(
                 'id' => 439,
-                'nama' => 'JAYAPURA',
+                'nama' => 'jayapura',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3974,7 +3973,7 @@ class KotaTableSeeder extends Seeder
             439 =>
             array(
                 'id' => 440,
-                'nama' => 'PANIAI',
+                'nama' => 'paniai',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3983,7 +3982,7 @@ class KotaTableSeeder extends Seeder
             440 =>
             array(
                 'id' => 441,
-                'nama' => 'MAPPI',
+                'nama' => 'mappi',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -3992,7 +3991,7 @@ class KotaTableSeeder extends Seeder
             441 =>
             array(
                 'id' => 442,
-                'nama' => 'TOLIKARA',
+                'nama' => 'tolikara',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4001,7 +4000,7 @@ class KotaTableSeeder extends Seeder
             442 =>
             array(
                 'id' => 443,
-                'nama' => 'PUNCAK JAYA',
+                'nama' => 'puncak jaya',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4010,7 +4009,7 @@ class KotaTableSeeder extends Seeder
             443 =>
             array(
                 'id' => 444,
-                'nama' => 'PEGUNUNGAN BINTANG',
+                'nama' => 'pegunungan bintang',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4019,7 +4018,7 @@ class KotaTableSeeder extends Seeder
             444 =>
             array(
                 'id' => 445,
-                'nama' => 'JAYAWIJAYA',
+                'nama' => 'jayawijaya',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4028,7 +4027,7 @@ class KotaTableSeeder extends Seeder
             445 =>
             array(
                 'id' => 446,
-                'nama' => 'LANNY JAYA',
+                'nama' => 'lanny jaya',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4037,7 +4036,7 @@ class KotaTableSeeder extends Seeder
             446 =>
             array(
                 'id' => 447,
-                'nama' => 'NDUGA',
+                'nama' => 'nduga',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4046,7 +4045,7 @@ class KotaTableSeeder extends Seeder
             447 =>
             array(
                 'id' => 448,
-                'nama' => 'BIAK NUMFOR',
+                'nama' => 'biak numfor',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4055,7 +4054,7 @@ class KotaTableSeeder extends Seeder
             448 =>
             array(
                 'id' => 449,
-                'nama' => 'KEPULAUAN YAPEN (YAPEN WAROPEN)',
+                'nama' => 'kepulauan yapen (yapen waropen)',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4064,7 +4063,7 @@ class KotaTableSeeder extends Seeder
             449 =>
             array(
                 'id' => 450,
-                'nama' => 'PUNCAK',
+                'nama' => 'puncak',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4073,7 +4072,7 @@ class KotaTableSeeder extends Seeder
             450 =>
             array(
                 'id' => 451,
-                'nama' => 'INTAN JAYA',
+                'nama' => 'intan jaya',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4082,7 +4081,7 @@ class KotaTableSeeder extends Seeder
             451 =>
             array(
                 'id' => 452,
-                'nama' => 'WAROPEN',
+                'nama' => 'waropen',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4091,7 +4090,7 @@ class KotaTableSeeder extends Seeder
             452 =>
             array(
                 'id' => 453,
-                'nama' => 'NABIRE',
+                'nama' => 'nabire',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4100,7 +4099,7 @@ class KotaTableSeeder extends Seeder
             453 =>
             array(
                 'id' => 454,
-                'nama' => 'MIMIKA',
+                'nama' => 'mimika',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4109,7 +4108,7 @@ class KotaTableSeeder extends Seeder
             454 =>
             array(
                 'id' => 455,
-                'nama' => 'BOVEN DIGOEL',
+                'nama' => 'boven digoel',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4118,7 +4117,7 @@ class KotaTableSeeder extends Seeder
             455 =>
             array(
                 'id' => 456,
-                'nama' => 'YAHUKIMO',
+                'nama' => 'yahukimo',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4127,7 +4126,7 @@ class KotaTableSeeder extends Seeder
             456 =>
             array(
                 'id' => 457,
-                'nama' => 'SARMI',
+                'nama' => 'sarmi',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4136,7 +4135,7 @@ class KotaTableSeeder extends Seeder
             457 =>
             array(
                 'id' => 458,
-                'nama' => 'MERAUKE',
+                'nama' => 'merauke',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4145,7 +4144,7 @@ class KotaTableSeeder extends Seeder
             458 =>
             array(
                 'id' => 459,
-                'nama' => 'DEIYAI (DELIYAI)',
+                'nama' => 'deiyai (deliyai)',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4154,7 +4153,7 @@ class KotaTableSeeder extends Seeder
             459 =>
             array(
                 'id' => 460,
-                'nama' => 'KEEROM',
+                'nama' => 'keerom',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4163,7 +4162,7 @@ class KotaTableSeeder extends Seeder
             460 =>
             array(
                 'id' => 461,
-                'nama' => 'SUPIORI',
+                'nama' => 'supiori',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4172,7 +4171,7 @@ class KotaTableSeeder extends Seeder
             461 =>
             array(
                 'id' => 462,
-                'nama' => 'MAMBERAMO RAYA',
+                'nama' => 'mamberamo raya',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4181,7 +4180,7 @@ class KotaTableSeeder extends Seeder
             462 =>
             array(
                 'id' => 463,
-                'nama' => 'MAMBERAMO TENGAH',
+                'nama' => 'mamberamo tengah',
                 'provinsi_id' => 33,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4190,7 +4189,7 @@ class KotaTableSeeder extends Seeder
             463 =>
             array(
                 'id' => 464,
-                'nama' => 'RAJA AMPAT',
+                'nama' => 'raja ampat',
                 'provinsi_id' => 34,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4199,7 +4198,7 @@ class KotaTableSeeder extends Seeder
             464 =>
             array(
                 'id' => 465,
-                'nama' => 'MANOKWARI SELATAN',
+                'nama' => 'manokwari selatan',
                 'provinsi_id' => 34,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4208,7 +4207,7 @@ class KotaTableSeeder extends Seeder
             465 =>
             array(
                 'id' => 466,
-                'nama' => 'MANOKWARI',
+                'nama' => 'manokwari',
                 'provinsi_id' => 34,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4217,7 +4216,7 @@ class KotaTableSeeder extends Seeder
             466 =>
             array(
                 'id' => 467,
-                'nama' => 'KAIMANA',
+                'nama' => 'kaimana',
                 'provinsi_id' => 34,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4226,7 +4225,7 @@ class KotaTableSeeder extends Seeder
             467 =>
             array(
                 'id' => 468,
-                'nama' => 'MAYBRAT',
+                'nama' => 'maybrat',
                 'provinsi_id' => 34,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4235,7 +4234,7 @@ class KotaTableSeeder extends Seeder
             468 =>
             array(
                 'id' => 469,
-                'nama' => 'SORONG SELATAN',
+                'nama' => 'sorong selatan',
                 'provinsi_id' => 34,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4244,7 +4243,7 @@ class KotaTableSeeder extends Seeder
             469 =>
             array(
                 'id' => 470,
-                'nama' => 'FAKFAK',
+                'nama' => 'fakfak',
                 'provinsi_id' => 34,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4253,7 +4252,7 @@ class KotaTableSeeder extends Seeder
             470 =>
             array(
                 'id' => 471,
-                'nama' => 'PEGUNUNGAN ARFAK',
+                'nama' => 'pegunungan arfak',
                 'provinsi_id' => 34,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4262,7 +4261,7 @@ class KotaTableSeeder extends Seeder
             471 =>
             array(
                 'id' => 472,
-                'nama' => 'TAMBRAUW',
+                'nama' => 'tambrauw',
                 'provinsi_id' => 34,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4271,7 +4270,7 @@ class KotaTableSeeder extends Seeder
             472 =>
             array(
                 'id' => 473,
-                'nama' => 'SORONG',
+                'nama' => 'sorong',
                 'provinsi_id' => 34,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4280,7 +4279,7 @@ class KotaTableSeeder extends Seeder
             473 =>
             array(
                 'id' => 474,
-                'nama' => 'TELUK WONDAMA',
+                'nama' => 'teluk wondama',
                 'provinsi_id' => 34,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4289,7 +4288,7 @@ class KotaTableSeeder extends Seeder
             474 =>
             array(
                 'id' => 475,
-                'nama' => 'TELUK BINTUNI',
+                'nama' => 'teluk bintuni',
                 'provinsi_id' => 34,
                 'deleted_at' => NULL,
                 'created_at' => NULL,

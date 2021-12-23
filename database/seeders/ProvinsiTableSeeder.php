@@ -22,7 +22,7 @@ class ProvinsiTableSeeder extends Seeder
             0 =>
             array(
                 'id' => 1,
-                'nama' => 'ACEH',
+                'nama' => 'aceh',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -31,7 +31,7 @@ class ProvinsiTableSeeder extends Seeder
             1 =>
             array(
                 'id' => 2,
-                'nama' => 'SUMATERA UTARA',
+                'nama' => 'sumatera utara',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -40,7 +40,7 @@ class ProvinsiTableSeeder extends Seeder
             2 =>
             array(
                 'id' => 3,
-                'nama' => 'SUMATERA BARAT',
+                'nama' => 'sumatera barat',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -49,7 +49,7 @@ class ProvinsiTableSeeder extends Seeder
             3 =>
             array(
                 'id' => 4,
-                'nama' => 'RIAU',
+                'nama' => 'riau',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -58,7 +58,7 @@ class ProvinsiTableSeeder extends Seeder
             4 =>
             array(
                 'id' => 5,
-                'nama' => 'JAMBI',
+                'nama' => 'jambi',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -67,7 +67,7 @@ class ProvinsiTableSeeder extends Seeder
             5 =>
             array(
                 'id' => 6,
-                'nama' => 'SUMATERA SELATAN',
+                'nama' => 'sumatera selatan',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -76,7 +76,7 @@ class ProvinsiTableSeeder extends Seeder
             6 =>
             array(
                 'id' => 7,
-                'nama' => 'BENGKULU',
+                'nama' => 'bengkulu',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -85,7 +85,7 @@ class ProvinsiTableSeeder extends Seeder
             7 =>
             array(
                 'id' => 8,
-                'nama' => 'LAMPUNG',
+                'nama' => 'lampung',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -94,7 +94,7 @@ class ProvinsiTableSeeder extends Seeder
             8 =>
             array(
                 'id' => 9,
-                'nama' => 'KEPULAUAN BANGKA BELITUNG',
+                'nama' => 'kepulauan bangka belitung',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -103,7 +103,7 @@ class ProvinsiTableSeeder extends Seeder
             9 =>
             array(
                 'id' => 10,
-                'nama' => 'KEPULAUAN RIAU',
+                'nama' => 'kepulauan riau',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -112,7 +112,7 @@ class ProvinsiTableSeeder extends Seeder
             10 =>
             array(
                 'id' => 11,
-                'nama' => 'DKI JAKARTA',
+                'nama' => 'dki jakarta',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -121,7 +121,7 @@ class ProvinsiTableSeeder extends Seeder
             11 =>
             array(
                 'id' => 12,
-                'nama' => 'JAWA BARAT',
+                'nama' => 'jawa barat',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -130,7 +130,7 @@ class ProvinsiTableSeeder extends Seeder
             12 =>
             array(
                 'id' => 13,
-                'nama' => 'JAWA TENGAH',
+                'nama' => 'jawa tengah',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -139,7 +139,7 @@ class ProvinsiTableSeeder extends Seeder
             13 =>
             array(
                 'id' => 14,
-                'nama' => 'DI YOGYAKARTA',
+                'nama' => 'di yogyakarta',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -148,7 +148,7 @@ class ProvinsiTableSeeder extends Seeder
             14 =>
             array(
                 'id' => 15,
-                'nama' => 'JAWA TIMUR',
+                'nama' => 'jawa timur',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -157,7 +157,7 @@ class ProvinsiTableSeeder extends Seeder
             15 =>
             array(
                 'id' => 16,
-                'nama' => 'BANTEN',
+                'nama' => 'banten',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -166,7 +166,7 @@ class ProvinsiTableSeeder extends Seeder
             16 =>
             array(
                 'id' => 17,
-                'nama' => 'BALI',
+                'nama' => 'bali',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -175,7 +175,7 @@ class ProvinsiTableSeeder extends Seeder
             17 =>
             array(
                 'id' => 18,
-                'nama' => 'NUSA TENGGARA BARAT',
+                'nama' => 'nusa tenggara barat',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -184,7 +184,7 @@ class ProvinsiTableSeeder extends Seeder
             18 =>
             array(
                 'id' => 19,
-                'nama' => 'NUSA TENGGARA TIMUR',
+                'nama' => 'nusa tenggara timur',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -193,7 +193,7 @@ class ProvinsiTableSeeder extends Seeder
             19 =>
             array(
                 'id' => 20,
-                'nama' => 'KALIMANTAN BARAT',
+                'nama' => 'kalimantan barat',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -202,7 +202,7 @@ class ProvinsiTableSeeder extends Seeder
             20 =>
             array(
                 'id' => 21,
-                'nama' => 'KALIMANTAN TENGAH',
+                'nama' => 'kalimantan tengah',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -211,7 +211,7 @@ class ProvinsiTableSeeder extends Seeder
             21 =>
             array(
                 'id' => 22,
-                'nama' => 'KALIMANTAN SELATAN',
+                'nama' => 'kalimantan selatan',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -220,7 +220,7 @@ class ProvinsiTableSeeder extends Seeder
             22 =>
             array(
                 'id' => 23,
-                'nama' => 'KALIMANTAN TIMUR',
+                'nama' => 'kalimantan timur',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -229,7 +229,7 @@ class ProvinsiTableSeeder extends Seeder
             23 =>
             array(
                 'id' => 24,
-                'nama' => 'KALIMANTAN UTARA',
+                'nama' => 'kalimantan utara',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -238,7 +238,7 @@ class ProvinsiTableSeeder extends Seeder
             24 =>
             array(
                 'id' => 25,
-                'nama' => 'SULAWESI UTARA',
+                'nama' => 'sulawesi utara',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -247,7 +247,7 @@ class ProvinsiTableSeeder extends Seeder
             25 =>
             array(
                 'id' => 26,
-                'nama' => 'SULAWESI TENGAH',
+                'nama' => 'sulawesi tengah',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -256,7 +256,7 @@ class ProvinsiTableSeeder extends Seeder
             26 =>
             array(
                 'id' => 27,
-                'nama' => 'SULAWESI SELATAN',
+                'nama' => 'sulawesi selatan',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -265,7 +265,7 @@ class ProvinsiTableSeeder extends Seeder
             27 =>
             array(
                 'id' => 28,
-                'nama' => 'SULAWESI TENGGARA',
+                'nama' => 'sulawesi tenggara',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -274,7 +274,7 @@ class ProvinsiTableSeeder extends Seeder
             28 =>
             array(
                 'id' => 29,
-                'nama' => 'GORONTALO',
+                'nama' => 'gorontalo',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -283,7 +283,7 @@ class ProvinsiTableSeeder extends Seeder
             29 =>
             array(
                 'id' => 30,
-                'nama' => 'SULAWESI BARAT',
+                'nama' => 'sulawesi barat',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -292,7 +292,7 @@ class ProvinsiTableSeeder extends Seeder
             30 =>
             array(
                 'id' => 31,
-                'nama' => 'MALUKU',
+                'nama' => 'maluku',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -301,7 +301,7 @@ class ProvinsiTableSeeder extends Seeder
             31 =>
             array(
                 'id' => 32,
-                'nama' => 'MALUKU UTARA',
+                'nama' => 'maluku utara',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -310,7 +310,7 @@ class ProvinsiTableSeeder extends Seeder
             32 =>
             array(
                 'id' => 33,
-                'nama' => 'PAPUA',
+                'nama' => 'papua',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -319,7 +319,7 @@ class ProvinsiTableSeeder extends Seeder
             33 =>
             array(
                 'id' => 34,
-                'nama' => 'PAPUA BARAT',
+                'nama' => 'papua barat',
                 'negara_id' => 102,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
