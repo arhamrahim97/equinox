@@ -42,10 +42,10 @@
             @include('components.navBottom')
         </div>
 
-        <div class="main-panel">
-            <div class="container">
+        <div class="main-panel" style="max-width: 1700px !important">
+            <div class="container" style="max-width: 1700px !important">
                 <div class="page-inner">
-                    <div class="page-header">
+                    <div class="page-header" >
                         <h4 class="page-title">@yield('title')</h4>
                         <ul class="breadcrumbs">
                             <li class="nav-home">
@@ -157,6 +157,9 @@
     <!-- jQuery Validation -->
     <script src="{{asset('assets/dashboard')}}/js/plugin/jquery.validate/jquery.validate.min.js"></script>
 
+    <!-- jQuery Mask -->
+    <script src="{{asset('assets/dashboard')}}/js/plugin/jquery.mask/jquery.mask.min.js"></script>
+
     <!-- Summernote -->
     <script src="{{asset('assets/dashboard')}}/js/plugin/summernote/summernote-bs4.min.js"></script>
 
@@ -168,6 +171,12 @@
 
     <!-- Atlantis JS -->
     <script src="{{asset('assets/dashboard')}}/js/atlantis2.min.js"></script>
+
+    <script>
+        $('.select2').select2({
+            theme: "bootstrap"
+        })
+    </script>
     @stack('script')
 </body>
 
