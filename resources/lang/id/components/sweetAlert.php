@@ -11,5 +11,6 @@ return [
     'hapusGagal' => 'Data Gagal Terhapus',
     'msgHapusGagal' => 'Data Gagal Dihapus',
     'ya' => 'Ya',
-    'tidak' => 'Tidak'
+    'tidak' => 'Tidak',
+    'msgBerhasilUpdateProfil' => 'Profil Berhasil Diupdate. Silahkan Login Kembali'
 ];

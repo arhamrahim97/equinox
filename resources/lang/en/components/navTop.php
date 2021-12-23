@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'aturAkun' => 'Account Setting',
+    'aturProfil' => 'Profile Setting',
     'lihatProfil' => 'View Profile',
     'inggris' => 'England (United States)',
     'keluar' => 'Logout',

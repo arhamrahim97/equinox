@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'aturAkun' => 'Atur Akun',
+    'aturProfil' => 'Atur Profil',
     'lihatProfil' => 'Lihat Profil',
     'inggris' => 'Inggris (United States)',
     'keluar' => 'Keluar',

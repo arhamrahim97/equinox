@@ -30,7 +30,7 @@
                                     <div class="notif-center">
                                         <a href="/lang/id">
                                             <div
-                                                class="notif-icon {{ session()->get('locale') == 'id' ? 'notif-primary' : 'notif-ligth' }} ">
+                                                class="notif-icon {{ session()->get('locale') == 'id' || session()->get('locale') ? 'notif-primary' : 'notif-ligth' }} ">
                                                 <span class="flag-icon flag-icon-id"></span>
                                             </div>
                                             <div
@@ -57,7 +57,7 @@
                     <li class="nav-item dropdown hidden-caret">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                             <div class="avatar-sm">
-                                <img src="{{asset('assets/dashboard')}}/img/profile.jpg" alt="..."
+                                <img src="{{asset('assets/dashboard')}}/img/user.png" alt="..."
                                     class="avatar-img rounded-circle">
                             </div>
                         </a>
@@ -65,21 +65,22 @@
                         <ul class="dropdown-menu dropdown-user animated fadeIn">
                             <div class="dropdown-user-scroll scrollbar-outer">
                                 <li>
-                                    <div class="user-box">
-                                        <div class="avatar-lg"><img src="{{asset('assets/dashboard')}}/img/profile.jpg"
+                                    <div class="user-box d-flex align-items-center">
+                                        <div class="avatar-lg"><img src="{{asset('assets/dashboard')}}/img/user.png"
                                                 alt="image profile" class="avatar-img rounded"></div>
                                         <div class="u-text">
-                                            <h4>Hizrian</h4>
-                                            <p class="text-muted">hello@example.com</p><a href="profile.html"
-                                                class="btn btn-xs btn-secondary btn-sm">{{__('components/navTop.lihatProfil')}}</a>
+                                            <h4 class="text-truncate" style="width: 150px">{{Auth::user()->nama}}</h4>
+                                            <p class="text-muted">{{Auth::user()->role}}</p>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">{{__('components/navTop.aturAkun')}}</a>
+                                    <a class="dropdown-item"
+                                        href="{{url('/profil')}}">{{__('components/navTop.aturProfil')}}</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">{{__('components/navTop.keluar')}}</a>
+                                    <a class="dropdown-item"
+                                        href="{{url('/logout')}}">{{__('components/navTop.keluar')}}</a>
                                 </li>
                             </div>
                         </ul>

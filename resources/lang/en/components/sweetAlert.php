@@ -12,4 +12,5 @@ return [
     'msgHapusGagal' => 'Data Failed to Delete',
     'ya' => 'Yes',
     'tidak' => 'No',
+    'msgBerhasilUpdateProfil' => 'Profile Updated Successfully. Please Login Back'
 ];

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class ProvinsiTableSeeder extends Seeder
 {
@@ -15,180 +14,319 @@ class ProvinsiTableSeeder extends Seeder
      */
     public function run()
     {
+        
 
-        DB::table('provinsi')->delete();
-
-        DB::table('provinsi')->insert(array(
-            0 =>
-            array(
+        \DB::table('provinsi')->delete();
+        
+        \DB::table('provinsi')->insert(array (
+            0 => 
+            array (
                 'id' => 1,
-                'nama' => 'ACEH',
+                'nama' => 'aceh',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            1 =>
-            array(
+            1 => 
+            array (
                 'id' => 2,
-                'nama' => 'SUMATERA UTARA',
+                'nama' => 'sumatera utara',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            2 =>
-            array(
+            2 => 
+            array (
                 'id' => 3,
-                'nama' => 'SUMATERA BARAT',
+                'nama' => 'sumatera barat',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            3 =>
-            array(
+            3 => 
+            array (
                 'id' => 4,
-                'nama' => 'RIAU',
+                'nama' => 'riau',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            4 =>
-            array(
+            4 => 
+            array (
                 'id' => 5,
-                'nama' => 'JAMBI',
+                'nama' => 'jambi',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            5 =>
-            array(
+            5 => 
+            array (
                 'id' => 6,
-                'nama' => 'SUMATERA SELATAN',
+                'nama' => 'sumatera selatan',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            6 =>
-            array(
+            6 => 
+            array (
                 'id' => 7,
-                'nama' => 'BENGKULU',
+                'nama' => 'bengkulu',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            7 =>
-            array(
+            7 => 
+            array (
                 'id' => 8,
-                'nama' => 'LAMPUNG',
+                'nama' => 'lampung',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            8 =>
-            array(
+            8 => 
+            array (
                 'id' => 9,
-                'nama' => 'KEPULAUAN BANGKA BELITUNG',
+                'nama' => 'kepulauan bangka belitung',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            9 =>
-            array(
+            9 => 
+            array (
                 'id' => 10,
-                'nama' => 'KEPULAUAN RIAU',
+                'nama' => 'kepulauan riau',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            10 =>
-            array(
+            10 => 
+            array (
                 'id' => 11,
-                'nama' => 'DKI JAKARTA',
+                'nama' => 'dki jakarta',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            11 =>
-            array(
+            11 => 
+            array (
                 'id' => 12,
-                'nama' => 'JAWA BARAT',
+                'nama' => 'jawa barat',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            12 =>
-            array(
+            12 => 
+            array (
                 'id' => 13,
-                'nama' => 'JAWA TENGAH',
+                'nama' => 'jawa tengah',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            13 =>
-            array(
+            13 => 
+            array (
                 'id' => 14,
-                'nama' => 'DI YOGYAKARTA',
+                'nama' => 'di yogyakarta',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            14 =>
-            array(
+            14 => 
+            array (
                 'id' => 15,
-                'nama' => 'JAWA TIMUR',
+                'nama' => 'jawa timur',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            15 =>
-            array(
+            15 => 
+            array (
                 'id' => 16,
-                'nama' => 'BANTEN',
+                'nama' => 'banten',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            16 =>
-            array(
+            16 => 
+            array (
                 'id' => 17,
-                'nama' => 'BALI',
+                'nama' => 'bali',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            17 =>
-            array(
+            17 => 
+            array (
                 'id' => 18,
-                'nama' => 'NUSA TENGGARA BARAT',
+                'nama' => 'nusa tenggara barat',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            18 =>
-            array(
+            18 => 
+            array (
                 'id' => 19,
-                'nama' => 'NUSA TENGGARA TIMUR',
+                'nama' => 'nusa tenggara timur',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            19 =>
-            array(
+            19 => 
+            array (
                 'id' => 20,
-                'nama' => 'KALIMANTAN BARAT',
+                'nama' => 'kalimantan barat',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            20 =>
-            array(
+            20 => 
+            array (
                 'id' => 21,
-                'nama' => 'KALIMANTAN TENGAH',
+                'nama' => 'kalimantan tengah',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            21 =>
-            array(
+            21 => 
+            array (
                 'id' => 22,
-                'nama' => 'KALIMANTAN SELATAN',
+                'nama' => 'kalimantan selatan',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            22 =>
-            array(
+            22 => 
+            array (
                 'id' => 23,
-                'nama' => 'KALIMANTAN TIMUR',
+                'nama' => 'kalimantan timur',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            23 =>
-            array(
+            23 => 
+            array (
                 'id' => 24,
-                'nama' => 'KALIMANTAN UTARA',
+                'nama' => 'kalimantan utara',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            24 =>
-            array(
+            24 => 
+            array (
                 'id' => 25,
-                'nama' => 'SULAWESI UTARA',
+                'nama' => 'sulawesi utara',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            25 =>
-            array(
+            25 => 
+            array (
                 'id' => 26,
-                'nama' => 'SULAWESI TENGAH',
+                'nama' => 'sulawesi tengah',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            26 =>
-            array(
+            26 => 
+            array (
                 'id' => 27,
-                'nama' => 'SULAWESI SELATAN',
+                'nama' => 'sulawesi selatan',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            27 =>
-            array(
+            27 => 
+            array (
                 'id' => 28,
-                'nama' => 'SULAWESI TENGGARA',
+                'nama' => 'sulawesi tenggara',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            28 =>
-            array(
+            28 => 
+            array (
                 'id' => 29,
-                'nama' => 'GORONTALO',
+                'nama' => 'gorontalo',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            29 =>
-            array(
+            29 => 
+            array (
                 'id' => 30,
-                'nama' => 'SULAWESI BARAT',
+                'nama' => 'sulawesi barat',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            30 =>
-            array(
+            30 => 
+            array (
                 'id' => 31,
-                'nama' => 'MALUKU',
+                'nama' => 'maluku',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            31 =>
-            array(
+            31 => 
+            array (
                 'id' => 32,
-                'nama' => 'MALUKU UTARA',
+                'nama' => 'maluku utara',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            32 =>
-            array(
+            32 => 
+            array (
                 'id' => 33,
-                'nama' => 'PAPUA',
+                'nama' => 'papua',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
-            33 =>
-            array(
+            33 => 
+            array (
                 'id' => 34,
-                'nama' => 'PAPUA BARAT',
+                'nama' => 'papua barat',
+                'negara_id' => 102,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
         ));
+        
+        
     }
 }
