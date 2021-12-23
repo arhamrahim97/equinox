@@ -1,5 +1,5 @@
 <div class="nav-bottom">
-    <div class="container">
+    <div class="container" style="max-width: 1700px !important">
         <h3 class="title-menu d-flex d-lg-none">
             Menu
             <div class="close-menu"> <i class="flaticon-cross"></i></div>
@@ -26,7 +26,7 @@
                 </div> --}}
             </li>
             <li class="nav-item menu">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/moa">
                     <i class="link-icon icon-docs"></i>
                     <span class="menu-title">MOA</span>
                 </a>
@@ -38,18 +38,21 @@
                     </ul>
                 </div> --}}
             </li>
-            <li class="nav-item menu">
+            <li class="nav-item submenu">
                 <a class="nav-link" href="#">
                     <i class="link-icon icon-docs"></i>
                     <span class="menu-title">IA</span>
                 </a>
-                {{-- <div class="navbar-dropdown animated fadeIn">
+                <div class="navbar-dropdown animated fadeIn">
                     <ul>
                         <li>
-                            <a href="boards.html">IA 1</a>
+                            <a href="/ia">{{__('components/navBottom.data_ia')}}</a>
+                        </li>
+                        <li>
+                            <a href="boards.html">{{__('components/navBottom.data_laporan_lpj')}}</a>
                         </li>
                     </ul>
-                </div> --}}
+                </div>
             </li>
 
             <li class="nav-item submenu" id="nav-master">
