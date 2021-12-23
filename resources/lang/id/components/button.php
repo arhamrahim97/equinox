@@ -5,5 +5,6 @@ return [
     'view' => 'Lihat',
     'save' => 'Simpan',
     'update' => 'Ubah',
-    'delete' => 'Hapus'
+    'delete' => 'Hapus',
+    'detail' => 'Detail'
 ];

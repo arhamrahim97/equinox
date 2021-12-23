@@ -16,6 +16,7 @@ class CreateNegaraTable extends Migration
         Schema::create('negara', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('region');
             $table->softDeletes();
             $table->timestamps();
         });

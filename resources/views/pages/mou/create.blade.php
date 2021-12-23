@@ -33,7 +33,7 @@
                         form_mou
                     @endslot                    
                     @slot('form_action')
-                        
+                        /mou
                     @endslot
                     @slot('document_category')
                         MOU

@@ -14,11 +14,15 @@
     <style>
         #peta {
             height: 300px;
-        }                
+        }      
+        .tambahPengusul a{
+            width: 100%
+        }          
     </style>
 @endpush
 
 <form method="{{$form_method}}" id="{{$form_id}}" enctype="multipart/form-data" action="{{$form_action}}">
+    @csrf
     <div class="card-body"> 
         <div class="row">
             <div class="col-lg-12">
@@ -40,7 +44,7 @@
                                 </optgroup>                                 
                             </select>                   
                         </div>
-                        <div class="col-lg-2 col-md-3 col-sm-12 text-right">
+                        <div class="col-lg-2 col-md-3 col-sm-12 tambahPengusul">
                             @component('components.buttons.add')
                                 @slot('href')
                                     /pengusul/create
@@ -135,13 +139,13 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <label>{{__('components/form_mou_moa_ia.nomor_mou')}} :</label>
-                    <input name="nomor_mou_universitas" type="text" class="form-control" required="">
+                    <input name="nomor_mou_universitas" type="text" class="form-control" >
                 </div>   
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
                     <label>{{__('components/form_mou_moa_ia.nomor_mou_pengusul')}} :</label>
-                    <input name="nomor_mou_pengusul" type="text" class="form-control" required="">
+                    <input name="nomor_mou_pengusul" type="text" class="form-control" >
                 </div> 
             </div>
             {{-- if MOU --}}
@@ -162,13 +166,13 @@
             <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                     <label>{{__('components/form_mou_moa_ia.nomor_moa')}} :</label>
-                    <input name="nomor_moa" type="text" class="form-control" required="">
+                    <input name="nomor_moa" type="text" class="form-control" >
                 </div>   
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                     <label>{{__('components/form_mou_moa_ia.nomor_moa_pengusul')}} :</label>
-                    <input name="nomor_moa_pengusul" type="text" class="form-control" required="">
+                    <input name="nomor_moa_pengusul" type="text" class="form-control" >
                 </div> 
             </div>                                             
             {{-- if MOA --}}
@@ -189,19 +193,19 @@
             <div class="col-lg-6 col-md-12">
                 <div class="form-group">
                     <label>{{__('components/form_mou_moa_ia.nomor_mou_pengusul')}} :</label>
-                    <input name="nomor_mou_pengusul" type="text" class="form-control" required="" disabled>
+                    <input name="nomor_mou_pengusul" type="text" class="form-control"  disabled>
                 </div>   
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                     <label>{{__('components/form_mou_moa_ia.nomor_ia')}} :</label>
-                    <input name="nomor_ia" type="text" class="form-control" required="">
+                    <input name="nomor_ia" type="text" class="form-control" >
                 </div>   
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                     <label>{{__('components/form_mou_moa_ia.nomor_ia_pengusul')}} :</label>
-                    <input name="nomor_ia_pengusul" type="text" class="form-control" required="">
+                    <input name="nomor_ia_pengusul" type="text" class="form-control" >
                 </div> 
             </div>            
             {{-- if IA --}}                    
@@ -212,13 +216,13 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             <label>{{__('components/form_mou_moa_ia.nik_nip_pengusul')}} :</label>
-                            <input name="nik_nip_pengusul" type="text" class="form-control" required="">
+                            <input name="nik_nip_pengusul" id="nik" type="text" class="form-control" >
                         </div>   
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             <label>{{__('components/form_mou_moa_ia.jabatan_pengusul')}} :</label>
-                            <input name="jabatan_pengusul" type="text" class="form-control" required="">
+                            <input name="jabatan_pengusul" type="text" class="form-control" >
                         </div> 
                     </div>
                 </div>
@@ -234,13 +238,13 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             <label>{{__('components/form_mou_moa_ia.tanggal_mulai')}} :</label>
-                            <input name="tanggal_mulai" type="text" class="form-control" required="">
+                            <input name="tanggal_mulai" type="text" class="form-control tanggal" >
                         </div>   
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             <label>{{__('components/form_mou_moa_ia.tanggal_berakhir')}} :</label>
-                            <input name="tanggal_berakhir" type="text" class="form-control" required="">
+                            <input name="tanggal_berakhir" type="text" class="form-control tanggal" >
                         </div> 
                     </div>
                 </div>
@@ -253,8 +257,8 @@
                     </div>
                 </div>
                 {{-- IF IA && role == Fakultas, Pasca Sarjana, PSDKU --}}
-                @if (($form_id == 'form_ia'))
-                    <div class="row" style="border: 1px solid green">
+                @if (($form_id == 'form_ia') && (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU'))))
+                    <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label>{{__('components/form_mou_moa_ia.program_studi')}} :</label>
@@ -284,8 +288,8 @@
                 @endif
     
                 {{-- IF IA && role == LPPM --}}
-                @if (($form_id == 'form_ia'))
-                    <div class="row" style="border: 1px solid tomato">
+                @if (($form_id == 'form_ia') && (Auth::user()->role == 'LPPM'))
+                    <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
                                 <label>{{__('components/form_mou_moa_ia.fakultas')}} :</label>
@@ -363,13 +367,13 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             <label>{{__('components/form_mou_moa_ia.tanggal_pertemuan')}} :</label>
-                            <input name="tanggal_mulai" type="text" class="form-control" required="">
+                            <input name="tanggal_pertemuan" type="text" class="form-control tanggal" >
                         </div>   
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             <label>{{__('components/form_mou_moa_ia.waktu_pertemuan')}} :</label>
-                            <input name="tanggal_berakhir" type="text" class="form-control" required="">
+                            <input name="waktu_pertemuan" type="text" class="form-control waktu" >
                         </div> 
                     </div>        
                 </div>
@@ -397,16 +401,16 @@
 
 @push('script')
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
-      integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+    $('.tanggal').mask('00-00-0000');
+    $('.waktu').mask('00:00');
+	$('#nik').mask('00000000000000000000');
+    </script>    
 
     <!-- Map -->
     <script>

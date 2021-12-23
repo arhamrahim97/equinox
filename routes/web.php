@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IaController;
 use App\Http\Controllers\MoaController;
 use App\Http\Controllers\MouController;
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\master\AkunController;
+use App\Http\Controllers\master\FakultasController;
+use App\Http\Controllers\master\NegaraController;
+use App\Http\Controllers\master\ProdiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +22,34 @@ use App\Http\Controllers\LocalizationController;
 |
 */
 
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('/mou', MouController::class)->parameters([
+        'mou' => 'mou'
+    ]);;
+    Route::resource('/moa', MoaController::class);
+    Route::resource('/ia', IaController::class);
+    Route::resource('/negara', NegaraController::class);
+    Route::resource('/fakultas', FakultasController::class)->parameters([
+        'fakultas' => 'fakultas'
+    ]);
+    Route::resource('/prodi/{fakultas}', ProdiController::class)->parameters([
+        '{fakultas}' => 'prodi',
+    ]);
+    Route::resource('/akun', AkunController::class)->parameters([
+        'akun' => 'user'
+    ]);
+});
+
 Route::get('/', function () {
     return view('pages.dashboard.starterTemplate');
 });
 
-Route::resource('/mou', MouController::class);
-Route::resource('/moa', MoaController::class);
-Route::resource('/ia', IaController::class);
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/cekLogin', [AuthController::class, 'cekLogin']);
+
 
 Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);
 // Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'create']);

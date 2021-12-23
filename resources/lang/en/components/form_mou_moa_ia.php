@@ -23,8 +23,8 @@ return [
     'program' => 'Program',
     'tanggal_mulai' => 'Starting Date (example: 22-12-2021)',
     'tanggal_berakhir' => 'End Date (example: 22-12-2022)',
-    'fakultas' => 'Faculty Involved (can choose more than one)',
-    'program_studi' => 'Study Program Involved (can choose more than one)',
+    'fakultas' => 'Select the Faculty / Postgraduate / PSDKU involved (can choose more than one)',
+    'program_studi' => 'Select the Study Program / Work Unit involved (can choose more than one)',
     'unggah_dokumen' => 'Upload Document',
 
     'metode_pertemuan' => 'Meeting Method', 

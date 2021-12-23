@@ -17,7 +17,13 @@ class DatabaseSeeder extends Seeder
         $this->call(NegaraTableSeeder::class);
         $this->call(ProvinsiTableSeeder::class);
         $this->call(KotaTableSeeder::class);
-        $this->call(KabupatenTableSeeder::class);
         $this->call(KecamatanTableSeeder::class);
+        $this->call(KelurahanTableSeeder::class);
+
+        $this->call(FakultasSeeder::class);
+        $this->call(ProdiSeeder::class);
+        $this->call(UserSeeder::class);
+
+        $this->call(PengusulSeeder::class);
     }
 }

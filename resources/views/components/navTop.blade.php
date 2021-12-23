@@ -1,5 +1,5 @@
 <div class="nav-top">
-    <div class="container d-flex flex-row">
+    <div class="container d-flex flex-row" style="max-width: 1700px !important">
         <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
             data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon">
@@ -17,7 +17,7 @@
         <!-- Navbar Header -->
         <nav class="navbar navbar-header navbar-expand-lg p-0">
 
-            <div class="container-fluid p-0">
+            <div class="container p-0 mr-0">
                 <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                     <li class="nav-item dropdown hidden-caret">
                         <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button"
@@ -79,7 +79,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">{{__('components/navTop.aturAkun')}}</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">{{__('components/navTop.keluar')}}</a>
+                                    <a class="dropdown-item" href="/logout">{{__('components/navTop.keluar')}}</a>
                                 </li>
                             </div>
                         </ul>

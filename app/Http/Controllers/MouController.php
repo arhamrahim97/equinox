@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mou;
 use App\Http\Requests\StoreMouRequest;
 use App\Http\Requests\UpdateMouRequest;
+use App\Models\Pengusul;
 
 class MouController extends Controller
 {
@@ -25,6 +26,10 @@ class MouController extends Controller
      */
     public function create()
     {
+        // $data = [
+        //     'pengusul' => Pengusul::all()
+        // ];
+        // dd($data['pengusul']);
         return view('pages/mou/create');
     }
 
@@ -36,7 +41,7 @@ class MouController extends Controller
      */
     public function store(StoreMouRequest $request)
     {
-        //
+        dd($request);
     }
 
     /**

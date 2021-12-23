@@ -13,7 +13,7 @@ class CreateMoasTable extends Migration
      */
     public function up()
     {
-        Schema::create('moas', function (Blueprint $table) {
+        Schema::create('moa', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateMoasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('moas');
+        Schema::dropIfExists('moa');
     }
 }

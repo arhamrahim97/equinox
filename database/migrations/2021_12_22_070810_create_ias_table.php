@@ -13,7 +13,7 @@ class CreateIasTable extends Migration
      */
     public function up()
     {
-        Schema::create('ias', function (Blueprint $table) {
+        Schema::create('ia', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateIasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ias');
+        Schema::dropIfExists('ia');
     }
 }
