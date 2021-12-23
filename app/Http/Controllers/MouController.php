@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mou;
+use App\Models\Pengusul;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMouRequest;
 use App\Http\Requests\UpdateMouRequest;
-use App\Models\Pengusul;
 
 class MouController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -26,11 +33,10 @@ class MouController extends Controller
      */
     public function create()
     {
-        // $data = [
-        //     'pengusul' => Pengusul::all()
-        // ];
-        // dd($data['pengusul']);
-        return view('pages/mou/create');
+        $data = [
+            'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->get()            
+        ];        
+        return view('pages/mou/create', $data);
     }
 
     /**
@@ -39,9 +45,9 @@ class MouController extends Controller
      * @param  \App\Http\Requests\StoreMouRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMouRequest $request)
+    public function store(Request $request)
     {
-        dd($request);
+        dd($request);        
     }
 
     /**

@@ -21,8 +21,9 @@
     </style>
 @endpush
 
-<form method="{{$form_method}}" id="{{$form_id}}" enctype="multipart/form-data" action="{{$form_action}}">
+<form action="{{$form_action}}" method="{{$form_method}}" id="{{$form_id}}" enctype="multipart/form-data" >
     @csrf
+    {{-- {{$csrf}} --}}
     <div class="card-body"> 
         <div class="row">
             <div class="col-lg-12">
@@ -31,17 +32,8 @@
                     <div class="row">
                         <div class="col-lg-10 col-md-9 col-sm-12">
                             <select id="pengusul_select" name="pengusul" class="form-control select2">
-                                <option value="">&nbsp;</option>
-                                <optgroup label="Alaskan/Hawaiian Time Zone">
-                                    <option value="AK">Alaska</option>
-                                    <option value="HI">Hawaii</option>
-                                </optgroup>
-                                <optgroup label="Pacific Time Zone">
-                                    <option value="CA">California</option>
-                                    <option value="NV" >Nevada</option>
-                                    <option value="OR">Oregon</option>
-                                    <option value="WA">Washington</option>
-                                </optgroup>                                 
+                                <option value="">{{__('components/form_mou_moa_ia.pilih_salah_satu')}}</option>
+                                {{$pengusul}}                                
                             </select>                   
                         </div>
                         <div class="col-lg-2 col-md-3 col-sm-12 tambahPengusul">
@@ -57,37 +49,37 @@
             <div class="col-lg-4 col-md-6">
                 <div class="form-group">
                     <label>{{__('components/form_mou_moa_ia.daerah')}} :</label>
-                    <input name="daerah" type="text" class="form-control" disabled>
+                    <input name="daerah" id="daerah" type="text" class="form-control" disabled>
                 </div>    
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="form-group">
                     <label>{{__('components/form_mou_moa_ia.negara')}} :</label>
-                    <input name="negara" type="text" class="form-control" disabled>
+                    <input name="negara" id="negara" type="text" class="form-control" disabled>
                 </div>    
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="form-group">
                     <label>{{__('components/form_mou_moa_ia.provinsi')}} :</label>
-                    <input name="provinsi" type="text" class="form-control" disabled>
+                    <input name="provinsi" id="provinsi" type="text" class="form-control" disabled>
                 </div>  
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="form-group">
                     <label>{{__('components/form_mou_moa_ia.kabupaten')}} :</label>
-                    <input name="kabupaten" type="text" class="form-control" disabled>
+                    <input name="kabupaten" id="kota" type="text" class="form-control" disabled>
                 </div>  
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="form-group">
                     <label>{{__('components/form_mou_moa_ia.kecamatan')}} :</label>
-                    <input name="kecamatan" type="text" class="form-control" disabled>
+                    <input name="kecamatan" id="kecamatan" type="text" class="form-control" disabled>
                 </div>    
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="form-group">
                     <label>{{__('components/form_mou_moa_ia.kelurahan')}} :</label>
-                    <input name="kelurahan" type="text" class="form-control" disabled>
+                    <input name="kelurahan" id="kelurahan" type="text" class="form-control" disabled>
                 </div>  
             </div>
             <div class="col-lg-12">
@@ -392,8 +384,14 @@
     <div class="card-action">
         <div class="row">
             <div class="col-md-12 text-right">
-                @component('components.buttons.submit')                                    
-                @endcomponent                 
+                {{-- @component('components.buttons.submit')                                    
+                @endcomponent                  --}}
+                <button class="btn btn-success" type="submit">
+                    <span class="btn-label">
+                        <i class="fa fa-save"></i>
+                    </span>
+                    {{__('components/button.save')}}
+                </button>
             </div>										
         </div>
     </div>
@@ -410,49 +408,70 @@
     $('.tanggal').mask('00-00-0000');
     $('.waktu').mask('00:00');
 	$('#nik').mask('00000000000000000000');
+
+    $('#pengusul_select').change(function(){
+        $('#latitude').val($(this).find('option:selected').attr('latitude'))
+        $('#longitude').val($(this).find('option:selected').attr('longitude'))
+        $('#daerah').val($(this).find('option:selected').attr('daerah'))
+        $('#negara').val($(this).find('option:selected').attr('negara'))
+        $('#provinsi').val($(this).find('option:selected').attr('provinsi'))
+        $('#kota').val($(this).find('option:selected').attr('kota'))
+        $('#kecamatan').val($(this).find('option:selected').attr('kecamatan'))
+        $('#kelurahan').val($(this).find('option:selected').attr('kelurahan'))
+        return updateMarker($("#latitude").val(), $("#longitude").val());        
+    })
     </script>    
 
     <!-- Map -->
     <script>
-      var map = L.map("peta").setView([-0.813367, 120.1366159], 13);
+        // function refreshMap() {
+            var map = L.map("peta").setView([$("#latitude").val(), $("#longitude").val()], 13);
 
-      var tiles = L.tileLayer(
-        "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW1pcnVsaGlkYXlhaCIsImEiOiJja3hlNGxicnQxY3lyMndxOTVxNndpMGdjIn0.WvONFefMPNi0U8JZEsJcIw",
-        {
-          maxZoom: 12,
-          attribution:
-            'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-          id: "mapbox/streets-v11",
-          tileSize: 512,
-          zoomOffset: -1,
-        }
-      ).addTo(map);
+            var tiles = L.tileLayer(
+                "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW1pcnVsaGlkYXlhaCIsImEiOiJja3hlNGxicnQxY3lyMndxOTVxNndpMGdjIn0.WvONFefMPNi0U8JZEsJcIw",
+                {
+                maxZoom: 12,
+                attribution:
+                    'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                id: "mapbox/streets-v11",
+                tileSize: 512,
+                zoomOffset: -1,
+                }
+            ).addTo(map);
 
-      var marker = L.marker([-0.813367, 120.1366159]).addTo(map);
+            var marker = L.marker([$("#latitude").val(), $("#longitude").val()]).addTo(map);
 
-      function updateMarker(lat, lng) {
-        marker
-          .setLatLng([lat, lng])
-          .bindPopup("Lokasi Pilihan : " + marker.getLatLng().toString())
-          .openPopup();
-        return false;
-      }
+            function updateMarker(lat, lng) {
+                marker
+                .setLatLng([lat, lng])
+                .bindPopup("Lokasi Pilihan : " + marker.getLatLng().toString())
+                .openPopup();
+                map.flyTo([lat, lng], 12);
+                return false;
+            }
 
-      map.on("click", function (e) {
-        let latitude = e.latlng.lat.toString().substring(0, 15);
-        let longitude = e.latlng.lng.toString().substring(0, 15);
-        $("#latitude").val(latitude);
-        $("#longitude").val(longitude);
-        updateMarker(latitude, longitude);
-      });
+            map.on("click", function (e) {
+                let latitude = e.latlng.lat.toString().substring(0, 15);
+                let longitude = e.latlng.lng.toString().substring(0, 15);
+                $("#latitude").val(latitude);
+                $("#longitude").val(longitude);
+                updateMarker(latitude, longitude);
+                
+            });
 
-      var updateMarkerByInputs = function () {
-        return updateMarker($("#latitude").val(), $("#longitude").val());
-      };
+            // function flyToLatLng(lat, lng) {
+            //     mymap.flyTo([lat, lng], 15);
+            // };
 
-      $("#latitude").on("input", updateMarkerByInputs);
-      $("#longitude").on("input", updateMarkerByInputs);
+            var updateMarkerByInputs = function () {
+                return updateMarker($("#latitude").val(), $("#longitude").val());
+            };
+
+            $("#latitude").on("input", updateMarkerByInputs);
+            $("#longitude").on("input", updateMarkerByInputs);
+
+        // }
     </script>
     <!-- Map -->
 @endpush

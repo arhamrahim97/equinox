@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'pilih_salah_satu' => '- Pilih Salah Satu -',
     'pengusul' => 'Pengusul',
     'daerah' => 'Kedaerahan',
     'negara' => 'Negara',

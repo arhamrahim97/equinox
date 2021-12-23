@@ -11,6 +11,7 @@ class Pengusul extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = 'pengusul';
+    protected $guarded = ['id'];
 
     public function negara()
     {
