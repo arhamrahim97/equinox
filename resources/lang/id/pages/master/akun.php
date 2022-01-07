@@ -21,6 +21,8 @@ return [
     'placeholderPassword' => 'Masukkan Kata Sandi',
     'placeholderRole' => 'Pilih Role',
     'placeholderStatusAktif' => 'Pilih Status Aktif',
+    'titleCard' => 'Tambah Akun',
+    'subTitleCard' => 'Silakan lengkapi semua informasi di bawah ini untuk membuat akun',
 
     'titleEdit' => 'Ubah',
     'notifPassword' => 'Kosongkan jika tidak ingin mengupdate password'

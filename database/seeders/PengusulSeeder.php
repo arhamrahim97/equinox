@@ -20,30 +20,43 @@ class PengusulSeeder extends Seeder
         // ID PALU : 369
         $data = [
             [
-                'nama' => 'RSUD Undata Palu',
-                'alamat' => 'Jl. Trans Sulawesi, Talise, Mantikulore, Kota Palu, Sulawesi Tengah',
+                'nama' => 'Kantor Kelurahan Tondo',
+                'alamat' => 'Jl. Padat Karya, Tondo, Mantikulore, Kota Palu, Sulawesi Tengah 94148',
                 'region' => 'Asia',
                 'negara_id' => 102,
                 'provinsi_id' => 26,
                 'kota_id' => 369,
                 'kecamatan_id' => 5453,
                 'kelurahan_id' => 65845,
-                'latitude' => '-0.857844',
-                'longitude' => '119.881858',
+                'latitude' => '-0.848937437882',
+                'longitude' => '119.88367080688',
                 'telepon' => '082195155175'
             ],
             [
-                'nama' => 'Universitas Tadulako',
-                'alamat' => 'Jl. Soekarno Hatta No.KM. 9, Tondo, Mantikulore, Kota Palu, Sulawesi Tengah 94148',
+                'nama' => 'Kantor Kelurahan Besusu Timur',
+                'alamat' => 'Jl. Urip Sumoharjo, Besusu Tim., Kec. Palu Tim., Kota Palu, Sulawesi Tengah 94118',
                 'region' => 'Asia',
                 'negara_id' => 102,
                 'provinsi_id' => 26,
                 'kota_id' => 369,
                 'kecamatan_id' => 5453,
                 'kelurahan_id' => 65845,
-                'latitude' => '-0.8364322',
-                'longitude' => '119.891505',
-                'telepon' => '(0451) 422611'
+                'latitude' => '-0.890131423145',
+                'longitude' => '119.86616134643',
+                'telepon' => '082195155175'
+            ],
+            [
+                'nama' => 'Kantor Kelurahan Ujuna',
+                'alamat' => 'Jl. S. Kinore, Ujuna, Kec. Palu Bar., Kota Palu, Sulawesi Tengah 94222',
+                'region' => 'Asia',
+                'negara_id' => 102,
+                'provinsi_id' => 26,
+                'kota_id' => 369,
+                'kecamatan_id' => 5453,
+                'kelurahan_id' => 65845,
+                'latitude' => '-0.895967201005',
+                'longitude' => '119.85517501831',
+                'telepon' => '082195155175'
             ],
             [
                 'nama' => 'Real Madrid C.F',
@@ -57,7 +70,50 @@ class PengusulSeeder extends Seeder
                 'latitude' => '40.4530387',
                 'longitude' => '-3.6905224',
                 'telepon' => '(0451) 422611'
-            ]
+            ],
+
+            // MOA & IA
+            [
+                'nama' => 'Universitas Tadulako',
+                'alamat' => 'Jl. Soekarno Hatta No.KM. 9, Tondo, Mantikulore, Kota Palu, Sulawesi Tengah 94148',
+                'region' => 'Asia',
+                'negara_id' => 102,
+                'provinsi_id' => 26,
+                'kota_id' => 369,
+                'kecamatan_id' => 5453,
+                'kelurahan_id' => 65845,
+                'latitude' => '-0.8364322',
+                'longitude' => '119.891505',
+                'telepon' => '(0451) 422611'
+            ],        
+            [
+                'nama' => 'Dinas Perdagangan dan Perindustrian',
+                'alamat' => 'Jl. S. Parman No.48, Besusu Tengah, Kec.  ., Kota Palu, Sulawesi Tengah 94118',
+                'region' => 'Asia',
+                'negara_id' => 102,
+                'provinsi_id' => 26,
+                'kota_id' => 369,
+                'kecamatan_id' => 5453,
+                'kelurahan_id' => 65845,
+                'latitude' => '-0.894250796714',
+                'longitude' => '119.86993789672',
+                'telepon' => '(0451) 422611'
+            ],
+            [
+                'nama' => 'Bawaslu Provinsi Sulawesi Tengah',
+                'alamat' => 'Jl. S. Parman No.48, Besusu Tengah, Kec. Palu Tim., Kota Palu, Sulawesi Tengah 94118',
+                'region' => 'Asia',
+                'negara_id' => 102,
+                'provinsi_id' => 26,
+                'kota_id' => 369,
+                'kecamatan_id' => 5453,
+                'kelurahan_id' => 65845,
+                'latitude' => '-0.894250796714',
+                'longitude' => '119.86993789672',
+                'telepon' => '(0451) 422611'
+            ],
+
+
         ];
 
         DB::table('pengusul')->insert($data);

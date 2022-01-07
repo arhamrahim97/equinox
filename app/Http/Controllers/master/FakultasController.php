@@ -53,7 +53,7 @@ class FakultasController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'nama' => 'required|unique:fakultas'
+                'nama' => ['required', Rule::unique('fakultas')->withoutTrashed()]
             ],
             [
                 'nama.required' => __('components/validation.required', ['nama' => __('pages/master/fakultas.title')]),
@@ -108,7 +108,7 @@ class FakultasController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'nama' => ['required', Rule::unique('fakultas')->ignore($request->id)]
+                'nama' => ['required', Rule::unique('fakultas')->ignore($request->id)->withoutTrashed()]
             ],
             [
                 'nama.required' => __('components/validation.required', ['nama' => __('pages/master/fakultas.title')]),

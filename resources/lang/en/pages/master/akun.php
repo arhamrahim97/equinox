@@ -21,6 +21,8 @@ return [
     'placeholderPassword' => 'Enter Password',
     'placeholderRole' => 'Choose Role',
     'placeholderStatusAktif' => 'Choose Active Status',
+    'titleCard' => 'Add Account',
+    'subTitleCard' => 'Please complete all the information below to create an account',
 
     'titleEdit' => 'Edit',
     'notifPassword' => 'Leave it blank if you don\'t want to update the password'

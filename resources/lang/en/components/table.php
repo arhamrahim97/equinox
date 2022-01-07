@@ -13,9 +13,20 @@ return [
     'alamat' => 'Address',
     'region' => 'Region',
     'negara' => 'Country',
+    'region' => 'Region',
     'provinsi' => 'Province',
     'kota' => 'City',
     'kecamatan' => 'Districts',
     'kelurahan' => 'Village',
-    'telepon' => 'Phone'
+    'telepon' => 'Phone',
+
+    'pengusul' => 'Proposer',
+    'program' => 'Program',
+    'status' => 'Status',
+    'tanggal_mulai' => 'Start Date',
+    'tanggal_berakhir' => 'End Date',
+
+    'judul' => 'Title',
+    'kategori' => 'Category',
+    'bahasa' => 'Language'
 ];

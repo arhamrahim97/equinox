@@ -23,7 +23,7 @@ class NegaraController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<div class="row"><button id="btn-edit" onclick="edit(' . $row->id . ')" class="btn btn-warning btn-sm mr-1" value="' . $row->id . '" >' . __('components/button.update') . '</button><button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button></div>';
+                    $actionBtn = '<div class="row"><a href="' . url('provinsi/' . $row->id) . '" class="btn btn-primary btn-sm mr-1">' .  __('components/button.detail') . '</a><button id="btn-edit" onclick="edit(' . $row->id . ')" class="btn btn-warning btn-sm mr-1" value="' . $row->id . '" >' . __('components/button.update') . '</button><button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button></div>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -53,11 +53,13 @@ class NegaraController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'nama' => 'required|unique:negara'
+                'nama' => 'required|unique:negara',
+                'region' => 'required',
             ],
             [
                 'nama.required' => __('components/validation.required', ['nama' => __('pages/master/negara.title')]),
-                'nama.unique' => __('components/validation.unique', ['nama' => __('pages/master/negara.title')])
+                'nama.unique' => __('components/validation.unique', ['nama' => __('pages/master/negara.title')]),
+                'region.required' => __('components/validation.required', ['nama' => __('pages/master/negara.region')]),
             ]
         );
 
@@ -67,6 +69,7 @@ class NegaraController extends Controller
 
         $negara = new Negara();
         $negara->nama = $request->nama;
+        $negara->region = $request->region;
         $negara->save();
 
         return response()->json(['success' => 'Success']);
@@ -108,11 +111,13 @@ class NegaraController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'nama' => ['required', Rule::unique('negara')->ignore($request->id)]
+                'nama' => ['required', Rule::unique('negara')->ignore($request->id)],
+                'region' => 'required'
             ],
             [
                 'nama.required' => __('components/validation.required', ['nama' => __('pages/master/negara.title')]),
-                'nama.unique' => __('components/validation.unique', ['nama' => __('pages/master/negara.title')])
+                'nama.unique' => __('components/validation.unique', ['nama' => __('pages/master/negara.title')]),
+                'region.required' => __('components/validation.required', ['nama' => __('pages/master/negara.region')]),
             ]
         );
 
@@ -121,6 +126,7 @@ class NegaraController extends Controller
         }
 
         $negara->nama = $request->nama;
+        $negara->region = $request->region;
         $negara->save();
 
         return response()->json(['success' => 'Success']);

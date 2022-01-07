@@ -5,5 +5,7 @@ return [
     'subTitle' => 'Master',
     'modalTitleTambah' => 'Add Country',
     'placeHolderTambah' => 'Enter Country',
-    'modalTitleUbah' => 'Update Country'
+    'placeholderSelectRegion' => 'Select Region',
+    'modalTitleUbah' => 'Update Country',
+    'region' => 'Region'
 ];

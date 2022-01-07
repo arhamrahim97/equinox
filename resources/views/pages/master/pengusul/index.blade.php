@@ -22,16 +22,19 @@
 @endpush
 
 @section('content')
-<div class="container">
+<section>
     <div class="row mb-3">
-        <a href="/pengusul/create" class="btn btn-primary" id="btn-tambah">
-            <span class="btn-label">
-                <i class="fa fa-plus"></i>
-            </span>
-            {{__('components/button.add')}}
-        </a>
+        <div class="col-12">
+            <a href="/pengusul/create" class="btn btn-primary" id="btn-tambah">
+                <span class="btn-label">
+                    <i class="fa fa-plus"></i>
+                </span>
+                {{__('components/button.add')}}
+            </a>
+        </div>
+
     </div>
-</div>
+</section>
 
 <div class="row">
     <table class="table table-bordered yajra-datatable">
