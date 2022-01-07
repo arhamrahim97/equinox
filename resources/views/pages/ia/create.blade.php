@@ -57,7 +57,40 @@
                         @empty
                             <option value="">Tidak ada data</option>
                         @endforelse
-                    @endslot      
+                    @endslot   
+                    
+                    @slot('nomor_moa_pengusul')
+                        @forelse ($nomor_moa_pengusul as $item)
+                            <option nomor_mou_pengusul="{{$item->mou->nomor_mou_pengusul}} - {{$item->mou->pengusul->nama}}" value="{{$item->id}}">{{$item->nomor_moa_pengusul }} - {{$item->pengusul->nama}}</option>
+                        @empty
+                            <option value="">Tidak ada data</option>                                                        
+                        @endforelse
+                    @endslot
+
+                    @slot('fakultas_all')
+                        @forelse ($fakultas_all as $item)
+                            <option value="{{$item->id}}">{{$item->nama}}</option>
+                        @empty
+                            <option value="">Tidak ada data</option>                                                        
+                        @endforelse
+                    @endslot
+
+                    @slot('prodi_all')
+                        @forelse ($prodi_all as $item)
+                            <option value="{{$item->id}}">{{$item->nama}}</option>
+                        @empty
+                            <option value="">Tidak ada data</option>                                                        
+                        @endforelse
+                    @endslot
+
+                    @slot('prodi_fakultas')
+                        @forelse ($prodi_fakultas as $item)
+                            <option value="{{$item->id}}">{{$item->nama}}</option>
+                        @empty
+                            <option value="">Tidak ada data</option>                                                        
+                        @endforelse                        
+                    @endslot
+
                     @slot('document_category')
                         IA
                     @endslot

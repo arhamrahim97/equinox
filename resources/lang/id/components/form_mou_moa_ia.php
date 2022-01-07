@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'MOU' => 'MOU',
+    'MOA' => 'MOU',
+    'IA' => 'MOU',
+    
     'pilih_salah_satu' => '- Pilih Salah Satu -',
     'pengusul' => 'Pengusul',
     'daerah' => 'Kedaerahan',
@@ -9,7 +13,10 @@ return [
     'kabupaten' => 'Kabupaten/Kota',
     'kecamatan' => 'Kecamatan',
     'kelurahan' => 'Kelurahan',
+    'alamat' => 'Alamat',
     'titik_koordinat' => 'Titik Koordinat',
+    'latitude' => 'Latitude',
+    'longitude' => 'Longitude',
 
     'nomor_mou' => 'Nomor MOU',
     'nomor_moa' => 'Nomor MOA',
@@ -22,15 +29,24 @@ return [
     'jabatan_pengusul' => 'Jabatan Pengusul',
     'program' => 'Program',
     'tanggal_mulai' => 'Tanggal Mulai (contoh: 22-12-2021)',
+    'tanggal_mulai_' => 'Tanggal Mulai',
     'tanggal_berakhir' => 'Tanggal Berakhir (contoh: 22-12-2022)',
-    'fakultas' => 'Pilih Fakultas / Pascasarjana / PSDKU yang Terlibat (bisa pilih lebih dari satu)',
-    'program_studi' => 'Pilih Program Studi / Unit Kerja yang Terlibat (bisa pilih lebih dari satu)',
-    'unggah_dokumen' => 'Unggah Dokumen',  
+    'tanggal_berakhir_' => 'Tanggal Berakhir',
+    'fakultas' => 'Fakultas / Pascasarjana / PSDKU yang Terlibat (bisa pilih lebih dari satu)',
+    'fakultas_' => 'Fakultas / Pascasarjana / PSDKU',
+    'program_studi' => 'Program Studi / Unit Kerja yang Terlibat (bisa pilih lebih dari satu)',
+    'program_studi_' => 'Program Studi / Unit Kerja',
+    'dokumen' => 'Dokumen',
+    'dokumen_ubah' => 'Biarkan kosong jika Anda tidak ingin mengubah file dokumen',
+    'download' => 'Unduh',
+    'nilai_uang' => 'Nilai Uang (Rp)',  
 
     'metode_pertemuan' => 'Metode Pertemuan',   
     'desktodesk' => 'Desk to desk',   
     'ceremonial' => 'Ceremonial',
     'tanggal_pertemuan' => 'Tanggal Pertemuan (contoh: 22-12-2021)',
+    'tanggal_pertemuan_' => 'Tanggal Pertemuan',
     'waktu_pertemuan' => 'Waktu Pertemuan (contoh: 16:00)',
+    'waktu_pertemuan_' => 'Waktu Pertemuan',
     'tempat_pertemuan' => 'Tempat Pertemuan'
 ];

@@ -17,5 +17,17 @@ return [
     'kota' => 'Kota',
     'kecamatan' => 'Kecamatan',
     'kelurahan' => 'Kelurahan/Desa',
-    'telepon' => 'Telepon'
+    'telepon' => 'Telepon',
+
+
+    'pengusul' => 'Pengusul',
+    'nomor_mou' => 'Nomor MOU',
+    'nomor_moa' => 'Nomor MOA',
+    'nomor_ia' => 'Nomor IA',
+    'nomor_mou_pengusul' => 'Nomor MOU Pengusul',
+    'nomor_moa_pengusul' => 'Nomor MOA Pengusul',
+    'nomor_ia_pengusul' => 'Nomor IA Pengusul',
+    'tanggal_mulai' => 'Tanggal Mulai',
+    'tanggal_berakhir' => 'Tanggal Berakhir',
+    'dibuat_oleh' => 'Dibuat oleh'
 ];

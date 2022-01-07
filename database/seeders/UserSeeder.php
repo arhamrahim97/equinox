@@ -27,14 +27,14 @@ class UserSeeder extends Seeder
                 'role' => 'Admin'
             ],
             [
-                'nama' => 'Fakultas',
+                'nama' => 'Fakultas Teknik',
                 'username' => 'fakultas',
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
                 'fakultas_id' => 1,
                 'prodi_id' => null,
                 'status' => 1,
                 'role' => 'Fakultas'
-            ],
+            ],            
             [
                 'nama' => 'Pascasarjana',
                 'username' => 'pascasarjana',
@@ -63,7 +63,7 @@ class UserSeeder extends Seeder
                 'role' => 'LPPM'
             ],
             [
-                'nama' => 'Prodi',
+                'nama' => 'Prodi Informatika',
                 'username' => 'prodi',
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
                 'fakultas_id' => 1,
@@ -79,6 +79,24 @@ class UserSeeder extends Seeder
                 'prodi_id' => 6,
                 'status' => 1,
                 'role' => 'Unit Kerja'
+            ],
+            [
+                'nama' => 'Fakultas Fisip',
+                'username' => 'fakultas2',
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+                'fakultas_id' => 2,
+                'prodi_id' => null,
+                'status' => 1,
+                'role' => 'Fakultas'
+            ],
+            [
+                'nama' => 'Prodi Ilmu Politik',
+                'username' => 'prodi2',
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+                'fakultas_id' => 2,
+                'prodi_id' => 5,
+                'status' => 1,
+                'role' => 'Prodi'
             ],
         ];
 

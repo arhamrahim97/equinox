@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'MOU' => 'MOU',
+    'MOA' => 'MOU',
+    'IA' => 'MOU',
+
     'pilih_salah_satu' => '- Select One -',
     'pengusul' => 'Proposer',
     'daerah' => 'Regional',
@@ -9,8 +13,10 @@ return [
     'kabupaten' => 'Regency/City',
     'kecamatan' => 'District',
     'kelurahan' => 'Sub-district/Village',
+    'alamat' => 'Address',
     'titik_koordinat' => 'Coordinate Point',
-    'program' => 'Program2',
+    'latitude' => 'Latitude',
+    'longitude' => 'Longitude',    
 
     'nomor_mou' => 'MOU Number',
     'nomor_moa' => 'MOA Number',
@@ -23,15 +29,24 @@ return [
     'jabatan_pengusul' => 'Position of the Proposer',
     'program' => 'Program',
     'tanggal_mulai' => 'Starting Date (example: 22-12-2021)',
+    'tanggal_mulai_' => 'Starting Date',
     'tanggal_berakhir' => 'End Date (example: 22-12-2022)',
-    'fakultas' => 'Select the Faculty / Postgraduate / PSDKU involved (can choose more than one)',
-    'program_studi' => 'Select the Study Program / Work Unit involved (can choose more than one)',
-    'unggah_dokumen' => 'Upload Document',
+    'tanggal_berakhir_' => 'End Date',
+    'fakultas' => 'The Faculty / Postgraduate / PSDKU involved (can choose more than one)',
+    'fakultas_' => 'The Faculty / Postgraduate / PSDKU',
+    'program_studi' => 'The Study Program / Work Unit involved (can choose more than one)',
+    'program_studi_' => 'The Study Program / Work Unit',
+    'dokumen' => 'Document',
+    'dokumen_ubah' => "Leave it blank if you don't want to change the document file",
+    'download' => 'Download',
+    'nilai_uang' => 'Money Value (Rp)',  
 
     'metode_pertemuan' => 'Meeting Method', 
     'desktodesk' => 'Desk to desk',   
     'ceremonial' => 'Ceremonial',
     'tanggal_pertemuan' => 'Meeting Date (example: 22-12-2021)',
+    'tanggal_pertemuan_' => 'Meeting Date',
     'waktu_pertemuan' => 'Meeting Time (example: 16:00)',   
+    'waktu_pertemuan_' => 'Meeting Time',   
     'tempat_pertemuan' => 'Meeting Place'
 ];

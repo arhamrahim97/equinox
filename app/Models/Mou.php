@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Pengusul;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class Mou extends Model
@@ -13,4 +14,10 @@ class Mou extends Model
     use SoftDeletes;
     protected $table = 'mou';
     protected $guarded = ['id'];
+
+    public function pengusul()
+    {
+        return $this->belongsTo(Pengusul::class);
+    }
+
 }
