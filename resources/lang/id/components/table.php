@@ -28,7 +28,7 @@ return [
     'nomor_ia_pengusul' => 'Nomor IA Pengusul',
     'tanggal_mulai' => 'Tanggal Mulai',
     'tanggal_berakhir' => 'Tanggal Berakhir',
-    'dibuat_oleh' => 'Dibuat oleh'
+    'dibuat_oleh' => 'Dibuat oleh',
     'program' => 'Program',
     'status' => 'Status',
 
