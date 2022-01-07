@@ -25,5 +25,13 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
 
         $this->call(PengusulSeeder::class);
+
+        $this->call(BeritaSeeder::class);
+        $this->call(KategoriBeritaSeeder::class);
+
+        $this->call(MouSeeder::class);
+        $this->call(MoaSeeder::class);
+        $this->call(IaSeeder::class);
+        $this->call(BeritaTableSeeder::class);
     }
 }

@@ -17,16 +17,20 @@
 @endpush
 
 @section('content')
-<div class="container">
+<section>
     <div class="row mb-3">
-        <button class="btn btn-primary" id="btn-tambah">
-            <span class="btn-label">
-                <i class="fa fa-plus"></i>
-            </span>
-            {{__('components/button.add')}}
-        </button>
+        <div class="col-12">
+            <button class="btn btn-primary" id="btn-tambah">
+                <span class="btn-label">
+                    <i class="fa fa-plus"></i>
+                </span>
+                {{__('components/button.add')}}
+            </button>
+        </div>
     </div>
-</div>
+</section>
+
+
 
 <div class="row">
     <table class="table table-bordered yajra-datatable">

@@ -6,5 +6,14 @@ return [
     'data_laporan_lpj' => 'Data Reports',
     'negara' => 'Country',
     'fakultas' => 'Faculty',
-    'akun' => 'Account'
+    'pengusul' => 'Proposer',
+    'akun' => 'Account',
+    'berita' => 'News',
+    'kategoriBerita' => 'News Category',
+    'mou' => 'MOU',
+    'moa' => 'MOA',
+    'ia' => 'IA',
+    'petaMou' => 'MOU Map',
+    'petaMoa' => 'MOA Map',
+    'petaIa' => 'IA Map',
 ];

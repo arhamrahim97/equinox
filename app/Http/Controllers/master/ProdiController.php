@@ -59,7 +59,7 @@ class ProdiController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'nama' => 'required|unique:fakultas',
+                'nama' => ['required', Rule::unique('prodi')->withoutTrashed()],
                 'unitKerja' => 'required'
             ],
             [
@@ -119,7 +119,7 @@ class ProdiController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'nama' => ['required', Rule::unique('prodi')->ignore($request->id)],
+                'nama' => ['required', Rule::unique('prodi')->ignore($request->id)->withoutTrashed()],
                 'unitKerja' => 'required'
             ],
             [

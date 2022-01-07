@@ -17,8 +17,8 @@
 @endpush
 
 @section('content')
-<div class="container">
-    <div class="row mb-3">
+<div class="row mb-3">
+    <div class="col-12">
         <button class="btn btn-primary" id="btn-tambah">
             <span class="btn-label">
                 <i class="fa fa-plus"></i>
@@ -34,6 +34,7 @@
             <tr>
                 <th>{{__('components/table.nomor')}}</th>
                 <th>{{__('components/table.nama')}}</th>
+                <th>{{__('components/table.region')}}</th>
                 <th>{{__('components/table.aksi')}}</th>
             </tr>
         </thead>
@@ -59,6 +60,21 @@
                         <input type="text" class="form-control" id="nama"
                             placeholder="{{__('pages/master/negara.placeHolderTambah')}}">
                         <span class="text-danger error-text nama-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="region">{{__('pages/master/negara.region')}}</label>
+                        <select class="form-control" id="region">
+                            <option hidden selected value="">
+                                {{__('pages/master/negara.placeholderSelectRegion')}}
+                            </option>
+                            <option value="Africa">Africa</option>
+                            <option value="Americas">Americas</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Europe">Europe</option>
+                            <option value="Oceania">Oceania</option>
+                            <option value="Polar">Polar</option>
+                        </select>
+                        <span class="text-danger error-text region-error"></span>
                     </div>
             </div>
             <div class="modal-footer">
@@ -88,6 +104,21 @@
                             placeholder="{{__('pages/master/negara.placeHolderTambah')}}">
                         <span class="text-danger error-text nama-error"></span>
                     </div>
+                    <div class="form-group">
+                        <label for="region">{{__('pages/master/negara.region')}}</label>
+                        <select class="form-control" id="region-edit">
+                            <option hidden selected value="">
+                                {{__('pages/master/negara.placeholderSelectRegion')}}
+                            </option>
+                            <option value="Africa">Africa</option>
+                            <option value="Americas">Americas</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Europe">Europe</option>
+                            <option value="Oceania">Oceania</option>
+                            <option value="Polar">Polar</option>
+                        </select>
+                        <span class="text-danger error-text region-error"></span>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success">{{__('components/button.save')}}</button>
@@ -109,13 +140,17 @@
         e.preventDefault();
         var _token = "{{csrf_token()}}";
         var nama = $('#nama').val();
+        var region = $('#region').val();
+
+        resetForm();
 
         $.ajax({
             url: "/negara",
             type: "POST",
             data: {
                 _token: _token,
-                nama: nama
+                nama: nama,
+                region: region
             },
             success: function (data) {
                 if ($.isEmptyObject(data.error)) {
@@ -143,6 +178,9 @@
         var _token = "{{csrf_token()}}";
         var id = $('#id-edit').val();
         var nama = $('#nama-edit').val();
+        var region = $('#region-edit').val();
+
+        resetForm();
 
         $.ajax({
             url: "/negara/" + id,
@@ -151,7 +189,8 @@
                 _token: _token,
                 _method: 'PUT',
                 id: id,
-                nama: nama
+                nama: nama,
+                region: region
             },
             success: function (data) {
                 if ($.isEmptyObject(data.error)) {
@@ -184,6 +223,7 @@
             success: function (data) {
                 $('#id-edit').val(data.id);
                 $('#nama-edit').val(data.nama);
+                $('#region-edit').val(data.region);
                 $('#modal-ubah').modal('show');
             },
         })
@@ -270,6 +310,7 @@
         $('#id-edit').val('');
         $('#nama-edit').val('');
         $('.nama-error').text('');
+        $('.region-error').text('');
         $('#nama').val('');
     }
 
@@ -287,6 +328,10 @@
             {
                 data: 'nama',
                 name: 'nama'
+            },
+            {
+                data: 'region',
+                name: 'region'
             },
             {
                 data: 'action',
