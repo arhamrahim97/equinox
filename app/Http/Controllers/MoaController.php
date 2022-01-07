@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Moa;
-use App\Http\Requests\StoreMoaRequest;
-use Illuminate\Http\Request;
-use App\Http\Requests\UpdateMoaRequest;
+use App\Models\Mou;
 use App\Models\Pengusul;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UpdateMoaRequest;
+use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 
 
 class MoaController extends Controller
@@ -16,8 +24,84 @@ class MoaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'))){
+                $data = DB::table('moa')
+                            ->join('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')
+                            ->join('users', 'moa.users_id', '=', 'users.id')
+                            ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.fakultas_id', 'users.nama as user_nama', 'users.role as user_role')
+                            ->where('users.fakultas_id', Auth::user()->fakultas_id)
+                            ->whereNull('moa.deleted_at')
+                            ->orderBy('id', 'desc')
+                            ->get();            
+            } else {
+                if(Auth::user()->role == 'Admin'){
+                    $data = DB::table('moa')
+                                ->join('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')    
+                                ->join('users', 'moa.users_id', '=', 'users.id')
+                                ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama', 'users.role as user_role')  
+                                ->whereNull('moa.deleted_at')
+                                ->orderBy('id', 'desc')
+                                ->get(); 
+                } else { // Role == Prodi, Unit Kerja
+                    $data = DB::table('moa')
+                            ->join('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')                                
+                            ->join('users', 'moa.users_id', '=', 'users.id')
+                            ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama', 'users.role as user_role')   
+                            ->where('users.fakultas_id', Auth::user()->fakultas_id)
+                            ->whereNull('moa.deleted_at')
+                            ->orderBy('id', 'desc')
+                            ->get(); 
+                }                        
+            }            
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('dibuat_oleh', function ($data) {                        
+                        return '<span class="badge badge-secondary">'.$data->user_nama.'</span>';                                                                                                                   
+                })
+                ->addColumn('status', function ($data) {
+                    $datetime1 = date_create($data->tanggal_berakhir);
+                    $datetime2 = date_create(date("Y-m-d"));            
+                    $interval = date_diff($datetime1, $datetime2);        
+                    $jumlah_tahun =  $interval->format('%y');     
+                    $jumlah_bulan =  $interval->format('%m');     
+                    if($datetime1<$datetime2){
+                        return '<span class="badge badge-danger">'.__('components/span.kadaluarsa').'</span>';                            
+                    } else{
+                        if($jumlah_tahun < 1){
+                            if($jumlah_bulan < 6){
+                                return '<span class="badge badge-warning">'.__('components/span.masa_tenggang').'</span>';                            
+                            }
+                            else{
+                                return '<span class="badge badge-success">'.__('components/span.aktif').'</span>';                            
+                            }
+                        } else{
+                            return '<span class="badge badge-success">'.__('components/span.aktif').'</span>';                            
+                        }
+                    }                 
+                })
+                ->addColumn('action', function ($row) {
+                    if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'))){
+                        $actionBtn = '<div class="row text-center justify-content-center">
+                            <a href="' . Storage::url("dokumen/moa/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>
+                            <a href="' . url('/moa/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>
+                            <a href="' . url('/moa/' . $row->id . '/edit') . '" id="btn-edit" class="btn btn-warning btn-sm mr-1 my-1">' . __('components/button.edit') . '</a>
+                            <button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1 my-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button>
+                        </div>';                        
+                    } else{ // Role == Admin, Prodi, Unit Kerja
+                        $actionBtn = '<div class="row text-center justify-content-center">
+                            <a href="' . Storage::url("dokumen/moa/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>
+                            <a href="' . url('/moa/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>                            
+                        </div>';                        
+                    }
+                    return $actionBtn;
+                })
+                ->rawColumns(['status', 'action', 'dibuat_oleh'])
+                ->make(true);
+        }  
         return view('pages/moa/index');
         
     }
@@ -29,10 +113,15 @@ class MoaController extends Controller
      */
     public function create()
     {
-        $data = [
-            'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->get()            
-        ];   
-        return view('pages/moa/create', $data);
+        if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'))){
+            $data = [
+                'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->orderBy('id', 'desc')->get(),
+                'nomor_mou_pengusul' => Mou::with(['pengusul'])->orderBy('id', 'desc')->get(),
+            ];               
+            return view('pages/moa/create', $data);
+        } else{
+            abort(404);
+        }
         
     }
 
@@ -44,7 +133,79 @@ class MoaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'pengusul_id' => 'required',
+                'nomor_mou_pengusul' => 'required',                
+                'nomor_moa' => ['required', Rule::unique('moa')->withoutTrashed()],
+                'nomor_moa_pengusul' => ['required', Rule::unique('moa')->withoutTrashed()],    
+                'nik_nip_pengusul' => 'required',
+                'jabatan_pengusul' => 'required',
+                'program' => 'required',
+                'tanggal_mulai' => 'required',
+                'tanggal_berakhir' => 'required',
+                'dokumen' => 'required',
+                'metode_pertemuan' => 'required',
+                'tanggal_pertemuan' => 'required',
+                'waktu_pertemuan' => 'required',
+                'tempat_pertemuan' => 'required',
+            ],
+            [
+                'pengusul_id.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.pengusul')]),
+                'nomor_mou_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nomor_mou_pengusul')]),
+                'nomor_moa.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nomor_moa')]),
+                'nomor_moa.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_moa')]),
+                'nomor_moa_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nomor_moa_pengusul')]),
+                'nomor_moa_pengusul.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_moa_pengusul')]),
+
+                'nik_nip_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nik_nip_pengusul')]),
+                'jabatan_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.jabatan_pengusul')]),
+                'program.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program')]),                
+                'tanggal_mulai.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_mulai')]),                
+                'tanggal_berakhir.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_berakhir')]),                
+                'dokumen.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.dokumen')]),                           
+                'metode_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.metode_pertemuan')]),                
+                'tanggal_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_pertemuan')]),                
+                'waktu_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.waktu_pertemuan')]),                
+                'tempat_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tempat_pertemuan')]),                             
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
+        }
+
+        $pengusul = Pengusul::find($request->pengusul_id);
+        $namaFileBerkas = 'MOA - '. $pengusul->nama. ' - '. Carbon::now()->format('YmdHs') . ".pdf";                  
+        $request->file('dokumen')->storeAs(
+            'dokumen/moa',
+            $namaFileBerkas
+        );
+
+        $data = [
+            'users_id' => Auth::user()->id,
+            'pengusul_id' => $request->pengusul_id,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'mou_id' => $request->nomor_mou_pengusul,
+            'nomor_moa' => $request->nomor_moa,
+            'nomor_moa_pengusul' => $request->nomor_moa_pengusul,
+            'nik_nip_pengusul' => $request->nik_nip_pengusul,
+            'jabatan_pengusul' => $request->jabatan_pengusul,
+            'program' => $request->program,
+            'tanggal_mulai' => date("Y-m-d", strtotime($request->tanggal_mulai)),
+            'tanggal_berakhir' => date("Y-m-d", strtotime($request->tanggal_berakhir)),
+            'dokumen' => $namaFileBerkas,
+            'metode_pertemuan' => $request->metode_pertemuan,
+            'tanggal_pertemuan' => date("Y-m-d", strtotime($request->tanggal_pertemuan)),
+            'waktu_pertemuan' => $request->waktu_pertemuan,
+            'tempat_pertemuan' => $request->tempat_pertemuan
+        ];
+
+        Moa::create($data);
+        return response()->json(['success' => 'Success']);
+
     }
 
     /**
@@ -55,7 +216,15 @@ class MoaController extends Controller
      */
     public function show(Moa $moa)
     {
-        //
+        if(($moa->user->fakultas_id == Auth::user()->fakultas_id) || (Auth::user()->role == 'Admin')){
+            $data = [
+                'moa' => Moa::with(['pengusul', 'mou', 'user'])->where('id', $moa->id)->first()
+            ];
+            return view('pages/moa/show', $data);
+        }
+        else{            
+            abort(404);
+        }
     }
 
     /**
@@ -65,8 +234,19 @@ class MoaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Moa $moa)
-    {
-        //
+    {        
+        if(($moa->user->fakultas_id == Auth::user()->fakultas_id) && ($moa->user->prodi_id == Auth::user()->prodi_id)){
+            $data = [
+                'moa' => Moa::with(['pengusul'])->where('id', $moa->id)->first(),
+                'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->orderBy('id', 'desc')->get(),
+                'nomor_mou_pengusul' => Mou::with(['pengusul'])->orderBy('id', 'desc')->get(),
+            ];     
+            
+            return view('pages/moa/edit', $data);
+        }        
+        else{
+            abort(404);
+        }
     }
 
     /**
@@ -76,9 +256,96 @@ class MoaController extends Controller
      * @param  \App\Models\Moa  $moa
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMoaRequest $request, Moa $moa)
+    public function update(Request $request, Moa $moa)
     {
-        //
+        if($request->nomor_moa != $moa->nomor_moa){
+            $nomor_moa_req = ['required', Rule::unique('moa')->withoutTrashed()];
+        } else{
+            $nomor_moa_req = 'required';
+        }
+
+        if($request->nomor_moa_pengusul != $moa->nomor_moa_pengusul){
+            $nomor_moa_pengusul_req = ['required', Rule::unique('moa')->withoutTrashed()];
+        } else{
+            $nomor_moa_pengusul_req = 'required';
+        }
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'pengusul_id' => 'required',
+                'nomor_mou_pengusul' => 'required',                
+                'nomor_moa' => $nomor_moa_req,
+                'nomor_moa_pengusul' => $nomor_moa_pengusul_req,    
+                'nik_nip_pengusul' => 'required',
+                'jabatan_pengusul' => 'required',
+                'program' => 'required',
+                'tanggal_mulai' => 'required',
+                'tanggal_berakhir' => 'required',
+                // 'dokumen' => 'required',
+                'metode_pertemuan' => 'required',
+                'tanggal_pertemuan' => 'required',
+                'waktu_pertemuan' => 'required',
+                'tempat_pertemuan' => 'required',
+            ],
+            [
+                'pengusul_id.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.pengusul')]),
+                'nomor_mou_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nomor_mou_pengusul')]),
+                'nomor_moa.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nomor_moa')]),
+                'nomor_moa.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_moa')]),
+                'nomor_moa_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nomor_moa_pengusul')]),
+                'nomor_moa_pengusul.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_moa_pengusul')]),
+                'nik_nip_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nik_nip_pengusul')]),
+                'jabatan_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.jabatan_pengusul')]),
+                'program.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program')]),                
+                'tanggal_mulai.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_mulai')]),                
+                'tanggal_berakhir.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_berakhir')]),                
+                // 'dokumen.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.dokumen')]),                           
+                'metode_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.metode_pertemuan')]),                
+                'tanggal_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_pertemuan')]),                
+                'waktu_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.waktu_pertemuan')]),                
+                'tempat_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tempat_pertemuan')]),                             
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
+        }
+
+        $data = [
+            'users_id' => Auth::user()->id,
+            'pengusul_id' => $request->pengusul_id,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'mou_id' => $request->nomor_mou_pengusul,
+            'nomor_moa' => $request->nomor_moa,
+            'nomor_moa_pengusul' => $request->nomor_moa_pengusul,
+            'nik_nip_pengusul' => $request->nik_nip_pengusul,
+            'jabatan_pengusul' => $request->jabatan_pengusul,
+            'program' => $request->program,
+            'tanggal_mulai' => date("Y-m-d", strtotime($request->tanggal_mulai)),
+            'tanggal_berakhir' => date("Y-m-d", strtotime($request->tanggal_berakhir)),            
+            'metode_pertemuan' => $request->metode_pertemuan,
+            'tanggal_pertemuan' => date("Y-m-d", strtotime($request->tanggal_pertemuan)),
+            'waktu_pertemuan' => $request->waktu_pertemuan,
+            'tempat_pertemuan' => $request->tempat_pertemuan
+        ];
+
+        if($request->dokumen){            
+            if (Storage::exists('dokumen/moa/' . $moa->dokumen)) {
+                Storage::delete('dokumen/moa/' . $moa->dokumen);
+            }            
+            $namaFileBerkas = 'MOA - '. $moa->pengusul->nama. ' - '. Carbon::now()->format('YmdHs') . ".pdf";                  
+            $request->file('dokumen')->storeAs(
+                'dokumen/moa',
+                $namaFileBerkas
+            );
+            $data['dokumen'] = $namaFileBerkas;                        
+        }
+        
+        Moa::where('id', $moa->id)->update($data);
+
+        return response()->json(['success' => 'Success']);             
     }
 
     /**
@@ -89,6 +356,13 @@ class MoaController extends Controller
      */
     public function destroy(Moa $moa)
     {
-        //
+        if (Storage::exists('dokumen/moa/' . $moa->dokumen)) {
+            Storage::delete('dokumen/moa/' . $moa->dokumen);
+        }
+        
+        $moa->delete();
+        return response()->json([
+            'res' => 'success'
+        ]);
     }
 }

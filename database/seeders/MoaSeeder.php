@@ -66,12 +66,31 @@ class MoaSeeder extends Seeder
                 'program' => 'Kerjasama Pengawasan Pemilu-moa',
                 'tanggal_mulai' => '2021-12-21',
                 'tanggal_berakhir' => '2022-08-16',
-                'dokumen' => 'dokumen_tidak_ada3-moa.pdf',
-                'metode_pertemuan' => 'desktodesk-moa',
+                'dokumen' => 'dokumen_tidak_ada-moa.pdf',
+                'metode_pertemuan' => 'Ceremonial',
                 'tanggal_pertemuan' => '2022-01-21',
                 'waktu_pertemuan' => '17:00',
                 'tempat_pertemuan' => 'Cafe BNS-moa'
-            ],
+            ],           
+            [
+                'users_id' => 8,
+                'pengusul_id' => 7,
+                'latitude' => '-0.893251',
+                'longitude' => '119.886419',
+                'mou_id' => '3',
+                'nomor_moa' => '6666667777778888-moa',
+                'nomor_moa_pengusul' => '6666668888889999-moa',
+                'nik_nip_pengusul' => '677777777777-moa',
+                'jabatan_pengusul' => 'Sekretaris Bawaslu-moa',
+                'program' => 'Testing',
+                'tanggal_mulai' => '2021-12-21',
+                'tanggal_berakhir' => '2022-08-16',
+                'dokumen' => 'dokumen_tidak_ada-moa.pdf',
+                'metode_pertemuan' => 'Ceremonial',
+                'tanggal_pertemuan' => '2022-01-21',
+                'waktu_pertemuan' => '17:00',
+                'tempat_pertemuan' => 'Cafe BNS-moa'
+            ],           
         ];
 
         DB::table('moa')->insert($data);

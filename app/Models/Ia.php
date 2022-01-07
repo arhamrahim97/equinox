@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Moa;
+use App\Models\User;
+use App\Models\Mou;
 use App\Models\Pengusul;
 use App\Models\AnggotaProdi;
 use App\Models\AnggotaFakultas;
@@ -24,7 +26,7 @@ class Ia extends Model
   
     public function moa() // Tabel IA = moa_id
     {
-        return $this->belongsTo(Moa::class);
+        return $this->belongsTo(Moa::class)->withTrashed();
     }
 
     // public function mou(){
@@ -37,5 +39,9 @@ class Ia extends Model
 
     public function anggotaProdi(){
         return $this->hasMany(AnggotaProdi::class, 'ia_id', 'id');
+    }
+  
+    public function user(){
+        return $this->belongsTo(User::class, 'users_id', 'id');
     }
 };

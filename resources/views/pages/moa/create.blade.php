@@ -56,7 +56,14 @@
                         @empty
                             <option value="">Tidak ada data</option>
                         @endforelse
-                    @endslot      
+                    @endslot   
+                    @slot('nomor_mou_pengusul')
+                        @forelse ($nomor_mou_pengusul as $item)
+                            <option value="{{$item->id}}">{{$item->nomor_mou_pengusul}} - {{$item->pengusul->nama}}</option>
+                        @empty
+                            <option value="">Tidak ada data</option>
+                        @endforelse
+                    @endslot   
                     @slot('document_category')
                         MOA
                     @endslot

@@ -12,6 +12,7 @@
                     <span class="menu-title">{{__('components/navBottom.beranda')}}</span>
                 </a>
             </li>
+
             <li class="nav-item submenu" id="nav-mou">
                 <a class="nav-link" href="#">
                     <i class="link-icon icon-docs"></i>
@@ -61,6 +62,7 @@
                 </div>
             </li>
 
+            @if (Auth::user()->role == 'Admin')
             <li class="nav-item submenu" id="nav-berita">
                 <a class="nav-link" href="#">
                     <i class="link-icon icon-book-open"></i>
@@ -99,9 +101,8 @@
                         </li>
                     </ul>
                 </div>
-
             </li>
-
+            @endif
         </ul>
     </div>
 </div>

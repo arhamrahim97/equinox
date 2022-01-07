@@ -22,6 +22,7 @@ use App\Http\Controllers\master\PengusulController;
 use App\Http\Controllers\master\ProdiController;
 use App\Http\Controllers\master\ProvinsiController;
 use App\Http\Controllers\ProfilController;
+use App\Models\Ia;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +41,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/mou', MouController::class)->parameters([
         'mou' => 'mou'
     ]);;
-    Route::resource('/moa', MoaController::class);
-    Route::resource('/ia', IaController::class);
+    Route::resource('/moa', MoaController::class)->parameters([
+        'moa' => 'moa'
+    ]);;;
+    Route::resource('/ia', IaController::class)->parameters([
+        'ia' => 'ia'
+    ]);
     Route::resource('/negara', NegaraController::class);
     Route::resource('/provinsi/{negara}', ProvinsiController::class)->parameters([
         '{negara}' => 'provinsi',
@@ -99,6 +104,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/profil', [ProfilController::class, 'index']);
     Route::put('/profil/{user}', [ProfilController::class, 'updateProfil']);
+
+    Route::get('/getProdi', [ListController::class, 'getProdi']);
+    Route::get('/getProdiEdit', [ListController::class, 'getProdiEdit']);
+
 });
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {

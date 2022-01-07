@@ -28,6 +28,7 @@ class CreateIasTable extends Migration
             $table->date('tanggal_mulai');
             $table->date('tanggal_berakhir');
             $table->text('dokumen');
+            $table->text('lpj')->nullable();
             $table->bigInteger('nilai_uang');
             $table->string('metode_pertemuan');
             $table->date('tanggal_pertemuan');
