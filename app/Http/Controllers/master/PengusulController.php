@@ -43,7 +43,7 @@ class PengusulController extends Controller
                     return $kelurahan;
                 })
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<div class="row"><a href="' . url('/akun/' . $row->id . '/edit') . '" id="btn-edit" class="btn btn-warning btn-sm mr-1">' . __('components/button.update') . '</a><button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button></div>';
+                    $actionBtn = '<div class="row"><a href="' . url('/pengusul/' . $row->id . '/edit') . '" id="btn-edit" class="btn btn-warning btn-sm mr-1">' . __('components/button.update') . '</a><button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button></div>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action', 'negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])
@@ -59,7 +59,7 @@ class PengusulController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.master.pengusul.create');
     }
 
     /**
@@ -70,7 +70,54 @@ class PengusulController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nama' => 'required',
+                'alamat' => 'required',
+                'region' => 'required',
+                'negara' => 'required',
+                'provinsi' => 'required',
+                'kota' => 'required',
+                'kecamatan' => 'required',
+                'kelurahan' => 'required',
+                'latitude' => 'required',
+                'longitude' => 'required',
+                'telepon' => 'required',
+            ],
+            [
+                'nama.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.nama')]),
+                'alamat.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.alamat')]),
+                'region.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.region')]),
+                'negara.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.negara')]),
+                'provinsi.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.provinsi')]),
+                'kota.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.kota')]),
+                'kecamatan.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.kecamatan')]),
+                'kelurahan.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.kelurahan')]),
+                'latitude.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.latitude')]),
+                'longitude.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.longitude')]),
+                'telepon.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.telepon')]),
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
+        }
+        $pengusul = new Pengusul();
+        $pengusul->nama = $request->nama;
+        $pengusul->alamat = $request->alamat;
+        $pengusul->region = $request->region;
+        $pengusul->negara_id = $request->negara;
+        $pengusul->provinsi_id = $request->provinsi;
+        $pengusul->kota_id = $request->kota;
+        $pengusul->kecamatan_id = $request->kecamatan;
+        $pengusul->kelurahan_id = $request->kelurahan;
+        $pengusul->latitude = $request->latitude;
+        $pengusul->longitude = $request->longitude;
+        $pengusul->telepon = $request->telepon;
+        $pengusul->save();
+
+        return response()->json(['success' => 'Success']);
     }
 
     /**
@@ -96,7 +143,7 @@ class PengusulController extends Controller
      */
     public function edit(Pengusul $pengusul)
     {
-        //
+        return view('pages/master/pengusul.edit', compact('pengusul'));
     }
 
     /**
@@ -108,7 +155,54 @@ class PengusulController extends Controller
      */
     public function update(Request $request, Pengusul $pengusul)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nama' => 'required',
+                'alamat' => 'required',
+                'region' => 'required',
+                'negara' => 'required',
+                'provinsi' => 'required',
+                'kota' => 'required',
+                'kecamatan' => 'required',
+                'kelurahan' => 'required',
+                'latitude' => 'required',
+                'longitude' => 'required',
+                'telepon' => 'required',
+            ],
+            [
+                'nama.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.nama')]),
+                'alamat.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.alamat')]),
+                'region.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.region')]),
+                'negara.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.negara')]),
+                'provinsi.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.provinsi')]),
+                'kota.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.kota')]),
+                'kecamatan.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.kecamatan')]),
+                'kelurahan.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.kelurahan')]),
+                'latitude.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.latitude')]),
+                'longitude.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.longitude')]),
+                'telepon.required' => __('components/validation.required', ['nama' => __('pages/master/pengusul.telepon')]),
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
+        }
+
+        $pengusul->nama = $request->nama;
+        $pengusul->alamat = $request->alamat;
+        $pengusul->region = $request->region;
+        $pengusul->negara_id = $request->negara;
+        $pengusul->provinsi_id = $request->provinsi;
+        $pengusul->kota_id = $request->kota;
+        $pengusul->kecamatan_id = $request->kecamatan;
+        $pengusul->kelurahan_id = $request->kelurahan;
+        $pengusul->latitude = $request->latitude;
+        $pengusul->longitude = $request->longitude;
+        $pengusul->telepon = $request->telepon;
+        $pengusul->save();
+
+        return response()->json(['success' => 'Success']);
     }
 
     /**

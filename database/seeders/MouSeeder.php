@@ -27,8 +27,8 @@ class MouSeeder extends Seeder
                 'program' => 'Pengadaan Server SIAKAD UNTAD-mou',
                 'tanggal_mulai' => '2021-08-16',
                 'tanggal_berakhir' => '2023-08-16',
-                'dokumen' => 'dokumen_tidak_ada-mou.pdf',
-                'metode_pertemuan' => 'Desk to Desk',
+                'dokumen' => 'dokumen_tidak_ada1-mou.pdf',
+                'metode_pertemuan' => 'desktodesk-mou',
                 'tanggal_pertemuan' => '2021-07-15',
                 'waktu_pertemuan' => '21:00',
                 'tempat_pertemuan' => 'Cafe Nintendo-mou'
@@ -45,8 +45,8 @@ class MouSeeder extends Seeder
                 'program' => 'Kerjasama Antar Dinas di Besusu Timur-mou',
                 'tanggal_mulai' => '2021-12-21',
                 'tanggal_berakhir' => '2022-03-16',
-                'dokumen' => 'dokumen_tidak_ada-mou.pdf',
-                'metode_pertemuan' => 'Desk to Desk',
+                'dokumen' => 'dokumen_tidak_ada2-mou.pdf',
+                'metode_pertemuan' => 'desktodesk-mou',
                 'tanggal_pertemuan' => '2022-01-21',
                 'waktu_pertemuan' => '17:00',
                 'tempat_pertemuan' => 'Kantor Imigrasi-mou'
@@ -63,8 +63,8 @@ class MouSeeder extends Seeder
                 'program' => 'Pembangunan Server Nintendo-mou',
                 'tanggal_mulai' => '2021-12-21',
                 'tanggal_berakhir' => '2022-03-16',
-                'dokumen' => 'dokumen_tidak_ada-mou.pdf',
-                'metode_pertemuan' => 'Desk to Desk',
+                'dokumen' => 'dokumen_tidak_ada3-mou.pdf',
+                'metode_pertemuan' => 'desktodesk-mou',
                 'tanggal_pertemuan' => '2022-01-21',
                 'waktu_pertemuan' => '17:00',
                 'tempat_pertemuan' => 'UPT TIK UNTAD-mou'
@@ -81,8 +81,8 @@ class MouSeeder extends Seeder
                 'program' => 'Pertukaran Pelajar Real Madrid-mou',
                 'tanggal_mulai' => '2020-02-05',
                 'tanggal_berakhir' => '2021-01-04',
-                'dokumen' => 'dokumen_tidak_ada-mou.pdf',
-                'metode_pertemuan' => 'Ceremonial',
+                'dokumen' => 'dokumen_tidak_ada4-mou.pdf',
+                'metode_pertemuan' => 'desktodesk-mou',
                 'tanggal_pertemuan' => '2021-07-13',
                 'waktu_pertemuan' => '09:00',
                 'tempat_pertemuan' => 'Stadiun Real Madrid-mou'

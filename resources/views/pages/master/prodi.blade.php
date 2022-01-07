@@ -17,8 +17,9 @@
 @endpush
 
 @section('content')
-<div class="container">
-    <div class="row mb-3">
+
+<div class="row mb-3">
+    <div class="col-12">
         <button class="btn btn-primary" id="btn-tambah">
             <span class="btn-label">
                 <i class="fa fa-plus"></i>
@@ -26,7 +27,9 @@
             {{__('components/button.add')}}
         </button>
     </div>
+
 </div>
+
 
 <div class="row">
     <table class="table table-bordered yajra-datatable">

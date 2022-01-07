@@ -14,72 +14,92 @@
 @endpush
 
 @section('content')
-<form id="form-tambah">
-    <div class="form-row">
-        <div class="form-group col-md-4">
-            <label for="nama">{{__('pages/master/akun.nama')}}</label>
-            <input type="text" class="form-control" id="nama" placeholder="{{__('pages/master/akun.placeholderNama')}}">
-            <span class="text-danger error-text nama-error"></span>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="username">{{__('pages/master/akun.username')}}</label>
-            <input type="text" class="form-control" id="username"
-                placeholder="{{__('pages/master/akun.placeholderUsername')}}">
-            <span class="text-danger error-text username-error"></span>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="password">{{__('pages/master/akun.password')}}</label>
-            <input type="text" class="form-control" id="password"
-                placeholder="{{__('pages/master/akun.placeholderPassword')}}">
-            <span class="text-danger error-text password-error"></span>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-4">
-            <label for="inputEmail4">{{__('pages/master/akun.role')}}</label>
-            <select class="form-control" id="role" onchange="roleSelection()">
-                <option hidden selected value="">{{__('pages/master/akun.placeholderRole')}}</option>
-                <option value="Admin">Admin</option>
-                <option value="Fakultas">Fakultas</option>
-                <option value="Pascasarjana">Pascasarjana</option>
-                <option value="PSDKU">PSDKU</option>
-                <option value="LPPM">LPPM</option>
-                <option value="Prodi">Prodi</option>
-                <option value="Unit Kerja">Unit Kerja</option>
-            </select>
-            <span class="text-danger error-text role-error"></span>
-        </div>
-        <div class="form-group col-md-4" id="form-fakultas">
-            <label for="inputEmail4">{{__('pages/master/akun.fakultas')}}</label>
-            <select class="form-control" id="fakultas" onchange="getListProdi()">
-            </select>
-            <span class="text-danger error-text fakultas-error"></span>
-        </div>
-        <div class="form-group col-md-4" id="form-prodi">
-            <label for="inputPassword4">{{__('pages/master/akun.prodi')}}</label>
-            <select class="form-control" id="prodi">
-            </select>
-            <span class="text-danger error-text prodi-error"></span>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-12">
-            <label for="statusAktif">{{__('pages/master/akun.statusAktif')}}</label>
-            <select class="form-control" id="statusAktif">
-                <option hidden selected value="">{{__('pages/master/akun.placeholderStatusAktif')}}</option>
-                <option value="1">Aktif</option>
-                <option value="0">Tidak Aktif</option>
-            </select>
-            <span class="text-danger error-text statusAktif-error"></span>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group ml-auto">
-            <button type="submit" class="btn btn-primary">{{__('components/button.save')}}</button>
-        </div>
-    </div>
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">{{__('pages/master/akun.titleCard')}}
+                    </div>
+                    <div class="card-category">{{__('pages/master/akun.subTitleCard')}}</div>
+                </div>
+                <div class="card-body">
+                    <form id="form-tambah">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="nama">{{__('pages/master/akun.nama')}}</label>
+                                <input type="text" class="form-control" id="nama"
+                                    placeholder="{{__('pages/master/akun.placeholderNama')}}">
+                                <span class="text-danger error-text nama-error"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="username">{{__('pages/master/akun.username')}}</label>
+                                <input type="text" class="form-control" id="username"
+                                    placeholder="{{__('pages/master/akun.placeholderUsername')}}">
+                                <span class="text-danger error-text username-error"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="password">{{__('pages/master/akun.password')}}</label>
+                                <input type="text" class="form-control" id="password"
+                                    placeholder="{{__('pages/master/akun.placeholderPassword')}}">
+                                <span class="text-danger error-text password-error"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4">{{__('pages/master/akun.role')}}</label>
+                                <select class="form-control" id="role" onchange="roleSelection()">
+                                    <option hidden selected value="">{{__('pages/master/akun.placeholderRole')}}
+                                    </option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Fakultas">Fakultas</option>
+                                    <option value="Pascasarjana">Pascasarjana</option>
+                                    <option value="PSDKU">PSDKU</option>
+                                    <option value="LPPM">LPPM</option>
+                                    <option value="Prodi">Prodi</option>
+                                    <option value="Unit Kerja">Unit Kerja</option>
+                                </select>
+                                <span class="text-danger error-text role-error"></span>
+                            </div>
+                            <div class="form-group col-md-4" id="form-fakultas">
+                                <label for="inputEmail4">{{__('pages/master/akun.fakultas')}}</label>
+                                <select class="form-control" id="fakultas" onchange="getListProdi()">
+                                </select>
+                                <span class="text-danger error-text fakultas-error"></span>
+                            </div>
+                            <div class="form-group col-md-4" id="form-prodi">
+                                <label for="inputPassword4">{{__('pages/master/akun.prodi')}}</label>
+                                <select class="form-control" id="prodi">
+                                </select>
+                                <span class="text-danger error-text prodi-error"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="statusAktif">{{__('pages/master/akun.statusAktif')}}</label>
+                                <select class="form-control" id="statusAktif">
+                                    <option hidden selected value="">{{__('pages/master/akun.placeholderStatusAktif')}}
+                                    </option>
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Tidak Aktif</option>
+                                </select>
+                                <span class="text-danger error-text statusAktif-error"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group ml-auto">
+                                <button type="submit" class="btn btn-success">{{__('components/button.save')}}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
-</form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 
 @endsection
 

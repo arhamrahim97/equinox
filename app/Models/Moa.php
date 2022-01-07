@@ -5,9 +5,9 @@ namespace App\Models;
 use App\Models\Mou;
 use App\Models\User;
 use App\Models\Pengusul;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
 
 class Moa extends Model
 {
@@ -32,5 +32,4 @@ class Moa extends Model
     public function user(){
         return $this->belongsTo(User::class, 'users_id', 'id');
     }
-
 }

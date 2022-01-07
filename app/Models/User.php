@@ -51,11 +51,11 @@ class User extends Authenticatable
 
     public function fakultas()
     {
-        return $this->belongsTo(Fakultas::class);
+        return $this->belongsTo(Fakultas::class)->withTrashed();
     }
 
     public function prodi()
     {
-        return $this->belongsTo(Prodi::class, 'prodi_id', 'id');
+        return $this->belongsTo(Prodi::class)->withTrashed();
     }
 }

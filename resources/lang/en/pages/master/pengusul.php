@@ -10,19 +10,42 @@ return [
 
     'titleCreate' => 'Add',
     'nama' => 'Name',
-    'username' => 'Username',
-    'password' => 'Password',
-    'role' => 'Role',
-    'fakultas' => 'Faculty',
-    'prodi' => 'Study Program',
-    'statusAktif' => 'Active Status',
+    'alamat' => 'Address',
+    'region' => 'Region',
+    'negara' => 'Country',
+    'provinsi' => 'Province',
+    'kota' => 'City',
+    'kecamatan' => 'Districts',
+    'kelurahan' => 'Village',
+    'latitude' => 'Latitude',
+    'longitude' => 'Longitude',
+    'lokasi' => 'Location',
+    'telepon' => 'Phone',
     'placeholderNama' => 'Enter Name',
-    'placeholderUsername' => 'Enter Username',
-    'placeholderPassword' => 'Enter Password',
-    'placeholderRole' => 'Choose Role',
-    'placeholderStatusAktif' => 'Choose Active Status',
+    'placeholderAlamat' => 'Enter Address',
+    'placeholderRegion' => 'Choose Region',
+    'placeholderNegara' => 'Choose Negara',
+
+    'placeholderProvinsi' => 'Enter Province',
+    'placeholderSelectProvinsi' => 'Choose Province',
+
+    'placeholderKota' => 'Enter City',
+    'placeholderSelectKota' => 'Choose City',
+
+    'placeholderKecamatan' => 'Enter District',
+    'placeholderSelectKecamatan' => 'Choose District',
+
+    'placeholderKelurahan' => 'Enter Village',
+    'placeholderSelectKelurahan' => 'Choose Village',
+
+    'placeholderLatitude' => 'Enter Latitude',
+    'placeholderLongitude' => 'Enter Longitude',
+    'placeholderTelepon' => 'Enter Phone',
 
     'titleEdit' => 'Edit',
-    'notifPassword' => 'Leave it blank if you don\'t want to update the password'
+    'notifPassword' => 'Leave it blank if you don\'t want to update the password',
+
+    'titleCard' => 'Add Proposer',
+    'subTitleCard' => 'Please complete all the information below to make an proposer',
 
 ];

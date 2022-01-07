@@ -28,8 +28,8 @@ class MoaSeeder extends Seeder
                 'program' => 'Penyuluhan Pabrik Tesla-moa',
                 'tanggal_mulai' => '2021-08-16',
                 'tanggal_berakhir' => '2021-10-16',
-                'dokumen' => 'dokumen_tidak_ada-moa.pdf',
-                'metode_pertemuan' => 'Desk to Desk',
+                'dokumen' => 'dokumen_tidak_ada1-moa.pdf',
+                'metode_pertemuan' => 'desktodesk-moa',
                 'tanggal_pertemuan' => '2021-07-15',
                 'waktu_pertemuan' => '21:00',
                 'tempat_pertemuan' => 'Cafe Mahasiswa-moa'
@@ -47,8 +47,8 @@ class MoaSeeder extends Seeder
                 'program' => 'Kerjasama IKM',
                 'tanggal_mulai' => '2021-12-21',
                 'tanggal_berakhir' => '2022-03-16',
-                'dokumen' => 'dokumen_tidak_ada-moa.pdf',
-                'metode_pertemuan' => 'Desk to Desk',
+                'dokumen' => 'dokumen_tidak_ada2-moa.pdf',
+                'metode_pertemuan' => 'desktodesk-moa',
                 'tanggal_pertemuan' => '2022-01-21',
                 'waktu_pertemuan' => '17:00',
                 'tempat_pertemuan' => 'JCO PGM-moa'
