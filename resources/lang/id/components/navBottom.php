@@ -17,5 +17,7 @@ return [
     'petaMoa' => 'Peta MOA',
     'petaIa' => 'Peta IA',
     'rekapitulasi' => 'Rekapitulasi',
-
+    'tentang' => 'Tentang',
+    'slider' => 'Slider'
 ];
+

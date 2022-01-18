@@ -12,4 +12,9 @@ class Negara extends Model
     use SoftDeletes;
 
     protected $table = 'negara';
+
+    public function pengusul()
+    {
+        return $this->hasMany(Pengusul::class);
+    }
 }

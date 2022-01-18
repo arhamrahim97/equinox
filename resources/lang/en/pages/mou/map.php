@@ -20,6 +20,7 @@ return [
     'tidak_aktif' => 'Expired',
     'kurang_1_tahun' => 'Active (Less Than 1 Year) ',
     'unduh' => 'Download Document',
+    'negara' => 'Country :',
 
     'titleCard' => 'MOU Map',
     'subTitleCard' => 'All MOU Location',

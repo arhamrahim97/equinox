@@ -14,4 +14,20 @@ class Berita extends Model
     {
         return $this->belongsTo(KategoriBerita::class)->withTrashed();
     }
+
+    public function scopeCari($query, $request)
+    {
+        if ($request['cari']) {
+            $query->where(function ($query) use ($request) {
+                $query->where('judul', 'like', '%' . $request['cari'] . '%')
+                    ->orWhere('konten', 'like', '%' . $request['cari'] . '%');
+            });
+        }
+
+        if ($request['kategori']) {
+            $query->where('kategori_berita_id', $request['kategori']);
+        }
+
+        return $query;
+    }
 }

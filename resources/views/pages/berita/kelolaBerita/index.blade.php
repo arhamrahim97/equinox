@@ -17,7 +17,6 @@
     td {
         text-transform: capitalize;
     }
-
 </style>
 @endpush
 
@@ -33,6 +32,26 @@
             </a>
         </div>
 
+    </div>
+    <div class="row mb-3">
+        <div class="col-lg-6">
+            <label for="exampleFormControlSelect1" class="mb-1">{{__('pages/berita/kelolaBerita.kategori')}}</label>
+            <select class="form-control filter" id="kategori">
+                <option value="">{{__('pages/berita/kelolaBerita.semua')}}</option>
+                @foreach ($daftarKategoriBerita as $kategoriBerita)
+                <option value="{{$kategoriBerita->id}}">{{$kategoriBerita->nama}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-lg-6">
+            <label for="exampleFormControlSelect1" class="mb-1">{{__('pages/berita/kelolaBerita.bahasa')}}</label>
+            <select class="form-control filter" id="bahasa">
+                <option hidden value="" selected>{{__('pages/berita/kelolaBerita.placeholderSelectBahasa')}}</option>
+                <option value="">{{__('pages/berita/kelolaBerita.semua')}}</option>
+                <option value="Indonesia">Indonesia</option>
+                <option value="Inggris">Inggris</option>
+            </select>
+        </div>
     </div>
 </section>
 
@@ -134,7 +153,14 @@
     var table = $('.yajra-datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('kelolaBerita.index') }}",
+        ajax: {
+                url: "{{ url('/kelolaBerita') }}",
+                data: function (d) {
+                    d.kategori = $('#kategori').val();
+                    d.bahasa = $('#bahasa').val();
+                    d.search = $('input[type="search"]').val();
+                }
+        },
         columns: [{
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex',
@@ -168,6 +194,10 @@
 <script>
     $(document).ready(function () {
         $('#nav-berita').addClass('active');
+    })
+
+    $('.filter').change(function () {
+        table.draw();
     })
 
 </script>

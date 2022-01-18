@@ -28,6 +28,22 @@
     </div>
 </div>
 
+<div class="row mb-3">
+    <div class="col-lg-12">
+        <label for="exampleFormControlSelect1" class="mb-1">{{__('pages/master/negara.region')}}</label>
+        <select class="form-control filter" id="filter-region">
+            <option hidden value="" selected>{{__('pages/master/negara.placeholderSelectRegion')}}</option>
+            <option value="">{{__('pages/master/negara.semua')}}</option>
+            <option value="Africa">Africa</option>
+            <option value="Americas">Americas</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+            <option value="Polar">Polar</option>
+        </select>
+    </div>
+</div>
+
 <div class="row">
     <table class="table table-bordered yajra-datatable">
         <thead>
@@ -320,10 +336,18 @@
     var table = $('.yajra-datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('negara.index') }}",
+        ajax: {
+                url: "{{ url('/negara') }}",
+                data: function (d) {
+                d.region = $('#filter-region').val();
+                d.search = $('input[type="search"]').val();
+                }
+        },
         columns: [{
                 data: 'DT_RowIndex',
-                name: 'DT_RowIndex'
+                name: 'DT_RowIndex',
+                orderable: false,
+                                searchable: false,
             },
             {
                 data: 'nama',
@@ -348,6 +372,10 @@
     $(document).ready(function () {
         $('#nav-master').addClass('active');
     })
+
+    $('.filter').change(function () {
+        table.draw();
+        })
 
 </script>
 @endpush

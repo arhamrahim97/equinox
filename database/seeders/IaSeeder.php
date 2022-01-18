@@ -81,13 +81,12 @@ class IaSeeder extends Seeder
                 'waktu_pertemuan' => '17:00',
                 'tempat_pertemuan' => 'Hutan Kota-ia',
                 'created_at' => '2021-11-11 07:18:42'
-
             ],           
             [
                 'users_id' => 8,
                 'pengusul_id' => 7,
-                'latitude' => '-0.893251',
-                'longitude' => '119.886419',
+                'latitude' => '-0.891618',
+                'longitude' => '119.8517753',
                 'moa_id' => '1',
                 'nomor_ia' => '666666777777888888000000-ia',
                 'nomor_ia_pengusul' => '666666888899999000000-ia',
@@ -108,8 +107,8 @@ class IaSeeder extends Seeder
             [
                 'users_id' => 6,
                 'pengusul_id' => 5,
-                'latitude' => '-0.893251',
-                'longitude' => '119.886419',
+                'latitude' => '-0.886793',
+                'longitude' => '119.8594253',
                 'moa_id' => '1',
                 'nomor_ia' => '666666777777888888111111-ia',
                 'nomor_ia_pengusul' => '666666888899999111111-ia',

@@ -25,3 +25,4 @@ class Mou extends Model
     }
 
 }
+

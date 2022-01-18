@@ -23,26 +23,26 @@ class MapMoaController extends Controller
                 ->addColumn('alamat', function (Moa $moa) {
                     return $moa->pengusul->alamat;
                 })
-                ->addColumn('tanggal_mulai', function (Moa $moa) {
-                    return Carbon::parse($moa->tanggal_mulai)->format('d-m-Y');
+                ->addColumn('tanggal_mulai', function ($row) {
+                    return Carbon::parse($row->tanggal_mulai)->translatedFormat('d F Y');
                 })
-                ->addColumn('tanggal_berakhir', function (Moa $moa) {
-                    return Carbon::parse($moa->tanggal_berakhir)->format('d-m-Y');
+                ->addColumn('tanggal_berakhir', function ($row) {
+                    return Carbon::parse($row->tanggal_berakhir)->translatedFormat('d F Y');
                 })
                 ->addColumn('status', function (Moa $moa) {
-                    $sekarang = new DateTime("now");
-                    $tanggal_berakhir = new DateTime($moa->tanggal_berakhir);
-                    $tahun = ($sekarang->diff($tanggal_berakhir)->format('%r%Y') * 12);
-                    $bulan = ($sekarang->diff($tanggal_berakhir)->format('%r%M') + $tahun);
-
-                    if ($bulan > 12) {
-                        $status = __('pages/moa/map.aktif');
-                    } else if ($bulan < 0) {
-                        $status = __('pages/moa/map.tidak_aktif');
+                    $datetime1 = date_create($moa->tanggal_berakhir);
+                    $datetime2 = date_create(date("Y-m-d"));
+                    $interval = date_diff($datetime1, $datetime2);
+                    $jumlah_tahun =  $interval->format('%y');
+                    if ($datetime1 < $datetime2) {
+                        return '<span class="badge badge-danger bg-danger">' . __('components/span.kadaluarsa') . '</span>';
                     } else {
-                        $status = __('pages/moa/map.kurang_1_tahun');
+                        if ($jumlah_tahun < 1) {
+                            return '<span class="badge badge-warning bg-warning">' . __('components/span.masa_tenggang') . '</span>';
+                        } else {
+                            return '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
+                        }
                     }
-                    return $status;
                 })
                 ->addColumn('action', function (Moa $moa) {
                     $actionBtn = "<div class='row justify-content-center'><a target='_blank' href='" . Storage::url('/dokumen/mou/' . $moa->mou->dokumen) . "' class='btn btn-primary btn-sm mx-1 my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/moa/map.unduhMou') . "</a><a target='_blank' href='" . Storage::url('/dokumen/moa/' . $moa->dokumen) . "' class='btn btn-success btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/moa/map.unduhMoa') . "</a></div>";
@@ -68,11 +68,14 @@ class MapMoaController extends Controller
             $bulan = ($sekarang->diff($tanggal_berakhir)->format('%r%M') + $tahun);
 
             if ($bulan > 12) {
-                $status = 'Aktif';
+                $status = 'aktif';
+                $namaStatus = '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
             } else if ($bulan < 0) {
-                $status = 'Tidak Aktif';
+                $status = 'tidak_aktif';
+                $namaStatus = '<span class="badge badge-danger bg-danger">' . __('components/span.kadaluarsa') . '</span>';
             } else {
-                $status = 'Aktif (Kurang dari 1 tahun)';
+                $status = 'masa_tenggang';
+                $namaStatus = '<span class="badge badge-warning bg-warning">' . __('components/span.masa_tenggang') . '</span>';
             }
 
             $mapDataArray[] = [
@@ -83,10 +86,11 @@ class MapMoaController extends Controller
                 'program' => $moa->program,
                 'alamat' => $moa->pengusul->alamat,
                 'no_referensi' => $moa->nomor_moa,
-                'tanggal_berakhir' => Carbon::parse($moa->tanggal_berakhir)->format('d-m-Y'),
+                'tanggal_berakhir' => Carbon::parse($moa->tanggal_berakhir)->translatedFormat('d F Y'),
                 'dokumen_moa' =>  Storage::url('/dokumen/moa/' . $moa->dokumen),
                 'dokumen_mou' =>  Storage::url('/dokumen/mou/' . $moa->mou->dokumen),
-                'status' => $status
+                'status' => $status,
+                'namaStatus' => $namaStatus
             ];
         }
 
@@ -97,7 +101,7 @@ class MapMoaController extends Controller
 
     public function getDetailMoa(Moa $moa)
     {
-        $pertemuan = $moa->tempat_pertemuan . ' | ' . $moa->metode_pertemuan . ' | ' . Carbon::parse($moa->tanggal_pertemuan)->format('d-m-Y') . ' | ' . Carbon::parse($moa->waktu_pertemuan)->format('H:i');
+        $pertemuan = $moa->tempat_pertemuan . ' | ' . $moa->metode_pertemuan . ' | ' . Carbon::parse($moa->tanggal_pertemuan)->translatedFormat('d F Y') . ' | ' . Carbon::parse($moa->waktu_pertemuan)->format('H:i');
 
         $sekarang = new DateTime("now");
         $tanggal_berakhir = new DateTime($moa->tanggal_berakhir);
@@ -105,11 +109,11 @@ class MapMoaController extends Controller
         $bulan = ($sekarang->diff($tanggal_berakhir)->format('%r%M') + $tahun);
 
         if ($bulan > 12) {
-            $status = 'Aktif';
+            $status = '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
         } else if ($bulan < 0) {
-            $status = 'Tidak Aktif';
+            $status = '<span class="badge badge-danger bg-danger">' . __('components/span.kadaluarsa') . '</span>';
         } else {
-            $status = 'Aktif (Kurang dari 1 tahun)';
+            $status = '<span class="badge badge-warning bg-warning">' . __('components/span.masa_tenggang') . '</span>';
         }
 
         return response()->json([
@@ -122,8 +126,8 @@ class MapMoaController extends Controller
             'nik_nip_pengusul' => $moa->nik_nip_pengusul,
             'jabatan_pengusul' => $moa->jabatan_pengusul,
             'program' => $moa->program,
-            'tanggal_mulai' => Carbon::parse($moa->tanggal_mulai)->format('d-m-Y'),
-            'tanggal_berakhir' => Carbon::parse($moa->tanggal_berakhir)->format('d-m-Y'),
+            'tanggal_mulai' => Carbon::parse($moa->tanggal_mulai)->translatedFormat('d F Y'),
+            'tanggal_berakhir' => Carbon::parse($moa->tanggal_berakhir)->translatedFormat('d F Y'),
             'pertemuan' => $pertemuan,
             'dokumen_moa' =>  Storage::url('/dokumen/moa/' . $moa->dokumen),
             'dokumen_mou' =>  Storage::url('/dokumen/mou/' . $moa->mou->dokumen),

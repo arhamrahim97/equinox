@@ -23,26 +23,22 @@ class MapIaController extends Controller
                 ->addColumn('alamat', function (Ia $ia) {
                     return $ia->pengusul->alamat;
                 })
-                ->addColumn('tanggal_mulai', function (Ia $ia) {
-                    return Carbon::parse($ia->tanggal_mulai)->format('d-m-Y');
+                ->addColumn('tanggal_mulai', function ($row) {
+                    return Carbon::parse($row->tanggal_mulai)->translatedFormat('d F Y');
                 })
-                ->addColumn('tanggal_berakhir', function (Ia $ia) {
-                    return Carbon::parse($ia->tanggal_berakhir)->format('d-m-Y');
+                ->addColumn('tanggal_berakhir', function ($row) {
+                    return Carbon::parse($row->tanggal_berakhir)->translatedFormat('d F Y');
                 })
                 ->addColumn('status', function (Ia $ia) {
-                    $sekarang = new DateTime("now");
-                    $tanggal_berakhir = new DateTime($ia->tanggal_berakhir);
-                    $tahun = ($sekarang->diff($tanggal_berakhir)->format('%r%Y') * 12);
-                    $bulan = ($sekarang->diff($tanggal_berakhir)->format('%r%M') + $tahun);
-
-                    if ($bulan > 12) {
-                        $status = __('pages/moa/map.aktif');
-                    } else if ($bulan < 0) {
-                        $status = __('pages/moa/map.tidak_aktif');
+                    $datetime1 = date_create($ia->tanggal_berakhir);
+                    $datetime2 = date_create(date("Y-m-d"));
+                    if ($ia->lpj) {
+                        return '<span class="badge badge-primary bg-primary">' . __('components/span.selesai') . '</span>';
+                    } else if ($datetime1 > $datetime2) {
+                        return '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
                     } else {
-                        $status = __('pages/moa/map.kurang_1_tahun');
+                        return '<span class="badge badge-danger bg-danger">' . __('components/span.melewati_batas') . '</span>';
                     }
-                    return $status;
                 })
                 ->addColumn('action', function (Ia $ia) {
                     $actionBtn = "<div class='row justify-content-center'><a target='_blank' href='" . Storage::url('/dokumen/mou/' . $ia->moa->mou->dokumen) . "' class='btn btn-primary btn-sm mx-1 my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhMou') . "</a><a target='_blank' href='" . Storage::url('/dokumen/moa/' . $ia->moa->dokumen) . "' class='btn btn-warning btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhMoa') . "</a><a target='_blank' href='" . Storage::url('/dokumen/ia/' . $ia->dokumen) . "' class='btn btn-success btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhIa') . "</a></div>";
@@ -63,16 +59,18 @@ class MapIaController extends Controller
         $tanggal_berakhir = '';
 
         foreach ($dataIa as $ia) {
-            $tanggal_berakhir = new DateTime($ia->tanggal_berakhir);
-            $tahun = ($sekarang->diff($tanggal_berakhir)->format('%r%Y') * 12);
-            $bulan = ($sekarang->diff($tanggal_berakhir)->format('%r%M') + $tahun);
+            $datetime1 = date_create($ia->tanggal_berakhir);
+            $datetime2 = date_create(date("Y-m-d"));
 
-            if ($bulan > 12) {
-                $status = 'Aktif';
-            } else if ($bulan < 0) {
-                $status = 'Tidak Aktif';
+            if ($ia->lpj) {
+                $status = 'selesai';
+                $namaStatus = '<span class="badge badge-primary bg-primary">' . __('components/span.selesai') . '</span>';
+            } else if ($datetime1 > $datetime2) {
+                $status = 'aktif';
+                $namaStatus = '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
             } else {
-                $status = 'Aktif (Kurang dari 1 tahun)';
+                $status = 'lewat_batas';
+                $namaStatus = '<span class="badge badge-danger bg-danger">' . __('components/span.melewati_batas') . '</span>';
             }
 
             $mapDataArray[] = [
@@ -83,11 +81,12 @@ class MapIaController extends Controller
                 'program' => $ia->program,
                 'alamat' => $ia->pengusul->alamat,
                 'no_referensi' => $ia->nomor_moa,
-                'tanggal_berakhir' => Carbon::parse($ia->tanggal_berakhir)->format('d-m-Y'),
+                'tanggal_berakhir' => Carbon::parse($ia->tanggal_berakhir)->translatedFormat('d F Y'),
                 'dokumen_ia' =>  Storage::url('/dokumen/ia/' . $ia->dokumen),
                 'dokumen_moa' =>  Storage::url('/dokumen/moa/' . $ia->moa->dokumen),
                 'dokumen_mou' =>  Storage::url('/dokumen/moa/' . $ia->moa->mou->dokumen),
-                'status' => $status
+                'status' => $status,
+                'namaStatus' => $namaStatus
             ];
         }
 
@@ -98,19 +97,17 @@ class MapIaController extends Controller
 
     public function getDetailIa(Ia $ia)
     {
-        $pertemuan = $ia->tempat_pertemuan . ' | ' . $ia->metode_pertemuan . ' | ' . Carbon::parse($ia->tanggal_pertemuan)->format('d-m-Y') . ' | ' . Carbon::parse($ia->waktu_pertemuan)->format('H:i');
+        $pertemuan = $ia->tempat_pertemuan . ' | ' . $ia->metode_pertemuan . ' | ' . Carbon::parse($ia->tanggal_pertemuan)->translatedFormat('d F Y') . ' | ' . Carbon::parse($ia->waktu_pertemuan)->format('H:i');
 
-        $sekarang = new DateTime("now");
-        $tanggal_berakhir = new DateTime($ia->tanggal_berakhir);
-        $tahun = ($sekarang->diff($tanggal_berakhir)->format('%r%Y') * 12);
-        $bulan = ($sekarang->diff($tanggal_berakhir)->format('%r%M') + $tahun);
+        $datetime1 = date_create($ia->tanggal_berakhir);
+        $datetime2 = date_create(date("Y-m-d"));
 
-        if ($bulan > 12) {
-            $status = 'Aktif';
-        } else if ($bulan < 0) {
-            $status = 'Tidak Aktif';
+        if ($ia->lpj) {
+            $status = '<span class="badge badge-primary bg-primary">' . __('components/span.selesai') . '</span>';
+        } else if ($datetime1 > $datetime2) {
+            $status = '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
         } else {
-            $status = 'Aktif (Kurang dari 1 tahun)';
+            $status = '<span class="badge badge-danger bg-danger">' . __('components/span.melewati_batas') . '</span>';
         }
 
         return response()->json([
@@ -125,8 +122,8 @@ class MapIaController extends Controller
             'nik_nip_pengusul' => $ia->nik_nip_pengusul,
             'jabatan_pengusul' => $ia->jabatan_pengusul,
             'program' => $ia->program,
-            'tanggal_mulai' => Carbon::parse($ia->tanggal_mulai)->format('d-m-Y'),
-            'tanggal_berakhir' => Carbon::parse($ia->tanggal_berakhir)->format('d-m-Y'),
+            'tanggal_mulai' => Carbon::parse($ia->tanggal_mulai)->translatedFormat('d F Y'),
+            'tanggal_berakhir' => Carbon::parse($ia->tanggal_berakhir)->translatedFormat('d F Y'),
             'pertemuan' => $pertemuan,
             'dokumen_moa' =>  Storage::url('/dokumen/moa/' . $ia->moa->dokumen),
             'dokumen_mou' =>  Storage::url('/dokumen/mou/' . $ia->moa->mou->dokumen),

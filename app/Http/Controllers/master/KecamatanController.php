@@ -23,7 +23,7 @@ class KecamatanController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<div class="row"><a href="' . url('kelurahan/' . $row->id) . '" class="btn btn-primary btn-sm mr-1">' .  __('components/button.detail') . '</a><button id="btn-edit" onclick="edit(' . $row->id . ')" class="btn btn-warning btn-sm mr-1" value="' . $row->id . '" >' . __('components/button.update') . '</button><button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button></div>';
+                    $actionBtn = '<div class="row"><a href="' . url('kelurahan/' . $row->id) . '" class="btn btn-primary btn-sm mr-1">' .  __('components/button.view') . '</a><button id="btn-edit" onclick="edit(' . $row->id . ')" class="btn btn-warning btn-sm mr-1" value="' . $row->id . '" >' . __('components/button.update') . '</button><button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button></div>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
