@@ -23,6 +23,7 @@ return [
     'kurang_1_tahun' => 'Aktif (Kurang Dari 1 Tahun)',
     'unduhMou' => 'Unduh Dokumen MOU',
     'unduhMoa' => 'Unduh Dokumen MOA',
+    'negara' => 'Negara :',
 
     'titleCard' => 'Peta MOA',
     'subTitleCard' => 'Seluruh Lokasi MOA',

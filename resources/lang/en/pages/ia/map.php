@@ -26,6 +26,7 @@ return [
     'unduhMou' => 'Download MOU\'s Document',
     'unduhMoa' => 'Download MOA\'s Document',
     'unduhIa' => 'Download IA\'s Document',
+    'negara' => 'Country :',
 
     'titleCard' => 'MOA Map',
     'subTitleCard' => 'All MOA Location',

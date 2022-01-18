@@ -37,4 +37,19 @@ class Pengusul extends Model
     {
         return $this->belongsTo(Kelurahan::class);
     }
+
+    public function mou()
+    {
+        return $this->hasMany(Mou::class);
+    }
+
+    public function moa()
+    {
+        return $this->hasMany(Moa::class);
+    }
+
+    public function ia()
+    {
+        return $this->hasMany(Ia::class);
+    }
 }

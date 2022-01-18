@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      *
      * @return void
-     */ 
+     */
     public function run()
     {
         // Mou::factory(3)->create();
@@ -39,7 +39,11 @@ class DatabaseSeeder extends Seeder
         $this->call(PengusulSeeder::class);
 
         // $this->call(BeritaSeeder::class);
-        $this->call(KategoriBeritaSeeder::class);        
+        $this->call(KategoriBeritaSeeder::class);
         $this->call(BeritaTableSeeder::class);
+
+        // $this->call(TentangSeeder::class);
+        $this->call(TentangTableSeeder::class);
+        $this->call(SliderSeeder::class);
     }
 }

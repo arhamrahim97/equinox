@@ -22,6 +22,7 @@ return [
     'placeholderDeskripsi' => 'Masukkan Deskripsi Singkat',
     'placeholderSelectKategori' => 'Pilih Kategori',
     'placeholderSelectBahasa' => 'Pilih Bahasa',
+    'semua' => 'Semua',
 
     'ukuranFoto' => 'Ukuran Sampul Tidak Boleh Lebih Dari 5 Mb',
 

@@ -7,5 +7,6 @@ return [
     'placeHolderTambah' => 'Masukkan Negara',
     'placeholderSelectRegion' => 'Pilih Region',
     'modalTitleUbah' => 'Ubah Negara',
-    'region' => 'Region'
+    'region' => 'Region',
+    'semua' => 'Semua'
 ];

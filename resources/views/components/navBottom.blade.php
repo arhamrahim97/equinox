@@ -99,6 +99,12 @@
                         <li>
                             <a href="{{url('pengusul')}}">{{__('components/navBottom.pengusul')}}</a>
                         </li>
+                        <li>
+                            <a href="{{url('kelolaTentang')}}">{{__('components/navBottom.tentang')}}</a>
+                        </li>
+                        <li>
+                            <a href="{{url('slider')}}">{{__('components/navBottom.slider')}}</a>
+                        </li>
                     </ul>
                 </div>
             </li>

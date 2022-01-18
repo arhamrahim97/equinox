@@ -34,5 +34,8 @@ return [
 
     'judul' => 'Judul',
     'kategori' => 'Kategori',
-    'bahasa' => 'Bahasa'
+    'bahasa' => 'Bahasa',
+    'program' => 'Program',
+
+    'foto' => 'Foto'
 ];

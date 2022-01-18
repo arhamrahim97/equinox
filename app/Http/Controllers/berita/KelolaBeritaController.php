@@ -22,9 +22,10 @@ class KelolaBeritaController extends Controller
      */
     public function index(Request $request)
     {
+        $daftarKategoriBerita = KategoriBerita::orderBy('nama', 'asc')->get();
         $data = Berita::with(['kategoriBerita',])->orderBy('id', 'desc')->get();
         if ($request->ajax()) {
-            $data = Berita::with(['kategoriBerita',])->orderBy('id', 'desc')->get();
+            $data = Berita::with(['kategoriBerita',])->orderBy('id', 'desc');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kategoriBerita', function (Berita $berita) {
@@ -34,11 +35,26 @@ class KelolaBeritaController extends Controller
                     $actionBtn = '<div class="row"><a href="' . url('/kelolaBerita/' . $row->id . '/edit') . '" id="btn-edit" class="btn btn-warning btn-sm mr-1">' . __('components/button.update') . '</a><button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button></div>';
                     return $actionBtn;
                 })
+                ->filter(function ($berita) use ($request) {
+                    if ($request->kategori) {
+                        $berita->whereHas('kategoriBerita', function ($kategori) use ($request) {
+                            $kategori->where('id', $request->kategori);
+                        });
+                    }
+
+                    if ($request->bahasa) {
+                        $berita->where('bahasa', $request->bahasa);
+                    }
+
+                    if ($request->search) {
+                        $berita->where('judul', 'LIKE', '%' . $request->search . '%');
+                    }
+                })
                 ->rawColumns(['action', 'kategoriBerita'])
                 ->make(true);
         }
 
-        return view('pages.berita.kelolaBerita.index');
+        return view('pages.berita.kelolaBerita.index', compact(['daftarKategoriBerita']));
     }
 
     /**
