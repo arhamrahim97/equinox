@@ -9,9 +9,10 @@
     </style>
 @endpush
 
-<div class="row mt-4">
+<div class="row mt-3">
     <div class="col-12">
         <div class="table-responsive">
+            {{$filterStatus}}
             <table class="table table-bordered table-striped yajra-datatable p-0">
                 <thead>
                     <tr class="text-center  ">
@@ -34,7 +35,6 @@
 @push('script')
 <script src="{{asset('assets/dashboard')}}/js/plugin/moment/moment.min.js"></script>
 <script>
-
     function hapus(id) {
     var _token = "{{csrf_token()}}";
     swal({
@@ -110,7 +110,14 @@
     var table = $('.yajra-datatable').DataTable({
     processing: true,
     serverSide: true,
-    ajax: "{{$link}}",
+    ajax: {
+        url: "{{$link}}",
+        data: function(d){
+            d.dibuat_oleh = $('#dibuat-oleh').val();                    
+            d.status = $('#status').val();
+            d.search = $('input[type="search"]').val();
+        }
+    },
     columns: [{
             data: 'DT_RowIndex',
             name: 'DT_RowIndex',
@@ -173,6 +180,15 @@
         }
         ],
     });
+
+    $('#status').change(function () {
+        table.draw();            
+    })
+
+    $('#dibuat-oleh').change(function () {
+        table.draw();        
+    })
+
 
 </script>
 @endpush

@@ -3,6 +3,7 @@
 return [
     'alertBerhasil' => 'Berhasil',
     'msgTambahBerhasil' => ':nama Berhasil Ditambahkan',
+    'msgUploadBerhasil' => ':nama Berhasil Diunggah',
     'msgUbahBerhasil' => ':nama Berhasil Diubah',
     'alertHapus' => 'Anda yakin ingin menghapus data ini ?',
     'msgHapus' => 'Data yang sudah dihapus tidak dapat dikembalikan lagi',

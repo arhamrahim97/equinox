@@ -25,13 +25,14 @@
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{asset('assets/dashboard')}}/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{asset('assets/dashboard')}}/css/atlantis2.css">
+    <link rel="stylesheet" href="{{asset('assets/dashboard')}}/css/atlantis2.css">    
+
+    @stack('style')
     <style>
         .btn{
             color: white !important
         }
     </style>
-    @stack('style')
 
 </head>
 

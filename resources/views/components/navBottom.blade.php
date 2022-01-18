@@ -63,6 +63,25 @@
             </li>
 
             @if (Auth::user()->role == 'Admin')
+            <li class="nav-item" id="nav-rekapitulasi">
+                <a class="nav-link" href="/rekapitulasi">
+                    <i class="link-icon icon-folder"></i>
+                    <span class="menu-title">{{__('components/navBottom.rekapitulasi')}}</span>
+                </a>
+                {{-- <div class="navbar-dropdown animated fadeIn">
+                    <ul>
+                        <li>
+                            <a href="{{url('kelolaBerita')}}">MOU</a>
+                        </li>
+                        <li>
+                            <a href="{{url('kategoriBerita')}}">MOA</a>
+                        </li>
+                        <li>
+                            <a href="{{url('kategoriBerita')}}">IA</a>
+                        </li>
+                    </ul>
+                </div> --}}
+            </li>
             <li class="nav-item submenu" id="nav-berita">
                 <a class="nav-link" href="#">
                     <i class="link-icon icon-book-open"></i>

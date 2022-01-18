@@ -29,7 +29,7 @@ return [
     'nomor_ia_pengusul' => 'IA Number of the Proposer',
     'tanggal_mulai' => 'Starting Date',
     'tanggal_berakhir' => 'End Date',
-    'dibuat_oleh' => 'Made by'
+    'dibuat_oleh' => 'Made by',
 
     'pengusul' => 'Proposer',
     'program' => 'Program',
@@ -39,6 +39,9 @@ return [
 
     'judul' => 'Title',
     'kategori' => 'Category',
-    'bahasa' => 'Language'
-];
+    'bahasa' => 'Language',
 
+    // Filter
+    'semua' => 'All',
+    'tidak_ada' => 'No Data'
+];

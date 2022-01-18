@@ -3,6 +3,7 @@
 return [
     'alertBerhasil' => 'Congratulation',
     'msgTambahBerhasil' => ':nama Added Successfully',
+    'msgUploadBerhasil' => 'Upload :nama Successfully',
     'msgUbahBerhasil' => ':nama Updated Successfully',
     'alertHapus' => 'Are you sure you want to delete this data ?',
     'msgHapus' => 'Deleted data cannot be recovered',

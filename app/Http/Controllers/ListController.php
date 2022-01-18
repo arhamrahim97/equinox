@@ -15,6 +15,9 @@ use App\Models\Provinsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Moa;
+use App\Models\Mou;
+use phpDocumentor\Reflection\Types\Null_;
 
 class ListController extends Controller
 {
@@ -231,6 +234,53 @@ class ListController extends Controller
                 'res' => 'success',
                 'html' => $html,
                 'type' => $type
+            ]
+        );
+    }
+
+    public function getFilter(Request $request){
+        if($request->tipeDokumen == 'mou'){
+            $data = [
+                'minDate' => Mou::min('created_at'),
+                'maxDate' => Mou::max('created_at'),
+                'dibuat_oleh' => Mou::with(['user'])->get()
+            ];
+        } else if($request->tipeDokumen == 'moa'){
+            $data = [
+                'minDate' => Moa::min('created_at'),
+                'maxDate' => Moa::max('created_at'),                
+                'dibuat_oleh' => Moa::with(['user'])->get()
+            ];
+        } else{
+            $data = [
+                'minDate' => Ia::min('created_at'),
+                'maxDate' => Ia::max('created_at'),
+                'dibuat_oleh' => Ia::with(['user'])->get()
+            ];
+        }
+            
+        $users = [];
+
+        foreach($data['dibuat_oleh'] as $row){
+            array_push($users, [
+                'id' => $row->users_id,
+                'nama' => $row->user->nama                
+            ]);
+        }
+
+        $users2 = array_unique($users, SORT_REGULAR);
+        
+        $html = '';
+        foreach ($users2 as $row) {
+            $html .= '<option value='.$row['id'].' selected>' . $row['nama'] . '</option>';
+        }
+
+        return response()->json(
+            [
+                'res' => 'success',
+                'minDate' => date("d-m-Y", strtotime($data['minDate'])),                
+                'maxDate' => date("d-m-Y", strtotime($data['maxDate'])),
+                'dibuat_oleh' => $html
             ]
         );
     }

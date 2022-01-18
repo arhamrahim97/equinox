@@ -39,6 +39,7 @@ return [
     'dokumen' => 'Document',
     'dokumen_ubah' => "Leave it blank if you don't want to change the document file",
     'download' => 'Download',
+    'laporan_pelaksanaan' => 'Implementation Results Report',
     'nilai_uang' => 'Money Value (Rp)',  
 
     'metode_pertemuan' => 'Meeting Method', 
@@ -48,5 +49,6 @@ return [
     'tanggal_pertemuan_' => 'Meeting Date',
     'waktu_pertemuan' => 'Meeting Time (example: 16:00)',   
     'waktu_pertemuan_' => 'Meeting Time',   
-    'tempat_pertemuan' => 'Meeting Place'
+    'tempat_pertemuan' => 'Meeting Place',
+
 ];

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateMouRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -26,14 +27,17 @@ class MouController extends Controller
     
     public function index(Request $request)
     {
+        $data = [
+            'user' => User::where('role', 'Admin')->get(),
+        ];
         if ($request->ajax()) {
             $data = DB::table('mou')
                             ->join('pengusul', 'mou.pengusul_id', '=', 'pengusul.id')                            
                             ->join('users', 'mou.users_id', '=', 'users.id')                            
                             ->select('mou.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama')
                             ->whereNull('mou.deleted_at')
-                            ->orderBy('mou.id', 'desc')
-                            ->get();            
+                            ->orderBy('mou.id', 'desc');
+                            // ->get();            
             // $data = Mou::with(['pengusul'])->orderBy('id', 'desc')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -74,10 +78,45 @@ class MouController extends Controller
 
                     return $actionBtn;
                 })
+                ->filter(function ($query) use ($request) {                    
+                    if (!empty($request->dibuat_oleh)) {
+                        $query->where('users.nama', $request->dibuat_oleh);
+                        if ($request->search != '') {
+                            $query->where('program', 'LIKE', '%'.$request->search.'%');                        
+                        }      
+                    }
+
+                    if (!empty($request->status)) {
+                        if($request->status == 'aktif'){
+                            $query->whereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 364 DAY) < tanggal_berakhir');
+                            if ($request->search != '') {
+                                $query->whereRaw('program LIKE "%'.$request->search.'%"')                                    ;                                            
+                            }
+                        } 
+                        else if($request->status == 'masa_tenggang'){
+                            $query->where('tanggal_berakhir','=',date("Y-m-d"));
+                            $query->orWhereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 364 DAY) > tanggal_berakhir');
+                            if ($request->search != '') {
+                                $query->whereRaw('program LIKE "%'.$request->search.'%"')                                    ;                                            
+                            }
+                        }
+                         else{ // expired
+                            $query->where('tanggal_berakhir', '<', date("Y-m-d"));
+                            if ($request->search != '') {
+                                $query->where('program', 'LIKE', '%'.$request->search.'%');                        
+                            }      
+
+                        }                     
+                    }
+
+                    if ($request->search != '') {
+                        $query->where('program', 'LIKE', '%'.$request->search.'%');                        
+                    }      
+                })
                 ->rawColumns(['status', 'action', 'dibuat_oleh'])
                 ->make(true);
         }        
-        return view('pages/mou/index');
+        return view('pages/mou/index', $data);
     }
 
     /**

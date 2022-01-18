@@ -69,16 +69,40 @@
             {{$ia->latitude}} | {{$ia->longitude}}
         @endslot
 
-        @slot('title_nomor')
+        @slot('title_nomor_mou')
+        {{__('components/form_mou_moa_ia.nomor_mou')}}
+        @endslot
+        @slot('title_nomor_pengusul_mou')
+        {{__('components/form_mou_moa_ia.nomor_mou_pengusul')}}        
+        @endslot
+        @slot('title_nomor_moa')
+        {{__('components/form_mou_moa_ia.nomor_moa')}}
+        @endslot
+        @slot('title_nomor_pengusul_moa')
+        {{__('components/form_mou_moa_ia.nomor_moa_pengusul')}}
+        @endslot
+        @slot('title_nomor_ia')
             {{__('components/form_mou_moa_ia.nomor_ia')}}
         @endslot
-        @slot('title_nomor_pengusul')
+        @slot('title_nomor_pengusul_ia')
             {{__('components/form_mou_moa_ia.nomor_ia_pengusul')}}        
         @endslot
         @slot('nomor_mou')
-            {{$ia->nomor_ia}}
+            {{$ia->moa->mou->nomor_mou}}
         @endslot
         @slot('nomor_mou_pengusul')
+            {{$ia->moa->mou->nomor_mou_pengusul}}
+        @endslot
+        @slot('nomor_moa')
+            {{$ia->moa->nomor_moa}}
+        @endslot
+        @slot('nomor_moa_pengusul')
+            {{$ia->moa->nomor_moa_pengusul}}
+        @endslot
+        @slot('nomor_ia')
+            {{$ia->nomor_ia}}
+        @endslot
+        @slot('nomor_ia_pengusul')
             {{$ia->nomor_ia_pengusul}}
         @endslot
         @slot('nik_nip_pengusul')
@@ -104,6 +128,24 @@
         @endslot
         @slot('download_ia')
             {{Storage::url("dokumen/ia/" . $ia->dokumen)}}
+        @endslot
+        @slot('download_laporan_pelaksanaan')
+            @if (($ia->laporan_hasil_pelaksanaan != '') || ($ia->laporan_hasil_pelaksanaan != NULL))
+                @component('components.buttons.download_badge')
+                    @slot('url')
+                        {{Storage::url("dokumen/ia-laporan hasil pelaksanaan/" . $ia->laporan_hasil_pelaksanaan)}}                
+                    @endslot
+                @endcomponent
+            @else
+                @component('components.buttons.badge_info')
+                    @slot('color')
+                        danger
+                    @endslot
+                    @slot('info')
+                        {{__('components/span.belum_ada')}}         
+                    @endslot
+                @endcomponent
+            @endif
         @endslot
         @slot('metode_pertemuan')
             {{$ia->metode_pertemuan}}

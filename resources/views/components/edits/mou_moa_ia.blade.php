@@ -469,8 +469,7 @@
                         idFakultas: idFakultas,       
                         idIa: idIa                 
                     },
-                    success: function (data) {
-                        console.log(data)                        
+                    success: function (data) {                                             
                         $('#program_studi').empty();
                         $('#program_studi').append(data.html);                       
                     },

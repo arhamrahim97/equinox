@@ -29,12 +29,13 @@ class IaSeeder extends Seeder
                 'tanggal_mulai' => '2021-08-16',
                 'tanggal_berakhir' => '2022-01-16',
                 'dokumen' => 'dokumen_tidak_ada-ia.pdf',
-                'lpj' => 'lpj_tidak_ada-ia.pdf',
+                'laporan_hasil_pelaksanaan' => 'lpj_tidak_ada-ia.pdf',
                 'nilai_uang' => 50000000,
                 'metode_pertemuan' => 'Desk to Desk',
                 'tanggal_pertemuan' => '2021-07-15',
                 'waktu_pertemuan' => '21:00',
-                'tempat_pertemuan' => 'Darisa-ia'
+                'tempat_pertemuan' => 'Darisa-ia',
+                'created_at' => '2021-08-16 07:18:42'
             ],
             [
                 'users_id' => 2,
@@ -48,14 +49,16 @@ class IaSeeder extends Seeder
                 'jabatan_pengusul' => 'Kepala Dinas-ia',
                 'program' => 'Pelaksanaan IKM-ia',
                 'tanggal_mulai' => '2021-12-21',
-                'tanggal_berakhir' => '2022-01-16',
+                'tanggal_berakhir' => '2022-02-01',
                 'dokumen' => 'dokumen_tidak_ada-ia.pdf',
-                'lpj' => '',
+                'laporan_hasil_pelaksanaan' => '',
                 'nilai_uang' => 10000000,
                 'metode_pertemuan' => 'Desk to Desk',
                 'tanggal_pertemuan' => '2022-01-21',
                 'waktu_pertemuan' => '17:00',
-                'tempat_pertemuan' => 'Anjungan-ia'
+                'tempat_pertemuan' => 'Anjungan-ia',
+                'created_at' => '2021-12-21 07:18:42'
+
             ],
             [
                 'users_id' => 5,
@@ -68,15 +71,17 @@ class IaSeeder extends Seeder
                 'nik_nip_pengusul' => '677777777777-ia',
                 'jabatan_pengusul' => 'Sekretaris Bawaslu-ia',
                 'program' => 'Pelaksaan Pengawasan Pemilu-ia',
-                'tanggal_mulai' => '2021-12-21',
-                'tanggal_berakhir' => '2022-02-16',
+                'tanggal_mulai' => '2021-11-11',
+                'tanggal_berakhir' => '2022-02-27`',
                 'dokumen' => 'dokumen_tidak_ada-ia.pdf',
-                'lpj' => '',
+                'laporan_hasil_pelaksanaan' => '',
                 'nilai_uang' => 5000000,
                 'metode_pertemuan' => 'Ceremonial',
                 'tanggal_pertemuan' => '2022-01-21',
                 'waktu_pertemuan' => '17:00',
-                'tempat_pertemuan' => 'Hutan Kota-ia'
+                'tempat_pertemuan' => 'Hutan Kota-ia',
+                'created_at' => '2021-11-11 07:18:42'
+
             ],           
             [
                 'users_id' => 8,
@@ -89,15 +94,16 @@ class IaSeeder extends Seeder
                 'nik_nip_pengusul' => '677777777777-ia',
                 'jabatan_pengusul' => 'Sekretaris Bawaslu-ia',
                 'program' => 'Testing-fakultas',
-                'tanggal_mulai' => '2021-12-21',
-                'tanggal_berakhir' => '2022-02-16',
+                'tanggal_mulai' => '2021-10-18',
+                'tanggal_berakhir' => '2022-03-15',
                 'dokumen' => 'dokumen_tidak_ada-ia.pdf',
-                'lpj' => '',
+                'laporan_hasil_pelaksanaan' => 'lpj_tidak_ada-ia.pdf',
                 'nilai_uang' => 800000,
                 'metode_pertemuan' => 'Ceremonial',
                 'tanggal_pertemuan' => '2022-01-21',
                 'waktu_pertemuan' => '17:00',
-                'tempat_pertemuan' => 'Kos-ia'
+                'tempat_pertemuan' => 'Kos-ia',
+                'created_at' => '2021-10-18 07:18:42'
             ],        
             [
                 'users_id' => 6,
@@ -110,15 +116,16 @@ class IaSeeder extends Seeder
                 'nik_nip_pengusul' => '677777777777-ia',
                 'jabatan_pengusul' => 'Sekretaris Bawaslu-ia',
                 'program' => 'Testing-prodi',
-                'tanggal_mulai' => '2021-12-21',
-                'tanggal_berakhir' => '2022-02-16',
+                'tanggal_mulai' => '2021-12-14',
+                'tanggal_berakhir' => '2022-04-04',
                 'dokumen' => 'dokumen_tidak_ada-ia.pdf',
-                'lpj' => '',
+                'laporan_hasil_pelaksanaan' => '',
                 'nilai_uang' => 800000,
                 'metode_pertemuan' => 'Ceremonial',
                 'tanggal_pertemuan' => '2022-01-21',
                 'waktu_pertemuan' => '17:00',
-                'tempat_pertemuan' => 'Kos-ia'
+                'tempat_pertemuan' => 'Kos-ia',
+                'created_at' => '2021-12-14 07:18:42'
             ],           
         ];
 

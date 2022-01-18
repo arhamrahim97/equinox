@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'belum_ada' => 'Belum Ada',    
     'kadaluarsa' => 'Kadaluarsa',
     'melewati_batas' => 'Melewati Batas',
     'aktif' => 'Aktif',
