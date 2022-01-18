@@ -26,7 +26,7 @@
             <div class="col-12 tab-style-01 without-number wow animate__fadeIn justify-content-center">
                 <!-- start tab navigation -->
                 <ul
-                    class="nav nav-tabs text-uppercase justify-content-center text-center alt-font font-weight-500 margin-7-rem-bottom md-margin-5-rem-bottom sm-margin-20px-bottom">
+                    class="nav x nav-tabs text-uppercase justify-content-center text-center alt-font font-weight-500 margin-7-rem-bottom md-margin-5-rem-bottom sm-margin-20px-bottom">
                     <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab"
                             href="#planning-tab">MOU</a><span class="tab-border bg-extra-dark-gray"></span></li>
                     <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#research-tab">MOA</a><span
