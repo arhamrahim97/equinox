@@ -27,8 +27,30 @@
     <link rel="stylesheet" href="{{asset('assets/dashboard')}}/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{asset('assets/dashboard')}}/css/atlantis2.css">
     <style>
-        .btn{
+        .btn {
             color: white !important
+        }
+
+        .leaflet-popup-content p {
+            font-size: 11px;
+        }
+
+        .leaflet-popup-content span {
+            font-size: 11px;
+        }
+
+        .leaflet-popup-content a {
+            font-size: 11px;
+            padding: 5px 10px !important;
+        }
+
+        .leaflet-popup-content .title {
+            font-size: 13px;
+        }
+
+        .leaflet-popup-content hr {
+            margin-top: 9px;
+            margin-bottom: 9px;
         }
     </style>
     @stack('style')
@@ -46,7 +68,7 @@
         <div class="main-panel" style="max-width: 1700px !important">
             <div class="container" style="max-width: 1700px !important">
                 <div class="page-inner">
-                    <div class="page-header" >
+                    <div class="page-header">
                         <h4 class="page-title">@yield('title')</h4>
                         <ul class="breadcrumbs">
                             <li class="nav-home">

@@ -6,6 +6,7 @@ use App\Http\Controllers\berita\KelolaBeritaController;
 use App\Http\Controllers\ListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IaController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MoaController;
 use App\Http\Controllers\MouController;
 use App\Http\Controllers\LocalizationController;
@@ -21,6 +22,8 @@ use App\Http\Controllers\master\NegaraController;
 use App\Http\Controllers\master\PengusulController;
 use App\Http\Controllers\master\ProdiController;
 use App\Http\Controllers\master\ProvinsiController;
+use App\Http\Controllers\master\SliderController;
+use App\Http\Controllers\master\TentangController;
 use App\Http\Controllers\ProfilController;
 use App\Models\Ia;
 
@@ -38,12 +41,16 @@ use App\Models\Ia;
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('pages.dashboard.starterTemplate');
+    });
+
     Route::resource('/mou', MouController::class)->parameters([
         'mou' => 'mou'
-    ]);;
+    ]);
     Route::resource('/moa', MoaController::class)->parameters([
         'moa' => 'moa'
-    ]);;;
+    ]);
     Route::resource('/ia', IaController::class)->parameters([
         'ia' => 'ia'
     ]);
@@ -86,9 +93,13 @@ Route::middleware(['auth'])->group(function () {
         'kelolaBerita' => 'berita'
     ]);
 
-    Route::get('/', function () {
-        return view('pages.dashboard.starterTemplate');
-    });
+    Route::resource('/kelolaTentang', TentangController::class)->parameters([
+        'kelolaTentang' => 'tentang'
+    ]);
+
+    Route::resource('/slider', SliderController::class)->parameters([
+        'slider' => 'slider'
+    ]);
 
     Route::get('/mapMou', [MapMouController::class, 'index']);
     Route::post('/getDataMapMou', [MapMouController::class, 'getMapDataMou']);
@@ -107,8 +118,23 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/getProdi', [ListController::class, 'getProdi']);
     Route::get('/getProdiEdit', [ListController::class, 'getProdiEdit']);
-
 });
+
+// Landing
+
+Route::get('/', [LandingController::class, 'index']);
+Route::get('/berita/{berita:slug}', [LandingController::class, 'berita']);
+Route::get('/daftarBerita', [LandingController::class, 'daftarBerita']);
+Route::get('/daftarMou', [LandingController::class, 'daftarMou']);
+Route::get('/daftarMoa', [LandingController::class, 'daftarMoa']);
+Route::get('/daftarIa', [LandingController::class, 'daftarIa']);
+Route::get('/tentang', [LandingController::class, 'tentang']);
+
+Route::get('/listNegaraTersedia', [LandingController::class, 'listNegaraTersedia']);
+
+Route::post('/getMarkerMapMou', [LandingController::class, 'getMapDataMou']);
+Route::post('/getMarkerMapMoa', [LandingController::class, 'getMapDataMoa']);
+Route::post('/getMarkerMapIa', [LandingController::class, 'getMapDataIa']);
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();

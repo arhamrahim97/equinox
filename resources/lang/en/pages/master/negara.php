@@ -7,5 +7,6 @@ return [
     'placeHolderTambah' => 'Enter Country',
     'placeholderSelectRegion' => 'Select Region',
     'modalTitleUbah' => 'Update Country',
-    'region' => 'Region'
+    'region' => 'Region',
+    'semua' => 'All'
 ];

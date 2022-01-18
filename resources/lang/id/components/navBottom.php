@@ -16,4 +16,6 @@ return [
     'petaMou' => 'Peta MOU',
     'petaMoa' => 'Peta MOA',
     'petaIa' => 'Peta IA',
+    'tentang' => 'Tentang',
+    'slider' => 'Slider'
 ];

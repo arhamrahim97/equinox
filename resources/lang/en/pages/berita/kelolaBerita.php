@@ -23,6 +23,7 @@ return [
     'placeholderSelectKategori' => 'Choose Category',
     'placeholderSelectBahasa' => 'Choose Language',
     'ukuranFoto' => 'Cover Size Can\'t Be More Than 5 Mb',
+    'semua' => 'All',
 
 
     'titleEdit' => 'Edit',

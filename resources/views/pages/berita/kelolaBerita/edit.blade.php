@@ -24,7 +24,7 @@
                     <div class="card-category">{{__('pages/berita/kelolaBerita.subTitleCard')}}</div>
                 </div>
                 <div class="card-body">
-                    <form id="form-tambah" enctype="multipart/form-data">
+                    <form id="form-ubah" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-row">
@@ -51,9 +51,9 @@
                                                 for="inputGroupFile01">{{$berita->foto_sampul}}</label>
                                         </div>
                                     </div>
-                                    <small id="emailHelp"
-                                        class="form-text
-                                        text-muted">{{__('pages/berita/kelolaBerita.ukuranFoto') . ', ' . __('pages/berita/kelolaBerita.notifSampul')}}</small>
+                                    <small id="emailHelp" class="form-text
+                                        text-muted">{{__('pages/berita/kelolaBerita.ukuranFoto') . ', ' .
+                                        __('pages/berita/kelolaBerita.notifSampul')}}</small>
                                     <span class="text-danger error-text fotoSampul-error"></span>
                                 </div>
                                 <div class="form-group col-md-12">
@@ -138,7 +138,7 @@
         $('#bahasa').val("{{$berita->bahasa}}").trigger('change');
     })
 
-    $('#form-tambah').on('submit', function (e) {
+    $('#form-ubah').on('submit', function (e) {
         e.preventDefault();
 
         resetForm();
@@ -155,7 +155,7 @@
             success: function (data) {
                 if ($.isEmptyObject(data.error)) {
                     swal("{{__('components/sweetalert.alertBerhasil')}}",
-                        "{{__('components/sweetalert.msgTambahBerhasil',['nama' => __('pages/berita/kelolaBerita.title')])}}", {
+                        "{{__('components/sweetalert.msgUbahBerhasil',['nama' => __('pages/berita/kelolaBerita.subTitle')])}}", {
                             icon: "success",
                             buttons: false,
                         });

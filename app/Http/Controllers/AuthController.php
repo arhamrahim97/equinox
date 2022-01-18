@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('/');
+            return redirect('/dashboard');
         }
         return back()->with('loginError', __('pages/login.gagalLogin'));
     }

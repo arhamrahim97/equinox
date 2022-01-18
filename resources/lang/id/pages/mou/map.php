@@ -20,6 +20,7 @@ return [
     'tidak_aktif' => 'Tidak Aktif',
     'kurang_1_tahun' => 'Aktif (Kurang Dari 1 Tahun)',
     'unduh' => 'Unduh Dokumen',
+    'negara' => 'Negara :',
 
     'titleCard' => 'Peta MOU',
     'subTitleCard' => 'Seluruh Lokasi MOU',

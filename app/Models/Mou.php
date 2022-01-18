@@ -19,5 +19,4 @@ class Mou extends Model
     {
         return $this->belongsTo(Pengusul::class);
     }
-
 }

@@ -20,10 +20,11 @@
     }
 
     .legend {
-        padding: 6px 8px;
-        font: 14px Arial, Helvetica, sans-serif;
+        padding: 5px 20px;
+        font: 14px, Arial, Helvetica, sans-serif;
+        font-family: 'Poppins';
         background: white;
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255);
         /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
         /*border-radius: 5px;*/
         line-height: 24px;
@@ -32,8 +33,10 @@
 
     .legend h4 {
         text-align: center;
+        font-weight: bold;
         font-size: 16px;
-        margin: 2px 12px 8px;
+        margin: 0px 3px;
+        padding: 0px;
         color: #777;
     }
 
@@ -53,6 +56,19 @@
     .legend i.icon {
         background-size: 18px;
         background-color: rgba(255, 255, 255, 1);
+    }
+
+    .legend hr {
+        margin: 8px 0px;
+    }
+
+    .leaflet-bottom .leaflet-control {
+        margin-bottom: 0px;
+        margin-left: 0px;
+    }
+
+    .legend img {
+        margin-right: 10px !important;
     }
 </style>
 @endpush
@@ -141,7 +157,7 @@
 
                                     <hr>
                                     <div class='row d-flex justify-content-center'>
-                                        <a target='_blank' href='' class='btn btn-success my-1' id="linkDokumen">
+                                        <a target='_blank' href='' class='btn btn-sm btn-success my-1' id="linkDokumen">
                                             <i class='fas fa-file-download mr-1'>
                                             </i> {{__('pages/mou/map.unduh')}}
                                         </a>
@@ -183,13 +199,22 @@
     });
 
     var greenIcon = new pin({
-        iconUrl: "{{asset('assets/dashboard/img/pin/green.png')}}",
+    iconUrl: "{{asset('assets/dashboard/img/pin/green.png')}}",
+    iconSize :[40,40],
+    iconAnchor : [25,20],
+    popupAnchor: [-4, -20]
     });
     var redIcon = new pin({
-        iconUrl: "{{asset('assets/dashboard/img/pin/red.png')}}",
+    iconUrl: "{{asset('assets/dashboard/img/pin/red.png')}}",
+    iconSize :[40,40],
+    iconAnchor : [25,20],
+    popupAnchor: [-4, -20]
     });
     var yellowIcon = new pin({
-        iconUrl: "{{asset('assets/dashboard/img/pin/yellow.png')}}",
+    iconUrl: "{{asset('assets/dashboard/img/pin/yellow.png')}}",
+    iconSize :[40,40],
+    iconAnchor : [25,20],
+    popupAnchor: [-4, -20]
     });
 
     $(document).ready(function () {
@@ -201,9 +226,9 @@
             },
             success: function (data) {
                 for (var i = 0; i < data[0].length; i++) {
-                    if (data[0][i].status == 'Aktif') {
+                    if (data[0][i].status == 'aktif') {
                         icon = greenIcon;
-                    } else if (data[0][i].status == 'Aktif (Kurang dari 1 tahun)') {
+                    } else if (data[0][i].status == 'masa_tenggang') {
                         icon = yellowIcon;
                     } else {
                         icon = redIcon;
@@ -213,12 +238,18 @@
                             icon: icon
                         })
                         .bindPopup(
-                            "<p class='fw-bold my-0'>" + data[0][i].nama_pengusul + "</p>" +
-                            "<p class='my-0'>{{__('pages/mou/map.program')}} " + data[0][i].program + "</p>" +
-                            "<p class='my-0'>{{__('pages/mou/map.alamat')}} " + data[0][i].alamat + "</p>" +
-                            "<p class='my-0'>{{__('pages/mou/map.tanggal_berakhir')}} " + data[0][i].tanggal_berakhir + "</p>" +
-                            "<p class='my-0'>{{__('pages/mou/map.status')}} " + data[0][i].status + "</p><hr>" +
-                            "<div class='row d-flex justify-content-center'><a target='_blank' href='" + data[0][i].dokumen + "' class='btn btn-success btn-sm my-1'><i class='fas fa-file-download mr-1'> </i>{{__('pages/mou/map.unduh')}}</a></div>"
+                            "<p class='fw-bold my-0 text-center'>" + data[0][i].nama_pengusul + "</p><hr>" +
+                            "<p class='my-0'>{{__('pages/mou/map.program')}} " + data[0][i]
+                            .program + "</p>" +
+                            "<p class='my-0'>{{__('pages/mou/map.alamat')}} " + data[0][i].alamat +
+                            "</p>" +
+                            "<p class='my-0'>{{__('pages/mou/map.tanggal_berakhir')}} " + data[0][i]
+                            .tanggal_berakhir + "</p>" +
+                            "<p class='my-0'>{{__('pages/mou/map.status')}} " + data[0][i].namaStatus +
+                            "</p><hr>" +
+                            "<div class='row d-flex justify-content-center'><a target='_blank' href='" +
+                            data[0][i].dokumen +
+                            "' class='btn btn-success btn-sm my-0'><i class='fas fa-file-download mr-1'> </i>{{__('pages/mou/map.unduh')}}</a></div>"
                         )
                         .on('click', L.bind(petaKlik, null, data[0][i].id))
                         .addTo(map);
@@ -249,21 +280,26 @@
                 $('#tanggal_berakhir').html(data.tanggal_berakhir);
                 $('#pertemuan').html(data.pertemuan);
                 $('#status').html(data.status);
-                $('#linkDokumen').attr('href',data.dokumen);
+                $('#linkDokumen').attr('href', data.dokumen);
             },
         })
     }
 
     /*Legend specific*/
-    var legend = L.control({ position: "bottomleft" });
+    var legend = L.control({
+        position: "bottomleft"
+    });
 
-    legend.onAdd = function(map) {
-    var div = L.DomUtil.create("div", "legend");
-    div.innerHTML += "<h4>{{__('pages/mou/map.simbol')}}</h4>";
-    div.innerHTML += '<div class="d-flex align-items-center"><img src="{{asset("assets/dashboard/img/pin/green.png")}}" width="25px"><span class="mt-2 ml-2 fw-bold">{{__("pages/mou/map.aktif")}}</span></div>';
-    div.innerHTML += '<div class="d-flex align-items-center"><img src="{{asset("assets/dashboard/img/pin/yellow.png")}}" width="25px"><span class="mt-2 ml-2 fw-bold">{{__("pages/mou/map.kurang_1_tahun")}}</span></div>';
-    div.innerHTML += '<div class="d-flex align-items-center"><img src="{{asset("assets/dashboard/img/pin/red.png")}}" width="25px"><span class="mt-2 ml-2 fw-bold">{{__("pages/mou/map.tidak_aktif")}}</span></div>';
-    return div;
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create("div", "legend");
+        div.innerHTML += "<h4>{{__('pages/mou/map.simbol')}}</h4><hr>";
+        div.innerHTML +=
+            '<div class="d-flex align-items-center"><img src="{{asset("assets/dashboard/img/pin/green.png")}}" width="25px"><span class="mt-2 ml-2 fw-bold">{{__("components/span.aktif")}}</span></div>';
+        div.innerHTML +=
+            '<div class="d-flex align-items-center"><img src="{{asset("assets/dashboard/img/pin/yellow.png")}}" width="25px"><span class="mt-2 ml-2 fw-bold">{{__("components/span.masa_tenggang")}}</span></div>';
+        div.innerHTML +=
+            '<div class="d-flex align-items-center"><img src="{{asset("assets/dashboard/img/pin/red.png")}}" width="25px"><span class="mt-2 ml-2 fw-bold">{{__("components/span.kadaluarsa")}}</span></div>';
+        return div;
     };
 
     legend.addTo(map);
@@ -304,7 +340,8 @@
             },
             {
                 data: 'status',
-                name: 'status'
+                name: 'status',
+                class : 'text-center'
             },
             {
                 data: 'action',
