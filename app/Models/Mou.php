@@ -19,4 +19,10 @@ class Mou extends Model
     {
         return $this->belongsTo(Pengusul::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'users_id', 'id')->withTrashed();
+    }
+
 }
+

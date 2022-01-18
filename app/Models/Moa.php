@@ -18,7 +18,7 @@ class Moa extends Model
 
     public function pengusul()
     {
-        return $this->belongsTo(Pengusul::class);
+        return $this->belongsTo(Pengusul::class)->withTrashed();
     }
 
     // public function fakultas(){
@@ -29,7 +29,8 @@ class Moa extends Model
     {
         return $this->belongsTo(Mou::class)->withTrashed();
     }
+    
     public function user(){
-        return $this->belongsTo(User::class, 'users_id', 'id');
+        return $this->belongsTo(User::class, 'users_id', 'id')->withTrashed();
     }
 }

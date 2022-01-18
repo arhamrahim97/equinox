@@ -16,6 +16,7 @@ return [
     'petaMou' => 'MOU Map',
     'petaMoa' => 'MOA Map',
     'petaIa' => 'IA Map',
+    'rekapitulasi' => 'Recapitulation',
     'tentang' => 'About',
     'slider' => 'Slider'
 ];

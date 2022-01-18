@@ -69,10 +69,10 @@
             {{$mou->latitude}} | {{$mou->longitude}}
         @endslot
 
-        @slot('title_nomor')
+        @slot('title_nomor_mou')
             {{__('components/form_mou_moa_ia.nomor_mou')}}
         @endslot
-        @slot('title_nomor_pengusul')
+        @slot('title_nomor_pengusul_mou')
             {{__('components/form_mou_moa_ia.nomor_mou_pengusul')}}        
         @endslot
         @slot('nomor_mou')

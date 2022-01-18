@@ -40,6 +40,10 @@ return [
     'judul' => 'Title',
     'kategori' => 'Category',
     'bahasa' => 'Language',
+
+    // Filter
+    'semua' => 'All',
+    'tidak_ada' => 'No Data'
     'program' => 'Program',
 
     'foto' => 'Photo'

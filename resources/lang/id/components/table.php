@@ -35,7 +35,10 @@ return [
     'judul' => 'Judul',
     'kategori' => 'Kategori',
     'bahasa' => 'Bahasa',
+    // Filter
+    'semua' => 'Semua',
+    'tidak_ada' => 'Tidak Ada Data',
     'program' => 'Program',
-
     'foto' => 'Foto'
 ];
+

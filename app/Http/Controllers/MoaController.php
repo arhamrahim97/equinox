@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Moa;
 use App\Models\Mou;
+use App\Models\User;
 use App\Models\Pengusul;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateMoaRequest;
+use App\Models\Fakultas;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -26,6 +28,16 @@ class MoaController extends Controller
      */
     public function index(Request $request)
     {
+        if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Unit Kerja', 'Prodi'))){
+            $user = User::where('fakultas_id', Auth::user()->fakultas_id)->whereNotIn('role', ['Admin', 'Prodi', 'Unit Kerja'])->get();
+        } else{
+            $user = User::whereIn('role', ['Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'])
+                    // ->where('role',)
+                    ->get();
+        }
+        $data = [
+            'user' => $user,
+        ];
         if ($request->ajax()) {
             if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'))){
                 $data = DB::table('moa')
@@ -34,8 +46,8 @@ class MoaController extends Controller
                             ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.fakultas_id', 'users.nama as user_nama', 'users.role as user_role')
                             ->where('users.fakultas_id', Auth::user()->fakultas_id)
                             ->whereNull('moa.deleted_at')
-                            ->orderBy('id', 'desc')
-                            ->get();            
+                            ->orderBy('id', 'desc');
+                            // ->get();            
             } else {
                 if(Auth::user()->role == 'Admin'){
                     $data = DB::table('moa')
@@ -43,8 +55,8 @@ class MoaController extends Controller
                                 ->join('users', 'moa.users_id', '=', 'users.id')
                                 ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama', 'users.role as user_role')  
                                 ->whereNull('moa.deleted_at')
-                                ->orderBy('id', 'desc')
-                                ->get(); 
+                                ->orderBy('id', 'desc');
+                                // ->get(); 
                 } else { // Role == Prodi, Unit Kerja
                     $data = DB::table('moa')
                             ->join('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')                                
@@ -52,8 +64,8 @@ class MoaController extends Controller
                             ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama', 'users.role as user_role')   
                             ->where('users.fakultas_id', Auth::user()->fakultas_id)
                             ->whereNull('moa.deleted_at')
-                            ->orderBy('id', 'desc')
-                            ->get(); 
+                            ->orderBy('id', 'desc');
+                            // ->get(); 
                 }                        
             }            
 
@@ -99,10 +111,46 @@ class MoaController extends Controller
                     }
                     return $actionBtn;
                 })
+                ->filter(function ($query) use ($request) {                    
+                    if (!empty($request->dibuat_oleh)) {                        
+                        $query->where('users.nama', $request->dibuat_oleh);                       
+                        if ($request->search != '') {
+                            $query->where('program', 'LIKE', '%'.$request->search.'%');                        
+                        }              
+                    }
+
+                    if (!empty($request->status)) {
+                        if($request->status == 'aktif'){
+                            $query->whereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) < tanggal_berakhir');  
+                            if ($request->search != '') {
+                                $query->whereRaw('program LIKE "%'.$request->search.'%"')                                    ;                        
+                            }                               
+                        } 
+                        else if($request->status == 'masa_tenggang'){
+                            $query->whereRaw('tanggal_berakhir = '.date("Y-m-d"));
+                            $query->orWhereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir');    
+                            if ($request->search != '') {
+                                $query->whereRaw('program LIKE "%'.$request->search.'%"')                                    ;                        
+                            }        
+
+                        }
+                         else{ // expired
+                            $query->where('tanggal_berakhir', '<', date("Y-m-d"));                                  
+                            if ($request->search != '') {
+                                $query->where('program', 'LIKE', '%'.$request->search.'%');                        
+                            }                               
+                        }                                                                        
+                    }
+                    
+                    if ($request->search != '') {
+                        $query->where('program', 'LIKE', '%'.$request->search.'%');                        
+                    }        
+                    
+                })
                 ->rawColumns(['status', 'action', 'dibuat_oleh'])
                 ->make(true);
         }  
-        return view('pages/moa/index');
+        return view('pages/moa/index', $data);
         
     }
 

@@ -69,16 +69,28 @@
             {{$moa->latitude}} | {{$moa->longitude}}
         @endslot
 
-        @slot('title_nomor')
+        @slot('title_nomor_mou')
+            {{__('components/form_mou_moa_ia.nomor_mou')}}
+        @endslot
+        @slot('title_nomor_pengusul_mou')
+            {{__('components/form_mou_moa_ia.nomor_mou_pengusul')}}        
+        @endslot
+        @slot('title_nomor_moa')
             {{__('components/form_mou_moa_ia.nomor_moa')}}
         @endslot
-        @slot('title_nomor_pengusul')
-            {{__('components/form_mou_moa_ia.nomor_moa_pengusul')}}        
+        @slot('title_nomor_pengusul_moa')
+            {{__('components/form_mou_moa_ia.nomor_moa_pengusul')}}
         @endslot
         @slot('nomor_mou')
-            {{$moa->nomor_moa}}
+            {{$moa->mou->nomor_mou}}
         @endslot
         @slot('nomor_mou_pengusul')
+            {{$moa->mou->nomor_mou_pengusul}}
+        @endslot
+        @slot('nomor_moa')
+            {{$moa->nomor_moa}}
+        @endslot
+        @slot('nomor_moa_pengusul')
             {{$moa->nomor_moa_pengusul}}
         @endslot
         @slot('nik_nip_pengusul')

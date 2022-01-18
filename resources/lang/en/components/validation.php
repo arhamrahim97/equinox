@@ -7,3 +7,4 @@ return [
     'mimes' => 'Invalid File Format',
     'max' => ':nama Can\'t Be More Than :ukuran'
 ];
+

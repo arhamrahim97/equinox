@@ -3,5 +3,8 @@
 return [
     'title' => 'IA',
     'subTitle' => 'Dashboard',
-    'content' => 'IA'
+    'content' => 'IA',
+    'upload' => 'Upload',
+    'tutup' => 'Close',
+    'laporan_pelaksanaan' => 'Laporan Hasil Pelaksanaan',    
 ];

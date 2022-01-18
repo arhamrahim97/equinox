@@ -32,7 +32,8 @@ class MoaSeeder extends Seeder
                 'metode_pertemuan' => 'desktodesk-moa',
                 'tanggal_pertemuan' => '2021-07-15',
                 'waktu_pertemuan' => '21:00',
-                'tempat_pertemuan' => 'Cafe Mahasiswa-moa'
+                'tempat_pertemuan' => 'Cafe Mahasiswa-moa',
+                'created_at' => '2022-02-02 07:18:42'
             ],
             [
                 'users_id' => 2,
@@ -46,12 +47,14 @@ class MoaSeeder extends Seeder
                 'jabatan_pengusul' => 'Kepala Dinas-moa',
                 'program' => 'Kerjasama IKM',
                 'tanggal_mulai' => '2021-12-21',
-                'tanggal_berakhir' => '2022-03-16',
+                'tanggal_berakhir' => '2022-03-10',
                 'dokumen' => 'dokumen_tidak_ada2-moa.pdf',
                 'metode_pertemuan' => 'desktodesk-moa',
                 'tanggal_pertemuan' => '2022-01-21',
                 'waktu_pertemuan' => '17:00',
-                'tempat_pertemuan' => 'JCO PGM-moa'
+                'tempat_pertemuan' => 'JCO PGM-moa',
+                'created_at' => '2022-01-28 07:18:42'
+
             ],
             [
                 'users_id' => 2,
@@ -65,12 +68,13 @@ class MoaSeeder extends Seeder
                 'jabatan_pengusul' => 'Sekretaris Bawaslu-moa',
                 'program' => 'Kerjasama Pengawasan Pemilu-moa',
                 'tanggal_mulai' => '2021-12-21',
-                'tanggal_berakhir' => '2022-08-16',
+                'tanggal_berakhir' => '2022-08-02',
                 'dokumen' => 'dokumen_tidak_ada-moa.pdf',
                 'metode_pertemuan' => 'Ceremonial',
                 'tanggal_pertemuan' => '2022-01-21',
                 'waktu_pertemuan' => '17:00',
-                'tempat_pertemuan' => 'Cafe BNS-moa'
+                'tempat_pertemuan' => 'Cafe BNS-moa',
+                'created_at' => '2021-12-01 07:18:42'                
             ],           
             [
                 'users_id' => 8,
@@ -84,12 +88,35 @@ class MoaSeeder extends Seeder
                 'jabatan_pengusul' => 'Sekretaris Bawaslu-moa',
                 'program' => 'Testing',
                 'tanggal_mulai' => '2021-12-21',
-                'tanggal_berakhir' => '2022-08-16',
+                'tanggal_berakhir' => '2021-08-16',
                 'dokumen' => 'dokumen_tidak_ada-moa.pdf',
                 'metode_pertemuan' => 'Ceremonial',
                 'tanggal_pertemuan' => '2022-01-21',
                 'waktu_pertemuan' => '17:00',
-                'tempat_pertemuan' => 'Cafe BNS-moa'
+                'tempat_pertemuan' => 'Cafe BNS-moa',
+                'created_at' => '2022-01-16 07:18:42'                
+
+            ],     
+            [
+                'users_id' => 5,
+                'pengusul_id' => 7,
+                'latitude' => '-0.893251',
+                'longitude' => '119.886419',
+                'mou_id' => '3',
+                'nomor_moa' => '66666677777788880000-moa',
+                'nomor_moa_pengusul' => '66666688888899990000-moa',
+                'nik_nip_pengusul' => '677777777777-moa',
+                'jabatan_pengusul' => 'Sekretaris Bawaslu-moa',
+                'program' => 'Testing2',
+                'tanggal_mulai' => '2021-12-21',
+                'tanggal_berakhir' => '2022-04-06',
+                'dokumen' => 'dokumen_tidak_ada-moa.pdf',
+                'metode_pertemuan' => 'Ceremonial',
+                'tanggal_pertemuan' => '2022-01-21',
+                'waktu_pertemuan' => '17:00',
+                'tempat_pertemuan' => 'Cafe BNS-moa',
+                'created_at' => '2021-10-16 07:18:42'                
+
             ],           
         ];
 

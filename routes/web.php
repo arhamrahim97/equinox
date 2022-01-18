@@ -1,31 +1,36 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\berita\KategoriBeritaController;
-use App\Http\Controllers\berita\KelolaBeritaController;
-use App\Http\Controllers\ListController;
+use App\Models\Ia;
+use UniSharp\LaravelFilemanager\Lfm;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IaController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MoaController;
 use App\Http\Controllers\MouController;
-use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ListController;
 use App\Http\Controllers\MapIaController;
 use App\Http\Controllers\MapMoaController;
 use App\Http\Controllers\MapMouController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\master\AkunController;
+use App\Http\Controllers\master\KotaController;
+use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\master\ProdiController;
+use App\Http\Controllers\RekapitulasiController;
+use App\Http\Controllers\master\NegaraController;
 use App\Http\Controllers\master\FakultasController;
+use App\Http\Controllers\master\PengusulController;
+use App\Http\Controllers\master\ProvinsiController;
 use App\Http\Controllers\master\KecamatanController;
 use App\Http\Controllers\master\KelurahanController;
-use App\Http\Controllers\master\KotaController;
-use App\Http\Controllers\master\NegaraController;
-use App\Http\Controllers\master\PengusulController;
-use App\Http\Controllers\master\ProdiController;
-use App\Http\Controllers\master\ProvinsiController;
+use App\Http\Controllers\berita\KelolaBeritaController;
+use App\Http\Controllers\berita\KategoriBeritaController;
+
 use App\Http\Controllers\master\SliderController;
 use App\Http\Controllers\master\TentangController;
-use App\Http\Controllers\ProfilController;
-use App\Models\Ia;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +59,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/ia', IaController::class)->parameters([
         'ia' => 'ia'
     ]);
+    Route::post('/ia/upload_laporan_pelaksanaan/{ia}', [IaController::class, 'uploadLaporanPelaksanaan']);
+
+
     Route::resource('/negara', NegaraController::class);
     Route::resource('/provinsi/{negara}', ProvinsiController::class)->parameters([
         '{negara}' => 'provinsi',
@@ -92,6 +100,16 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/kelolaBerita', KelolaBeritaController::class)->parameters([
         'kelolaBerita' => 'berita'
     ]);
+
+
+    Route::resource('/rekapitulasi', RekapitulasiController::class);    
+    Route::get('/rekapitulasiresult', [RekapitulasiController::class, 'datatables']);
+    Route::get('/getfilter', [ListController::class, 'getFilter']);
+
+
+    Route::get('/', function () {
+        return view('pages.dashboard.starterTemplate');
+    });
 
     Route::resource('/kelolaTentang', TentangController::class)->parameters([
         'kelolaTentang' => 'tentang'

@@ -65,14 +65,55 @@
                             <div class="tab-pane fade active show" id="v-pills-dokumen-icons" role="tabpanel" aria-labelledby="v-pills-dokumen-tab-icons">
                                 <div class="card-pricing">                                                                    
                                     <ul class="specification-list" style="text-transform: capitalize; ">
-                                        <li>
+                                        {{-- <li>
                                             <span class="name-specification">{{$title_nomor}}</span>
                                             <span class="status-specification">{{$nomor_mou}}</span>
                                         </li>
                                         <li>
                                             <span class="name-specification">{{$title_nomor_pengusul}}</span>
                                             <span class="status-specification">{{$nomor_mou_pengusul}}</span>
-                                        </li>
+                                        </li> --}}
+                                        {{-- @if ($type_doc == 'IA')
+                                            <li>
+                                                <span class="name-specification">{{$title_nomor}}</span>
+                                                <span class="status-specification">{{$nomor_mou}}</span>
+                                            </li>
+                                            <li>
+                                                <span class="name-specification">{{$title_nomor_pengusul}}</span>
+                                                <span class="status-specification">{{$nomor_mou_pengusul}}</span>
+                                            </li>        
+                                        @endif --}}
+                                        @if (($type_doc == 'MOU') || ($type_doc == 'MOA') || ($type_doc == 'IA'))
+                                            @if ($type_doc == 'IA')
+                                                <li>
+                                                    <span class="name-specification">{{$title_nomor_ia}}</span>
+                                                    <span class="status-specification">{{$nomor_ia}}</span>
+                                                </li>
+                                                <li>
+                                                    <span class="name-specification">{{$title_nomor_pengusul_ia}}</span>
+                                                    <span class="status-specification">{{$nomor_ia_pengusul}}</span>
+                                                </li>   
+                                            @endif  
+                                            @if (($type_doc == 'MOA') || ($type_doc == 'IA'))
+                                                <li>
+                                                    <span class="name-specification">{{$title_nomor_moa}}</span>
+                                                    <span class="status-specification">{{$nomor_moa}}</span>
+                                                </li>
+                                                <li>
+                                                    <span class="name-specification">{{$title_nomor_pengusul_moa}}</span>
+                                                    <span class="status-specification">{{$nomor_moa_pengusul}}</span>
+                                                </li>    
+                                            @endif  
+
+                                            <li>
+                                                <span class="name-specification">{{$title_nomor_mou}}</span>
+                                                <span class="status-specification">{{$nomor_mou}}</span>
+                                            </li>
+                                            <li>
+                                                <span class="name-specification">{{$title_nomor_pengusul_mou}}</span>
+                                                <span class="status-specification">{{$nomor_mou_pengusul}}</span>
+                                            </li>                                                                                                               
+                                        @endif  
                                         <li>
                                             <span class="name-specification">{{__('components/form_mou_moa_ia.nik_nip_pengusul')}}</span>
                                             <span class="status-specification">{{$nik_nip_pengusul}}</span>
@@ -123,6 +164,12 @@
                                                 @endslot
                                                 @endcomponent</span>
                                             </li>                         
+                                            <li>
+                                                <span class="name-specification">{{__('components/form_mou_moa_ia.laporan_pelaksanaan')}}</span>
+                                                <span class="status-specification">
+                                                    {{$download_laporan_pelaksanaan}}
+                                                </span>
+                                            </li>      
                                             {{$anggota_fakultas}}                           
                                             {{$anggota_prodi}}
                                             <li>

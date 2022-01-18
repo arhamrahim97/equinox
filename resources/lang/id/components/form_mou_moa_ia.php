@@ -39,6 +39,7 @@ return [
     'dokumen' => 'Dokumen',
     'dokumen_ubah' => 'Biarkan kosong jika Anda tidak ingin mengubah file dokumen',
     'download' => 'Unduh',
+    'laporan_pelaksanaan' => 'Laporan Hasil Pelaksanaan',
     'nilai_uang' => 'Nilai Uang (Rp)',  
 
     'metode_pertemuan' => 'Metode Pertemuan',   
@@ -48,5 +49,6 @@ return [
     'tanggal_pertemuan_' => 'Tanggal Pertemuan',
     'waktu_pertemuan' => 'Waktu Pertemuan (contoh: 16:00)',
     'waktu_pertemuan_' => 'Waktu Pertemuan',
-    'tempat_pertemuan' => 'Tempat Pertemuan'
+    'tempat_pertemuan' => 'Tempat Pertemuan',
+
 ];

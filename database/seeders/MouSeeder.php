@@ -26,12 +26,13 @@ class MouSeeder extends Seeder
                 'jabatan_pengusul' => 'Kepala Dinas-mou',
                 'program' => 'Pengadaan Server SIAKAD UNTAD-mou',
                 'tanggal_mulai' => '2021-08-16',
-                'tanggal_berakhir' => '2023-08-16',
+                'tanggal_berakhir' => '2021-07-15',
                 'dokumen' => 'dokumen_tidak_ada1-mou.pdf',
                 'metode_pertemuan' => 'desktodesk-mou',
                 'tanggal_pertemuan' => '2021-07-15',
                 'waktu_pertemuan' => '21:00',
-                'tempat_pertemuan' => 'Cafe Nintendo-mou'
+                'tempat_pertemuan' => 'Cafe Nintendo-mou',
+                'created_at' => '2022-01-12 07:18:42'
             ],
             [
                 'users_id' => 1,
@@ -44,12 +45,13 @@ class MouSeeder extends Seeder
                 'jabatan_pengusul' => 'Kepala Imigrasi-mou',
                 'program' => 'Kerjasama Antar Dinas di Besusu Timur-mou',
                 'tanggal_mulai' => '2021-12-21',
-                'tanggal_berakhir' => '2022-03-16',
+                'tanggal_berakhir' => '2022-01-21',
                 'dokumen' => 'dokumen_tidak_ada2-mou.pdf',
                 'metode_pertemuan' => 'desktodesk-mou',
                 'tanggal_pertemuan' => '2022-01-21',
                 'waktu_pertemuan' => '17:00',
-                'tempat_pertemuan' => 'Kantor Imigrasi-mou'
+                'tempat_pertemuan' => 'Kantor Imigrasi-mou',
+                'created_at' => '2022-01-21 07:18:42'
             ],
             [
                 'users_id' => 1,
@@ -62,12 +64,13 @@ class MouSeeder extends Seeder
                 'jabatan_pengusul' => 'CEO Libra Komputer-mou',
                 'program' => 'Pembangunan Server Nintendo-mou',
                 'tanggal_mulai' => '2021-12-21',
-                'tanggal_berakhir' => '2022-03-16',
+                'tanggal_berakhir' => '2022-01-21',
                 'dokumen' => 'dokumen_tidak_ada3-mou.pdf',
                 'metode_pertemuan' => 'desktodesk-mou',
                 'tanggal_pertemuan' => '2022-01-21',
                 'waktu_pertemuan' => '17:00',
-                'tempat_pertemuan' => 'UPT TIK UNTAD-mou'
+                'tempat_pertemuan' => 'UPT TIK UNTAD-mou',
+                'created_at' => '2022-01-27 07:18:42'
             ],
             [
                 'users_id' => 1,
@@ -80,12 +83,13 @@ class MouSeeder extends Seeder
                 'jabatan_pengusul' => 'Presiden Real Madrid C.F-mou',
                 'program' => 'Pertukaran Pelajar Real Madrid-mou',
                 'tanggal_mulai' => '2020-02-05',
-                'tanggal_berakhir' => '2021-01-04',
+                'tanggal_berakhir' => '2021-07-13',
                 'dokumen' => 'dokumen_tidak_ada4-mou.pdf',
                 'metode_pertemuan' => 'desktodesk-mou',
                 'tanggal_pertemuan' => '2021-07-13',
                 'waktu_pertemuan' => '09:00',
-                'tempat_pertemuan' => 'Stadiun Real Madrid-mou'
+                'tempat_pertemuan' => 'Stadiun Real Madrid-mou',
+                'created_at' => '2022-01-25 07:18:42'                
             ],
         ];
 
