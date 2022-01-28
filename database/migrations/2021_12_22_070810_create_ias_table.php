@@ -17,8 +17,8 @@ class CreateIasTable extends Migration
             $table->id();
             $table->integer('users_id');
             $table->integer('pengusul_id');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->integer('moa_id');
             $table->string('nomor_ia');
             $table->string('nomor_ia_pengusul');
@@ -26,9 +26,11 @@ class CreateIasTable extends Migration
             $table->string('nik_nip_pengusul');
             $table->string('jabatan_pengusul');
             $table->text('program');
+            $table->text('manfaat');
             $table->date('tanggal_mulai');
             $table->date('tanggal_berakhir');
-            $table->text('dokumen');
+            $table->text('dokumen')->nullable();
+            $table->text('surat_tugas')->nullable();
             $table->text('laporan_hasil_pelaksanaan')->nullable();
             $table->bigInteger('nilai_uang');
             $table->string('metode_pertemuan');

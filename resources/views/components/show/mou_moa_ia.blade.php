@@ -10,7 +10,7 @@
                         <div class="nav flex-column nav-pills nav-secondary nav-pills-no-bd nav-pills-icons" id="v-pills-tab" role="tablist" aria-orientation="vertical">   
                             <a class="nav-link" id="v-pills-profile-tab-icons" data-toggle="pill" href="#v-pills-profile-icons" role="tab" aria-controls="v-pills-profile-icons" aria-selected="false">
                                 <i class="flaticon-user-4"></i>
-                                Profil Pengusul
+                                {{__('components/form_mou_moa_ia.pengusul')}}
                             </a>
                             <a class="nav-link active show" id="v-pills-dokumen-tab-icons" data-toggle="pill" href="#v-pills-dokumen-icons" role="tab" aria-controls="v-pills-dokumen-icons" aria-selected="true">
                                 <i class="flaticon-file"></i>
@@ -18,7 +18,7 @@
                             </a>      
                             <a class="nav-link" id="v-pills-meeting-tab-icons" data-toggle="pill" href="#v-pills-meeting-icons" role="tab" aria-controls="v-pills-meeting-icons" aria-selected="true">
                                 <i class="flaticon-calendar"></i>
-                                Pertemuan
+                                {{__('components/form_mou_moa_ia.pertemuan')}}
                             </a>                            
                         </div>
                     </div>
@@ -26,9 +26,9 @@
                         <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane" id="v-pills-profile-icons" role="tabpanel" aria-labelledby="v-pills-profile-tab-icons">                               
                                 <div class="card-pricing">                                                              
-                                    <ul class="specification-list" style="text-transform: capitalize; ">
+                                    <ul class="specification-list" style="text-transform: capitalize; ">                                        
                                         <li>
-                                            <span class="name-specification">{{__('components/form_mou_moa_ia.pengusul')}}</span>
+                                            <span class="name-specification">{{__('components/form_mou_moa_ia.instansi_pengusul')}}</span>
                                             <span class="status-specification">{{$pengusul}}</span>
                                         </li>
                                         <li>
@@ -114,6 +114,22 @@
                                                 <span class="status-specification">{{$nomor_mou_pengusul}}</span>
                                             </li>                                                                                                               
                                         @endif  
+                                       
+                                        <li>
+                                            <span class="name-specification">{{__('components/form_mou_moa_ia.program')}}</span>
+                                            <span class="status-specification">{{$program}}</span>
+                                        </li>
+                                        @if ($type_doc == 'IA')                                            
+                                            <li>
+                                                <span class="name-specification">{{__('components/form_mou_moa_ia.manfaat')}}</span>
+                                                <span class="status-specification">{{$manfaat}}</span>
+                                            </li>
+                                            {{$jenis_kerjasama}}
+                                            @endif
+                                        <li>
+                                            <span class="name-specification">{{__('components/form_mou_moa_ia.pejabat_penandatangan')}}</span>
+                                            <span class="status-specification">{{$pejabat_penandatangan}}</span>
+                                        </li>
                                         <li>
                                             <span class="name-specification">{{__('components/form_mou_moa_ia.nik_nip_pengusul')}}</span>
                                             <span class="status-specification">{{$nik_nip_pengusul}}</span>
@@ -121,10 +137,6 @@
                                         <li>
                                             <span class="name-specification">{{__('components/form_mou_moa_ia.jabatan_pengusul')}}</span>
                                             <span class="status-specification">{{$jabatan_pengusul}}</span>
-                                        </li>
-                                        <li>
-                                            <span class="name-specification">{{__('components/form_mou_moa_ia.program')}}</span>
-                                            <span class="status-specification">{{$program}}</span>
                                         </li>
                                         <li>
                                             <span class="name-specification">{{__('components/form_mou_moa_ia.tanggal_mulai_')}}</span>
@@ -163,7 +175,13 @@
                                                     {{$download_ia}}
                                                 @endslot
                                                 @endcomponent</span>
-                                            </li>                         
+                                            </li>   
+                                            <li>
+                                                <span class="name-specification">{{__('components/form_mou_moa_ia.surat_tugas')}}</span>
+                                                <span class="status-specification">
+                                                    {{$surat_tugas}}
+                                                </span>
+                                            </li>                           
                                             <li>
                                                 <span class="name-specification">{{__('components/form_mou_moa_ia.laporan_pelaksanaan')}}</span>
                                                 <span class="status-specification">

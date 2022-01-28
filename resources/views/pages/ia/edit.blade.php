@@ -61,7 +61,7 @@
                                 @else {{$item->kelurahan->nama}}
                                 @endif" 
                                 latitude="{{$item->latitude}}" 
-                                longitude="{{$item->longitude}}" value="{{$item->id}}" @if(old('pengusul_id', $ia->pengusul->id) == $item->id) selected @endif>{{$item->nama}}</option>                                       
+                                longitude="{{$item->longitude}}" alamat="{{$item->alamat}}" value="{{$item->id}}" @if(old('pengusul_id', $ia->pengusul->id) == $item->id) selected @endif>{{$item->nama}}</option>                                       
                         @empty
                             <option value="">Tidak ada data</option>
                         @endforelse
@@ -90,6 +90,9 @@
                     @slot('nomor_ia_pengusul')
                         {{$ia->nomor_ia_pengusul}}
                     @endslot
+                    @slot('pejabat_penandatangan')
+                        {{$ia->pejabat_penandatangan}}
+                    @endslot
                     @slot('nik_nip_pengusul')
                         {{$ia->nik_nip_pengusul}}
                     @endslot
@@ -98,6 +101,9 @@
                     @endslot
                     @slot('program')
                         {{$ia->program}}
+                    @endslot
+                    @slot('manfaat')
+                        {{$ia->manfaat}}
                     @endslot
                     @slot('tanggal_mulai')
                         @php
@@ -108,6 +114,17 @@
                         @php
                             echo date("d-m-Y", strtotime($ia->tanggal_berakhir))                                    
                         @endphp                        
+                    @endslot
+                    @slot('jenis_kerjasama')
+                        @forelse ($jenis_kerjasama_all as $item)                            
+                            @if (in_array($item->jenis_kerjasama, $jenis_kerjasama_ia))
+                                <option value="{{$item->jenis_kerjasama}}" selected >{{$item->jenis_kerjasama}}</option>
+                            @else 
+                                <option value="{{$item->jenis_kerjasama}}">{{$item->jenis_kerjasama}}</option>
+                            @endif                                   
+                        @empty
+                            <option value="">Tidak ada data</option>                                                        
+                        @endforelse
                     @endslot
                     @slot('fakultas_all')
                         @forelse ($fakultas_all as $item)                            

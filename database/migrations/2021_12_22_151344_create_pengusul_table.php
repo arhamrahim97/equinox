@@ -16,16 +16,16 @@ class CreatePengusulTable extends Migration
         Schema::create('pengusul', function (Blueprint $table) {
             $table->id();
             $table->text('nama');
-            $table->text('alamat');
-            $table->string('region');
-            $table->string('negara_id');
-            $table->string('provinsi_id');
-            $table->string('kota_id');
-            $table->string('kecamatan_id');
-            $table->string('kelurahan_id');
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->string('telepon');
+            $table->text('alamat')->nullable();
+            $table->string('region')->nullable();
+            $table->string('negara_id')->nullable();
+            $table->string('provinsi_id')->nullable();
+            $table->string('kota_id')->nullable();
+            $table->string('kecamatan_id')->nullable();
+            $table->string('kelurahan_id')->nullable();
+            $table->string('latitude')->nullable();;
+            $table->string('longitude')->nullable();;
+            $table->string('telepon')->nullable();;
             $table->softDeletes();
             $table->timestamps();
         });

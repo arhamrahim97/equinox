@@ -6,5 +6,5 @@ return [
     'content' => 'IA',
     'upload' => 'Upload',
     'tutup' => 'Close',
-    'laporan_pelaksanaan' => 'Laporan Hasil Pelaksanaan',    
+    'laporan_pelaksanaan' => 'The Implementation Report',    
 ];

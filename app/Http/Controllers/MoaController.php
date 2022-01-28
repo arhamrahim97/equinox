@@ -113,7 +113,7 @@ class MoaController extends Controller
                 })
                 ->filter(function ($query) use ($request) {                    
                     if ($request->search != '') {
-                        $query->where('program', 'LIKE', '%'.$request->search.'%');                        
+                        $query->whereRaw('(program LIKE "%'.$request->search.'%" OR pengusul.nama LIKE "%'.$request->search.'%" OR moa.nomor_moa_pengusul LIKE "%'.$request->search.'%")');                        
                     }              
                     if (!empty($request->dibuat_oleh)) {                        
                         $query->where('users.nama', $request->dibuat_oleh);                       
@@ -127,13 +127,13 @@ class MoaController extends Controller
                             $query->whereRaw('tanggal_berakhir = '.date("Y-m-d"));
                             if((Auth::user()->role != 'Admin')){ // Selain Admin
                                 if((Auth::user()->role != 'LPPM')){ // Selain LPPM
-                                    $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND users.nama LIKE "%'.$request->dibuat_oleh.'" AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.fakultas_id = "'. Auth::user()->fakultas_id. '" AND program LIKE "%'.$request->search.'%"');        
+                                    $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND users.nama LIKE "%'.$request->dibuat_oleh.'" AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.fakultas_id = "'. Auth::user()->fakultas_id. '" AND (program LIKE "%'.$request->search.'%" OR pengusul.nama LIKE "%'.$request->search.'%" OR moa.nomor_moa_pengusul LIKE "%'.$request->search.'%")');        
                                 } else{ //LPPM
-                                    $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND users.nama LIKE "%'.$request->dibuat_oleh.'" AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.role = "'. Auth::user()->role. '" AND program LIKE "%'.$request->search.'%"');
+                                    $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND users.nama LIKE "%'.$request->dibuat_oleh.'" AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.role = "'. Auth::user()->role. '" AND (program LIKE "%'.$request->search.'%" OR pengusul.nama LIKE "%'.$request->search.'%" OR moa.nomor_moa_pengusul LIKE "%'.$request->search.'%")');
                                 }                        
                             }
                             else{
-                                $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.nama LIKE "%'.$request->dibuat_oleh.'" AND program LIKE "%'.$request->search.'%"');                                    
+                                $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.nama LIKE "%'.$request->dibuat_oleh.'" AND (program LIKE "%'.$request->search.'%" OR pengusul.nama LIKE "%'.$request->search.'%" OR moa.nomor_moa_pengusul LIKE "%'.$request->search.'%")');                                    
                             }
 
                         }
@@ -183,6 +183,7 @@ class MoaController extends Controller
                 'nomor_mou_pengusul' => 'required',                
                 'nomor_moa' => ['required', Rule::unique('moa')->withoutTrashed()],
                 'nomor_moa_pengusul' => ['required', Rule::unique('moa')->withoutTrashed()],    
+                'pejabat_penandatangan' => 'required',
                 'nik_nip_pengusul' => 'required',
                 'jabatan_pengusul' => 'required',
                 'program' => 'required',
@@ -202,6 +203,7 @@ class MoaController extends Controller
                 'nomor_moa_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nomor_moa_pengusul')]),
                 'nomor_moa_pengusul.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_moa_pengusul')]),
 
+                'pejabat_penandatangan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.pejabat_penandatangan')]),
                 'nik_nip_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nik_nip_pengusul')]),
                 'jabatan_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.jabatan_pengusul')]),
                 'program.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program')]),                
@@ -234,6 +236,7 @@ class MoaController extends Controller
             'mou_id' => $request->nomor_mou_pengusul,
             'nomor_moa' => $request->nomor_moa,
             'nomor_moa_pengusul' => $request->nomor_moa_pengusul,
+            'pejabat_penandatangan' => $request->pejabat_penandatangan,
             'nik_nip_pengusul' => $request->nik_nip_pengusul,
             'jabatan_pengusul' => $request->jabatan_pengusul,
             'program' => $request->program,
@@ -320,6 +323,8 @@ class MoaController extends Controller
                 'nomor_mou_pengusul' => 'required',                
                 'nomor_moa' => $nomor_moa_req,
                 'nomor_moa_pengusul' => $nomor_moa_pengusul_req,    
+                
+                'pejabat_penandatangan' => 'required',
                 'nik_nip_pengusul' => 'required',
                 'jabatan_pengusul' => 'required',
                 'program' => 'required',
@@ -338,6 +343,7 @@ class MoaController extends Controller
                 'nomor_moa.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_moa')]),
                 'nomor_moa_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nomor_moa_pengusul')]),
                 'nomor_moa_pengusul.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_moa_pengusul')]),
+                'pejabat_penandatangan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.pejabat_penandatangan')]),
                 'nik_nip_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nik_nip_pengusul')]),
                 'jabatan_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.jabatan_pengusul')]),
                 'program.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program')]),                
@@ -363,6 +369,7 @@ class MoaController extends Controller
             'mou_id' => $request->nomor_mou_pengusul,
             'nomor_moa' => $request->nomor_moa,
             'nomor_moa_pengusul' => $request->nomor_moa_pengusul,
+            'pejabat_penandatangan' => $request->pejabat_penandatangan,
             'nik_nip_pengusul' => $request->nik_nip_pengusul,
             'jabatan_pengusul' => $request->jabatan_pengusul,
             'program' => $request->program,

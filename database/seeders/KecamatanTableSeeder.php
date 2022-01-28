@@ -48459,16 +48459,7 @@ class KecamatanTableSeeder extends Seeder
                 'deleted_at' => NULL,
                 'created_at' => NULL,
                 'updated_at' => NULL,
-            ),
-            380 =>
-            array (
-                'id' => 5381,
-                'nama' => 'BUNGKU UTARA',
-                'kota_id' => 365,
-                'deleted_at' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
+            ),           
             381 =>
             array (
                 'id' => 5382,
@@ -62992,6 +62983,107 @@ class KecamatanTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
+            494 =>
+            array (
+                'id' => 6995,
+                'nama' => 'BANGGAI',
+                'kota_id' => 367,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+
+
+            495 =>
+            array (
+                'id' => 6996,
+                'nama' => 'BUNGKU UTARA',
+                'kota_id' => 476,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),      
+            496 =>
+            array (
+                'id' => 6997,
+                'nama' => 'LEMBO',
+                'kota_id' => 476,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),      
+            497 =>
+            array (
+                'id' => 6998,
+                'nama' => 'LEMBO RAYA',
+                'kota_id' => 476,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),      
+            498 =>
+            array (
+                'id' => 6999,
+                'nama' => 'MAMOSALATO',
+                'kota_id' => 476,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),       
+            499 =>
+            array (
+                'id' => 7000,
+                'nama' => 'MORI ATAS',
+                'kota_id' => 476,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),       
+            500 =>
+            array (
+                'id' => 7001,
+                'nama' => 'MORI UTARA',
+                'kota_id' => 476,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),       
+            501 =>
+            array (
+                'id' => 7002,
+                'nama' => 'PETASIA',
+                'kota_id' => 476,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),     
+            502 =>
+            array (
+                'id' => 7003,
+                'nama' => 'PETASIA BARAT',
+                'kota_id' => 476,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),     
+            503 =>
+            array (
+                'id' => 7004,
+                'nama' => 'PETASIA TIMUR',
+                'kota_id' => 476,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),     
+            504 =>
+            array (
+                'id' => 7005,
+                'nama' => 'SOLO RAYA',
+                'kota_id' => 476,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),                                        
         ));
 
 

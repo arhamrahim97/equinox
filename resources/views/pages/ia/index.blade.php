@@ -38,7 +38,7 @@
             {{__('components/table.nomor_ia_pengusul')}}
         @endslot    
         @slot('thead_pengusul')
-            {{__('components/table.pengusul')}}
+            {{__('components/table.instansi_pengusul')}}        
         @endslot
         @slot('thead_tanggal_mulai')
             {{__('components/table.tanggal_mulai')}}
@@ -90,13 +90,13 @@
         @endslot
 
     @endcomponent
-    <form id="upload_laporan_pelaksanaan" method="POST" enctype="multipart/form-data" action="#">
+    <form id="upload_tambahan" class="form_modal_change" method="POST" enctype="multipart/form-data" action="#">
         @csrf            
-        <div class="modal fade" id="upload-lpj" tabindex="-1" role="dialog" aria-labelledby="upload-lpj" aria-hidden="true">
+        <div class="modal fade" id="upload-tambahan" tabindex="-1" role="dialog" aria-labelledby="upload-tambahan" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">{{__('pages/ia/index.upload')}} {{__('pages/ia/index.laporan_pelaksanaan')}}</h5>
+                        <h5 class="modal-title" id="modalTitle"></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -105,6 +105,7 @@
                         <div class="form-group">                            
                             <label for="exampleFormControlFile1">{{__('components/form_mou_moa_ia.dokumen')}} (.pdf) :</label>
                             <input type="hidden" value="" id="ia_id_" name="id_ia_">
+                            <input type="hidden" value="" id="jenis_upload" name="jenis_upload">
                             <input type="file" class="form-control form-control-file" id="dokumen" name="dokumen">
                             <span class="text-danger error-text dokumen-error"></span>                              
                         </div>
@@ -124,19 +125,25 @@
 
 @push('script')
 <script>
-    function showModal(id){                
-        // $('form').attr('action', '/ia/upload_laporan_pelaksanaan/'+id);        
+    function showModalFileTambahan(id, jenis_upload){                        
+        if (jenis_upload == 'laporan_pelaksanaan') {
+            $('#modalTitle').html("{{__('pages/ia/index.upload')}} {{__('pages/ia/index.laporan_pelaksanaan')}}")            
+        } else if (jenis_upload == 'surat_tugas') {
+            $('#modalTitle').html("{{__('pages/ia/index.upload')}} {{__('components/form_mou_moa_ia.surat_tugas')}}")            
+        }
         $('#ia_id_').val(id)
-        $('#upload-lpj').modal('show')        
+        $('#jenis_upload').val(jenis_upload)
+        $('#upload-tambahan').modal('show')        
+        // $('.form_modal_change').attr('id', 'upload_laporan_pelaksanaan')
     }
 
-    $('#upload_laporan_pelaksanaan').submit(function(e) {            
+    $('#upload_tambahan').submit(function(e) {            
         e.preventDefault();            
-        $('.dokumen-error').text('');
+        $('.dokumen-error').text('');       
         var formData = new FormData(this)                 
         $.ajax({             
             type: "POST",
-            url: "/ia/upload_laporan_pelaksanaan/" + $('#ia_id_').val(),
+            url: "/ia/upload_tambahan/" + $('#ia_id_').val(),
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
             data: formData,
             cache : false,
@@ -146,7 +153,7 @@
                 if ($.isEmptyObject(data.error)) {
                     // console.log(data)
                     swal("{{__('components/sweetalert.alertBerhasil')}}",
-                        "{{__('components/sweetalert.msgUploadBerhasil', ['nama' => 'Laporan Hasil Pelaksanaan'])}}", {
+                        "{{__('components/sweetalert.msgUploadBerhasil', ['nama' => ''])}}", {
                             icon: "success",
                             buttons: false,
                         });

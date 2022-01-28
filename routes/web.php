@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/ia', IaController::class)->parameters([
         'ia' => 'ia'
     ]);
-    Route::post('/ia/upload_laporan_pelaksanaan/{ia}', [IaController::class, 'uploadLaporanPelaksanaan']);
+    Route::post('/ia/upload_tambahan/{ia}', [IaController::class, 'uploadTambahan']);
 
 
     Route::resource('/negara', NegaraController::class);

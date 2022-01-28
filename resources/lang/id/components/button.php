@@ -12,4 +12,6 @@ return [
     'download_document' => '<i class="fas fa-download"></i> Unduh Dokumen',
     'upload_laporan_pelaksanaan' => '<i class="fas fa-upload"></i> Unggah Laporan Hasil Pelaksanaan',    
     'download_laporan_pelaksanaan' => '<i class="fas fa-download"></i> Unduh Laporan Hasil Pelaksanaan',    
+    'upload_surat_tugas' => '<i class="fas fa-upload"></i> Unggah Surat Tugas',    
+    'download_surat_tugas' => '<i class="fas fa-download"></i> Unduh Surat Tugas',
 ];

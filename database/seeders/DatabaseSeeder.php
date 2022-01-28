@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MoaSeeder::class);
         $this->call(IaSeeder::class);
         $this->call(AnggotaProdiSeeder::class);
+        $this->call(JenisKerjasamaSeeder::class);
         $this->call(AnggotaFakultasSeeder::class);
         $this->call(NegaraTableSeeder::class);
         $this->call(ProvinsiTableSeeder::class);

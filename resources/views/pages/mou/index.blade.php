@@ -38,7 +38,7 @@
             {{__('components/table.nomor_mou_pengusul')}}
         @endslot    
         @slot('thead_pengusul')
-            {{__('components/table.pengusul')}}
+            {{__('components/table.instansi_pengusul')}}
         @endslot
         @slot('thead_tanggal_mulai')
             {{__('components/table.tanggal_mulai')}}

@@ -69,142 +69,180 @@ IA
 {{$ia->latitude}} | {{$ia->longitude}}
 @endslot
 
-@slot('title_nomor_mou')
-{{__('components/form_mou_moa_ia.nomor_mou')}}
-@endslot
-@slot('title_nomor_pengusul_mou')
-{{__('components/form_mou_moa_ia.nomor_mou_pengusul')}}
-@endslot
-@slot('title_nomor_moa')
-{{__('components/form_mou_moa_ia.nomor_moa')}}
-@endslot
-@slot('title_nomor_pengusul_moa')
-{{__('components/form_mou_moa_ia.nomor_moa_pengusul')}}
-@endslot
-@slot('title_nomor_ia')
-{{__('components/form_mou_moa_ia.nomor_ia')}}
-@endslot
-@slot('title_nomor_pengusul_ia')
-{{__('components/form_mou_moa_ia.nomor_ia_pengusul')}}
-@endslot
-@slot('nomor_mou')
-{{$ia->moa->mou->nomor_mou}}
-@endslot
-@slot('nomor_mou_pengusul')
-{{$ia->moa->mou->nomor_mou_pengusul}}
-@endslot
-@slot('nomor_moa')
-{{$ia->moa->nomor_moa}}
-@endslot
-@slot('nomor_moa_pengusul')
-{{$ia->moa->nomor_moa_pengusul}}
-@endslot
-@slot('nomor_ia')
-{{$ia->nomor_ia}}
-@endslot
-@slot('nomor_ia_pengusul')
-{{$ia->nomor_ia_pengusul}}
-@endslot
-@slot('nik_nip_pengusul')
-{{$ia->nik_nip_pengusul}}
-@endslot
-@slot('jabatan_pengusul')
-{{$ia->jabatan_pengusul}}
-@endslot
-@slot('program')
-{{$ia->program}}
-@endslot
-@slot('tanggal_mulai')
-{{$ia->tanggal_mulai}}
-@endslot
-@slot('tanggal_berakhir')
-{{$ia->tanggal_berakhir}}
-@endslot
-@slot('download_mou')
-{{Storage::url("dokumen/mou/" . $ia->moa->mou->dokumen)}}
-@endslot
-@slot('download_moa')
-{{Storage::url("dokumen/moa/" . $ia->moa->dokumen)}}
-@endslot
-@slot('download_ia')
-{{Storage::url("dokumen/ia/" . $ia->dokumen)}}
-@endslot
-@slot('download_laporan_pelaksanaan')
-@if (($ia->laporan_hasil_pelaksanaan != '') || ($ia->laporan_hasil_pelaksanaan != NULL))
-@component('components.buttons.download_badge')
-@slot('url')
-{{Storage::url("dokumen/ia_laporan_hasil_pelaksanaan/" . $ia->laporan_hasil_pelaksanaan)}}
-@endslot
-@endcomponent
-@else
-@component('components.buttons.badge_info')
-@slot('color')
-danger
-@endslot
-@slot('info')
-{{__('components/span.belum_ada')}}
-@endslot
-@endcomponent
-@endif
-@endslot
-@slot('metode_pertemuan')
-{{$ia->metode_pertemuan}}
-@endslot
-@slot('tanggal_pertemuan')
-{{$ia->tanggal_pertemuan}}
-@endslot
-@slot('waktu_pertemuan')
-{{$ia->waktu_pertemuan}}
-@endslot
-@slot('tempat_pertemuan')
-{{$ia->tempat_pertemuan}}
-@endslot
-@slot('anggota_fakultas')
-@if (count($ia->anggotaFakultas) != 0)
-<li>
-    <span class="name-specification">{{__('components/form_mou_moa_ia.fakultas_')}}</span>
-    <span class="status-specification">
-        @foreach ($ia->anggotaFakultas as $item)
-        {{$item->fakultas->nama}} <p style="color: red; font-weight: bold; display: inline">|</p>
-        @endforeach
-    </span>
-</li>
-@else
-<li>
-    <span class="name-specification">{{__('components/form_mou_moa_ia.fakultas_')}}</span>
-    <span class="status-specification">
-        {{$ia->user->fakultas->nama}}
-    </span>
-</li>
-@endif
-@endslot
-@slot('anggota_prodi')
-@if (count($ia->anggotaProdi) != 0)
-<li>
-    <span class="name-specification">{{__('components/form_mou_moa_ia.program_studi_')}}</span>
-    <span class="status-specification">
-        {{-- {{$anggota_prodi}} --}}
-        @foreach ($ia->anggotaProdi as $item)
-        {{$item->prodi->nama}} <p style="color: red; font-weight: bold; display: inline">|</p>
-        @endforeach
-    </span>
-</li>
-@else
-<li>
-    <span class="name-specification">{{__('components/form_mou_moa_ia.program_studi_')}}</span>
-    <span class="status-specification">
-        {{$ia->user->prodi->nama}}
-    </span>
-</li>
-@endif
-@endslot
-@slot('nilai_uang')
-@php
-echo "Rp " . number_format($ia->nilai_uang, 0, ".", ".");
-
-@endphp
-@endslot
-@endcomponent
+        @slot('title_nomor_mou')
+        {{__('components/form_mou_moa_ia.nomor_mou')}}
+        @endslot
+        @slot('title_nomor_pengusul_mou')
+        {{__('components/form_mou_moa_ia.nomor_mou_pengusul')}}        
+        @endslot
+        @slot('title_nomor_moa')
+        {{__('components/form_mou_moa_ia.nomor_moa')}}
+        @endslot
+        @slot('title_nomor_pengusul_moa')
+        {{__('components/form_mou_moa_ia.nomor_moa_pengusul')}}
+        @endslot
+        @slot('title_nomor_ia')
+            {{__('components/form_mou_moa_ia.nomor_ia')}}
+        @endslot
+        @slot('title_nomor_pengusul_ia')
+            {{__('components/form_mou_moa_ia.nomor_ia_pengusul')}}        
+        @endslot
+        @slot('nomor_mou')
+            {{$ia->moa->mou->nomor_mou}}
+        @endslot
+        @slot('nomor_mou_pengusul')
+            {{$ia->moa->mou->nomor_mou_pengusul}}
+        @endslot
+        @slot('nomor_moa')
+            {{$ia->moa->nomor_moa}}
+        @endslot
+        @slot('nomor_moa_pengusul')
+            {{$ia->moa->nomor_moa_pengusul}}
+        @endslot
+        @slot('nomor_ia')
+            {{$ia->nomor_ia}}
+        @endslot
+        @slot('nomor_ia_pengusul')
+            {{$ia->nomor_ia_pengusul}}
+        @endslot
+        @slot('pejabat_penandatangan')
+            {{$ia->pejabat_penandatangan}}
+        @endslot
+        @slot('nik_nip_pengusul')
+            {{$ia->nik_nip_pengusul}}
+        @endslot
+        @slot('jabatan_pengusul')
+            {{$ia->jabatan_pengusul}}
+        @endslot
+        @slot('program')
+            {{$ia->program}}
+        @endslot
+        @slot('manfaat')
+            {{$ia->manfaat}}
+        @endslot
+        @slot('jenis_kerjasama')
+            @if (count($ia->jenisKerjasama) != 0)
+            <li>
+                <span class="name-specification">{{__('components/form_mou_moa_ia.jenis_kerjasama')}}</span>
+                <span class="status-specification">                    
+                    @foreach ($ia->jenisKerjasama as $item)
+                        {{$item->jenis_kerjasama}} <p style="color: red; font-weight: bold; display: inline">|</p>
+                    @endforeach 
+                </span>
+            </li>                           
+            @endif
+        @endslot
+        @slot('tanggal_mulai')
+            {{$ia->tanggal_mulai}}
+        @endslot
+        @slot('tanggal_berakhir')
+            {{$ia->tanggal_berakhir}}
+        @endslot
+        @slot('download_mou')
+            {{Storage::url("dokumen/mou/" . $ia->moa->mou->dokumen)}}
+        @endslot
+        @slot('download_moa')
+            {{Storage::url("dokumen/moa/" . $ia->moa->dokumen)}}
+        @endslot
+        @slot('download_ia')
+            {{Storage::url("dokumen/ia/" . $ia->dokumen)}}
+        @endslot
+        {{-- @slot('surat_tugas')
+            {{Storage::url("dokumen/ia/" . $ia->surat_tugas)}}
+        @endslot --}}
+        @slot('surat_tugas')
+            @if (($ia->surat_tugas != '') || ($ia->surat_tugas != NULL))
+                @component('components.buttons.download_badge')
+                    @slot('url')
+                        {{Storage::url("dokumen/ia-surat_tugas/" . $ia->surat_tugas)}}                
+                    @endslot
+                @endcomponent
+            @else
+                @component('components.buttons.badge_info')
+                    @slot('color')
+                        danger
+                    @endslot
+                    @slot('info')
+                        {{__('components/span.belum_ada')}}         
+                    @endslot
+                @endcomponent
+            @endif
+        @endslot
+        @slot('download_laporan_pelaksanaan')
+            @if (($ia->laporan_hasil_pelaksanaan != '') || ($ia->laporan_hasil_pelaksanaan != NULL))
+                @component('components.buttons.download_badge')
+                    @slot('url')
+                        {{Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $ia->laporan_hasil_pelaksanaan)}}                
+                    @endslot
+                @endcomponent
+            @else
+                @component('components.buttons.badge_info')
+                    @slot('color')
+                        danger
+                    @endslot
+                    @slot('info')
+                        {{__('components/span.belum_ada')}}         
+                    @endslot
+                @endcomponent
+            @endif
+        @endslot
+        @slot('metode_pertemuan')
+            {{$ia->metode_pertemuan}}
+        @endslot
+        @slot('tanggal_pertemuan')
+            {{$ia->tanggal_pertemuan}}
+        @endslot
+        @slot('waktu_pertemuan')
+            {{$ia->waktu_pertemuan}}
+        @endslot
+        @slot('tempat_pertemuan')
+            {{$ia->tempat_pertemuan}}
+        @endslot
+        @slot('anggota_fakultas')
+            @if (count($ia->anggotaFakultas) != 0)
+            <li>
+                <span class="name-specification">{{__('components/form_mou_moa_ia.fakultas_')}}</span>
+                <span class="status-specification">                    
+                    @foreach ($ia->anggotaFakultas as $item)
+                        {{$item->fakultas->nama}} <p style="color: red; font-weight: bold; display: inline">|</p>
+                    @endforeach 
+                </span>
+            </li>    
+            @else
+            <li>
+                <span class="name-specification">{{__('components/form_mou_moa_ia.fakultas_')}}</span>
+                <span class="status-specification">
+                    {{$ia->user->fakultas->nama}}                    
+                </span>
+            </li>                  
+            @endif
+        @endslot
+        @slot('anggota_prodi')
+            @if (count($ia->anggotaProdi) != 0)
+            <li>
+                <span class="name-specification">{{__('components/form_mou_moa_ia.program_studi_')}}</span>
+                <span class="status-specification">
+                    {{-- {{$anggota_prodi}} --}}
+                    @foreach ($ia->anggotaProdi as $item)
+                        {{$item->prodi->nama}} <p style="color: red; font-weight: bold; display: inline">|</p>
+                    @endforeach 
+                </span>
+            </li>   
+            @else
+            <li>
+                <span class="name-specification">{{__('components/form_mou_moa_ia.program_studi_')}}</span>
+                <span class="status-specification">
+                    {{$ia->user->prodi->nama}}                    
+                </span>
+            </li>   
+            @endif
+        @endslot   
+        @slot('nilai_uang')
+            @php
+                echo "Rp " . number_format($ia->nilai_uang, 0, ".", ".");                
+            @endphp
+        @endslot
+    @endcomponent
 @endsection
 
 @push('script')

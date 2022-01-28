@@ -53,7 +53,7 @@
                                 @else {{$item->kelurahan->nama}}
                                 @endif" 
                                 latitude="{{$item->latitude}}" 
-                                longitude="{{$item->longitude}}" value="{{$item->id}}">{{$item->nama}}</option>                                       
+                                longitude="{{$item->longitude}}" alamat="{{$item->alamat}}" value="{{$item->id}}">{{$item->nama}}</option>                                       
                         @empty
                             <option value="">Tidak ada data</option>
                         @endforelse

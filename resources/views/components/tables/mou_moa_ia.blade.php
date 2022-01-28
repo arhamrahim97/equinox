@@ -18,8 +18,8 @@
                     <tr class="text-center  ">
                         <th>{{$thead_nomor}}</th>
                         <th>{{$thead_nomor_mou_moa_ia}}</th>
-                        <th style="width: 30%">Program</th>
                         <th>{{$thead_pengusul}}</th>
+                        <th style="width: 30%">Program</th>
                         <th>{{$thead_tanggal_mulai}}</th>                    
                         <th>{{$thead_tanggal_berakhir}}</th>                                                
                         <th>{{$thead_dibuat_oleh}}</th>                                                
@@ -130,13 +130,13 @@
             name: '{{$tbody_nomor_mou_moa_ia}}'
         },
         {
-            data: 'program',
-            name: 'program'
-        },
-        {
             data: 'pengusul_nama',
             name: 'pengusul_nama',
 
+        },
+        {
+            data: 'program',
+            name: 'program'
         },
         {
             data: 'tanggal_mulai',

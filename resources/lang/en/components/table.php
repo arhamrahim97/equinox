@@ -21,6 +21,7 @@ return [
     'telepon' => 'Phone',
 
     'pengusul' => 'Proposer',
+    'instansi_pengusul' => 'Proposer Agency',
     'nomor_mou' => 'MOU Number',
     'nomor_moa' => 'MOA Number',
     'nomor_ia' => 'IA Number',
@@ -31,7 +32,7 @@ return [
     'tanggal_berakhir' => 'End Date',
     'dibuat_oleh' => 'Made by',
 
-    'pengusul' => 'Proposer',
+    // 'pengusul' => 'Proposer',
     'program' => 'Program',
     'status' => 'Status',
     'tanggal_mulai' => 'Start Date',

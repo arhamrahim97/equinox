@@ -61,7 +61,7 @@
                                 @else {{$item->kelurahan->nama}}
                                 @endif" 
                                 latitude="{{$item->latitude}}" 
-                                longitude="{{$item->longitude}}" value="{{$item->id}}" @if(old('pengusul_id', $mou->pengusul->id) == $item->id) selected @endif>{{$item->nama}}</option>                                       
+                                longitude="{{$item->longitude}}" alamat="{{$item->alamat}}" value="{{$item->id}}" @if(old('pengusul_id', $mou->pengusul->id) == $item->id) selected @endif>{{$item->nama}}</option>                                       
                         @empty
                             <option value="">Tidak ada data</option>
                         @endforelse
@@ -77,6 +77,9 @@
                     @endslot
                     @slot('nomor_mou_pengusul')
                         {{$mou->nomor_mou_pengusul}}
+                    @endslot
+                    @slot('pejabat_penandatangan')
+                        {{$mou->pejabat_penandatangan}}
                     @endslot
                     @slot('nik_nip_pengusul')
                         {{$mou->nik_nip_pengusul}}
@@ -127,3 +130,5 @@
 @push('script')   
 
 @endpush
+
+
