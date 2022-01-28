@@ -26,7 +26,7 @@ class MouController extends Controller
      */
     
     public function index(Request $request)
-    {
+    {        
         $data = [
             'user' => User::where('role', 'Admin')->get(),
         ];
@@ -36,7 +36,7 @@ class MouController extends Controller
                             ->join('users', 'mou.users_id', '=', 'users.id')                            
                             ->select('mou.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama')
                             ->whereNull('mou.deleted_at')
-                            ->orderBy('mou.id', 'desc');
+                            ->orderBy('mou.id', 'asc');
                             // ->get();            
             // $data = Mou::with(['pengusul'])->orderBy('id', 'desc')->get();
             return DataTables::of($data)
@@ -78,40 +78,35 @@ class MouController extends Controller
 
                     return $actionBtn;
                 })
-                ->filter(function ($query) use ($request) {                    
+                ->filter(function ($query) use ($request) {    
+                    if ($request->search != '') {
+                        $query->whereRaw('(program LIKE "%'.$request->search.'%" OR pengusul.nama LIKE "%'.$request->search.'%" OR mou.nomor_mou_pengusul LIKE "%'.$request->search.'%")');                        
+                        // $query->where('program', 'LIKE', '%'.$request->search.'%');                        
+                    }      
+                                    
                     if (!empty($request->dibuat_oleh)) {
-                        $query->where('users.nama', $request->dibuat_oleh);
-                        if ($request->search != '') {
-                            $query->where('program', 'LIKE', '%'.$request->search.'%');                        
-                        }      
+                        $query->where('users.nama', $request->dibuat_oleh);                       
                     }
 
                     if (!empty($request->status)) {
                         if($request->status == 'aktif'){
-                            $query->whereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 364 DAY) < tanggal_berakhir');
-                            if ($request->search != '') {
-                                $query->whereRaw('program LIKE "%'.$request->search.'%"')                                    ;                                            
-                            }
+                            $query->whereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 364 DAY) < tanggal_berakhir');                            
                         } 
                         else if($request->status == 'masa_tenggang'){
                             $query->where('tanggal_berakhir','=',date("Y-m-d"));
-                            $query->orWhereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 364 DAY) > tanggal_berakhir');
-                            if ($request->search != '') {
-                                $query->whereRaw('program LIKE "%'.$request->search.'%"')                                    ;                                            
-                            }
+                            if(Auth::user()->role == 'Admin'){
+                                $query->orWhereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 364 DAY) > tanggal_berakhir AND (mou.deleted_at is NULL OR mou.deleted_at = "" OR mou.deleted_at = NULL) AND users.nama LIKE "%'.$request->dibuat_oleh.'" AND users.role = "'. Auth::user()->role. '" AND (program LIKE "%'.$request->search.'%" OR pengusul.nama LIKE "%'.$request->search.'%" OR mou.nomor_mou_pengusul LIKE "%'.$request->search.'%")');
+                            } else{
+                                $query->orWhereRaw('tanggal_berakhir > NOW() AND (mou.deleted_at is NULL OR mou.deleted_at = "" OR mou.deleted_at = NULL) AND DATE_ADD(NOW(), INTERVAL 364 DAY) > tanggal_berakhir AND users.nama LIKE "%'.$request->dibuat_oleh.'" AND (program LIKE "%'.$request->search.'%" OR pengusul.nama LIKE "%'.$request->search.'%" OR mou.nomor_mou_pengusul LIKE "%'.$request->search.'%")');
+                            }                            
+                            
                         }
                          else{ // expired
-                            $query->where('tanggal_berakhir', '<', date("Y-m-d"));
-                            if ($request->search != '') {
-                                $query->where('program', 'LIKE', '%'.$request->search.'%');                        
-                            }      
-
+                            $query->where('tanggal_berakhir', '<', date("Y-m-d"));                           
                         }                     
                     }
 
-                    if ($request->search != '') {
-                        $query->where('program', 'LIKE', '%'.$request->search.'%');                        
-                    }      
+                    
                 })
                 ->rawColumns(['status', 'action', 'dibuat_oleh'])
                 ->make(true);
@@ -128,7 +123,7 @@ class MouController extends Controller
     {
         if(Auth::user()->role == 'Admin'){
             $data = [
-                'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->orderBy('id', 'desc')->get()
+                'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->orderBy('id', 'desc')->orderBy('id', 'desc')->get()
             ];        
             return view('pages/mou/create', $data);
         } else{
@@ -150,6 +145,7 @@ class MouController extends Controller
                 'pengusul_id' => 'required',
                 'nomor_mou' => ['required', Rule::unique('mou')->withoutTrashed()],
                 'nomor_mou_pengusul' => ['required', Rule::unique('mou')->withoutTrashed()],            
+                'pejabat_penandatangan' => 'required',
                 'nik_nip_pengusul' => 'required',
                 'jabatan_pengusul' => 'required',
                 'program' => 'required',
@@ -167,6 +163,7 @@ class MouController extends Controller
                 'nomor_mou.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_mou')]),
                 'nomor_mou_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nomor_mou_pengusul')]),
                 'nomor_mou_pengusul.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_mou_pengusul')]),
+                'pejabat_penandatangan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.pejabat_penandatangan')]),
                 'nik_nip_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nik_nip_pengusul')]),
                 'jabatan_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.jabatan_pengusul')]),
                 'program.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program')]),                
@@ -199,6 +196,7 @@ class MouController extends Controller
             'longitude' => $request->longitude,
             'nomor_mou' => $request->nomor_mou,
             'nomor_mou_pengusul' => $request->nomor_mou_pengusul,
+            'pejabat_penandatangan' => $request->pejabat_penandatangan,
             'nik_nip_pengusul' => $request->nik_nip_pengusul,
             'jabatan_pengusul' => $request->jabatan_pengusul,
             'program' => $request->program,
@@ -275,6 +273,7 @@ class MouController extends Controller
                 'pengusul_id' => 'required',
                 'nomor_mou' => $nomor_mou_req,
                 'nomor_mou_pengusul' => $nomor_mou_pengusul_req,
+                'pejabat_penandatangan' => 'required',
                 'nik_nip_pengusul' => 'required',
                 'jabatan_pengusul' => 'required',
                 'program' => 'required',
@@ -292,6 +291,7 @@ class MouController extends Controller
                 'nomor_mou.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_mou')]),
                 'nomor_mou_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nomor_mou_pengusul')]),
                 'nomor_mou_pengusul.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_mou_pengusul')]),
+                'pejabat_penandatangan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.pejabat_penandatangan')]),
                 'nik_nip_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nik_nip_pengusul')]),
                 'jabatan_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.jabatan_pengusul')]),
                 'program.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program')]),                
@@ -311,12 +311,13 @@ class MouController extends Controller
         }       
 
         $data = [
-            'users_id' => Auth::user()->id,
+            // 'users_id' => Auth::user()->id,
             'pengusul_id' => $request->pengusul_id,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
             'nomor_mou' => $request->nomor_mou,
             'nomor_mou_pengusul' => $request->nomor_mou_pengusul,
+            'pejabat_penandatangan' => $request->pejabat_penandatangan,
             'nik_nip_pengusul' => $request->nik_nip_pengusul,
             'jabatan_pengusul' => $request->jabatan_pengusul,
             'program' => $request->program,

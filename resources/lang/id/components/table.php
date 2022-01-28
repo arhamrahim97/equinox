@@ -20,6 +20,7 @@ return [
     'kelurahan' => 'Kelurahan/Desa',
     'telepon' => 'Telepon',
     'pengusul' => 'Pengusul',
+    'instansi_pengusul' => 'Instansi Pengusul',
     'nomor_mou' => 'Nomor MOU',
     'nomor_moa' => 'Nomor MOA',
     'nomor_ia' => 'Nomor IA',
@@ -41,4 +42,3 @@ return [
     'program' => 'Program',
     'foto' => 'Foto'
 ];
-

@@ -3316,7 +3316,7 @@ class KotaTableSeeder extends Seeder
             366 =>
             array(
                 'id' => 367,
-                'nama' => 'banggai',
+                'nama' => 'banggai laut',
                 'provinsi_id' => 26,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
@@ -4294,6 +4294,16 @@ class KotaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
+            475 =>
+            array(
+                'id' => 476,
+                'nama' => 'morowali utara',
+                'provinsi_id' => 26,
+                'deleted_at' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            
         ));
     }
 }

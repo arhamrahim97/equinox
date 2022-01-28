@@ -81,6 +81,9 @@
         @slot('nomor_mou_pengusul')
             {{$mou->nomor_mou_pengusul}}
         @endslot
+        @slot('pejabat_penandatangan')
+            {{$mou->pejabat_penandatangan}}
+        @endslot
         @slot('nik_nip_pengusul')
             {{$mou->nik_nip_pengusul}}
         @endslot

@@ -93,6 +93,9 @@
         @slot('nomor_moa_pengusul')
             {{$moa->nomor_moa_pengusul}}
         @endslot
+        @slot('pejabat_penandatangan')
+            {{$moa->pejabat_penandatangan}}
+        @endslot
         @slot('nik_nip_pengusul')
             {{$moa->nik_nip_pengusul}}
         @endslot

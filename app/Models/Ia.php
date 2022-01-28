@@ -40,6 +40,10 @@ class Ia extends Model
     public function anggotaProdi(){
         return $this->hasMany(AnggotaProdi::class, 'ia_id', 'id');
     }
+
+    public function jenisKerjasama(){
+        return $this->hasMany(JenisKerjasama::class, 'ia_id', 'id');
+    }
   
     public function user(){
         return $this->belongsTo(User::class, 'users_id', 'id');

@@ -169,12 +169,11 @@
                             <tr>
                                 <th class="text-center">No.</th>
                                 <th class="text-center">Status</th>
+                                <th class="text-center">{{__('pages/master/rekapitulasi.program')}}</th>                            
                                 <th class="text-center">{{__('pages/master/rekapitulasi.tanggal_penginputan')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.waktu_penginputan')}}</th>
-                                <th class="text-center">{{__('pages/master/rekapitulasi.penginput')}}</th>
-                                <th class="text-center">{{__('pages/master/rekapitulasi.pengusul')}}</th>
-                                <th class="text-center">{{__('pages/master/rekapitulasi.nik_nip_pengusul')}}</th>
-                                <th class="text-center">{{__('pages/master/rekapitulasi.jabatan_pengusul')}}</th>
+                                <th class="text-center">{{__('pages/master/rekapitulasi.penginput')}}</th>                                
+                                <th class="text-center">{{__('pages/master/rekapitulasi.instansi_pengusul')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.negara')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.provinsi')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.kabupaten')}}</th>
@@ -186,7 +185,9 @@
                                 <th class="text-center">{{__('pages/master/rekapitulasi.nomor_hp')}}</th>                                
                                 <th class="text-center">{{__('pages/master/rekapitulasi.nomor_mou')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.nomor_mou_pengusul')}}</th>                                                              
-                                <th class="text-center">{{__('pages/master/rekapitulasi.program')}}</th>                            
+                                <th class="text-center">{{__('pages/master/rekapitulasi.pejabat_penandatangan')}}</th>
+                                <th class="text-center">{{__('pages/master/rekapitulasi.nik_nip_pengusul')}}</th>
+                                <th class="text-center">{{__('pages/master/rekapitulasi.jabatan_pengusul')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.tanggal_mulai_')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.tanggal_berakhir_')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.metode_pertemuan')}}</th>
@@ -204,12 +205,11 @@
                             <tr>
                                 <th class="text-center">No.</th>
                                 <th class="text-center">Status</th>
+                                <th class="text-center">{{__('pages/master/rekapitulasi.program')}}</th>                            
                                 <th class="text-center">{{__('pages/master/rekapitulasi.tanggal_penginputan')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.waktu_penginputan')}}</th>
-                                <th class="text-center">{{__('pages/master/rekapitulasi.penginput')}}</th>
-                                <th class="text-center">{{__('pages/master/rekapitulasi.pengusul')}}</th>
-                                <th class="text-center">{{__('pages/master/rekapitulasi.nik_nip_pengusul')}}</th>
-                                <th class="text-center">{{__('pages/master/rekapitulasi.jabatan_pengusul')}}</th>
+                                <th class="text-center">{{__('pages/master/rekapitulasi.penginput')}}</th>                                
+                                <th class="text-center">{{__('pages/master/rekapitulasi.instansi_pengusul')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.negara')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.provinsi')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.kabupaten')}}</th>
@@ -223,7 +223,9 @@
                                 <th class="text-center">{{__('pages/master/rekapitulasi.nomor_moa_pengusul')}}</th>                                                              
                                 <th class="text-center">{{__('pages/master/rekapitulasi.nomor_mou')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.nomor_mou_pengusul')}}</th>                                                              
-                                <th class="text-center">{{__('pages/master/rekapitulasi.program')}}</th>                            
+                                <th class="text-center">{{__('pages/master/rekapitulasi.pejabat_penandatangan')}}</th>
+                                <th class="text-center">{{__('pages/master/rekapitulasi.nik_nip_pengusul')}}</th>
+                                <th class="text-center">{{__('pages/master/rekapitulasi.jabatan_pengusul')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.tanggal_mulai_')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.tanggal_berakhir_')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.metode_pertemuan')}}</th>
@@ -241,12 +243,11 @@
                             <tr>
                                 <th class="text-center">No.</th>
                                 <th class="text-center">Status</th>
+                                <th class="text-center">{{__('pages/master/rekapitulasi.program')}}</th>                            
                                 <th class="text-center">{{__('pages/master/rekapitulasi.tanggal_penginputan')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.waktu_penginputan')}}</th>
-                                <th class="text-center">{{__('pages/master/rekapitulasi.penginput')}}</th>
-                                <th class="text-center">{{__('pages/master/rekapitulasi.pengusul')}}</th>
-                                <th class="text-center">{{__('pages/master/rekapitulasi.nik_nip_pengusul')}}</th>
-                                <th class="text-center">{{__('pages/master/rekapitulasi.jabatan_pengusul')}}</th>
+                                <th class="text-center">{{__('pages/master/rekapitulasi.penginput')}}</th>                                
+                                <th class="text-center">{{__('pages/master/rekapitulasi.instansi_pengusul')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.negara')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.provinsi')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.kabupaten')}}</th>
@@ -261,8 +262,10 @@
                                 <th class="text-center">{{__('pages/master/rekapitulasi.nomor_moa')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.nomor_moa_pengusul')}}</th>  
                                 <th class="text-center">{{__('pages/master/rekapitulasi.nomor_mou')}}</th>
-                                <th class="text-center">{{__('pages/master/rekapitulasi.nomor_mou_pengusul')}}</th>                                                               
-                                <th class="text-center">{{__('pages/master/rekapitulasi.program')}}</th>                            
+                                <th class="text-center">{{__('pages/master/rekapitulasi.nomor_mou_pengusul')}}</th>    
+                                <th class="text-center">{{__('pages/master/rekapitulasi.pejabat_penandatangan')}}</th>
+                                <th class="text-center">{{__('pages/master/rekapitulasi.nik_nip_pengusul')}}</th>
+                                <th class="text-center">{{__('pages/master/rekapitulasi.jabatan_pengusul')}}</th>                                                           
                                 <th class="text-center">{{__('pages/master/rekapitulasi.tanggal_mulai_')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.tanggal_berakhir_')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.metode_pertemuan')}}</th>
@@ -433,6 +436,11 @@
                         searchable: false
                     },
                     {
+                        data: 'program',
+                        name: 'program',
+                        searchable: true
+                    },
+                    {
                         data: 'tanggal_pembuatan',
                         name: 'tanggal_pembuatan',
                         searchable: false
@@ -447,21 +455,11 @@
                         data: 'penginput',
                         name: 'users.nama',
                         searchable: true
-                    },
+                    },                    
                     {
                         data: 'pengusul',
                         name: 'pengusul.nama',
                         searchable: true
-                    },
-                    {
-                        data: 'nik_nip_pengusul',
-                        name: 'nik_nip_pengusul',
-                        searchable: false
-                    },
-                    {
-                        data: 'jabatan_pengusul',
-                        name: 'jabatan_pengusul',
-                        searchable: false
                     },
                     {
                         data: 'negara',
@@ -517,12 +515,22 @@
                         data: 'nomor_mou_pengusul',
                         name: 'nomor_mou_pengusul',
                         searchable: false
-                    },
+                    },  
                     {
-                        data: 'program',
-                        name: 'program',
+                        data: 'pejabat_penandatangan',
+                        name: 'pejabat_penandatangan',
                         searchable: true
                     },
+                    {
+                        data: 'nik_nip_pengusul',
+                        name: 'nik_nip_pengusul',
+                        searchable: false
+                    },
+                    {
+                        data: 'jabatan_pengusul',
+                        name: 'jabatan_pengusul',
+                        searchable: false
+                    },                  
                     {
                         data: 'tanggal_mulai',
                         name: 'tanggal_mulai',
@@ -603,6 +611,11 @@
                         searchable: false
                     },
                     {
+                        data: 'program',
+                        name: 'program',
+                        searchable: true
+                    },
+                    {
                         data: 'tanggal_pembuatan',
                         name: 'tanggal_pembuatan',
                         searchable: false
@@ -617,21 +630,11 @@
                         data: 'penginput',
                         name: 'users.nama',
                         searchable: true
-                    },
+                    },                    
                     {
                         data: 'pengusul',
                         name: 'pengusul.nama',
                         searchable: true
-                    },
-                    {
-                        data: 'nik_nip_pengusul',
-                        name: 'nik_nip_pengusul',
-                        searchable: false
-                    },
-                    {
-                        data: 'jabatan_pengusul',
-                        name: 'jabatan_pengusul',
-                        searchable: false
                     },
                     {
                         data: 'negara',
@@ -697,12 +700,22 @@
                         data: 'nomor_mou_pengusul',
                         name: 'nomor_mou_pengusul',
                         searchable: false
-                    },
+                    },     
                     {
-                        data: 'program',
-                        name: 'program',
+                        data: 'pejabat_penandatangan',
+                        name: 'pejabat_penandatangan',
                         searchable: true
                     },
+                    {
+                        data: 'nik_nip_pengusul',
+                        name: 'nik_nip_pengusul',
+                        searchable: false
+                    },
+                    {
+                        data: 'jabatan_pengusul',
+                        name: 'jabatan_pengusul',
+                        searchable: false
+                    },               
                     {
                         data: 'tanggal_mulai',
                         name: 'tanggal_mulai',
@@ -783,6 +796,11 @@
                         searchable: false
                     },
                     {
+                        data: 'program',
+                        name: 'program',
+                        searchable: true
+                    },
+                    {
                         data: 'tanggal_pembuatan',
                         name: 'tanggal_pembuatan',
                         searchable: false
@@ -797,21 +815,11 @@
                         data: 'penginput',
                         name: 'users.nama',
                         searchable: true
-                    },
+                    },                    
                     {
                         data: 'pengusul',
                         name: 'pengusul.nama',
                         searchable: true
-                    },
-                    {
-                        data: 'nik_nip_pengusul',
-                        name: 'nik_nip_pengusul',
-                        searchable: false
-                    },
-                    {
-                        data: 'jabatan_pengusul',
-                        name: 'jabatan_pengusul',
-                        searchable: false
                     },
                     {
                         data: 'negara',
@@ -887,12 +895,22 @@
                         data: 'nomor_mou_pengusul',
                         name: 'nomor_mou_pengusul',
                         searchable: false
-                    },
+                    },   
                     {
-                        data: 'program',
-                        name: 'program',
+                        data: 'pejabat_penandatangan',
+                        name: 'pejabat_penandatangan',
                         searchable: true
                     },
+                    {
+                        data: 'nik_nip_pengusul',
+                        name: 'nik_nip_pengusul',
+                        searchable: false
+                    },
+                    {
+                        data: 'jabatan_pengusul',
+                        name: 'jabatan_pengusul',
+                        searchable: false
+                    },                
                     {
                         data: 'tanggal_mulai',
                         name: 'tanggal_mulai',

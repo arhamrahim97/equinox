@@ -18,6 +18,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreIaRequest;
 use App\Http\Requests\UpdateIaRequest;
+use App\Models\JenisKerjasama;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -120,22 +121,33 @@ class IaController extends Controller
                     if($row->users_id == Auth::user()->id){
                         $actionBtn = '<div class="row text-center justify-content-center">';
                         $actionBtn .= '<a href="' . Storage::url("dokumen/ia/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>';
+                        if(($row->surat_tugas != '') || ($row->surat_tugas != NULL)){
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-surat_tugas/" . $row->surat_tugas) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_surat_tugas') . '</a>';                            
+                        }                   
                         if(($row->laporan_hasil_pelaksanaan != '') || ($row->laporan_hasil_pelaksanaan != NULL)){
-                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-laporan hasil pelaksanaan/" . $row->laporan_hasil_pelaksanaan) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_laporan_pelaksanaan') . '</a>';                            
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $row->laporan_hasil_pelaksanaan) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_laporan_pelaksanaan') . '</a>';                            
+                        } else{
+                            $actionBtn .= '<button id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-secondary btn-sm mr-1 my-1" onclick="showModalFileTambahan(' . $row->id . ', `laporan_pelaksanaan`)"  value="' . $row->id . '" >' . __('components/button.upload_laporan_pelaksanaan') . '</button>';
+                        
                         }
-                        else{
-                            $actionBtn .= '<button id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-secondary btn-sm mr-1 my-1" onclick="showModal(' . $row->id . ')"  value="' . $row->id . '" >' . __('components/button.upload_laporan_pelaksanaan') . '</button>';
-                        }
+                                  
                         $actionBtn .= '<a href="' . url('/ia/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>';
                         $actionBtn .= '<a href="' . url('/ia/' . $row->id . '/edit') . '" id="btn-edit" class="btn btn-warning btn-sm mr-1 my-1">' . __('components/button.edit') . '</a>';
                         $actionBtn .= '<button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1 my-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button>';
                         $actionBtn .= '</div>';
                     }
-                    else{ // role selain user pembuat
-                        $actionBtn = '<div class="row text-center justify-content-center">';
+                    else{ // role selain user pembuat      
+                        $actionBtn = '';
+                        if((Auth::user()->role == 'Admin') && (($row->surat_tugas == '') || ($row->surat_tugas == NULL))){                         
+                            $actionBtn = '<button id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-secondary btn-sm mr-1 my-1" onclick="showModalFileTambahan(' . $row->id . ', `surat_tugas`)"  value="' . $row->id . '" >' . __('components/button.upload_surat_tugas') . '</button>';                            
+                        }                        
+                        $actionBtn .= '<div class="row text-center justify-content-center">';
                         $actionBtn .= '<a href="' . Storage::url("dokumen/ia/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>';
+                        if(($row->surat_tugas != '') || ($row->surat_tugas != NULL)){
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-surat_tugas/" . $row->surat_tugas) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_surat_tugas') . '</a>';                            
+                        }
                         if(($row->laporan_hasil_pelaksanaan != '') || ($row->laporan_hasil_pelaksanaan != NULL)){                            
-                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-laporan hasil pelaksanaan/" . $row->laporan_hasil_pelaksanaan) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_laporan_pelaksanaan') . '</a>';
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $row->laporan_hasil_pelaksanaan) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_laporan_pelaksanaan') . '</a>';
                         }
                         $actionBtn .= '<a href="' . url('/ia/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>';
                         $actionBtn .= '</div>';
@@ -144,7 +156,7 @@ class IaController extends Controller
                 })
                 ->filter(function ($query) use ($request) {      
                     if ($request->search != '') {
-                        $query->where('program', 'LIKE', '%'.$request->search.'%');                        
+                        $query->whereRaw('(program LIKE "%'.$request->search.'%" OR pengusul.nama LIKE "%'.$request->search.'%" OR ia.nomor_ia_pengusul LIKE "%'.$request->search.'%")');                        
                     }        
                                   
                     if (!empty($request->dibuat_oleh)) {                        
@@ -157,8 +169,7 @@ class IaController extends Controller
                             $query->whereRaw('(laporan_hasil_pelaksanaan = "" OR laporan_hasil_pelaksanaan is NULL)');                    
                         }                      
                         else if ($request->status == 'selesai')  {                              
-                            $query->where('laporan_hasil_pelaksanaan', '!=', '');                                                        
-                            $query->orWhereRaw('laporan_hasil_pelaksanaan != NULL');                                                        
+                            $query->whereRaw('(laporan_hasil_pelaksanaan != "" OR laporan_hasil_pelaksanaan != NULL)');                                                                                                                                      
                         }
                         else if ($request->status == 'melewati_batas'){ // melewati batas                                                                    
                             $query->whereRaw('tanggal_berakhir < NOW() AND (laporan_hasil_pelaksanaan = "" OR laporan_hasil_pelaksanaan is NULL)');                                                            
@@ -199,9 +210,7 @@ class IaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // return response()->json($request);
-        // die;
+    {         
         if(in_array(Auth::user()->role, array('LPPM', 'Fakultas', 'Pascasarjana', 'PSDKU'))){
             if(Auth::user()->role == 'LPPM'){
                 $fakultas_req = 'required';
@@ -215,7 +224,7 @@ class IaController extends Controller
                 $prodi = $request->program_studi;
             }
         }
-        else{
+        else{ // role == prodi, unit kerja
             $fakultas_req = '';
             $prodi_req = '';
             $prodi = 0;
@@ -229,6 +238,7 @@ class IaController extends Controller
                 'nomor_moa_pengusul' => 'required',                
                 'nomor_ia' => ['required', Rule::unique('ia')->withoutTrashed()],
                 'nomor_ia_pengusul' => ['required', Rule::unique('ia')->withoutTrashed()],                         
+                'pejabat_penandatangan' => 'required',
                 'nik_nip_pengusul' => 'required',
                 'jabatan_pengusul' => 'required',
                 'program' => 'required',
@@ -237,6 +247,8 @@ class IaController extends Controller
                 'dokumen' => 'required',
                 'fakultas' => $fakultas_req,
                 'program_studi' => $prodi_req,
+                'manfaat' => 'required',
+                'jenis_kerjasama' => 'required',
                 'nilai_uang' => 'required',
                 'metode_pertemuan' => 'required',
                 'tanggal_pertemuan' => 'required',
@@ -251,6 +263,7 @@ class IaController extends Controller
                 'nomor_ia_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nomor_ia_pengusul')]),
                 'nomor_ia_pengusul.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_ia_pengusul')]),
 
+                'pejabat_penandatangan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.pejabat_penandatangan')]),
                 'nik_nip_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nik_nip_pengusul')]),
                 'jabatan_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.jabatan_pengusul')]),
                 'program.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program')]),                
@@ -258,7 +271,9 @@ class IaController extends Controller
                 'tanggal_berakhir.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_berakhir')]),                
                 'dokumen.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.dokumen')]),                           
                 'fakultas.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.fakultas')]),                           
-                'program_studi.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program_studi')]),                           
+                'program_studi.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program_studi')]),  
+                'manfaat.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.manfaat')]),                           
+                'jenis_kerjasama.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.jenis_kerjasama')]),                                
                 'nilai_uang.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nilai_uang')]),                           
                 'metode_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.metode_pertemuan')]),                
                 'tanggal_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_pertemuan')]),                
@@ -287,9 +302,11 @@ class IaController extends Controller
             'moa_id' => $request->nomor_moa_pengusul,
             'nomor_ia' => $request->nomor_ia,
             'nomor_ia_pengusul' => $request->nomor_ia_pengusul,
+            'pejabat_penandatangan' => $request->pejabat_penandatangan,
             'nik_nip_pengusul' => $request->nik_nip_pengusul,
             'jabatan_pengusul' => $request->jabatan_pengusul,
             'program' => $request->program,
+            'manfaat' => $request->manfaat,
             'tanggal_mulai' => date("Y-m-d", strtotime($request->tanggal_mulai)),
             'tanggal_berakhir' => date("Y-m-d", strtotime($request->tanggal_berakhir)),
             'dokumen' => $namaFileBerkas,            
@@ -304,6 +321,7 @@ class IaController extends Controller
 
 
         $ia_id = Ia::max('id');        
+                
         if($prodi != 0){
             foreach($request->program_studi as $item){
                 $data = [
@@ -335,6 +353,14 @@ class IaController extends Controller
             ];                          
             AnggotaFakultas::create($data);
         }
+
+        foreach($request->jenis_kerjasama as $item){
+            $data = [
+                'ia_id' => $ia_id,
+                'jenis_kerjasama' => $item
+            ];            
+            JenisKerjasama::create($data);
+        }
         
         return response()->json(['success' => 'Success']);    
     }
@@ -347,13 +373,9 @@ class IaController extends Controller
      */
     public function show(Ia $ia)
     {
-        // dump($ia->user->role);
-        // dump($ia->user->fakultas_id);
-        // dd(Auth::user()->fakultas_id);
-
         if(($ia->user->fakultas_id == Auth::user()->fakultas_id) || (Auth::user()->role == 'Admin') || ($ia->user->role == 'LPPM')){
             $data = [
-                'ia' => Ia::with(['pengusul', 'moa', 'anggotaFakultas', 'anggotaProdi', 'user'])->where('id', $ia->id)->first()
+                'ia' => Ia::with(['pengusul', 'moa', 'jenisKerjasama', 'anggotaFakultas', 'anggotaProdi', 'user'])->where('id', $ia->id)->first()
             ];            
             return view('pages/ia/show', $data);
         } else{
@@ -369,16 +391,16 @@ class IaController extends Controller
      */
     public function edit(Ia $ia)
     {
-        // dump($ia->user->fakultas_id);
-        // dump(Auth::user()->fakultas_id);
-        // dump($ia->user->prodi_id );
-        // dd(Auth::user()->prodi_id);
-
         if(($ia->user->fakultas_id == Auth::user()->fakultas_id) && ($ia->user->prodi_id == Auth::user()->prodi_id)){
-            $ia_ = Ia::with(['pengusul', 'moa', 'anggotaFakultas', 'anggotaProdi'])->where('id', $ia->id)->first();
+            $ia_ = Ia::with(['pengusul', 'moa', 'jenisKerjasama', 'anggotaFakultas', 'anggotaProdi'])->where('id', $ia->id)->first();
+            $jenis_kerjasama = [];
             $fakultas_ia = [];
             $prodi_ia = [];
     
+            foreach ($ia_->jenisKerjasama as $value) {
+                array_push($jenis_kerjasama, $value['jenis_kerjasama']);
+            }
+
             foreach ($ia_->anggotaFakultas as $value) {
                 array_push($fakultas_ia, $value['fakultas_id']);
             }
@@ -392,8 +414,10 @@ class IaController extends Controller
                 'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->orderBy('id', 'desc')->get(),
                 'nomor_moa_pengusul' => Moa::with(['mou'])->orderBy('id', 'desc')->get(),
                 'prodi_fakultas' => Prodi::where('fakultas_id', Auth::user()->fakultas_id)->get(),
+                'jenis_kerjasama_all' => JenisKerjasama::select('jenis_kerjasama')->groupBy('jenis_kerjasama')->get(),
                 'fakultas_all' => Fakultas::all(),
                 'prodi_all' => Prodi::all(),
+                'jenis_kerjasama_ia' => $jenis_kerjasama,
                 'fakultas_ia' => $fakultas_ia,
                 'prodi_ia' => $prodi_ia,
             ];  
@@ -428,11 +452,11 @@ class IaController extends Controller
                 $prodi = $request->program_studi;
             }
         }
-        else{
+        else{ // role == prodi, unit kerja
             $fakultas_req = '';
             $prodi_req = '';
             $prodi = 0;
-            $fakultas = 0;
+            $fakultas = 0;            
         }
       
         if($request->nomor_ia != $ia->nomor_ia){
@@ -455,6 +479,7 @@ class IaController extends Controller
                 'nomor_moa_pengusul' => 'required',                
                 'nomor_ia' => $nomor_ia_req,
                 'nomor_ia_pengusul' => $nomor_ia_pengusul_req,
+                'pejabat_penandatangan' => 'required',
                 'nik_nip_pengusul' => 'required',
                 'jabatan_pengusul' => 'required',
                 'program' => 'required',
@@ -463,6 +488,8 @@ class IaController extends Controller
                 // 'dokumen' => 'required',
                 'fakultas' => $fakultas_req,
                 'program_studi' => $prodi_req,
+                'manfaat' => 'required',
+                'jenis_kerjasama' => 'required',
                 'nilai_uang' => 'required',
                 'metode_pertemuan' => 'required',
                 'tanggal_pertemuan' => 'required',
@@ -476,7 +503,7 @@ class IaController extends Controller
                 'nomor_ia.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_ia')]),
                 'nomor_ia_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nomor_ia_pengusul')]),
                 'nomor_ia_pengusul.unique' => __('components/validation.unique', ['nama' => __('components/form_mou_moa_ia.nomor_ia_pengusul')]),
-
+                'pejabat_penandatangan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.pejabat_penandatangan')]),
                 'nik_nip_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nik_nip_pengusul')]),
                 'jabatan_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.jabatan_pengusul')]),
                 'program.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program')]),                
@@ -485,6 +512,8 @@ class IaController extends Controller
                 'dokumen.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.dokumen')]),                           
                 'fakultas.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.fakultas')]),                           
                 'program_studi.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program_studi')]),                           
+                'manfaat.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.manfaat')]),                           
+                'jenis_kerjasama.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.jenis_kerjasama')]),                           
                 'nilai_uang.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nilai_uang')]),                           
                 'metode_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.metode_pertemuan')]),                
                 'tanggal_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_pertemuan')]),                
@@ -505,9 +534,11 @@ class IaController extends Controller
             'moa_id' => $request->nomor_moa_pengusul,
             'nomor_ia' => $request->nomor_ia,
             'nomor_ia_pengusul' => $request->nomor_ia_pengusul,
+            'pejabat_penandatangan' => $request->pejabat_penandatangan,
             'nik_nip_pengusul' => $request->nik_nip_pengusul,
             'jabatan_pengusul' => $request->jabatan_pengusul,
             'program' => $request->program,
+            'manfaat' => $request->manfaat,
             'tanggal_mulai' => date("Y-m-d", strtotime($request->tanggal_mulai)),
             'tanggal_berakhir' => date("Y-m-d", strtotime($request->tanggal_berakhir)),                  
             'nilai_uang' => $request->nilai_uang,
@@ -565,7 +596,17 @@ class IaController extends Controller
                     AnggotaFakultas::create($data);
                 }
             }             
-        }              
+        }       
+        
+        $del_prodi = JenisKerjasama::where('ia_id', $ia_id);
+        $del_prodi->delete();
+        foreach($request->jenis_kerjasama as $item){
+            $data = [
+                'ia_id' => $ia_id,
+                'jenis_kerjasama' => $item
+            ];            
+            JenisKerjasama::create($data);
+        }
         
         return response()->json(['success' => 'Success']);             
 
@@ -584,50 +625,77 @@ class IaController extends Controller
         if (Storage::exists('dokumen/ia/' . $ia->dokumen)) {
             Storage::delete('dokumen/ia/' . $ia->dokumen);
         }
+
+        if (Storage::exists('dokumen/ia-laporan_hasil_pelaksanaan/' . $ia->laporan_hasil_pelaksanaan)) {
+            Storage::delete('dokumen/ia-laporan_hasil_pelaksanaan/' . $ia->laporan_hasil_pelaksanaan);
+        }
+
+        if (Storage::exists('dokumen/ia-surat_tugas/' . $ia->surat_tugas)) {
+            Storage::delete('dokumen/ia-surat_tugas/' . $ia->surat_tugas);
+        }
         
         $ia->anggotaProdi()->delete();
         $ia->anggotaFakultas()->delete();
+        $ia->jenisKerjasama()->delete();
         $ia->delete();
         return response()->json([
             'res' => 'success'
         ]);
     }   
 
-    public function uploadLaporanPelaksanaan(Request $request){        
+    public function uploadTambahan(Request $request){        
         $id = $request->id_ia_;
+        $jenis_upload = $request->jenis_upload;
         $ia = Ia::with(['pengusul'])->find($id);
-        if($ia->users_id == Auth::user()->id){
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'dokumen' => 'required',                  
-                ],
-                [
-                    'dokumen.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.dokumen')]),                   
-                ]
-            );
-    
-            if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()]);
-            }
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'dokumen' => 'required',                  
+            ],
+            [
+                'dokumen.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.dokumen')]),                   
+            ]
+        );
 
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
+        }
+
+        if($jenis_upload == 'laporan_pelaksanaan'){
+            if($ia->users_id == Auth::user()->id){
+                $pengusul = Pengusul::find($ia->pengusul->id);
+                $namaFileBerkas = 'IA LAPORAN HASIL PELAKSANAAN - ' . $pengusul->nama. ' - '. Carbon::now()->format('YmdHs') . ".pdf";                  
+                $request->file('dokumen')->storeAs(
+                    'dokumen/ia-laporan_hasil_pelaksanaan',
+                    $namaFileBerkas
+                );  
+    
+                $data = [                      
+                    'laporan_hasil_pelaksanaan' => $namaFileBerkas,                        
+                ];
+    
+                Ia::where('id', $id)->update($data);        
+                
+                return response()->json($request);
+                    // dump($ia);
+            } else{
+                abort(404);
+            }
+        } else if($jenis_upload == 'surat_tugas'){
             $pengusul = Pengusul::find($ia->pengusul->id);
-            $namaFileBerkas = 'IA LAPORAN HASIL PELAKSANAAN - ' . $ia->program . ' - ' . $pengusul->nama. ' - '. Carbon::now()->format('YmdHs') . ".pdf";                  
+            $namaFileBerkas = 'IA SURAT TUGAS - ' . $pengusul->nama. ' - '. Carbon::now()->format('YmdHs') . ".pdf";                  
             $request->file('dokumen')->storeAs(
-                'dokumen/ia-laporan hasil pelaksanaan',
+                'dokumen/ia-surat_tugas',
                 $namaFileBerkas
             );  
 
             $data = [                      
-                'laporan_hasil_pelaksanaan' => $namaFileBerkas,                        
+                'surat_tugas' => $namaFileBerkas,                        
             ];
 
             Ia::where('id', $id)->update($data);        
             
             return response()->json($request);
-                // dump($ia);
-        } else{
-            abort(404);
         }
     }
     

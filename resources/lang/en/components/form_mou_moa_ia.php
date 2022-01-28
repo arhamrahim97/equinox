@@ -7,6 +7,7 @@ return [
 
     'pilih_salah_satu' => '- Select One -',
     'pengusul' => 'Proposer',
+    'instansi_pengusul' => 'Proposer Agency',
     'daerah' => 'Regional',
     'negara' => 'Country',
     'provinsi' => 'Province',
@@ -25,8 +26,9 @@ return [
     'nomor_moa_pengusul' => 'MOA Number of the Proposer',
     'nomor_ia_pengusul' => 'IA Number of the Proposer',
 
-    'nik_nip_pengusul' => 'NIN of the Proposer',
-    'jabatan_pengusul' => 'Position of the Proposer',
+    'pejabat_penandatangan' => 'Signing Officer',
+    'nik_nip_pengusul' => 'NIN',
+    'jabatan_pengusul' => 'Position',
     'program' => 'Program',
     'tanggal_mulai' => 'Starting Date (example: 22-12-2021)',
     'tanggal_mulai_' => 'Starting Date',
@@ -41,7 +43,15 @@ return [
     'download' => 'Download',
     'laporan_pelaksanaan' => 'Implementation Results Report',
     'nilai_uang' => 'Money Value (Rp)',  
+    'manfaat' => 'Benefit',  
+    'jenis_kerjasama' => 'Type of Cooperation',
+    'pendidikan' => 'Education',
+    'penelitian' => 'Research',
+    'pengabdian_kepada_masyarakat' => 'Public Service',
+    'surat_tugas' => 'Letter of Assignment',
 
+
+    'pertemuan' => 'Meeting',   
     'metode_pertemuan' => 'Meeting Method', 
     'desktodesk' => 'Desk to desk',   
     'ceremonial' => 'Ceremonial',

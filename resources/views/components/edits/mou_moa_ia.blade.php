@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="form-group">
-                    <label>{{__('components/form_mou_moa_ia.pengusul')}} :</label>
+                    <label>{{__('components/form_mou_moa_ia.instansi_pengusul')}} :</label>
                     <div class="row">
                         <div class="col-lg-10 col-md-9 col-sm-12">
                             <select id="pengusul" name="pengusul_id" class="form-control select2">
@@ -89,6 +89,13 @@
                     <span class="text-danger error-text kelurahan-error"></span>
                 </div>  
             </div>
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group">
+                    <label>{{__('components/form_mou_moa_ia.alamat')}} :</label>
+                    <input name="alamat" id="alamat" type="text" class="form-control" disabled>
+                    <span class="text-danger error-text alamat-error"></span>
+                </div>  
+            </div>
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-12">
@@ -129,7 +136,7 @@
                             </div>                    
                         </div>  
                     </div>
-                </div>
+                </div>                
             </div>  
 
             <div class="col-lg-12">
@@ -217,23 +224,7 @@
             {{-- if IA --}}                    
             @endif
             
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="form-group">
-                            <label>{{__('components/form_mou_moa_ia.nik_nip_pengusul')}} :</label>
-                            <input name="nik_nip_pengusul" id="nik_nip_pengusul" type="text" class="form-control" value="{{$nik_nip_pengusul}} ">
-                            <span class="text-danger error-text nik_nip_pengusul-error"></span>                 
-                        </div>   
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="form-group">
-                            <label>{{__('components/form_mou_moa_ia.jabatan_pengusul')}} :</label>
-                            <input name="jabatan_pengusul" id="jabatan_pengusul" type="text" class="form-control" value="{{$jabatan_pengusul}}" >
-                            <span class="text-danger error-text jabatan_pengusul-error"></span>                 
-                        </div> 
-                    </div>
-                </div>
+            <div class="col-12">                
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
@@ -296,7 +287,7 @@
                                         <label>{{__('components/form_mou_moa_ia.fakultas')}} :</label>
                                         <div class="select2-input select2-warning">
                                             <select id="fakultas" name="fakultas[]" class="form-control select2" multiple="multiple">
-                                                <option value="">{{__('components/form_mou_moa_ia.pilih_salah_satu')}}</option>
+                                                {{-- <option value="">{{__('components/form_mou_moa_ia.pilih_salah_satu')}}</option> --}}
                                                 {{$fakultas_all}}
                                             </select>
                                             <span class="text-danger error-text fakultas-error"></span>                              
@@ -316,28 +307,63 @@
                                     </div>
                                 </div>                
                             </div>                  
-                        @endif
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group">
-                                    <label>{{__('components/form_mou_moa_ia.nilai_uang')}} :</label>
-                                    <input name="nilai_uang" id="nilai_uang" type="text" class="form-control rupiah" value="{{$nilai_uang}}">
-                                    <span class="text-danger error-text nilai_uang-error"></span>                              
-                                </div>   
+                        @endif       
+                        {{-- IF IA && role == prodi --}}
+                    @else                            
+                    @endif        
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label>{{__('components/form_mou_moa_ia.manfaat')}} :</label>
+                                <textarea class="form-control" name="manfaat" id="manfaat" cols="30" rows="2">{{$manfaat}}</textarea>
+                                <span class="text-danger error-text manfaat-error"></span>                                         
+                            </div>       
+                        </div>                
+                    </div>                                       
+                    <div class="row">                            
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <label>{{__('components/form_mou_moa_ia.jenis_kerjasama')}} :</label>
+                                <div class="select2-input select2-warning">
+                                    <select id="jenis_kerjasama" name="jenis_kerjasama[]" class="form-control select2" multiple="multiple">
+                                        {{$jenis_kerjasama}}                                        
+                                    </select>
+                                    <span class="text-danger error-text jenis_kerjasama-error"></span>                              
+                                </div>
                             </div>
-                        </div>                                          
-                    @else                    
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group">
-                                    <label>{{__('components/form_mou_moa_ia.nilai_uang')}} :</label>
-                                    <input name="nilai_uang" id="nilai_uang" type="text" class="form-control rupiah" value="{{$nilai_uang}}">
-                                    <span class="text-danger error-text nilai_uang-error"></span>                              
-                                </div>   
-                            </div>
-                        </div>         
-                    @endif             
-                @endif                
+                        </div>                                               
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <label>{{__('components/form_mou_moa_ia.nilai_uang')}} :</label>
+                                <input name="nilai_uang" id="nilai_uang" type="text" class="form-control rupiah" value="{{$nilai_uang}}">
+                                <span class="text-danger error-text nilai_uang-error"></span>                              
+                            </div>   
+                        </div>
+                    </div>          
+                @endif       
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>{{__('components/form_mou_moa_ia.pejabat_penandatangan')}} :</label>
+                            <input name="pejabat_penandatangan" id="pejabat_penandatangan" type="text" class="form-control" value="{{$pejabat_penandatangan}}">
+                            <span class="text-danger error-text pejabat_penandatangan-error"></span>                 
+                        </div>   
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>{{__('components/form_mou_moa_ia.nik_nip_pengusul')}} :</label>
+                            <input name="nik_nip_pengusul" id="nik_nip_pengusul" type="text" class="form-control" value="{{$nik_nip_pengusul}}">
+                            <span class="text-danger error-text nik_nip_pengusul-error"></span>                 
+                        </div>   
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>{{__('components/form_mou_moa_ia.jabatan_pengusul')}} :</label>
+                            <input name="jabatan_pengusul" id="jabatan_pengusul" type="text" class="form-control" value="{{$jabatan_pengusul}}">
+                            <span class="text-danger error-text jabatan_pengusul-error"></span>                 
+                        </div> 
+                    </div>
+                </div>         
                 <div class="row">
                     <div class="col-12">
                         <div class="separator-solid mt-5 mb-4"></div>
@@ -419,7 +445,8 @@
             $('#nik_nip_pengusul').mask('00000000000000000000');
 
             $('#latitude').val('{{$latitude}}')
-            $('#longitude').val('{{$longitude}}')
+            $('#longitude').val('{{$longitude}}')            
+            $('#alamat').val($('#pengusul').find('option:selected').attr('alamat'))
             $('#daerah').val($('#pengusul').find('option:selected').attr('daerah'))
             $('#negara').val($('#pengusul').find('option:selected').attr('negara'))
             $('#provinsi').val($('#pengusul').find('option:selected').attr('provinsi'))
@@ -432,6 +459,8 @@
         $('#pengusul').change(function(){
             $('#nik_nip_pengusul').val('')
             $('#jabatan_pengusul').val('')
+            $('#pejabat_penandatangan').val('')
+            $('#alamat').val($(this).find('option:selected').attr('alamat'))
             $('#latitude').val($(this).find('option:selected').attr('latitude'))
             $('#longitude').val($(this).find('option:selected').attr('longitude'))
             $('#daerah').val($(this).find('option:selected').attr('daerah'))

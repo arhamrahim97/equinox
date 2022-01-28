@@ -105,6 +105,9 @@
         @slot('nomor_ia_pengusul')
             {{$ia->nomor_ia_pengusul}}
         @endslot
+        @slot('pejabat_penandatangan')
+            {{$ia->pejabat_penandatangan}}
+        @endslot
         @slot('nik_nip_pengusul')
             {{$ia->nik_nip_pengusul}}
         @endslot
@@ -113,6 +116,21 @@
         @endslot
         @slot('program')
             {{$ia->program}}
+        @endslot
+        @slot('manfaat')
+            {{$ia->manfaat}}
+        @endslot
+        @slot('jenis_kerjasama')
+            @if (count($ia->jenisKerjasama) != 0)
+            <li>
+                <span class="name-specification">{{__('components/form_mou_moa_ia.jenis_kerjasama')}}</span>
+                <span class="status-specification">                    
+                    @foreach ($ia->jenisKerjasama as $item)
+                        {{$item->jenis_kerjasama}} <p style="color: red; font-weight: bold; display: inline">|</p>
+                    @endforeach 
+                </span>
+            </li>                           
+            @endif
         @endslot
         @slot('tanggal_mulai')
             {{$ia->tanggal_mulai}}
@@ -129,11 +147,32 @@
         @slot('download_ia')
             {{Storage::url("dokumen/ia/" . $ia->dokumen)}}
         @endslot
+        {{-- @slot('surat_tugas')
+            {{Storage::url("dokumen/ia/" . $ia->surat_tugas)}}
+        @endslot --}}
+        @slot('surat_tugas')
+            @if (($ia->surat_tugas != '') || ($ia->surat_tugas != NULL))
+                @component('components.buttons.download_badge')
+                    @slot('url')
+                        {{Storage::url("dokumen/ia-surat_tugas/" . $ia->surat_tugas)}}                
+                    @endslot
+                @endcomponent
+            @else
+                @component('components.buttons.badge_info')
+                    @slot('color')
+                        danger
+                    @endslot
+                    @slot('info')
+                        {{__('components/span.belum_ada')}}         
+                    @endslot
+                @endcomponent
+            @endif
+        @endslot
         @slot('download_laporan_pelaksanaan')
             @if (($ia->laporan_hasil_pelaksanaan != '') || ($ia->laporan_hasil_pelaksanaan != NULL))
                 @component('components.buttons.download_badge')
                     @slot('url')
-                        {{Storage::url("dokumen/ia-laporan hasil pelaksanaan/" . $ia->laporan_hasil_pelaksanaan)}}                
+                        {{Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $ia->laporan_hasil_pelaksanaan)}}                
                     @endslot
                 @endcomponent
             @else

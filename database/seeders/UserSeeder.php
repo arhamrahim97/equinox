@@ -21,9 +21,9 @@ class UserSeeder extends Seeder
                 'nama' => 'Admin',
                 'username' => 'admin',
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-                'status' => 1,
                 'fakultas_id' => null,
                 'prodi_id' => null,
+                'status' => 1,
                 'role' => 'Admin'
             ],
             [
@@ -98,6 +98,24 @@ class UserSeeder extends Seeder
                 'status' => 1,
                 'role' => 'Prodi'
             ],
+            [
+                'nama' => 'Fakultas Teknik 2',
+                'username' => 'fakultas3',
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+                'fakultas_id' => 1,
+                'prodi_id' => null,
+                'status' => 1,
+                'role' => 'Fakultas'
+            ],        
+            [
+                'nama' => 'Admin 2',
+                'username' => 'admin2',
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+                'fakultas_id' => null,
+                'prodi_id' => null,
+                'status' => 1,
+                'role' => 'Admin'
+            ],        
         ];
 
         DB::table('users')->insert($data);
