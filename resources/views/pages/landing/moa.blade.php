@@ -62,7 +62,7 @@
                 <thead>
                     <tr>
                         <th>{{__('components/table.nomor')}}</th>
-                        <th>{{__('components/table.pengusul')}}</th>
+                        <th>{{__('components/table.instansi_pengusul')}}</th>
                         <th>{{__('components/table.region')}}</th>
                         <th>{{__('components/table.negara')}}</th>
                         <th>{{__('components/table.tanggal_mulai')}}</th>
@@ -90,6 +90,7 @@
         processing: true,
         serverSide: true,
         scrollX: true,
+        ordering : false,
         ajax: {
             url: "{{ url('/daftarMoa') }}",
                 data: function (d) {
@@ -102,8 +103,9 @@
         columns: [{
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex',
-                orderable: false,
-                searchable: false
+                ordering : false,
+                searchable: false,
+                class : 'text-center'
             },
             {
                 data: 'pengusul',

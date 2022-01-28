@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Map',
+    'title' => 'MOA Map',
     'subTitle' => 'MOA',
     'detail' => 'MOA Details',
     'nomor_moa' => 'MOA Number :',
@@ -9,7 +9,7 @@ return [
     'nomor_mou' => 'MOU Number :',
     'nomor_mou_pengusul' => 'Proposer\'s MOU\'s Number :',
     'pengusul' => 'Proposer :',
-    'nik' => 'NIK\NIP :',
+    'nik' => 'NIK / NIP :',
     'jabatan' => 'Position Of Proposer :',
     'program' => 'Program :',
     'alamat' => 'Address :',
@@ -24,7 +24,9 @@ return [
     'unduhMou' => 'Download MOU\'s Document',
     'unduhMoa' => 'Download MOA\'s Document',
     'negara' => 'Country :',
+    'pejabat_penandatangan' => 'Signing Officer : ',
 
     'titleCard' => 'MOA Map',
     'subTitleCard' => 'All MOA Location',
+    'instansi_pengusul' => 'Proposing Agency',
 ];

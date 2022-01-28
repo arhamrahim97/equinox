@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'title' => 'Peta',
-    'subTitle' => 'MOA',
-    'detail' => 'Detail MOA',
+    'title' => 'Peta IA',
+    'subTitle' => 'IA',
+    'detail' => 'Detail IA',
     'nomor_moa' => 'Nomor MOA :',
     'nomor_moa_pengusul' => 'Nomor MOA Pengusul :',
     'nomor_mou' => 'Nomor MOU :',
@@ -11,7 +11,7 @@ return [
     'nomor_ia' => 'Nomor IA :',
     'nomor_ia_pengusul' => 'Nomor IA Pengusul :',
     'pengusul' => 'Pengusul :',
-    'nik' => 'NIK\NIP :',
+    'nik' => 'NIK / NIP :',
     'jabatan' => 'Jabatan Pengusul :',
     'program' => 'Program :',
     'alamat' => 'Alamat :',
@@ -28,6 +28,8 @@ return [
     'unduhIa' => 'Unduh Dokumen IA',
     'negara' => 'Negara :',
 
-    'titleCard' => 'Peta MOA',
-    'subTitleCard' => 'Seluruh Lokasi MOA',
+    'titleCard' => 'Peta IA',
+    'subTitleCard' => 'Seluruh Lokasi IA',
+    'instansi_pengusul' => 'Instansi Pengusul : ',
+    'pejabat_penandatangan' => 'Pejabat Penandatangan : ',
 ];

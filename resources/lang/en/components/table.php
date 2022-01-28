@@ -43,8 +43,23 @@ return [
 
     // Filter
     'semua' => 'All',
-    'tidak_ada' => 'No Data'
+    'tidak_ada' => 'No Data',
     'program' => 'Program',
 
-    'foto' => 'Photo'
+    'foto' => 'Photo',
+    'total' => 'Total',
+    'instansi_pengusul' => 'Proposing Agency',
+    'pejabat_penandatangan' => 'Signing Officer',
+
+    // Borang
+    'lembaga_mitra' => 'Partner Institutions',
+    'tipe_kerjasama' => 'Type of Cooperation',
+    'tingkat' => 'Level',
+    'internasional' => 'International',
+    'nasional' => 'National',
+    'lokal' => 'Local',
+    'judul_kegiatan_kerjasama' => 'Title of Cooperation Activities',
+    'manfaat' => 'Benefits to Accredited Study Programs',
+    'waktu_dan_durasi' => 'Time and Duration',
+    'bukti_kerjasama' => 'Proof of Cooperation'
 ];

@@ -86,6 +86,7 @@ class MapMouController extends Controller
                 'latitude' => $mou->latitude,
                 'longitude' => $mou->longitude,
                 'nama_pengusul' => $mou->pengusul->nama,
+                'pejabat_penandatangan' => $mou->pejabat_penandatangan,
                 'program' => $mou->program,
                 'alamat' => $mou->pengusul->alamat,
                 'no_referensi' => $mou->nomor_mou,
@@ -103,7 +104,8 @@ class MapMouController extends Controller
 
     public function getDetailMou(Mou $mou)
     {
-        $pertemuan = $mou->tempat_pertemuan . ' | ' . $mou->metode_pertemuan . ' | ' . Carbon::parse($mou->tanggal_pertemuan)->translatedFormat('d F Y') . ' | ' . Carbon::parse($mou->waktu_pertemuan)->format('H:i');
+        $metode_pertemuan = ($mou->metode_pertemuan == NULL || $mou->metode_pertemuan == '') ? '-' : $mou->metode_pertemuan;
+        $pertemuan = $mou->tempat_pertemuan . ' | ' . $metode_pertemuan .  ' | ' . Carbon::parse($mou->tanggal_pertemuan)->translatedFormat('d F Y') . ' | ' . Carbon::parse($mou->waktu_pertemuan)->format('H:i');
 
         $sekarang = new DateTime("now");
         $tanggal_berakhir = new DateTime($mou->tanggal_berakhir);
@@ -125,6 +127,7 @@ class MapMouController extends Controller
             'alamat' => $mou->pengusul->alamat,
             'nik_nip_pengusul' => $mou->nik_nip_pengusul,
             'jabatan_pengusul' => $mou->jabatan_pengusul,
+            'pejabat_penandatangan' => $mou->pejabat_penandatangan,
             'program' => $mou->program,
             'tanggal_mulai' => Carbon::parse($mou->tanggal_mulai)->translatedFormat('d F Y'),
             'tanggal_berakhir' => Carbon::parse($mou->tanggal_berakhir)->translatedFormat('d F Y'),

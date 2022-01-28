@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Peta',
+    'title' => 'Peta MOA',
     'subTitle' => 'MOA',
     'detail' => 'Detail MOA',
     'nomor_moa' => 'Nomor MOA :',
@@ -9,7 +9,7 @@ return [
     'nomor_mou' => 'Nomor MOU :',
     'nomor_mou_pengusul' => 'Nomor MOU Pengusul :',
     'pengusul' => 'Pengusul :',
-    'nik' => 'NIK\NIP :',
+    'nik' => 'NIK / NIP :',
     'jabatan' => 'Jabatan Pengusul :',
     'program' => 'Program :',
     'alamat' => 'Alamat :',
@@ -24,7 +24,9 @@ return [
     'unduhMou' => 'Unduh Dokumen MOU',
     'unduhMoa' => 'Unduh Dokumen MOA',
     'negara' => 'Negara :',
+    'pejabat_penandatangan' => 'Pejabat Penandatangan : ',
 
     'titleCard' => 'Peta MOA',
     'subTitleCard' => 'Seluruh Lokasi MOA',
+    'instansi_pengusul' => 'Instansi Pengusul',
 ];

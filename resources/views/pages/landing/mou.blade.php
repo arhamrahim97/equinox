@@ -5,7 +5,6 @@
 @endsection
 
 @push('style')
-
 @endpush
 
 @section('content')
@@ -62,7 +61,7 @@
                 <thead>
                     <tr>
                         <th>{{__('components/table.nomor')}}</th>
-                        <th>{{__('components/table.pengusul')}}</th>
+                        <th>{{__('components/table.instansi_pengusul')}}</th>
                         <th>{{__('components/table.region')}}</th>
                         <th>{{__('components/table.negara')}}</th>
                         <th>{{__('components/table.tanggal_mulai')}}</th>
@@ -90,6 +89,7 @@
         processing: true,
         serverSide: true,
         scrollX: true,
+        ordering : false,
         // autoWidth : true,
         ajax: {
             url: "{{ url('/daftarMou') }}",
@@ -104,7 +104,8 @@
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex',
                 orderable: false,
-                searchable: false
+                searchable: false,
+                class : 'text-center'
             },
             {
                 data: 'pengusul',

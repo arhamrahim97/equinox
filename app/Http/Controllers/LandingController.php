@@ -167,25 +167,39 @@ class LandingController extends Controller
                     $datetime2 = date_create(date("Y-m-d"));
                     $interval = date_diff($datetime1, $datetime2);
                     $jumlah_tahun =  $interval->format('%y');
+                    $jumlah_bulan =  $interval->format('%m');
                     if ($datetime1 < $datetime2) {
                         return '<span class="badge badge-danger bg-danger">' . __('components/span.kadaluarsa') . '</span>';
                     } else {
                         if ($jumlah_tahun < 1) {
-                            return '<span class="badge badge-warning bg-warning">' . __('components/span.masa_tenggang') . '</span>';
+                            if ($jumlah_bulan < 6) {
+                                return '<span class="badge badge-warning bg-warning">' . __('components/span.masa_tenggang') . '</span>';
+                            } else {
+                                return '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
+                            }
                         } else {
                             return '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
                         }
                     }
                 })
                 ->filter(function ($instance) use ($request) {
-                    if ($request->status) {
-                        if ($request->status == "Aktif") {
-                            $instance->where('tanggal_berakhir', '>', DB::raw('NOW() + INTERVAL 1 YEAR'));
-                        } else if ($request->status == "Masa Tenggang") {
-                            $instance->where('tanggal_berakhir', '>', DB::raw('NOW()'));
-                            $instance->where('tanggal_berakhir', '<', DB::raw('NOW() + INTERVAL 1 YEAR'));
-                        } else {
-                            $instance->where('tanggal_berakhir', '<', DB::raw('NOW()'));
+                    if (!empty($request->status)) {
+                        if ($request->status == 'Aktif') {
+                            $instance->whereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) < tanggal_berakhir');
+                            if ($request->search != '') {
+                                $instance->whereRaw('program LIKE "%' . $request->search . '%"');
+                            }
+                        } else if ($request->status == 'Masa Tenggang') {
+                            $instance->whereRaw('tanggal_berakhir = ' . date("Y-m-d"));
+                            $instance->orWhereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir');
+                            if ($request->search != '') {
+                                $instance->whereRaw('program LIKE "%' . $request->search . '%"');
+                            }
+                        } else { // expired
+                            $instance->where('tanggal_berakhir', '<', date("Y-m-d"));
+                            if ($request->search != '') {
+                                $instance->where('program', 'LIKE', '%' . $request->search . '%');
+                            }
                         }
                     }
 
@@ -233,25 +247,34 @@ class LandingController extends Controller
                 ->addColumn('status', function ($row) {
                     $datetime1 = date_create($row->tanggal_berakhir);
                     $datetime2 = date_create(date("Y-m-d"));
-                    // $interval = date_diff($datetime1, $datetime2);
-                    // $jumlah_tahun =  $interval->format('%y');
-                    if ($row->lpj) {
-                        return '<span class="badge badge-primary bg-primary">' . __('components/span.selesai') . '</span>';
-                    } else if ($datetime1 > $datetime2) {
-                        return '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
+                    $interval = date_diff($datetime1, $datetime2);
+                    $jumlah_tahun =  $interval->format('%y');
+                    $jumlah_bulan =  $interval->format('%m');
+                    if ($datetime1 < $datetime2) {
+                        if (($row->laporan_hasil_pelaksanaan != '') || ($row->laporan_hasil_pelaksanaan != NULL)) {
+                            return '<span class="badge badge-primary bg-primary">' . __('components/span.selesai') . '</span>';
+                        } else {
+                            // return '<span class="badge badge-success">'.__('components/span.aktif').'</span>';
+                            return '<span class="badge badge-danger bg-danger">' . __('components/span.melewati_batas') . '</span>';
+                        }
                     } else {
-                        return '<span class="badge badge-danger bg-danger">' . __('components/span.melewati_batas') . '</span>';
+                        if (($row->laporan_hasil_pelaksanaan != '') || ($row->laporan_hasil_pelaksanaan != NULL)) {
+                            return '<span class="badge badge-primary bg-primary">' . __('components/span.selesai') . '</span>';
+                        } else {
+                            return '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
+                        }
                     }
                 })
                 ->filter(function ($instance) use ($request) {
-                    if ($request->status) {
-                        if ($request->status == "Aktif") {
-                            $instance->where('tanggal_berakhir', '>', DB::raw('NOW()'));
-                            $instance->where('lpj', '=', '');
-                        } else if ($request->status == "Selesai") {
-                            $instance->where('lpj', '!=', '');
-                        } else {
-                            $instance->where('tanggal_berakhir', '<', DB::raw('NOW()'));
+                    if (!empty($request->status)) {
+                        if ($request->status == 'Aktif') {
+                            $instance->where('tanggal_berakhir', '>=', date("Y-m-d"));
+                            $instance->whereRaw('(laporan_hasil_pelaksanaan = "" OR laporan_hasil_pelaksanaan is NULL)');
+                        } else if ($request->status == 'Selesai') {
+                            $instance->where('laporan_hasil_pelaksanaan', '!=', '');
+                            $instance->orWhereRaw('laporan_hasil_pelaksanaan != NULL');
+                        } else if ($request->status == 'melewati_batas') { // melewati batas
+                            $instance->whereRaw('tanggal_berakhir < NOW() AND (laporan_hasil_pelaksanaan = "" OR laporan_hasil_pelaksanaan is NULL)');
                         }
                     }
 
@@ -273,23 +296,22 @@ class LandingController extends Controller
         $dataMou = Mou::all();
         $mapDataArray = array();
 
-        $sekarang = new DateTime("now");
-        $tanggal_berakhir = '';
-
         foreach ($dataMou as $mou) {
-            $tanggal_berakhir = new DateTime($mou->tanggal_berakhir);
-            $tahun = ($sekarang->diff($tanggal_berakhir)->format('%r%Y') * 12);
-            $bulan = ($sekarang->diff($tanggal_berakhir)->format('%r%M') + $tahun);
-
-            if ($bulan > 12) {
-                $status = 'aktif';
-                $namaStatus = '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
-            } else if ($bulan < 0) {
+            $datetime1 = date_create($mou->tanggal_berakhir);
+            $datetime2 = date_create(date("Y-m-d"));
+            $interval = date_diff($datetime1, $datetime2);
+            $jumlah_tahun =  $interval->format('%y');
+            if ($datetime1 < $datetime2) {
                 $status = 'tidak_aktif';
                 $namaStatus = '<span class="badge badge-danger bg-danger">' . __('components/span.kadaluarsa') . '</span>';
             } else {
-                $status = 'masa_tenggang';
-                $namaStatus = '<span class="badge badge-warning bg-warning">' . __('components/span.masa_tenggang') . '</span>';
+                if ($jumlah_tahun < 1) {
+                    $status = 'masa_tenggang';
+                    $namaStatus = '<span class="badge badge-warning bg-warning">' . __('components/span.masa_tenggang') . '</span>';
+                } else {
+                    $status = 'aktif';
+                    $namaStatus = '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
+                }
             }
 
             $mapDataArray[] = [
@@ -318,23 +340,28 @@ class LandingController extends Controller
         $dataMoa = Moa::all();
         $mapDataArray = array();
 
-        $sekarang = new DateTime("now");
-        $tanggal_berakhir = '';
-
         foreach ($dataMoa as $moa) {
-            $tanggal_berakhir = new DateTime($moa->tanggal_berakhir);
-            $tahun = ($sekarang->diff($tanggal_berakhir)->format('%r%Y') * 12);
-            $bulan = ($sekarang->diff($tanggal_berakhir)->format('%r%M') + $tahun);
-
-            if ($bulan > 12) {
-                $status = 'aktif';
-                $namaStatus = '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
-            } else if ($bulan < 0) {
+            $datetime1 = date_create($moa->tanggal_berakhir);
+            $datetime2 = date_create(date("Y-m-d"));
+            $interval = date_diff($datetime1, $datetime2);
+            $jumlah_tahun =  $interval->format('%y');
+            $jumlah_bulan =  $interval->format('%m');
+            if ($datetime1 < $datetime2) {
                 $status = 'tidak_aktif';
                 $namaStatus = '<span class="badge badge-danger bg-danger">' . __('components/span.kadaluarsa') . '</span>';
             } else {
-                $status = 'masa_tenggang';
-                $namaStatus = '<span class="badge badge-warning bg-warning">' . __('components/span.masa_tenggang') . '</span>';
+                if ($jumlah_tahun < 1) {
+                    if ($jumlah_bulan < 6) {
+                        $status = 'masa_tenggang';
+                        $namaStatus = '<span class="badge badge-warning bg-warning">' . __('components/span.masa_tenggang') . '</span>';
+                    } else {
+                        $status = 'aktif';
+                        $namaStatus = '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
+                    }
+                } else {
+                    $status = 'aktif';
+                    $namaStatus = '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
+                }
             }
 
             $mapDataArray[] = [
@@ -367,16 +394,22 @@ class LandingController extends Controller
         foreach ($dataIa as $ia) {
             $datetime1 = date_create($ia->tanggal_berakhir);
             $datetime2 = date_create(date("Y-m-d"));
-
-            if ($ia->lpj) {
-                $status = 'selesai';
-                $namaStatus = '<span class="badge badge-primary bg-primary">' . __('components/span.selesai') . '</span>';
-            } else if ($datetime1 > $datetime2) {
-                $status = 'aktif';
-                $namaStatus = '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
+            if ($datetime1 < $datetime2) {
+                if (($ia->laporan_hasil_pelaksanaan != '') || ($ia->laporan_hasil_pelaksanaan != NULL)) {
+                    $status = 'selesai';
+                    $namaStatus = '<span class="badge badge-primary bg-primary">' . __('components/span.selesai') . '</span>';
+                } else {
+                    $status = 'lewat_batas';
+                    $namaStatus = '<span class="badge badge-danger bg-danger">' . __('components/span.melewati_batas') . '</span>';
+                }
             } else {
-                $status = 'lewat_batas';
-                $namaStatus = '<span class="badge badge-danger bg-danger">' . __('components/span.melewati_batas') . '</span>';
+                if (($ia->laporan_hasil_pelaksanaan != '') || ($ia->laporan_hasil_pelaksanaan != NULL)) {
+                    $status = 'selesai';
+                    $namaStatus = '<span class="badge badge-primary bg-primary">' . __('components/span.selesai') . '</span>';
+                } else {
+                    $status = 'aktif';
+                    $namaStatus = '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
+                }
             }
 
             $mapDataArray[] = [

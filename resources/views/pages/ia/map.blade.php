@@ -1,5 +1,9 @@
 @extends('templates/dashboard')
 
+@section('title-tab')
+| {{__('pages/ia/map.title')}}
+@endsection
+
 @section('title')
 {{__('pages/ia/map.title')}}
 @endsection
@@ -89,10 +93,11 @@
                             <div id="peta"></div>
                             <div class="row mt-3">
                                 <table class="table table-bordered yajra-datatable">
-                                    <thead>
+                                    <thead class="text-center">
                                         <tr>
                                             <th>{{__('components/table.nomor')}}</th>
-                                            <th>{{__('components/table.pengusul')}}</th>
+                                            <th>{{__('components/table.instansi_pengusul')}}</th>
+                                            <th>{{__('components/table.pejabat_penandatangan')}}</th>
                                             <th>{{__('components/table.alamat')}}</th>
                                             <th>{{__('components/table.program')}}</th>
                                             <th>{{__('components/table.tanggal_mulai')}}</th>
@@ -112,8 +117,12 @@
                                     <h5 class="card-title text-center">{{__('pages/ia/map.detail')}}</h5>
                                     <hr class="card-text">
 
-                                    <p class="fw-bold mb-0 card-text">{{__('pages/ia/map.pengusul')}}</p>
+                                    <p class="fw-bold mb-0 card-text">{{__('pages/ia/map.instansi_pengusul')}}</p>
                                     <p class="card-text" id="pengusul">-</p>
+                                    <hr class="card-text">
+
+                                    <p class="fw-bold mb-0 card-text">{{__('pages/ia/map.pejabat_penandatangan')}}</p>
+                                    <p class="card-text" id="pejabat_penandatangan">-</p>
                                     <hr class="card-text">
 
                                     <p class="fw-bold mb-0 card-text">{{__('pages/ia/map.program')}}</p>
@@ -189,6 +198,9 @@
                                                 <i class='fas fa-file-download mr-1'>
                                                 </i> {{__('pages/ia/map.unduhIa')}}
                                             </a>
+                                            <div id="linkDokumenLaporanHasilPelaksanaan">
+
+                                            </div>
                                         </div>
 
                                     </div>
@@ -213,7 +225,7 @@
     var _token = "{{csrf_token()}}";
     var icon = '';
 
-    var map = L.map("peta").setView([-0.9006266, 119.8879643], 13);
+    var map = L.map("peta").setView([20.585042, 65.424051], 3);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -275,10 +287,11 @@
                         .bindPopup(
                             "<p class='fw-bold my-0 text-center title'>" + data[0][i].nama_pengusul + "</p><hr>" +
                             "<p class='my-0'>{{__('pages/ia/map.program')}} " + data[0][i].program + "</p>" +
+                            "<p class='my-0'>{{__('pages/ia/map.pejabat_penandatangan')}} " + data[0][i].pejabat_penandatangan + "</p>" +
                             "<p class='my-0'>{{__('pages/ia/map.alamat')}} " + data[0][i].alamat + "</p>" +
                             "<p class='my-0'>{{__('pages/ia/map.tanggal_berakhir')}} " + data[0][i].tanggal_berakhir + "</p>" +
                             "<p class='my-0'>{{__('pages/ia/map.status')}} " + data[0][i].namaStatus + "</p><hr>" +
-                            "<div class='row d-flex justify-content-center'><a target='_blank' href='" + data[0][i].dokumen_mou + "' class='btn btn-primary btn-sm my-1 mx-1'><i class='fas fa-file-download mr-1'> </i>{{__('pages/ia/map.unduhMou')}}</a><a target='_blank' href='" + data[0][i].dokumen_moa + "' class='btn btn-warning btn-sm my-1 mx-1'><i class='fas fa-file-download mr-1'> </i>{{__('pages/ia/map.unduhMoa')}}</a><a target='_blank' href='" + data[0][i].dokumen_ia + "' class='btn btn-success btn-sm my-1 mx-1'><i class='fas fa-file-download mr-1'> </i>{{__('pages/ia/map.unduhIa')}}</a></div>"
+                            "<div class='row d-flex justify-content-center'><a target='_blank' href='" + data[0][i].dokumen_mou + "' class='btn btn-primary btn-sm my-1 mx-1'><i class='fas fa-file-download mr-1'> </i>{{__('pages/ia/map.unduhMou')}}</a><a target='_blank' href='" + data[0][i].dokumen_moa + "' class='btn btn-warning btn-sm my-1 mx-1'><i class='fas fa-file-download mr-1'> </i>{{__('pages/ia/map.unduhMoa')}}</a><a target='_blank' href='" + data[0][i].dokumen_ia + "' class='btn btn-success btn-sm my-1 mx-1'><i class='fas fa-file-download mr-1'> </i>{{__('pages/ia/map.unduhIa')}}</a>" + data[0][i].laporan_hasil_pelaksanaan + "</div>"
                         )
                         .on('click', L.bind(petaKlik, null, data[0][i].id))
                         .addTo(map);
@@ -295,7 +308,6 @@
                 _token: _token
             },
             success: function (data) {
-                console.log(data);
                 $('#informasiMap').removeAttr('hidden');
                 $('#mapSection').removeClass('col');
                 $('#mapSection').addClass('col-lg-8');
@@ -310,6 +322,7 @@
                 $('#jabatan').html(data.jabatan_pengusul);
                 $('#program').html(data.program);
                 $('#alamat').html(data.alamat);
+                $('#pejabat_penandatangan').html(data.pejabat_penandatangan);
                 $('#tanggal_mulai').html(data.tanggal_mulai);
                 $('#tanggal_berakhir').html(data.tanggal_berakhir);
                 $('#pertemuan').html(data.pertemuan);
@@ -317,6 +330,7 @@
                 $('#linkDokumenMou').attr('href',data.dokumen_mou);
                 $('#linkDokumenMoa').attr('href',data.dokumen_moa);
                 $('#linkDokumenIa').attr('href',data.dokumen_ia);
+                $('#linkDokumenLaporanHasilPelaksanaan').html(data.laporan_hasil_pelaksanaan);
             },
         })
     }
@@ -352,10 +366,15 @@
                 orderable: false,
                 searchable: false,
                 responsive: true,
+                class : 'text-center'
             },
             {
                 data: 'pengusul',
                 name: 'pengusul'
+            },
+            {
+                data: 'pejabat_penandatangan',
+                name: 'pejabat_penandatangan'
             },
             {
                 data: 'alamat',
