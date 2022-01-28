@@ -1,5 +1,9 @@
 @extends('templates/dashboard')
 
+@section('title-tab')
+| {{__('pages/moa/map.title')}}
+@endsection
+
 @section('title')
 {{__('pages/moa/map.title')}}
 @endsection
@@ -89,10 +93,11 @@
                             <div id="peta"></div>
                             <div class="row mt-3">
                                 <table class="table table-bordered yajra-datatable">
-                                    <thead>
+                                    <thead class="text-center">
                                         <tr>
                                             <th>{{__('components/table.nomor')}}</th>
-                                            <th>{{__('components/table.pengusul')}}</th>
+                                            <th>{{__('components/table.instansi_pengusul')}}</th>
+                                            <th>{{__('components/table.pejabat_penandatangan')}}</th>
                                             <th>{{__('components/table.alamat')}}</th>
                                             <th>{{__('components/table.program')}}</th>
                                             <th>{{__('components/table.tanggal_mulai')}}</th>
@@ -112,8 +117,12 @@
                                     <h5 class="card-title text-center">{{__('pages/moa/map.detail')}}</h5>
                                     <hr class="card-text">
 
-                                    <p class="fw-bold mb-0 card-text">{{__('pages/moa/map.pengusul')}}</p>
+                                    <p class="fw-bold mb-0 card-text">{{__('pages/moa/map.instansi_pengusul')}}</p>
                                     <p class="card-text" id="pengusul">-</p>
+                                    <hr class="card-text">
+
+                                    <p class="fw-bold mb-0 card-text">{{__('pages/ia/map.pejabat_penandatangan')}}</p>
+                                    <p class="card-text" id="pejabat_penandatangan">-</p>
                                     <hr class="card-text">
 
                                     <p class="fw-bold mb-0 card-text">{{__('pages/moa/map.program')}}</p>
@@ -200,7 +209,7 @@
     var _token = "{{csrf_token()}}";
     var icon = '';
 
-    var map = L.map("peta").setView([-0.9006266, 119.8879643], 13);
+    var map = L.map("peta").setView([20.585042, 65.424051], 3);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -256,6 +265,7 @@ popupAnchor: [-4, -20]
                         .bindPopup(
                             "<p class='fw-bold my-0 text-center title'>" + data[0][i].nama_pengusul + "</p><hr>" +
                             "<p class='my-0'>{{__('pages/moa/map.program')}} " + data[0][i].program + "</p>" +
+                            "<p class='my-0'>{{__('pages/ia/map.pejabat_penandatangan')}} " + data[0][i].pejabat_penandatangan + "</p>" +
                             "<p class='my-0'>{{__('pages/moa/map.alamat')}} " + data[0][i].alamat + "</p>" +
                             "<p class='my-0'>{{__('pages/moa/map.tanggal_berakhir')}} " + data[0][i].tanggal_berakhir + "</p>" +
                             "<p class='my-0'>{{__('pages/moa/map.status')}} " + data[0][i].namaStatus + "</p><hr>" +
@@ -285,6 +295,7 @@ popupAnchor: [-4, -20]
                 $('#nomor_mou_pengusul').html(data.nomor_mou_pengusul);
                 $('#pengusul').html(data.pengusul);
                 $('#nik_nip_pengusul').html(data.nik_nip_pengusul);
+                $('#pejabat_penandatangan').html(data.pejabat_penandatangan);
                 $('#jabatan').html(data.jabatan_pengusul);
                 $('#program').html(data.program);
                 $('#alamat').html(data.alamat);
@@ -328,10 +339,15 @@ popupAnchor: [-4, -20]
                 orderable: false,
                 searchable: false,
                 responsive: true,
+                class : 'text-center'
             },
             {
                 data: 'pengusul',
                 name: 'pengusul'
+            },
+            {
+                data: 'pejabat_penandatangan',
+                name: 'pejabat_penandatangan'
             },
             {
                 data: 'alamat',
@@ -351,7 +367,8 @@ popupAnchor: [-4, -20]
             },
             {
                 data: 'status',
-                name: 'status'
+                name: 'status',
+                class : 'text-center'
             },
             {
                 data: 'action',

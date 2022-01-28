@@ -31,94 +31,92 @@ class IaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {     
-        if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Unit Kerja', 'Prodi'))){
+    {
+        if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Unit Kerja', 'Prodi'))) {
             $user = User::where('role', '!=', 'Admin')->where('fakultas_id', Auth::user()->fakultas_id)->orWhere('role', 'LPPM')->get();
-        } else{
+        } else {
             $user = User::whereIn('role', ['Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Unit Kerja', 'Prodi'])->get();
         }
         $data = [
             'user' => $user,
         ];
         if ($request->ajax()) {
-            if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))){
-                if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU'))){
+            if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))) {
+                if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU'))) {
                     $data = DB::table('ia')
-                            ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
-                            ->join('users', 'ia.users_id', '=', 'users.id') // User pembuat                
-                            ->leftJoin('anggota_fakultas as af', 'ia.id', 'af.ia_id')
-                            ->select(DB::raw('ia.*, pengusul.nama as pengusul_nama,  GROUP_CONCAT(af.fakultas_id) as ang_fakultas, FIND_IN_SET('.Auth::user()->fakultas_id.', GROUP_CONCAT(af.fakultas_id)) as find'),'users.nama as user_nama')                    
-                            ->whereNull('ia.deleted_at')
-                            ->whereNull('af.deleted_at')
-                            ->groupBy('ia.id')
-                            ->havingRaw('FIND_IN_SET('.Auth::user()->fakultas_id.', ang_fakultas)')
-                            ->orderBy('ia.id', 'desc');
-                            // ->get();                                      
-                } else { 
-                    if(Auth::user()->role == 'LPPM'){
+                        ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
+                        ->join('users', 'ia.users_id', '=', 'users.id') // User pembuat
+                        ->leftJoin('anggota_fakultas as af', 'ia.id', 'af.ia_id')
+                        ->select(DB::raw('ia.*, pengusul.nama as pengusul_nama,  GROUP_CONCAT(af.fakultas_id) as ang_fakultas, FIND_IN_SET(' . Auth::user()->fakultas_id . ', GROUP_CONCAT(af.fakultas_id)) as find'), 'users.nama as user_nama')
+                        ->whereNull('ia.deleted_at')
+                        ->whereNull('af.deleted_at')
+                        ->groupBy('ia.id')
+                        ->havingRaw('FIND_IN_SET(' . Auth::user()->fakultas_id . ', ang_fakultas)')
+                        ->orderBy('ia.id', 'desc');
+                    // ->get();
+                } else {
+                    if (Auth::user()->role == 'LPPM') {
                         $data = DB::table('ia')
                             ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
                             ->join('users', 'ia.users_id', '=', 'users.id')
                             ->select('ia.*', 'pengusul.nama as pengusul_nama', 'users.fakultas_id', 'users.nama as user_nama')
                             ->where('users.role', Auth::user()->role) // role == LPPM
                             ->orderBy('id', 'desc');
-                            // ->get();      
-                    }
-                    else{ // 'Prodi', 'Unit Kerja'
+                        // ->get();
+                    } else { // 'Prodi', 'Unit Kerja'
                         $data = DB::table('ia')
-                                ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
-                                ->join('users', 'ia.users_id', '=', 'users.id') // User pembuat                
-                                ->leftJoin('anggota_prodi as ap', 'ia.id', 'ap.ia_id')
-                                ->select(DB::raw('ia.*, pengusul.nama as pengusul_nama, GROUP_CONCAT(ap.prodi_id) as ang_prodi, FIND_IN_SET('.Auth::user()->prodi_id.', GROUP_CONCAT(ap.prodi_id)) as find'), 'users.nama as user_nama')                    
-                                ->whereNull('ia.deleted_at')
-                                ->whereNull('ap.deleted_at')
-                                ->groupBy('ia.id')
-                                ->havingRaw('FIND_IN_SET('.Auth::user()->prodi_id.', ang_prodi)')
-                                ->orderBy('ia.id', 'desc');
-                                // ->get();     
+                            ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
+                            ->join('users', 'ia.users_id', '=', 'users.id') // User pembuat
+                            ->leftJoin('anggota_prodi as ap', 'ia.id', 'ap.ia_id')
+                            ->select(DB::raw('ia.*, pengusul.nama as pengusul_nama, GROUP_CONCAT(ap.prodi_id) as ang_prodi, FIND_IN_SET(' . Auth::user()->prodi_id . ', GROUP_CONCAT(ap.prodi_id)) as find'), 'users.nama as user_nama')
+                            ->whereNull('ia.deleted_at')
+                            ->whereNull('ap.deleted_at')
+                            ->groupBy('ia.id')
+                            ->havingRaw('FIND_IN_SET(' . Auth::user()->prodi_id . ', ang_prodi)')
+                            ->orderBy('ia.id', 'desc');
+                        // ->get();
                     }
-                }                                
-
+                }
             } else {
-                if(Auth::user()->role == 'Admin'){
+                if (Auth::user()->role == 'Admin') {
                     $data = DB::table('ia')
-                                ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')     
-                                ->join('users', 'ia.users_id', '=', 'users.id') // User pembuat                
-                                ->select('ia.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama')                                
-                                ->whereNull('ia.deleted_at')
-                                ->orderBy('id', 'desc');
-                                // ->get(); 
-                }             
-            }                       
-            
+                        ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
+                        ->join('users', 'ia.users_id', '=', 'users.id') // User pembuat
+                        ->select('ia.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama')
+                        ->whereNull('ia.deleted_at')
+                        ->orderBy('id', 'desc');
+                    // ->get();
+                }
+            }
+
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('dibuat_oleh', function ($data) {                                        
-                    return '<span class="badge badge-secondary">'.$data->user_nama.'</span>';                                                                                                                                                              
+                ->addColumn('dibuat_oleh', function ($data) {
+                    return '<span class="badge badge-secondary">' . $data->user_nama . '</span>';
                 })
                 ->addColumn('status', function ($data) {
                     $datetime1 = date_create($data->tanggal_berakhir);
-                    $datetime2 = date_create(date("Y-m-d"));            
-                    $interval = date_diff($datetime1, $datetime2);        
-                    $jumlah_tahun =  $interval->format('%y');     
-                    $jumlah_bulan =  $interval->format('%m');     
-                    if($datetime1<$datetime2){
-                        if(($data->laporan_hasil_pelaksanaan != '') || ($data->laporan_hasil_pelaksanaan != NULL)){
-                            return '<span class="badge badge-primary">'.__('components/span.selesai').'</span>';                            
-                        } else{
-                            // return '<span class="badge badge-success">'.__('components/span.aktif').'</span>';                              
-                            return '<span class="badge badge-danger">'.__('components/span.melewati_batas').'</span>';                            
+                    $datetime2 = date_create(date("Y-m-d"));
+                    $interval = date_diff($datetime1, $datetime2);
+                    $jumlah_tahun =  $interval->format('%y');
+                    $jumlah_bulan =  $interval->format('%m');
+                    if ($datetime1 < $datetime2) {
+                        if (($data->laporan_hasil_pelaksanaan != '') || ($data->laporan_hasil_pelaksanaan != NULL)) {
+                            return '<span class="badge badge-primary">' . __('components/span.selesai') . '</span>';
+                        } else {
+                            // return '<span class="badge badge-success">'.__('components/span.aktif').'</span>';
+                            return '<span class="badge badge-danger">' . __('components/span.melewati_batas') . '</span>';
                         }
-                    } else{
-                        if(($data->laporan_hasil_pelaksanaan != '') || ($data->laporan_hasil_pelaksanaan != NULL)){
-                            return '<span class="badge badge-primary">'.__('components/span.selesai').'</span>';                            
-                        } else{
-                            return '<span class="badge badge-success">'.__('components/span.aktif').'</span>';                              
+                    } else {
+                        if (($data->laporan_hasil_pelaksanaan != '') || ($data->laporan_hasil_pelaksanaan != NULL)) {
+                            return '<span class="badge badge-primary">' . __('components/span.selesai') . '</span>';
+                        } else {
+                            return '<span class="badge badge-success">' . __('components/span.aktif') . '</span>';
                         }
-                    }        
+                    }
                 })
                 ->addColumn('action', function ($row) {
-                    if($row->users_id == Auth::user()->id){
+                    if ($row->users_id == Auth::user()->id) {
                         $actionBtn = '<div class="row text-center justify-content-center">';
                         $actionBtn .= '<a href="' . Storage::url("dokumen/ia/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>';
                         if(($row->surat_tugas != '') || ($row->surat_tugas != NULL)){
@@ -128,7 +126,6 @@ class IaController extends Controller
                             $actionBtn .= '<a href="' . Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $row->laporan_hasil_pelaksanaan) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_laporan_pelaksanaan') . '</a>';                            
                         } else{
                             $actionBtn .= '<button id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-secondary btn-sm mr-1 my-1" onclick="showModalFileTambahan(' . $row->id . ', `laporan_pelaksanaan`)"  value="' . $row->id . '" >' . __('components/button.upload_laporan_pelaksanaan') . '</button>';
-                        
                         }
                                   
                         $actionBtn .= '<a href="' . url('/ia/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>';
@@ -154,32 +151,30 @@ class IaController extends Controller
                     }
                     return $actionBtn;
                 })
-                ->filter(function ($query) use ($request) {      
+                ->filter(function ($query) use ($request) {
                     if ($request->search != '') {
                         $query->whereRaw('(program LIKE "%'.$request->search.'%" OR pengusul.nama LIKE "%'.$request->search.'%" OR ia.nomor_ia_pengusul LIKE "%'.$request->search.'%")');                        
                     }        
                                   
                     if (!empty($request->dibuat_oleh)) {                        
                         $query->where('users.nama', $request->dibuat_oleh);                       
-                    }
+                    }                   
 
                     if (!empty($request->status)) {
-                        if($request->status == 'aktif'){                            
-                            $query->where('tanggal_berakhir', '>=', date("Y-m-d"));                            
-                            $query->whereRaw('(laporan_hasil_pelaksanaan = "" OR laporan_hasil_pelaksanaan is NULL)');                    
-                        }                      
-                        else if ($request->status == 'selesai')  {                              
-                            $query->whereRaw('(laporan_hasil_pelaksanaan != "" OR laporan_hasil_pelaksanaan != NULL)');                                                                                                                                      
+                        if ($request->status == 'aktif') {
+                            $query->where('tanggal_berakhir', '>=', date("Y-m-d"));
+                            $query->whereRaw('(laporan_hasil_pelaksanaan = "" OR laporan_hasil_pelaksanaan is NULL)');
+                        } else if ($request->status == 'selesai') {
+                            $query->whereRaw('(laporan_hasil_pelaksanaan != "" OR laporan_hasil_pelaksanaan != NULL)');
+                        } else if ($request->status == 'melewati_batas') { // melewati batas
+                            $query->whereRaw('tanggal_berakhir < NOW() AND (laporan_hasil_pelaksanaan = "" OR laporan_hasil_pelaksanaan is NULL)');
                         }
-                        else if ($request->status == 'melewati_batas'){ // melewati batas                                                                    
-                            $query->whereRaw('tanggal_berakhir < NOW() AND (laporan_hasil_pelaksanaan = "" OR laporan_hasil_pelaksanaan is NULL)');                                                            
-                        }                                                                        
-                    }                                                        
+                    }
                 })
                 ->rawColumns(['status', 'action', 'dibuat_oleh'])
                 ->make(true);
-        }  
-        return view('pages/ia/index', $data);            
+        }
+        return view('pages/ia/index', $data);
     }
 
     /**
@@ -189,18 +184,18 @@ class IaController extends Controller
      */
     public function create()
     {
-        if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))){
+        if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))) {
             $data = [
                 'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->orderBy('id', 'desc')->get(),
                 'nomor_moa_pengusul' => Moa::with(['mou'])->orderBy('id', 'desc')->get(),
                 'prodi_fakultas' => Prodi::where('fakultas_id', Auth::user()->fakultas_id)->get(),
                 'fakultas_all' => Fakultas::all(),
                 'prodi_all' => Prodi::all(),
-            ];                  
-            return view('pages/ia/create', $data); 
-        } else{
+            ];
+            return view('pages/ia/create', $data);
+        } else {
             abort(404);
-        }             
+        }
     }
 
     /**
@@ -217,7 +212,7 @@ class IaController extends Controller
                 $fakultas = $request->fakultas;
                 $prodi_req = 'required';
                 $prodi = $request->program_studi;
-            } else{
+            } else {
                 $fakultas_req = '';
                 $fakultas = 0;
                 $prodi_req = 'required';
@@ -235,10 +230,10 @@ class IaController extends Controller
             $request->all(),
             [
                 'pengusul_id' => 'required',
-                'nomor_moa_pengusul' => 'required',                
+                'nomor_moa_pengusul' => 'required',
                 'nomor_ia' => ['required', Rule::unique('ia')->withoutTrashed()],
                 'nomor_ia_pengusul' => ['required', Rule::unique('ia')->withoutTrashed()],                         
-                'pejabat_penandatangan' => 'required',
+                'pejabat_penandatangan' => 'required',                
                 'nik_nip_pengusul' => 'required',
                 'jabatan_pengusul' => 'required',
                 'program' => 'required',
@@ -287,14 +282,14 @@ class IaController extends Controller
         }
 
         $pengusul = Pengusul::find($request->pengusul_id);
-        $namaFileBerkas = 'IA - '. $pengusul->nama. ' - '. Carbon::now()->format('YmdHs') . ".pdf";                  
+        $namaFileBerkas = 'IA - ' . $pengusul->nama . ' - ' . Carbon::now()->format('YmdHs') . ".pdf";
         $request->file('dokumen')->storeAs(
             'dokumen/ia',
             $namaFileBerkas
-        );  
+        );
 
-        
-        $data = [            
+
+        $data = [
             'users_id' => Auth::user()->id,
             'pengusul_id' => $request->pengusul_id,
             'latitude' => $request->latitude,
@@ -309,7 +304,7 @@ class IaController extends Controller
             'manfaat' => $request->manfaat,
             'tanggal_mulai' => date("Y-m-d", strtotime($request->tanggal_mulai)),
             'tanggal_berakhir' => date("Y-m-d", strtotime($request->tanggal_berakhir)),
-            'dokumen' => $namaFileBerkas,            
+            'dokumen' => $namaFileBerkas,
             'nilai_uang' => $request->nilai_uang,
             'metode_pertemuan' => $request->metode_pertemuan,
             'tanggal_pertemuan' => date("Y-m-d", strtotime($request->tanggal_pertemuan)),
@@ -319,7 +314,6 @@ class IaController extends Controller
 
         Ia::create($data);
 
-
         $ia_id = Ia::max('id');        
                 
         if($prodi != 0){
@@ -327,30 +321,30 @@ class IaController extends Controller
                 $data = [
                     'ia_id' => $ia_id,
                     'prodi_id' => $item
-                ];            
+                ];
                 AnggotaProdi::create($data);
-            }            
-        } else{
+            }
+        } else {
             $data = [
                 'ia_id' => $ia_id,
                 'prodi_id' => Auth::user()->prodi_id
-            ];            
+            ];
             AnggotaProdi::create($data);
         }
-        
-        if($fakultas != 0){
-            foreach($request->fakultas as $item){
+
+        if ($fakultas != 0) {
+            foreach ($request->fakultas as $item) {
                 $data = [
                     'ia_id' => $ia_id,
                     'fakultas_id' => $item
-                ];                          
+                ];
                 AnggotaFakultas::create($data);
             }
-        } else{
+        } else {
             $data = [
                 'ia_id' => $ia_id,
                 'fakultas_id' => Auth::user()->fakultas_id
-            ];                          
+            ];
             AnggotaFakultas::create($data);
         }
 
@@ -378,7 +372,7 @@ class IaController extends Controller
                 'ia' => Ia::with(['pengusul', 'moa', 'jenisKerjasama', 'anggotaFakultas', 'anggotaProdi', 'user'])->where('id', $ia->id)->first()
             ];            
             return view('pages/ia/show', $data);
-        } else{
+        } else {
             abort(404);
         }
     }
@@ -404,11 +398,11 @@ class IaController extends Controller
             foreach ($ia_->anggotaFakultas as $value) {
                 array_push($fakultas_ia, $value['fakultas_id']);
             }
-    
+
             foreach ($ia_->anggotaProdi as $value) {
                 array_push($prodi_ia, $value['prodi_id']);
             }
-                    
+
             $data = [
                 'ia' => $ia_,
                 'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->orderBy('id', 'desc')->get(),
@@ -420,14 +414,11 @@ class IaController extends Controller
                 'jenis_kerjasama_ia' => $jenis_kerjasama,
                 'fakultas_ia' => $fakultas_ia,
                 'prodi_ia' => $prodi_ia,
-            ];  
-            // $a = $data['ia']->anggotaFakultas;
-            // dd(($a->fakultas_id)->get());
+            ];            
             return view('pages/ia/edit', $data);
-        } else{
+        } else {
             abort(404);
         }
-
     }
 
     /**
@@ -439,13 +430,13 @@ class IaController extends Controller
      */
     public function update(Request $request, Ia $ia)
     {
-        if(in_array(Auth::user()->role, array('LPPM', 'Fakultas', 'Pascasarjana', 'PSDKU'))){
-            if(Auth::user()->role == 'LPPM'){
+        if (in_array(Auth::user()->role, array('LPPM', 'Fakultas', 'Pascasarjana', 'PSDKU'))) {
+            if (Auth::user()->role == 'LPPM') {
                 $fakultas_req = 'required';
                 $fakultas = $request->fakultas;
                 $prodi_req = 'required';
                 $prodi = $request->program_studi;
-            } else{ //'Fakultas', 'Pascasarjana', 'PSDKU'
+            } else { //'Fakultas', 'Pascasarjana', 'PSDKU'
                 $fakultas_req = '';
                 $fakultas = Auth::user()->fakultas_id;
                 $prodi_req = 'required';
@@ -458,16 +449,16 @@ class IaController extends Controller
             $prodi = 0;
             $fakultas = 0;            
         }
-      
-        if($request->nomor_ia != $ia->nomor_ia){
+
+        if ($request->nomor_ia != $ia->nomor_ia) {
             $nomor_ia_req = ['required', Rule::unique('ia')->withoutTrashed()];
-        } else{
+        } else {
             $nomor_ia_req = 'required';
         }
 
-        if($request->nomor_ia_pengusul != $ia->nomor_ia_pengusul){
+        if ($request->nomor_ia_pengusul != $ia->nomor_ia_pengusul) {
             $nomor_ia_pengusul_req = ['required', Rule::unique('ia')->withoutTrashed()];
-        } else{
+        } else {
             $nomor_ia_pengusul_req = 'required';
         }
 
@@ -476,7 +467,7 @@ class IaController extends Controller
             $request->all(),
             [
                 'pengusul_id' => 'required',
-                'nomor_moa_pengusul' => 'required',                
+                'nomor_moa_pengusul' => 'required',
                 'nomor_ia' => $nomor_ia_req,
                 'nomor_ia_pengusul' => $nomor_ia_pengusul_req,
                 'pejabat_penandatangan' => 'required',
@@ -526,7 +517,7 @@ class IaController extends Controller
             return response()->json(['error' => $validator->errors()]);
         }
 
-        $data = [            
+        $data = [
             'users_id' => Auth::user()->id,
             'pengusul_id' => $request->pengusul_id,
             'latitude' => $request->latitude,
@@ -540,7 +531,7 @@ class IaController extends Controller
             'program' => $request->program,
             'manfaat' => $request->manfaat,
             'tanggal_mulai' => date("Y-m-d", strtotime($request->tanggal_mulai)),
-            'tanggal_berakhir' => date("Y-m-d", strtotime($request->tanggal_berakhir)),                  
+            'tanggal_berakhir' => date("Y-m-d", strtotime($request->tanggal_berakhir)),
             'nilai_uang' => $request->nilai_uang,
             'metode_pertemuan' => $request->metode_pertemuan,
             'tanggal_pertemuan' => date("Y-m-d", strtotime($request->tanggal_pertemuan)),
@@ -548,70 +539,66 @@ class IaController extends Controller
             'tempat_pertemuan' => $request->tempat_pertemuan
         ];
 
-        if($request->dokumen){            
+        if ($request->dokumen) {
             if (Storage::exists('dokumen/ia/' . $ia->dokumen)) {
                 Storage::delete('dokumen/ia/' . $ia->dokumen);
-            }            
-            $namaFileBerkas = 'IA - '. $ia->pengusul->nama. ' - '. Carbon::now()->format('YmdHs') . ".pdf";                  
+            }
+            $namaFileBerkas = 'IA - ' . $ia->pengusul->nama . ' - ' . Carbon::now()->format('YmdHs') . ".pdf";
             $request->file('dokumen')->storeAs(
                 'dokumen/ia',
                 $namaFileBerkas
             );
-            $data['dokumen'] = $namaFileBerkas;                        
+            $data['dokumen'] = $namaFileBerkas;
         }
 
         Ia::where('id', $ia->id)->update($data);
 
-        $ia_id = $ia->id;      
-        
-        if(!in_array(Auth::user()->role, array('Prodi', 'Unit Kerja'))){
-            if(Auth::user()->role == 'LPPM'){                
+        $ia_id = $ia->id;
+
+        if (!in_array(Auth::user()->role, array('Prodi', 'Unit Kerja'))) {
+            if (Auth::user()->role == 'LPPM') {
                 $del_prodi = AnggotaProdi::where('ia_id', $ia_id);
                 $del_prodi->delete();
                 $del_fakultas = AnggotaFakultas::where('ia_id', $ia_id);
                 $del_fakultas->delete();
-            } else{ // Fakultas dkk
+            } else { // Fakultas dkk
                 $del_prodi = AnggotaProdi::where('ia_id', $ia_id);
                 $del_prodi->delete();
             }
         }
-                
-        if($prodi != 0){                
-            foreach($request->program_studi as $item){
+
+        if ($prodi != 0) {
+            foreach ($request->program_studi as $item) {
                 $data = [
                     'ia_id' => $ia_id,
                     'prodi_id' => $item
-                ];            
+                ];
                 AnggotaProdi::create($data);
             }
-        } 
-        
-        if($fakultas != 0){    
-            if(Auth::user()->role == 'LPPM'){
-                foreach($request->fakultas as $item){
+        }
+
+        if ($fakultas != 0) {
+            if (Auth::user()->role == 'LPPM') {
+                foreach ($request->fakultas as $item) {
                     $data = [
                         'ia_id' => $ia_id,
                         'fakultas_id' => $item
-                    ];                          
+                    ];
                     AnggotaFakultas::create($data);
                 }
             }             
         }       
         
-        $del_prodi = JenisKerjasama::where('ia_id', $ia_id);
-        $del_prodi->delete();
+        $del_kerjasama = JenisKerjasama::where('ia_id', $ia_id);
+        $del_kerjasama->delete();
         foreach($request->jenis_kerjasama as $item){
             $data = [
                 'ia_id' => $ia_id,
                 'jenis_kerjasama' => $item
             ];            
             JenisKerjasama::create($data);
-        }
-        
-        return response()->json(['success' => 'Success']);             
-
-        // return response()->json($request);             
-
+        }       
+        return response()->json(['success' => 'Success']);       
     }
 
     /**
@@ -633,7 +620,7 @@ class IaController extends Controller
         if (Storage::exists('dokumen/ia-surat_tugas/' . $ia->surat_tugas)) {
             Storage::delete('dokumen/ia-surat_tugas/' . $ia->surat_tugas);
         }
-        
+
         $ia->anggotaProdi()->delete();
         $ia->anggotaFakultas()->delete();
         $ia->jenisKerjasama()->delete();
@@ -641,7 +628,7 @@ class IaController extends Controller
         return response()->json([
             'res' => 'success'
         ]);
-    }   
+    }
 
     public function uploadTambahan(Request $request){        
         $id = $request->id_ia_;
@@ -676,8 +663,7 @@ class IaController extends Controller
     
                 Ia::where('id', $id)->update($data);        
                 
-                return response()->json($request);
-                    // dump($ia);
+                return response()->json($request);                    
             } else{
                 abort(404);
             }
@@ -687,16 +673,15 @@ class IaController extends Controller
             $request->file('dokumen')->storeAs(
                 'dokumen/ia-surat_tugas',
                 $namaFileBerkas
-            );  
+            );
 
             $data = [                      
                 'surat_tugas' => $namaFileBerkas,                        
             ];
 
-            Ia::where('id', $id)->update($data);        
-            
+            Ia::where('id', $id)->update($data);
+
             return response()->json($request);
         }
     }
-    
 }

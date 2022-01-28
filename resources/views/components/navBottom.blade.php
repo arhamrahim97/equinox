@@ -7,7 +7,7 @@
         <ul class="nav page-navigation page-navigation-info bg-white">
 
             <li class="nav-item menu">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{url('/dashboard')}}">
                     <i class="link-icon icon-screen-desktop"></i>
                     <span class="menu-title">{{__('components/navBottom.beranda')}}</span>
                 </a>
@@ -58,6 +58,9 @@
                         <li>
                             <a href="{{url('mapIa')}}">{{__('components/navBottom.petaIa')}}</a>
                         </li>
+                        <li>
+                            <a href="{{url('borangIa')}}">{{__('components/navBottom.borangIa')}}</a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -107,7 +110,7 @@
                 <div class="navbar-dropdown animated fadeIn">
                     <ul>
                         <li>
-                            <a href="{{url('negara')}}">{{__('components/navBottom.negara')}}</a>
+                            <a href="{{url('negara')}}">{{__('components/navBottom.wilayah')}}</a>
                         </li>
                         <li>
                             <a href="{{url('fakultas')}}">{{__('components/navBottom.fakultas')}}</a>

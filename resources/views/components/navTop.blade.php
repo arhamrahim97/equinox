@@ -8,9 +8,9 @@
         </button>
         <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
         <!-- Logo Header -->
-        <a href="index.html" class="logo d-flex align-items-center">
-            <img src="{{asset('assets/logo')}}/untad.png" alt="navbar brand" class="navbar-brand" width="40px">
-            <div class="text-light fw-bold ml-1">SIMOU</div>
+        <a href="{{url('/')}}" class="logo d-flex align-items-center">
+            <img src="{{asset('assets/dashboard/img')}}/logo-simou-footer.png" alt="navbar brand" class="navbar-brand"
+                width="200px">
         </a>
         <!-- End Logo Header -->
 

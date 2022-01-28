@@ -2,8 +2,8 @@
 
 return [
     'title' => 'Map',
-    'subTitle' => 'MOA',
-    'detail' => 'MOA Details',
+    'subTitle' => 'IA',
+    'detail' => 'IA Details',
     'nomor_moa' => 'MOA Number :',
     'nomor_moa_pengusul' => 'Proposer\'s MOA\'s Number :',
     'nomor_mou' => 'MOU Number :',
@@ -11,7 +11,7 @@ return [
     'nomor_ia' => 'IA Number :',
     'nomor_ia_pengusul' => 'Proposer\'s IA\'s Number :',
     'pengusul' => 'Proposer :',
-    'nik' => 'NIK\NIP :',
+    'nik' => 'NIK / NIP :',
     'jabatan' => 'Position Of Proposer :',
     'program' => 'Program :',
     'alamat' => 'Address :',
@@ -28,6 +28,8 @@ return [
     'unduhIa' => 'Download IA\'s Document',
     'negara' => 'Country :',
 
-    'titleCard' => 'MOA Map',
-    'subTitleCard' => 'All MOA Location',
+    'titleCard' => 'IA Map',
+    'subTitleCard' => 'All IA Location',
+    'instansi_pengusul' => 'Proposing Agency : ',
+    'pejabat_penandatangan' => 'Signing Officer : ',
 ];

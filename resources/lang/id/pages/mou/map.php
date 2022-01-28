@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'title' => 'Peta',
+    'title' => 'Peta MOU',
     'subTitle' => 'MOU',
     'detail' => 'Detail MOU',
     'nomor_mou' => 'Nomor MOU :',
     'nomor_mou_pengusul' => 'Nomor MOU Pengusul :',
     'pengusul' => 'Pengusul :',
-    'nik' => 'NIK\NIP :',
+    'nik' => 'NIK / NIP :',
     'jabatan' => 'Jabatan Pengusul :',
     'program' => 'Program :',
     'alamat' => 'Alamat :',
@@ -21,7 +21,9 @@ return [
     'kurang_1_tahun' => 'Aktif (Kurang Dari 1 Tahun)',
     'unduh' => 'Unduh Dokumen',
     'negara' => 'Negara :',
+    'pejabat_penandatangan' => 'Pejabat Penandatangan : ',
 
     'titleCard' => 'Peta MOU',
     'subTitleCard' => 'Seluruh Lokasi MOU',
+    'instansi_pengusul' => 'Instansi Pengusul',
 ];

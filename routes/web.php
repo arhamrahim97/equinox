@@ -26,7 +26,8 @@ use App\Http\Controllers\master\KecamatanController;
 use App\Http\Controllers\master\KelurahanController;
 use App\Http\Controllers\berita\KelolaBeritaController;
 use App\Http\Controllers\berita\KategoriBeritaController;
-
+use App\Http\Controllers\BorangIaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\master\SliderController;
 use App\Http\Controllers\master\TentangController;
 
@@ -46,9 +47,10 @@ use App\Http\Controllers\master\TentangController;
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('pages.dashboard.starterTemplate');
-    });
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/getTotalNegaraMou', [DashboardController::class, 'getTotalNegaraMou']);
+    Route::get('/getTotalNegaraMoa', [DashboardController::class, 'getTotalNegaraMoa']);
+    Route::get('/getTotalNegaraIa', [DashboardController::class, 'getTotalNegaraIa']);
 
     Route::resource('/mou', MouController::class)->parameters([
         'mou' => 'mou'
@@ -102,7 +104,7 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
 
-    Route::resource('/rekapitulasi', RekapitulasiController::class);    
+    Route::resource('/rekapitulasi', RekapitulasiController::class);
     Route::get('/rekapitulasiresult', [RekapitulasiController::class, 'datatables']);
     Route::get('/getfilter', [ListController::class, 'getFilter']);
 
@@ -136,6 +138,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/getProdi', [ListController::class, 'getProdi']);
     Route::get('/getProdiEdit', [ListController::class, 'getProdiEdit']);
+
+    Route::get('/borangIa', [BorangIaController::class, 'index']);
+    Route::get('/exportBorangIa', [BorangIaController::class, 'export']);
 });
 
 // Landing

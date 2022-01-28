@@ -40,5 +40,20 @@ return [
     'semua' => 'Semua',
     'tidak_ada' => 'Tidak Ada Data',
     'program' => 'Program',
-    'foto' => 'Foto'
+    'foto' => 'Foto',
+    'total' => 'Total',
+    'instansi_pengusul' => 'Instansi Pengusul',
+    'pejabat_penandatangan' => 'Pejabat Penandatangan',
+
+    // Borang
+    'lembaga_mitra' => 'Lembaga Mitra',
+    'tipe_kerjasama' => 'Jenis Kerjasama',
+    'tingkat' => 'Tingkat',
+    'internasional' => 'Internasional',
+    'nasional' => 'Nasional',
+    'lokal' => 'Lokal/Wilayah',
+    'judul_kegiatan_kerjasama' => 'Judul Kegiatan Kerjasama',
+    'manfaat' => 'Manfaat Bagi Program Studi yang Diakreditasi',
+    'waktu_dan_durasi' => 'Waktu dan Durasi',
+    'bukti_kerjasama' => 'Bukti Kerjasama'
 ];

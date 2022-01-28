@@ -14,60 +14,60 @@
 
 @push('style')
 <style>
-    .nav-pills.nav-secondary .nav-link.active{
+    .nav-pills.nav-secondary .nav-link.active {
         background: rgb(54, 151, 225) !important;
     }
 </style>
 @endpush
 
 @section('content')
-    @component('components.show.mou_moa_ia')
-        @slot('type_doc')
-            IA
-        @endslot
-        @slot('program')
-            {{$ia->program}}
-        @endslot
-        @slot('pengusul')
-            {{$ia->pengusul->nama}}
-        @endslot
-        @slot('negara')
-            {{$ia->pengusul->negara->nama}}
-        @endslot
-        @slot('provinsi')
-            @if ($ia->pengusul->provinsi)
-                {{$ia->pengusul->provinsi->nama}}   
-            @else
-                {{$ia->pengusul->provinsi_id}}
-            @endif
-        @endslot
-        @slot('kota')
-            @if ($ia->pengusul->kota)
-                {{$ia->pengusul->kota->nama}}
-            @else
-                {{$ia->pengusul->kota_id}}
-            @endif
-        @endslot
-        @slot('kecamatan')
-            @if ($ia->pengusul->kecamatan)
-                {{$ia->pengusul->kecamatan->nama}}
-            @else
-                {{$ia->pengusul->kecamatan_id}}
-            @endif
-        @endslot
-        @slot('kelurahan')
-            @if ($ia->pengusul->kelurahan)
-                {{$ia->pengusul->kelurahan->nama}}
-            @else
-                {{$ia->pengusul->kelurahan_id}}
-            @endif
-        @endslot
-        @slot('alamat')
-            {{$ia->pengusul->alamat}}            
-        @endslot
-        @slot('latitude_longitude')
-            {{$ia->latitude}} | {{$ia->longitude}}
-        @endslot
+@component('components.show.mou_moa_ia')
+@slot('type_doc')
+IA
+@endslot
+@slot('program')
+{{$ia->program}}
+@endslot
+@slot('pengusul')
+{{$ia->pengusul->nama}}
+@endslot
+@slot('negara')
+{{$ia->pengusul->negara->nama}}
+@endslot
+@slot('provinsi')
+@if ($ia->pengusul->provinsi)
+{{$ia->pengusul->provinsi->nama}}
+@else
+{{$ia->pengusul->provinsi_id}}
+@endif
+@endslot
+@slot('kota')
+@if ($ia->pengusul->kota)
+{{$ia->pengusul->kota->nama}}
+@else
+{{$ia->pengusul->kota_id}}
+@endif
+@endslot
+@slot('kecamatan')
+@if ($ia->pengusul->kecamatan)
+{{$ia->pengusul->kecamatan->nama}}
+@else
+{{$ia->pengusul->kecamatan_id}}
+@endif
+@endslot
+@slot('kelurahan')
+@if ($ia->pengusul->kelurahan)
+{{$ia->pengusul->kelurahan->nama}}
+@else
+{{$ia->pengusul->kelurahan_id}}
+@endif
+@endslot
+@slot('alamat')
+{{$ia->pengusul->alamat}}
+@endslot
+@slot('latitude_longitude')
+{{$ia->latitude}} | {{$ia->longitude}}
+@endslot
 
         @slot('title_nomor_mou')
         {{__('components/form_mou_moa_ia.nomor_mou')}}
@@ -239,8 +239,7 @@
         @endslot   
         @slot('nilai_uang')
             @php
-                echo "Rp " . number_format($ia->nilai_uang, 0, ".", ".");
-                
+                echo "Rp " . number_format($ia->nilai_uang, 0, ".", ".");                
             @endphp
         @endslot
     @endcomponent
