@@ -18,6 +18,11 @@ class Pengusul extends Model
         return $this->belongsTo(Negara::class);
     }
 
+    public function countNegara()
+    {
+        return $this->negara()->count();
+    }
+
     public function provinsi()
     {
         return $this->belongsTo(Provinsi::class);

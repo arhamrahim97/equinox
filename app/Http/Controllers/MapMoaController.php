@@ -6,6 +6,7 @@ use App\Models\Moa;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -13,8 +14,15 @@ class MapMoaController extends Controller
 {
     public function index(Request $request)
     {
+        $userLogin = Auth::user();
         if ($request->ajax()) {
-            $data = Moa::with(['pengusul', 'mou'])->orderBy('id', 'desc')->get();
+            if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))) {
+                $data = Moa::with(['pengusul', 'user'])->whereHas('user', function ($user) use ($userLogin) {
+                    $user->where('fakultas_id', $userLogin->fakultas_id);
+                })->get();
+            } else {
+                $data = Moa::get();
+            }
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('pengusul', function (Moa $moa) {
@@ -56,43 +64,54 @@ class MapMoaController extends Controller
 
     public function getMapDataMoa()
     {
-        $dataMoa = Moa::all();
+        $userLogin = Auth::user();
+
+        if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))) {
+            $dataMoa = Moa::with(['pengusul', 'user'])->whereHas('user', function ($user) use ($userLogin) {
+                $user->where('fakultas_id', $userLogin->fakultas_id);
+            })->get();
+        } else {
+            $dataMoa = Moa::get();
+        }
         $mapDataArray = array();
 
         $sekarang = new DateTime("now");
         $tanggal_berakhir = '';
+        if ($dataMoa) {
+            foreach ($dataMoa as $moa) {
+                $tanggal_berakhir = new DateTime($moa->tanggal_berakhir);
+                $tahun = ($sekarang->diff($tanggal_berakhir)->format('%r%Y') * 12);
+                $bulan = ($sekarang->diff($tanggal_berakhir)->format('%r%M') + $tahun);
 
-        foreach ($dataMoa as $moa) {
-            $tanggal_berakhir = new DateTime($moa->tanggal_berakhir);
-            $tahun = ($sekarang->diff($tanggal_berakhir)->format('%r%Y') * 12);
-            $bulan = ($sekarang->diff($tanggal_berakhir)->format('%r%M') + $tahun);
+                if ($bulan > 12) {
+                    $status = 'aktif';
+                    $namaStatus = '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
+                } else if ($bulan < 0) {
+                    $status = 'tidak_aktif';
+                    $namaStatus = '<span class="badge badge-danger bg-danger">' . __('components/span.kadaluarsa') . '</span>';
+                } else {
+                    $status = 'masa_tenggang';
+                    $namaStatus = '<span class="badge badge-warning bg-warning">' . __('components/span.masa_tenggang') . '</span>';
+                }
 
-            if ($bulan > 12) {
-                $status = 'aktif';
-                $namaStatus = '<span class="badge badge-success bg-success">' . __('components/span.aktif') . '</span>';
-            } else if ($bulan < 0) {
-                $status = 'tidak_aktif';
-                $namaStatus = '<span class="badge badge-danger bg-danger">' . __('components/span.kadaluarsa') . '</span>';
-            } else {
-                $status = 'masa_tenggang';
-                $namaStatus = '<span class="badge badge-warning bg-warning">' . __('components/span.masa_tenggang') . '</span>';
+                $mapDataArray[] = [
+                    'id' => $moa->id,
+                    'latitude' => $moa->latitude,
+                    'longitude' => $moa->longitude,
+                    'nama_pengusul' => $moa->pengusul->nama,
+                    'pejabat_penandatangan' => $moa->pejabat_penandatangan,
+                    'program' => $moa->program,
+                    'alamat' => $moa->pengusul->alamat,
+                    'no_referensi' => $moa->nomor_moa,
+                    'tanggal_berakhir' => Carbon::parse($moa->tanggal_berakhir)->translatedFormat('d F Y'),
+                    'dokumen_moa' =>  Storage::url('/dokumen/moa/' . $moa->dokumen),
+                    'dokumen_mou' =>  Storage::url('/dokumen/mou/' . $moa->mou->dokumen),
+                    'status' => $status,
+                    'namaStatus' => $namaStatus
+                ];
             }
-
-            $mapDataArray[] = [
-                'id' => $moa->id,
-                'latitude' => $moa->latitude,
-                'longitude' => $moa->longitude,
-                'nama_pengusul' => $moa->pengusul->nama,
-                'program' => $moa->program,
-                'alamat' => $moa->pengusul->alamat,
-                'no_referensi' => $moa->nomor_moa,
-                'tanggal_berakhir' => Carbon::parse($moa->tanggal_berakhir)->translatedFormat('d F Y'),
-                'dokumen_moa' =>  Storage::url('/dokumen/moa/' . $moa->dokumen),
-                'dokumen_mou' =>  Storage::url('/dokumen/mou/' . $moa->mou->dokumen),
-                'status' => $status,
-                'namaStatus' => $namaStatus
-            ];
         }
+
 
         return response()->json([
             $mapDataArray
@@ -101,7 +120,8 @@ class MapMoaController extends Controller
 
     public function getDetailMoa(Moa $moa)
     {
-        $pertemuan = $moa->tempat_pertemuan . ' | ' . $moa->metode_pertemuan . ' | ' . Carbon::parse($moa->tanggal_pertemuan)->translatedFormat('d F Y') . ' | ' . Carbon::parse($moa->waktu_pertemuan)->format('H:i');
+        $metode_pertemuan = ($moa->metode_pertemuan == NULL || $moa->metode_pertemuan == '') ? '-' : $moa->metode_pertemuan;
+        $pertemuan = $moa->tempat_pertemuan . ' | ' . $metode_pertemuan .  ' | ' . Carbon::parse($moa->tanggal_pertemuan)->translatedFormat('d F Y') . ' | ' . Carbon::parse($moa->waktu_pertemuan)->format('H:i');
 
         $sekarang = new DateTime("now");
         $tanggal_berakhir = new DateTime($moa->tanggal_berakhir);
@@ -122,6 +142,7 @@ class MapMoaController extends Controller
             'nomor_mou' => $moa->mou->nomor_mou,
             'nomor_mou_pengusul' => $moa->mou->nomor_mou_pengusul,
             'pengusul' => $moa->pengusul->nama,
+            'pejabat_penandatangan' => $moa->pejabat_penandatangan,
             'alamat' => $moa->pengusul->alamat,
             'nik_nip_pengusul' => $moa->nik_nip_pengusul,
             'jabatan_pengusul' => $moa->jabatan_pengusul,

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Login</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <link rel="icon" href="{{asset('assets/dashboard')}}/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="{{asset('assets/logo')}}/untad.png" type="image/x-icon" />
 
     <!-- Fonts and icons -->
     <script src="{{asset('assets/dashboard')}}/js/plugin/webfont/webfont.min.js"></script>
@@ -35,7 +35,6 @@
             background: url('{{asset('assets/dashboard/img/bg-abstract2.png')}}');
             background-size: cover;
         }
-
     </style>
 </head>
 

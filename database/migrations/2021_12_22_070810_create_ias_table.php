@@ -22,6 +22,7 @@ class CreateIasTable extends Migration
             $table->integer('moa_id');
             $table->string('nomor_ia');
             $table->string('nomor_ia_pengusul');
+            $table->string('pejabat_penandatangan');
             $table->string('nik_nip_pengusul');
             $table->string('jabatan_pengusul');
             $table->text('program');

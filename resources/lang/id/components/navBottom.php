@@ -18,6 +18,7 @@ return [
     'petaIa' => 'Peta IA',
     'rekapitulasi' => 'Rekapitulasi',
     'tentang' => 'Tentang',
-    'slider' => 'Slider'
+    'slider' => 'Slider',
+    'wilayah' => 'Wilayah',
+    'borangIa' => 'Borang IA',
 ];
-

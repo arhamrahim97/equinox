@@ -234,7 +234,7 @@
                             data-textAlign="['left','left','center','center']" data-paddingtop="[20,20,20,20]"
                             data-paddingright="[20,20,20,20]" data-paddingbottom="[30,30,30,30]"
                             data-paddingleft="[20,20,20,20]" style="z-index: 8;letter-spacing: -3px;">
-                            <strong>SIMOU</strong>
+                            <strong>SIMOU <span style="font-size: 20px;letter-spacing:-1px;">Ver. 2.0</span> </strong>
                         </div>
 
                         <!-- LAYER NR. 1 -->
@@ -852,7 +852,7 @@
         if(map != undefined || map != null){
             map.remove();
         }
-        map = L.map("peta").setView([-0.9006266, 119.8879643], 13);
+        map = L.map("peta").setView([20.585042, 65.424051], 3);
 
     var legend = L.control({ position: "bottomleft" });
 
@@ -951,7 +951,7 @@
                 L.marker([data[0][i].latitude, data[0][i].longitude], { icon: icon })
                 .bindPopup( "<p class='fw-bold my-0 text-center title'>" + data[0][i].nama_pengusul + "</p><hr>"
                 + "<p class='my-0'>{{__('pages/moa/map.program')}} " + data[0][i].program + "</p>"
-                + "<p class='my-0'>{{__('pages/mou/map.negara')}} " + data[0][i].negara + "</p>"
+                + "<p class='my-0'>{{__('pages/moa/map.negara')}} " + data[0][i].negara + "</p>"
                 + "<p class='my-0'>{{__('pages/moa/map.alamat')}} " + data[0][i].alamat + "</p>"
                 + "<p class='my-0'>{{__('pages/moa/map.tanggal_berakhir')}} " + data[0][i].tanggal_berakhir + "</p>"
                 + "<p class='my-0'>{{__('pages/moa/map.status')}} " + data[0][i].namaStatus + "</p>"
@@ -974,7 +974,7 @@
                 }
                 L.marker([data[0][i].latitude, data[0][i].longitude], { icon: icon }) .bindPopup( "<p class='fw-bold my-0 text-center title'>" +
                 data[0][i].nama_pengusul + "</p><hr>" + "<p class='my-0'>{{__('pages/ia/map.program')}} " + data[0][i].program + "</p>"
-                + "<p class='my-0'>{{__('pages/mou/map.negara')}} " + data[0][i].negara + "</p>"
+                + "<p class='my-0'>{{__('pages/ia/map.negara')}} " + data[0][i].negara + "</p>"
                 + "<p class='my-0'>{{__('pages/ia/map.alamat')}} " + data[0][i].alamat + "</p>"
                 + "<p class='my-0'>{{__('pages/ia/map.tanggal_berakhir')}} " + data[0][i].tanggal_berakhir + "</p>"
                 + "<p class='my-0'>{{__('pages/ia/map.status')}} " + data[0][i].namaStatus + "</p>"

@@ -22,6 +22,7 @@ class CreateMoasTable extends Migration
             $table->integer('mou_id');
             $table->string('nomor_moa');
             $table->string('nomor_moa_pengusul');
+            $table->string('pejabat_penandatangan');
             $table->string('nik_nip_pengusul');
             $table->string('jabatan_pengusul');
             $table->text('program');

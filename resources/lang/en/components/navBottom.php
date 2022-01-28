@@ -18,5 +18,7 @@ return [
     'petaIa' => 'IA Map',
     'rekapitulasi' => 'Recapitulation',
     'tentang' => 'About',
-    'slider' => 'Slider'
+    'slider' => 'Slider',
+    'wilayah' => 'Region',
+    'borangIa' => 'Form IA',
 ];
