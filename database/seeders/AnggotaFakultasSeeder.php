@@ -17,28 +17,28 @@ class AnggotaFakultasSeeder extends Seeder
         $data = [
             [
                 'ia_id' => 1,
-                'fakultas_id' => 1,                
+                'fakultas_id' => 6,                
             ], 
 
             [
                 'ia_id' => 2,
-                'fakultas_id' => 1,                
+                'fakultas_id' => 6,                
             ],
             [
                 'ia_id' => 3,
-                'fakultas_id' => 1,                
+                'fakultas_id' => 6,                
             ],
             [
                 'ia_id' => 3,
-                'fakultas_id' => 2,                
+                'fakultas_id' => 3,                
             ],
             [
                 'ia_id' => 4,
-                'fakultas_id' => 2,                
+                'fakultas_id' => 3,                
             ],
             [
                 'ia_id' => 5,
-                'fakultas_id' => 1,                
+                'fakultas_id' => 6,                
             ],
           
         ];

@@ -364,6 +364,11 @@ class LandingController extends Controller
                 }
             }
 
+            $dokumen_mou = '';
+            if($moa->mou){
+                $dokumen_mou = Storage::url('/dokumen/mou/' . $moa->mou->dokumen);
+            }
+
             $mapDataArray[] = [
                 'id' => $moa->id,
                 'latitude' => $moa->latitude,
@@ -374,7 +379,7 @@ class LandingController extends Controller
                 'no_referensi' => $moa->nomor_moa,
                 'tanggal_berakhir' =>  Carbon::parse($moa->tanggal_berakhir)->translatedFormat('d F Y'),
                 'dokumen_moa' =>  Storage::url('/dokumen/moa/' . $moa->dokumen),
-                'dokumen_mou' =>  Storage::url('/dokumen/mou/' . $moa->mou->dokumen),
+                'dokumen_mou' =>  $dokumen_mou,
                 'status' => $status,
                 'negara' => $moa->pengusul->negara->nama,
                 'namaStatus' => $namaStatus

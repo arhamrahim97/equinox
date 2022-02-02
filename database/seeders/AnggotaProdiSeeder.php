@@ -17,52 +17,52 @@ class AnggotaProdiSeeder extends Seeder
         $data = [
             [
                 'ia_id' => 1,
-                'prodi_id' => 1,                
+                'prodi_id' => 31,                
             ],
             [
                 'ia_id' => 1,
-                'prodi_id' => 2,                
+                'prodi_id' => 30,                
             ],
             [
                 'ia_id' => 1,
-                'prodi_id' => 3,                
+                'prodi_id' => 32,                
             ],
 
             [
                 'ia_id' => 2,
-                'prodi_id' => 1,                
+                'prodi_id' => 31,                
             ],
             [
                 'ia_id' => 2,
-                'prodi_id' => 3,                
+                'prodi_id' => 32,                
             ],
 
             [
                 'ia_id' => 3,
-                'prodi_id' => 1,                
+                'prodi_id' => 31,                
             ],  
             [
                 'ia_id' => 3,
-                'prodi_id' => 2,                
+                'prodi_id' => 30,                
             ],  
             [
                 'ia_id' => 3,
-                'prodi_id' => 4,                
+                'prodi_id' => 20,                
             ],  [
                 'ia_id' => 3,
-                'prodi_id' => 5,                
+                'prodi_id' => 19,                
             ],      
             [
                 'ia_id' => 4,
-                'prodi_id' => 4,                
+                'prodi_id' => 20,                
             ],  
             [
                 'ia_id' => 4,
-                'prodi_id' => 5,                
+                'prodi_id' => 19,                
             ],   
             [
                 'ia_id' => 5,
-                'prodi_id' => 1,                
+                'prodi_id' => 31,                
             ],                   
         ];
 

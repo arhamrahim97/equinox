@@ -74,15 +74,23 @@
                     @endslot
                     @slot('nomor_moa_pengusul')
                         @forelse ($nomor_moa_pengusul as $item)
-                            <option nomor_mou_pengusul="{{$item->mou->nomor_mou_pengusul}} - {{$item->mou->pengusul->nama}}" value="{{$item->id}}" @if(old('nomor_moa_pengusul', $ia->moa_id) == $item->id)
-                                selected
-                            @endif>{{$item->nomor_moa_pengusul}} - {{$item->pengusul->nama}}</option>
+                            @if ($item->mou)
+                                <option nomor_mou_pengusul="{{$item->mou->nomor_mou_pengusul}} - {{$item->mou->pengusul->nama}}" value="{{$item->id}}" @if(old('nomor_moa_pengusul', $ia->moa_id) == $item->id) selected
+                                @endif>{{$item->nomor_moa_pengusul}} - {{$item->pengusul->nama}}</option>                                
+                            @else
+                                <option nomor_mou_pengusul="-" value="{{$item->id}}" @if(old('nomor_moa_pengusul', $ia->moa_id) == $item->id) selected
+                                @endif>{{$item->nomor_moa_pengusul}} - {{$item->pengusul->nama}}</option>
+                            @endif
                         @empty
                             <option value="">Tidak ada data</option>
                         @endforelse
                     @endslot 
                     @slot('nomor_mou_pengusul')
-                        {{$ia->moa->mou->nomor_mou_pengusul}} - {{$ia->moa->mou->pengusul->nama}}                        
+                        @if ($ia->moa->mou)
+                            {{$ia->moa->mou->nomor_mou_pengusul}} - {{$ia->moa->mou->pengusul->nama}}                                                    
+                        @else
+                            -                                    
+                        @endif
                     @endslot   
                     @slot('nomor_ia')
                         {{$ia->nomor_ia}}
@@ -118,7 +126,7 @@
                     @slot('jenis_kerjasama')
                         @forelse ($jenis_kerjasama_all as $item)                            
                             @if (in_array($item->jenis_kerjasama, $jenis_kerjasama_ia))
-                                <option value="{{$item->jenis_kerjasama}}" selected >{{$item->jenis_kerjasama}}</option>
+                                <option value="{{$item->jenis_kerjasama}}" selected>{{$item->jenis_kerjasama}}</option>
                             @else 
                                 <option value="{{$item->jenis_kerjasama}}">{{$item->jenis_kerjasama}}</option>
                             @endif                                   

@@ -96,7 +96,7 @@ class MouSeeder extends Seeder
                 'created_at' => '2022-01-25 07:18:42'                
             ],
             [
-                'users_id' => 11,
+                'users_id' => 1,
                 'pengusul_id' => 4,
                 'latitude' => '40.4530387',
                 'longitude' => '-3.6905224',

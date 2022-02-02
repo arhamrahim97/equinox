@@ -19,7 +19,7 @@ class CreateIasTable extends Migration
             $table->integer('pengusul_id');
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
-            $table->integer('moa_id');
+            $table->integer('moa_id')->nullable();
             $table->string('nomor_ia');
             $table->string('nomor_ia_pengusul');
             $table->string('pejabat_penandatangan');

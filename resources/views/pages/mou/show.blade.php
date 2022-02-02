@@ -76,10 +76,10 @@
             {{__('components/form_mou_moa_ia.nomor_mou_pengusul')}}        
         @endslot
         @slot('nomor_mou')
-            {{$mou->nomor_mou}}
+            {{$mou->nomor_mou}}                            
         @endslot
         @slot('nomor_mou_pengusul')
-            {{$mou->nomor_mou_pengusul}}
+            {{$mou->nomor_mou_pengusul}}                            
         @endslot
         @slot('pejabat_penandatangan')
             {{$mou->pejabat_penandatangan}}
@@ -100,7 +100,11 @@
             {{$mou->tanggal_berakhir}}
         @endslot
         @slot('download_mou')
-            {{Storage::url("dokumen/mou/" . $mou->dokumen)}}
+            @if (($mou->dokumen == '') || ($mou->dokumen == NULL))
+                kosong
+            @else
+                {{Storage::url("dokumen/mou/" . $mou->dokumen)}}                
+            @endif
         @endslot
 
         @slot('metode_pertemuan')

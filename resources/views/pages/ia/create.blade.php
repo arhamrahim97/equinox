@@ -61,7 +61,11 @@
                     
                     @slot('nomor_moa_pengusul')
                         @forelse ($nomor_moa_pengusul as $item)
-                            <option nomor_mou_pengusul="{{$item->mou->nomor_mou_pengusul}} - {{$item->mou->pengusul->nama}}" value="{{$item->id}}">{{$item->nomor_moa_pengusul }} - {{$item->pengusul->nama}}</option>
+                        @if ($item->mou)
+                            <option nomor_mou_pengusul="{{$item->mou->nomor_mou_pengusul}} - {{$item->mou->pengusul->nama}}" value="{{$item->id}}">{{$item->nomor_moa_pengusul }} - {{$item->pengusul->nama}}</option>                            
+                        @else
+                            <option nomor_mou_pengusul="-" value="{{$item->id}}">{{$item->nomor_moa_pengusul }} - {{$item->pengusul->nama}}</option>                                                        
+                        @endif
                         @empty
                             <option value="">Tidak ada data</option>                                                        
                         @endforelse

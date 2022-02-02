@@ -45,10 +45,16 @@ class MapMouController extends Controller
                     }
                 })
                 ->addColumn('action', function (Mou $mou) {
-                    $actionBtn = "<a target='_blank' href='" . Storage::url('/dokumen/mou/' . $mou->dokumen) . "' class='btn btn-success btn-sm'>
-                                            <i class='fas fa-file-download mr-1'>
-                                            </i>" .  __('pages/mou/map.unduh') . "
-                                        </a>";
+                    $actionBtn = '';
+                    if(($mou->dokumen != '') || ($mou->dokumen != NULL)){
+                        $actionBtn = "<a target='_blank' href='" . Storage::url('/dokumen/mou/' . $mou->dokumen) . "' class='btn btn-success btn-sm'>
+                                                <i class='fas fa-file-download mr-1'>
+                                                </i>" .  __('pages/mou/map.unduh') . "
+                                            </a>";
+                    }
+                    else{
+                        $actionBtn = '';
+                    }
                     return $actionBtn;
                 })
                 ->rawColumns(['action', 'pengusul', 'alamat', 'tanggal_mulai', 'tanggal_berakhir', 'status'])

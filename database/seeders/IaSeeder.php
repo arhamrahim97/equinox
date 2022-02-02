@@ -16,8 +16,8 @@ class IaSeeder extends Seeder
     {
         $data = [
             [
-                'users_id' => 2,
-                'pengusul_id' => 5,
+                'users_id' => 9,
+                'pengusul_id' => 4, //5
                 'latitude' => '-0.857844',
                 'longitude' => '119.881858',
                 'moa_id' => '1',
@@ -41,8 +41,8 @@ class IaSeeder extends Seeder
                 'created_at' => '2021-08-16 07:18:42'
             ],
             [
-                'users_id' => 2,
-                'pengusul_id' => 6,
+                'users_id' => 9,
+                'pengusul_id' => 4, //6
                 'latitude' => '-0.8364322',
                 'longitude' => '119.891505',
                 'moa_id' => '2',
@@ -67,7 +67,7 @@ class IaSeeder extends Seeder
 
             ],
             [
-                'users_id' => 5,
+                'users_id' => 2,
                 'pengusul_id' => 7,
                 'latitude' => '-0.893251',
                 'longitude' => '119.886419',
@@ -92,7 +92,7 @@ class IaSeeder extends Seeder
                 'created_at' => '2021-11-11 07:18:42'
             ],           
             [
-                'users_id' => 8,
+                'users_id' => 6,
                 'pengusul_id' => 7,
                 'latitude' => '-0.891618',
                 'longitude' => '119.8517753',
@@ -117,7 +117,7 @@ class IaSeeder extends Seeder
                 'created_at' => '2021-10-18 07:18:42'
             ],        
             [
-                'users_id' => 6,
+                'users_id' => 47,
                 'pengusul_id' => 5,
                 'latitude' => '-0.886793',
                 'longitude' => '119.8594253',
