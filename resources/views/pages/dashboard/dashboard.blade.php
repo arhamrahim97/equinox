@@ -87,6 +87,26 @@
                         {{$iaSelesai}}</span>
                     <span class="badge badge-danger bg-danger"> {{ __('components/span.melewati_batas') }} :
                         {{$iaMelewatiBatas}}</span>
+                    @if (Auth::user()->role == "Admin")
+                    <span class="badge badge-danger bg-warning"> {{ __('components/span.surat_tugas') }} :
+                        {{$iaSuratTugas}}</span>
+                    @endif
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-12">
+        <div class="card p-3">
+            <div class="d-flex align-items-center">
+                <span class="stamp stamp-md bg-primary mr-3">
+                    <i class="fas fa-money-bill-wave fa-3x my-4"></i>
+                </span>
+                <div style="width: 100%">
+                    <h4 class="fw-bold">{{__('pages/dashboard/dashboard.total_pemasukan')}}</h4>
+                    {{--
+                    <hr class="my-2"> --}}
+                    <h5 class="mb-1">Rp. <b>{{number_format($totalPemasukan,0,',','.')}}</b></h5>
                 </div>
             </div>
         </div>

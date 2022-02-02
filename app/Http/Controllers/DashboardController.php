@@ -34,8 +34,11 @@ class DashboardController extends Controller
         $iaAktif = $this->_countIa()['iaAktif'];
         $iaSelesai = $this->_countIa()['iaSelesai'];
         $iaMelewatiBatas = $this->_countIa()['iaMelewatiBatas'];
+        $iaSuratTugas = $this->_countIa()['iaSuratTugas'];
 
-        $data = ['totalMou', 'mouAktif', 'mouMasaTenggang', 'mouKadaluarsa', 'totalMoa', 'moaAktif', 'moaMasaTenggang', 'moaKadaluarsa', 'totalIa', 'iaAktif', 'iaSelesai', 'iaMelewatiBatas'];
+        $totalPemasukan = $this->_countIa()['totalPemasukan'];
+
+        $data = ['totalMou', 'mouAktif', 'mouMasaTenggang', 'mouKadaluarsa', 'totalMoa', 'moaAktif', 'moaMasaTenggang', 'moaKadaluarsa', 'totalIa', 'iaAktif', 'iaSelesai', 'iaMelewatiBatas', 'iaSuratTugas', 'totalPemasukan'];
         return view('pages.dashboard.dashboard', compact($data));
     }
 
@@ -127,6 +130,8 @@ class DashboardController extends Controller
                 $query->where('laporan_hasil_pelaksanaan', '!=', '');
             })->count();
 
+            $iaSuratTugas = "";
+
             // Melewati Batas
             $iaMelewatiBatas = Ia::with(['anggotaFakultas'])->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
                 $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
@@ -134,6 +139,10 @@ class DashboardController extends Controller
                 $query->whereNull('laporan_hasil_pelaksanaan');
                 $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
             })->where('tanggal_berakhir', '<', $hariIni)->count();
+
+            $totalPemasukan = Ia::with(['anggotaFakultas'])->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
+                $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
+            })->sum('nilai_uang');
         } else if (Auth::user()->role == 'LPPM') {
 
             // Total Ia
@@ -164,6 +173,12 @@ class DashboardController extends Controller
                 $query->whereNull('laporan_hasil_pelaksanaan');
                 $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
             })->where('tanggal_berakhir', '<', $hariIni)->count();
+
+            $iaSuratTugas = "";
+
+            $totalPemasukan = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
+                $user->where('role', $userLogin->role);
+            })->sum('nilai_uang');
         } else if (in_array(Auth::user()->role, array('Prodi', 'Unit Kerja'))) {
 
             // Total Ia
@@ -194,6 +209,12 @@ class DashboardController extends Controller
                 $query->whereNull('laporan_hasil_pelaksanaan');
                 $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
             })->where('tanggal_berakhir', '<', $hariIni)->count();
+
+            $iaSuratTugas = "";
+
+            $totalPemasukan = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
+                $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
+            })->sum('nilai_uang');
         } else {
             // Total Ia
             $totalIa = Ia::count();
@@ -215,6 +236,12 @@ class DashboardController extends Controller
                 $query->whereNull('laporan_hasil_pelaksanaan');
                 $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
             })->where('tanggal_berakhir', '<', $hariIni)->count();
+
+            // Belum Upload Surat Tugas
+            $iaSuratTugas = Ia::where('surat_tugas', '=', NULL)->orWhere('surat_tugas', '=', '')->count();
+
+            // Total Pemasukan
+            $totalPemasukan = Ia::sum('nilai_uang');
         }
 
         return [
@@ -222,6 +249,8 @@ class DashboardController extends Controller
             'iaAktif' => $iaAktif,
             'iaSelesai' => $iaSelesai,
             'iaMelewatiBatas' => $iaMelewatiBatas,
+            'iaSuratTugas' => $iaSuratTugas,
+            'totalPemasukan' => $totalPemasukan
         ];
     }
 
