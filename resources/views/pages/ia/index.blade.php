@@ -18,7 +18,7 @@
 
 @section('content')
 <section>    
-    @if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja')))
+    @if (in_array(Auth::user()->role, array('Admin', 'Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja')))
         <div class="row mb-3">
             <div class="col-12">
                 @component('components.buttons.add')

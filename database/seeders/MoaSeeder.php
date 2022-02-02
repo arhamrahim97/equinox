@@ -16,8 +16,8 @@ class MoaSeeder extends Seeder
     {
         $data = [
             [
-                'users_id' => 2,
-                'pengusul_id' => 5,
+                'users_id' => 9,
+                'pengusul_id' => 4, //5
                 'latitude' => '-0.857844',
                 'longitude' => '119.881858',
                 'mou_id' => '1',
@@ -37,8 +37,8 @@ class MoaSeeder extends Seeder
                 'created_at' => '2022-02-02 07:18:42'
             ],
             [
-                'users_id' => 2,
-                'pengusul_id' => 6,
+                'users_id' => 9,
+                'pengusul_id' => 4, //6
                 'latitude' => '-0.8364322',
                 'longitude' => '119.891505',
                 'mou_id' => '2',
@@ -59,7 +59,7 @@ class MoaSeeder extends Seeder
 
             ],
             [
-                'users_id' => 2,
+                'users_id' => 9,
                 'pengusul_id' => 7,
                 'latitude' => '-0.893251',
                 'longitude' => '119.886419',
@@ -80,7 +80,7 @@ class MoaSeeder extends Seeder
                 'created_at' => '2021-12-01 07:18:42'                
             ],           
             [
-                'users_id' => 8,
+                'users_id' => 6,
                 'pengusul_id' => 7,
                 'latitude' => '-0.893251',
                 'longitude' => '119.886419',
@@ -102,7 +102,7 @@ class MoaSeeder extends Seeder
 
             ],     
             [
-                'users_id' => 5,
+                'users_id' => 2,
                 'pengusul_id' => 7,
                 'latitude' => '-0.893251',
                 'longitude' => '119.886419',
@@ -124,7 +124,7 @@ class MoaSeeder extends Seeder
 
             ],           
             [
-                'users_id' => 10,
+                'users_id' => 7,
                 'pengusul_id' => 7,
                 'latitude' => '-0.893251',
                 'longitude' => '119.886419',

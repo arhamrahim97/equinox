@@ -54,19 +54,60 @@
             margin-top: 9px;
             margin-bottom: 9px;
         }
+
+        #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100000;
+        width: 100%;
+        height: 100%;
+        display: none;
+        background: rgba(0, 0, 0, 0.6);
+        }
+
+        .confirm:hover {
+            color: maroon !important
+        }
+
+        .cv-spinner {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px #ddd solid;
+            border-top: 4px #2e93e6 solid;
+            border-radius: 50%;
+            animation: sp-anime 0.8s infinite linear;
+        }
+
+        @keyframes sp-anime {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 
 </head>
 
 <body>
     <div class="wrapper horizontal-layout-2">
-
         <div class="main-header" data-background-color="light-blue2">
+            <div id="overlay">
+                <div class="cv-spinner">
+                    <span class="spinner"></span>
+                </div>
+            </div>
             @include('components.navTop')
             @include('components.navBottom')
         </div>
-
-        <div class="main-panel" style="max-width: 1700px !important">
+        
+        <div class="main-panel" style="max-width: 1700px !important">            
             <div class="container" style="max-width: 1700px !important">
                 <div class="page-inner">
                     <div class="page-header">

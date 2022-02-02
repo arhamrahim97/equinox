@@ -36,7 +36,7 @@ class MouController extends Controller
                             ->join('users', 'mou.users_id', '=', 'users.id')                            
                             ->select('mou.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama')
                             ->whereNull('mou.deleted_at')
-                            ->orderBy('mou.id', 'asc');
+                            ->orderBy('mou.id', 'desc');
                             // ->get();            
             // $data = Mou::with(['pengusul'])->orderBy('id', 'desc')->get();
             return DataTables::of($data)
@@ -62,17 +62,22 @@ class MouController extends Controller
                 ->addColumn('action', function ($row) {
                     if(Auth::user()->role == 'Admin'){
                         $actionBtn = '
-                        <div class="row text-center justify-content-center">
-                            <a href="' . Storage::url("dokumen/mou/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>                     
-                                <a href="' . url('/mou/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>
-                                <a href="' . url('/mou/' . $row->id . '/edit') . '" id="btn-edit" class="btn btn-warning btn-sm mr-1 my-1">' . __('components/button.edit') . '</a>
-                                <button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1 my-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button>
+                        <div class="row text-center justify-content-center">';
+                        if(($row->dokumen != '') || ($row->dokumen != NULL)){
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/mou/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>';                     
+                        }
+                        $actionBtn .= '
+                            <a href="' . url('/mou/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>
+                            <a href="' . url('/mou/' . $row->id . '/edit') . '" id="btn-edit" class="btn btn-warning btn-sm mr-1 my-1">' . __('components/button.edit') . '</a>
+                            <button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1 my-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button>
                         </div>';
                     } else{
                         $actionBtn = '
-                        <div class="row text-center justify-content-center">
-                            <a href="' . Storage::url("dokumen/mou/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>                     
-                            <a href="' . url('/mou/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>                                
+                        <div class="row text-center justify-content-center">';
+                        if(($row->dokumen != '') || ($row->dokumen != NULL)){
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/mou/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>';
+                        }
+                            $actionBtn .= '<a href="' . url('/mou/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>                                
                         </div>';
                     }
 

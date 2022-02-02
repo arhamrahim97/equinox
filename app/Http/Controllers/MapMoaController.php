@@ -53,7 +53,19 @@ class MapMoaController extends Controller
                     }
                 })
                 ->addColumn('action', function (Moa $moa) {
-                    $actionBtn = "<div class='row justify-content-center'><a target='_blank' href='" . Storage::url('/dokumen/mou/' . $moa->mou->dokumen) . "' class='btn btn-primary btn-sm mx-1 my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/moa/map.unduhMou') . "</a><a target='_blank' href='" . Storage::url('/dokumen/moa/' . $moa->dokumen) . "' class='btn btn-success btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/moa/map.unduhMoa') . "</a></div>";
+                    $actionBtn = '';
+                    if($moa->mou){
+                        $actionBtn .= "<div class='row justify-content-center'>";
+                        if(($moa->mou->dokumen != '') || ($moa->mou->dokumen != NULL)){
+                            $actionBtn .= "<a target='_blank' href='" . Storage::url('/dokumen/mou/' . $moa->mou->dokumen) . "' class='btn btn-primary btn-sm mx-1 my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/moa/map.unduhMou') . "</a>";                            
+                        }
+                        if(($moa->dokumen != '') || ($moa->dokumen != NULL))                        {
+                            $actionBtn .= "<a target='_blank' href='" . Storage::url('/dokumen/moa/' . $moa->dokumen) . "' class='btn btn-success btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/moa/map.unduhMoa') . "</a></div>";
+                        }
+                    }
+                    else{
+                        $actionBtn = '';
+                    }
                     return $actionBtn;
                 })
                 ->rawColumns(['action', 'pengusul', 'alamat', 'tanggal_mulai', 'tanggal_berakhir', 'status'])
@@ -94,6 +106,11 @@ class MapMoaController extends Controller
                     $namaStatus = '<span class="badge badge-warning bg-warning">' . __('components/span.masa_tenggang') . '</span>';
                 }
 
+                $dokumen_mou = '';
+                if($moa->mou){
+                    $dokumen_mou = Storage::url('/dokumen/mou/' . $moa->mou->dokumen);
+                }
+
                 $mapDataArray[] = [
                     'id' => $moa->id,
                     'latitude' => $moa->latitude,
@@ -105,7 +122,7 @@ class MapMoaController extends Controller
                     'no_referensi' => $moa->nomor_moa,
                     'tanggal_berakhir' => Carbon::parse($moa->tanggal_berakhir)->translatedFormat('d F Y'),
                     'dokumen_moa' =>  Storage::url('/dokumen/moa/' . $moa->dokumen),
-                    'dokumen_mou' =>  Storage::url('/dokumen/mou/' . $moa->mou->dokumen),
+                    'dokumen_mou' =>  $dokumen_mou,
                     'status' => $status,
                     'namaStatus' => $namaStatus
                 ];
@@ -136,11 +153,21 @@ class MapMoaController extends Controller
             $status = '<span class="badge badge-warning bg-warning">' . __('components/span.masa_tenggang') . '</span>';
         }
 
+        $dokumen_mou = '';
+        $nomor_mou = '';
+        $nomor_mou_pengusul = '';
+        if($moa->mou){
+            $dokumen_mou = Storage::url('/dokumen/mou/' . $moa->mou->dokumen);
+            $nomor_mou  = $moa->mou->nomor_mou;
+            $nomor_mou_pengusul = $moa->mou->nomor_mou_pengusul;
+        }        
+
+
         return response()->json([
             'nomor_moa' => $moa->nomor_moa,
             'nomor_moa_pengusul' => $moa->nomor_moa_pengusul,
-            'nomor_mou' => $moa->mou->nomor_mou,
-            'nomor_mou_pengusul' => $moa->mou->nomor_mou_pengusul,
+            'nomor_mou' => $nomor_mou,
+            'nomor_mou_pengusul' => $nomor_mou_pengusul,
             'pengusul' => $moa->pengusul->nama,
             'pejabat_penandatangan' => $moa->pejabat_penandatangan,
             'alamat' => $moa->pengusul->alamat,
@@ -151,7 +178,7 @@ class MapMoaController extends Controller
             'tanggal_berakhir' => Carbon::parse($moa->tanggal_berakhir)->translatedFormat('d F Y'),
             'pertemuan' => $pertemuan,
             'dokumen_moa' =>  Storage::url('/dokumen/moa/' . $moa->dokumen),
-            'dokumen_mou' =>  Storage::url('/dokumen/mou/' . $moa->mou->dokumen),
+            'dokumen_mou' =>  $dokumen_mou,
             'status' => $status
         ]);
     }

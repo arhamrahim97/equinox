@@ -21,53 +21,53 @@
 @endpush
 
 @section('content')
-@component('components.show.mou_moa_ia')
-@slot('type_doc')
-IA
-@endslot
-@slot('program')
-{{$ia->program}}
-@endslot
-@slot('pengusul')
-{{$ia->pengusul->nama}}
-@endslot
-@slot('negara')
-{{$ia->pengusul->negara->nama}}
-@endslot
-@slot('provinsi')
-@if ($ia->pengusul->provinsi)
-{{$ia->pengusul->provinsi->nama}}
-@else
-{{$ia->pengusul->provinsi_id}}
-@endif
-@endslot
-@slot('kota')
-@if ($ia->pengusul->kota)
-{{$ia->pengusul->kota->nama}}
-@else
-{{$ia->pengusul->kota_id}}
-@endif
-@endslot
-@slot('kecamatan')
-@if ($ia->pengusul->kecamatan)
-{{$ia->pengusul->kecamatan->nama}}
-@else
-{{$ia->pengusul->kecamatan_id}}
-@endif
-@endslot
-@slot('kelurahan')
-@if ($ia->pengusul->kelurahan)
-{{$ia->pengusul->kelurahan->nama}}
-@else
-{{$ia->pengusul->kelurahan_id}}
-@endif
-@endslot
-@slot('alamat')
-{{$ia->pengusul->alamat}}
-@endslot
-@slot('latitude_longitude')
-{{$ia->latitude}} | {{$ia->longitude}}
-@endslot
+    @component('components.show.mou_moa_ia')
+        @slot('type_doc')
+            IA
+        @endslot
+        @slot('program')
+            {{$ia->program}}
+        @endslot
+        @slot('pengusul')
+            {{$ia->pengusul->nama}}
+        @endslot
+        @slot('negara')
+            {{$ia->pengusul->negara->nama}}
+        @endslot
+        @slot('provinsi')
+            @if ($ia->pengusul->provinsi)
+                {{$ia->pengusul->provinsi->nama}}
+            @else
+                {{$ia->pengusul->provinsi_id}}
+            @endif
+        @endslot
+        @slot('kota')
+            @if ($ia->pengusul->kota)
+                {{$ia->pengusul->kota->nama}}
+            @else
+                {{$ia->pengusul->kota_id}}
+            @endif
+        @endslot
+        @slot('kecamatan')
+            @if ($ia->pengusul->kecamatan)
+                {{$ia->pengusul->kecamatan->nama}}
+            @else
+                {{$ia->pengusul->kecamatan_id}}
+            @endif
+        @endslot
+        @slot('kelurahan')
+            @if ($ia->pengusul->kelurahan)
+                {{$ia->pengusul->kelurahan->nama}}
+            @else
+                {{$ia->pengusul->kelurahan_id}}
+            @endif
+        @endslot
+        @slot('alamat')
+            {{$ia->pengusul->alamat}}
+        @endslot
+        @slot('latitude_longitude')
+            {{$ia->latitude}} | {{$ia->longitude}}
+        @endslot
 
         @slot('title_nomor_mou')
         {{__('components/form_mou_moa_ia.nomor_mou')}}
@@ -88,22 +88,38 @@ IA
             {{__('components/form_mou_moa_ia.nomor_ia_pengusul')}}        
         @endslot
         @slot('nomor_mou')
-            {{$ia->moa->mou->nomor_mou}}
+            @if ($ia->moa->mou)
+                {{$ia->moa->mou->nomor_mou}}                                
+            @else
+                
+            @endif
         @endslot
         @slot('nomor_mou_pengusul')
-            {{$ia->moa->mou->nomor_mou_pengusul}}
+            @if ($ia->moa->mou)                           
+                {{$ia->moa->mou->nomor_mou_pengusul}}
+            @else
+                
+            @endif
         @endslot
         @slot('nomor_moa')
-            {{$ia->moa->nomor_moa}}
+            @if ($ia->moa)                
+                {{$ia->moa->nomor_moa}}                                                        
+            @else
+                
+            @endif
         @endslot
         @slot('nomor_moa_pengusul')
-            {{$ia->moa->nomor_moa_pengusul}}
+            @if ($ia->moa)                               
+                {{$ia->moa->nomor_moa_pengusul}}
+            @else
+                
+            @endif
         @endslot
-        @slot('nomor_ia')
-            {{$ia->nomor_ia}}
+        @slot('nomor_ia')                  
+            {{$ia->nomor_ia}}                
         @endslot
-        @slot('nomor_ia_pengusul')
-            {{$ia->nomor_ia_pengusul}}
+        @slot('nomor_ia_pengusul')            
+            {{$ia->nomor_ia_pengusul}}                
         @endslot
         @slot('pejabat_penandatangan')
             {{$ia->pejabat_penandatangan}}
@@ -139,13 +155,33 @@ IA
             {{$ia->tanggal_berakhir}}
         @endslot
         @slot('download_mou')
-            {{Storage::url("dokumen/mou/" . $ia->moa->mou->dokumen)}}
+            @if ($ia->moa->mou)
+                @if (($ia->moa->mou->dokumen == '') || ($ia->moa->mou->dokumen == NULL))
+                    kosong
+                @else                        
+                    {{Storage::url("dokumen/mou/" . $ia->moa->mou->dokumen)}}                
+                @endif
+            @else
+                kosong
+            @endif
         @endslot
         @slot('download_moa')
-            {{Storage::url("dokumen/moa/" . $ia->moa->dokumen)}}
+            @if ($ia->moa)          
+                @if (($ia->moa->dokumen == '') || ($ia->moa->dokumen == NULL))
+                    kosong
+                @else
+                    {{Storage::url("dokumen/moa/" . $ia->moa->dokumen)}}                    
+                @endif      
+            @else
+                kosong
+            @endif
         @endslot
         @slot('download_ia')
-            {{Storage::url("dokumen/ia/" . $ia->dokumen)}}
+            @if (($ia->dokumen == '') || ($ia->dokumen == NULL))
+                kosong
+            @else
+                {{Storage::url("dokumen/ia/" . $ia->dokumen)}}                
+            @endif
         @endslot
         {{-- @slot('surat_tugas')
             {{Storage::url("dokumen/ia/" . $ia->surat_tugas)}}

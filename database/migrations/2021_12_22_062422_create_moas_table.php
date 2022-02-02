@@ -19,8 +19,8 @@ class CreateMoasTable extends Migration
             $table->integer('pengusul_id');
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
-            $table->integer('mou_id');
-            $table->string('nomor_moa');
+            $table->integer('mou_id')->nullable();
+            $table->string('nomor_moa')->nullable();
             $table->string('nomor_moa_pengusul');
             $table->string('pejabat_penandatangan');
             $table->string('nik_nip_pengusul')->nullable();

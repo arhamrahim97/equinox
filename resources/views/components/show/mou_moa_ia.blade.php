@@ -148,20 +148,32 @@
                                         </li>
                                         <li>
                                             <span class="name-specification">{{__('components/form_mou_moa_ia.dokumen')}} MOU</span>
-                                            <span class="status-specification">@component('components.buttons.download_badge')
-                                            @slot('url')
-                                                {{$download_mou}}
-                                            @endslot
-                                            @endcomponent</span>
+                                            <span class="status-specification">
+                                                @if ($download_mou == 'kosong')
+                                                    
+                                                @else
+                                                    @component('components.buttons.download_badge')
+                                                    @slot('url')                                            
+                                                        {{$download_mou}}
+                                                    @endslot
+                                                    @endcomponent                                                    
+                                                @endif
+                                            </span>
                                         </li>     
                                         @if (($type_doc == 'MOA') || ($type_doc == 'IA'))
                                             <li>
                                                 <span class="name-specification">{{__('components/form_mou_moa_ia.dokumen')}} MOA</span>
-                                                <span class="status-specification">@component('components.buttons.download_badge')
-                                                @slot('url')
-                                                    {{$download_moa}}
-                                                @endslot
-                                                @endcomponent</span>
+                                                <span class="status-specification">     
+                                                    @if ($download_moa == 'kosong')
+                                                                                                                
+                                                    @else                                               
+                                                        @component('components.buttons.download_badge')
+                                                        @slot('url')
+                                                            {{$download_moa}}
+                                                        @endslot
+                                                        @endcomponent
+                                                    @endif
+                                                </span>
                                             </li>                                                                           
                                         @endif  
                                         @if ($type_doc == 'MOA')
@@ -170,11 +182,17 @@
                                         @if ($type_doc == "IA")
                                             <li>
                                                 <span class="name-specification">{{__('components/form_mou_moa_ia.dokumen')}} IA</span>
-                                                <span class="status-specification">@component('components.buttons.download_badge')
-                                                @slot('url')
-                                                    {{$download_ia}}
-                                                @endslot
-                                                @endcomponent</span>
+                                                <span class="status-specification">
+                                                    @if ($download_ia == 'kosong')
+                                                        
+                                                    @else
+                                                        @component('components.buttons.download_badge')
+                                                        @slot('url')
+                                                            {{$download_ia}}
+                                                        @endslot
+                                                        @endcomponent
+                                                    @endif
+                                                </span>
                                             </li>   
                                             <li>
                                                 <span class="name-specification">{{__('components/form_mou_moa_ia.surat_tugas')}}</span>

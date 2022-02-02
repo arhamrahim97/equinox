@@ -34,7 +34,7 @@ class JenisKerjasamaSeeder extends Seeder
             ],
             [
                 'ia_id' => 4,
-                'jenis_kerjasama' => 'Pengabdian Kepada Masyarakat',
+                'jenis_kerjasama' => 'Pengabdian Kepada Masyarakat',                
             ],
             [
                 'ia_id' => 5,

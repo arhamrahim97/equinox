@@ -101,16 +101,11 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>{{__('components/form_mou_moa_ia.titik_koordinat')}} :</label> 
-                            <div class="cover">
-                                @if ($form_id == 'form_mou')
+                            <div class="cover">                                
                                 <div id="peta" style="position: relative;  pointer-events: none;">
                                     <div class="overlay" style="background: rgba(0, 0, 0, 0.3); cursor: not-allowed; position: absolute; top: 0; z-index: 500; width: 100%; height: 300px">              
                                     </div>                                                       
-                                </div> 
-                                @else 
-                                    <div id="peta">                                                
-                                    </div>                
-                                @endif                             
+                                </div>                                                        
                             </div> 
                             <div class="row mt-3">
                                 <div class="col-md-6">
@@ -261,7 +256,7 @@
                     </div>
                 </div>
                 @if ($form_id == 'form_ia')
-                    @if (in_array(Auth::user()->role, array('LPPM', 'Fakultas', 'Pascasarjana', 'PSDKU')))
+                    @if (in_array(Auth::user()->role, array('Admin', 'LPPM', 'Fakultas', 'Pascasarjana', 'PSDKU')))
                         {{-- IF IA && role == Fakultas, Pasca Sarjana, PSDKU --}}
                         @if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU')))
                             <div class="row">
@@ -279,8 +274,8 @@
                                 </div>
                             </div>           
                         @endif
-                        {{-- IF IA && role == LPPM --}}
-                        @if (Auth::user()->role == 'LPPM')
+                        {{-- IF IA && role == LPPM, Admin --}}
+                        @if (in_array(Auth::user()->role, array('Admin', 'LPPM')))
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">

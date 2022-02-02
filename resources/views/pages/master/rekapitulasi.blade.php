@@ -263,6 +263,9 @@
                                 <th class="text-center">{{__('pages/master/rekapitulasi.nomor_moa_pengusul')}}</th>  
                                 <th class="text-center">{{__('pages/master/rekapitulasi.nomor_mou')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.nomor_mou_pengusul')}}</th>    
+                                <th class="text-center">{{__('components/form_mou_moa_ia.manfaat')}}</th>    
+                                <th class="text-center">{{__('components/form_mou_moa_ia.jenis_kerjasama')}}</th>    
+                                {{-- <th class="text-center">{{__('components/form_mou_moa_ia.fakultas_')}}</th>     --}}
                                 <th class="text-center">{{__('pages/master/rekapitulasi.pejabat_penandatangan')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.nik_nip_pengusul')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.jabatan_pengusul')}}</th>                                                           
@@ -271,7 +274,7 @@
                                 <th class="text-center">{{__('pages/master/rekapitulasi.metode_pertemuan')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.tanggal_pertemuan_')}}</th>
                                 <th class="text-center">{{__('pages/master/rekapitulasi.waktu_pertemuan_')}}</th>                        
-                                <th class="text-center">{{__('pages/master/rekapitulasi.nama_berkas')}}</th>
+                                <th class="text-center">{{__('pages/master/rekapitulasi.nama_berkas')}} IA</th>
                             </tr>
                         </thead>
                     </table>
@@ -356,7 +359,8 @@
 
        
 
-        $('#rekapitulasi-form').submit(function(e) {                          
+        $('#rekapitulasi-form').submit(function(e) {       
+            $("#overlay").fadeIn(100);
             e.preventDefault();                         
             resetForm()
             var formData = new FormData(this)                    
@@ -370,7 +374,8 @@
                 contentType: false,
                 success: function (data) {          
                     if ($.isEmptyObject(data.error)) {
-                        console.log(data)   
+                        // console.log(data)   
+                        $("#overlay").fadeOut(100);
                         $('#result').removeClass('d-none')
                         if(data.jenis_dokumen == 'mou'){
                             rekapMou(data)
@@ -896,6 +901,21 @@
                         name: 'nomor_mou_pengusul',
                         searchable: false
                     },   
+                    {
+                        data: 'manfaat',
+                        name: 'manfaat',
+                        searchable: false
+                    },   
+                    {
+                        data: 'jenis_kerjasama',
+                        name: 'jenis_kerjasama',
+                        searchable: false
+                    },   
+                    // {
+                    //     data: 'fakultas_anggota',
+                    //     name: 'fakultas_anggota',
+                    //     searchable: false
+                    // },   
                     {
                         data: 'pejabat_penandatangan',
                         name: 'pejabat_penandatangan',

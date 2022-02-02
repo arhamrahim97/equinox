@@ -55,7 +55,7 @@ class MoaController extends Controller
                                 ->leftJoin('users', 'moa.users_id', '=', 'users.id')
                                 ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama', 'users.role as user_role')  
                                 ->whereNull('moa.deleted_at')
-                                ->orderBy('moa.id', 'desc');
+                                ->orderBy('moa.id', 'asc');
                                 // ->get(); 
                 } else { // Role == Prodi, Unit Kerja
                     $data = DB::table('moa')
@@ -96,17 +96,22 @@ class MoaController extends Controller
                     }                 
                 })
                 ->addColumn('action', function ($row) {
-                    if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'))){
-                        $actionBtn = '<div class="row text-center justify-content-center">
-                            <a href="' . Storage::url("dokumen/moa/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>
+                    if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Admin'))){
+                        $actionBtn = '<div class="row text-center justify-content-center">';
+                        if(($row->dokumen != '') || ($row->dokumen != NULL)){
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/moa/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>';
+                        }       
+                        $actionBtn .= '                            
                             <a href="' . url('/moa/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>
                             <a href="' . url('/moa/' . $row->id . '/edit') . '" id="btn-edit" class="btn btn-warning btn-sm mr-1 my-1">' . __('components/button.edit') . '</a>
                             <button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1 my-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button>
-                        </div>';                        
+                            </div>';                        
                     } else{ // Role == Admin, Prodi, Unit Kerja
-                        $actionBtn = '<div class="row text-center justify-content-center">
-                            <a href="' . Storage::url("dokumen/moa/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>
-                            <a href="' . url('/moa/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>                            
+                        $actionBtn = '<div class="row text-center justify-content-center">';
+                        if(($row->dokumen != '') || ($row->dokumen != NULL)){
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/moa/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>';
+                        }                            
+                        $actionBtn .= '<a href="' . url('/moa/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>                            
                         </div>';                        
                     }
                     return $actionBtn;
@@ -156,7 +161,7 @@ class MoaController extends Controller
      */
     public function create()
     {
-        if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'))){
+        if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Admin'))){
             $data = [
                 'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->orderBy('id', 'desc')->get(),
                 'nomor_mou_pengusul' => Mou::with(['pengusul'])->orderBy('id', 'desc')->get(),
@@ -281,7 +286,7 @@ class MoaController extends Controller
      */
     public function edit(Moa $moa)
     {        
-        if(($moa->user->fakultas_id == Auth::user()->fakultas_id) && ($moa->user->prodi_id == Auth::user()->prodi_id)){
+        if((($moa->user->fakultas_id == Auth::user()->fakultas_id) && ($moa->user->prodi_id == Auth::user()->prodi_id)) || (Auth::user()->role == 'Admin')){
             $data = [
                 'moa' => Moa::with(['pengusul'])->where('id', $moa->id)->first(),
                 'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->orderBy('id', 'desc')->get(),
@@ -362,7 +367,7 @@ class MoaController extends Controller
         }
 
         $data = [
-            'users_id' => Auth::user()->id,
+            // 'users_id' => Auth::user()->id,
             'pengusul_id' => $request->pengusul_id,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,

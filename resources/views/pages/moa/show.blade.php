@@ -82,16 +82,24 @@
             {{__('components/form_mou_moa_ia.nomor_moa_pengusul')}}
         @endslot
         @slot('nomor_mou')
-            {{$moa->mou->nomor_mou}}
+            @if ($moa->mou)
+                {{$moa->mou->nomor_mou}}                
+            @else
+                
+            @endif            
         @endslot
         @slot('nomor_mou_pengusul')
-            {{$moa->mou->nomor_mou_pengusul}}
+            @if ($moa->mou)
+                {{$moa->mou->nomor_mou_pengusul}}                
+            @else
+                
+            @endif
         @endslot
-        @slot('nomor_moa')
-            {{$moa->nomor_moa}}
+        @slot('nomor_moa')            
+            {{$moa->nomor_moa}}                            
         @endslot
         @slot('nomor_moa_pengusul')
-            {{$moa->nomor_moa_pengusul}}
+            {{$moa->nomor_moa_pengusul}}            
         @endslot
         @slot('pejabat_penandatangan')
             {{$moa->pejabat_penandatangan}}
@@ -112,10 +120,22 @@
             {{$moa->tanggal_berakhir}}
         @endslot
         @slot('download_mou')
-            {{Storage::url("dokumen/mou/" . $moa->mou->dokumen)}}
+            @if ($moa->mou)
+                @if (($moa->mou->dokumen == '') || ($moa->mou->dokumen == NULL))
+                    kosong
+                @else
+                    {{Storage::url("dokumen/mou/" . $moa->mou->dokumen)}}                                    
+                @endif
+            @else
+                kosong
+            @endif
         @endslot
         @slot('download_moa')
-            {{Storage::url("dokumen/moa/" . $moa->dokumen)}}
+            @if (($moa->dokumen == '') || ($moa->dokumen == NULL))
+                kosong
+            @else
+                {{Storage::url("dokumen/moa/" . $moa->dokumen)}}                                
+            @endif
         @endslot
         @slot('metode_pertemuan')
             {{$moa->metode_pertemuan}}
@@ -130,7 +150,7 @@
             {{$moa->tempat_pertemuan}}
         @endslot
         @slot('anggota_fakultas')
-        <li>
+        {{-- <li>
             <span class="name-specification">{{__('components/form_mou_moa_ia.fakultas_')}}</span>
             <span class="status-specification">
                 @if ($moa->user->fakultas)
@@ -139,8 +159,8 @@
                     LPPM
                 @endif
             </span>
-        </li>                  
-    @endslot
+        </li>                   --}}
+        @endslot
 
     @endcomponent
 @endsection

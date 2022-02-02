@@ -125,7 +125,9 @@ class IaController extends Controller
                         if(($row->laporan_hasil_pelaksanaan != '') || ($row->laporan_hasil_pelaksanaan != NULL)){
                             $actionBtn .= '<a href="' . Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $row->laporan_hasil_pelaksanaan) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_laporan_pelaksanaan') . '</a>';                            
                         } else{
-                            $actionBtn .= '<button id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-secondary btn-sm mr-1 my-1" onclick="showModalFileTambahan(' . $row->id . ', `laporan_pelaksanaan`)"  value="' . $row->id . '" >' . __('components/button.upload_laporan_pelaksanaan') . '</button>';
+                            if(($row->surat_tugas != '') || ($row->surat_tugas != NULL)){
+                                $actionBtn .= '<button id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-secondary btn-sm mr-1 my-1" onclick="showModalFileTambahan(' . $row->id . ', `laporan_pelaksanaan`)"  value="' . $row->id . '" >' . __('components/button.upload_laporan_pelaksanaan') . '</button>';
+                            }
                         }
                                   
                         $actionBtn .= '<a href="' . url('/ia/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>';
@@ -147,6 +149,10 @@ class IaController extends Controller
                             $actionBtn .= '<a href="' . Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $row->laporan_hasil_pelaksanaan) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_laporan_pelaksanaan') . '</a>';
                         }
                         $actionBtn .= '<a href="' . url('/ia/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>';
+                        if(Auth::user()->role == 'Admin'){
+                            $actionBtn .= '<a href="' . url('/ia/' . $row->id . '/edit') . '" id="btn-edit" class="btn btn-warning btn-sm mr-1 my-1">' . __('components/button.edit') . '</a>';
+                            $actionBtn .= '<button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1 my-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button>';
+                        }
                         $actionBtn .= '</div>';
                     }
                     return $actionBtn;
@@ -184,7 +190,7 @@ class IaController extends Controller
      */
     public function create()
     {
-        if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))) {
+        if (in_array(Auth::user()->role, array('Admin', 'Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))) {
             $data = [
                 'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->orderBy('id', 'desc')->get(),
                 'nomor_moa_pengusul' => Moa::with(['mou'])->orderBy('id', 'desc')->get(),
@@ -205,9 +211,9 @@ class IaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {         
-        if(in_array(Auth::user()->role, array('LPPM', 'Fakultas', 'Pascasarjana', 'PSDKU'))){
-            if(Auth::user()->role == 'LPPM'){
+    {                 
+        if(in_array(Auth::user()->role, array('Admin', 'LPPM', 'Fakultas', 'Pascasarjana', 'PSDKU'))){
+            if(in_array(Auth::user()->role, array('Admin', 'LPPM'))){
                 $fakultas_req = 'required';
                 $fakultas = $request->fakultas;
                 $prodi_req = 'required';
@@ -356,7 +362,9 @@ class IaController extends Controller
             JenisKerjasama::create($data);
         }
         
-        return response()->json(['success' => 'Success']);    
+        return response()->json($request);    
+
+        // return response()->json(['success' => 'Success']);    
     }
 
     /**
@@ -367,7 +375,18 @@ class IaController extends Controller
      */
     public function show(Ia $ia)
     {
-        if(($ia->user->fakultas_id == Auth::user()->fakultas_id) || (Auth::user()->role == 'Admin') || ($ia->user->role == 'LPPM')){
+        $anggotaFakultas =  AnggotaFakultas::where('ia_id', $ia->id)->get();
+        $found = FALSE;
+        foreach($anggotaFakultas as $item){
+            if ($item->fakultas_id == Auth::user()->fakultas_id) {
+                $found = TRUE;
+                break;
+            } else {
+                $found = FALSE;
+            }                        
+        }        
+
+        if(($ia->user->fakultas_id == Auth::user()->fakultas_id) || ($found == TRUE) || (Auth::user()->role == 'Admin') || ($ia->user->role == 'LPPM')){
             $data = [
                 'ia' => Ia::with(['pengusul', 'moa', 'jenisKerjasama', 'anggotaFakultas', 'anggotaProdi', 'user'])->where('id', $ia->id)->first()
             ];            
@@ -385,7 +404,7 @@ class IaController extends Controller
      */
     public function edit(Ia $ia)
     {
-        if(($ia->user->fakultas_id == Auth::user()->fakultas_id) && ($ia->user->prodi_id == Auth::user()->prodi_id)){
+        if((($ia->user->fakultas_id == Auth::user()->fakultas_id) && ($ia->user->prodi_id == Auth::user()->prodi_id)) || (Auth::user()->role == 'Admin')){
             $ia_ = Ia::with(['pengusul', 'moa', 'jenisKerjasama', 'anggotaFakultas', 'anggotaProdi'])->where('id', $ia->id)->first();
             $jenis_kerjasama = [];
             $fakultas_ia = [];
@@ -430,8 +449,8 @@ class IaController extends Controller
      */
     public function update(Request $request, Ia $ia)
     {
-        if (in_array(Auth::user()->role, array('LPPM', 'Fakultas', 'Pascasarjana', 'PSDKU'))) {
-            if (Auth::user()->role == 'LPPM') {
+        if (in_array(Auth::user()->role, array('Admin', 'LPPM', 'Fakultas', 'Pascasarjana', 'PSDKU'))) {
+            if (in_array(Auth::user()->role, array('Admin', 'LPPM'))) {
                 $fakultas_req = 'required';
                 $fakultas = $request->fakultas;
                 $prodi_req = 'required';
@@ -518,7 +537,7 @@ class IaController extends Controller
         }
 
         $data = [
-            'users_id' => Auth::user()->id,
+            // 'users_id' => Auth::user()->id,
             'pengusul_id' => $request->pengusul_id,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
@@ -556,7 +575,7 @@ class IaController extends Controller
         $ia_id = $ia->id;
 
         if (!in_array(Auth::user()->role, array('Prodi', 'Unit Kerja'))) {
-            if (Auth::user()->role == 'LPPM') {
+            if (in_array(Auth::user()->role, array('LPPM', 'Admin'))) {
                 $del_prodi = AnggotaProdi::where('ia_id', $ia_id);
                 $del_prodi->delete();
                 $del_fakultas = AnggotaFakultas::where('ia_id', $ia_id);
@@ -578,7 +597,7 @@ class IaController extends Controller
         }
 
         if ($fakultas != 0) {
-            if (Auth::user()->role == 'LPPM') {
+            if ((Auth::user()->role == 'LPPM') || (Auth::user()->role == 'Admin')) {
                 foreach ($request->fakultas as $item) {
                     $data = [
                         'ia_id' => $ia_id,
@@ -598,7 +617,8 @@ class IaController extends Controller
             ];            
             JenisKerjasama::create($data);
         }       
-        return response()->json(['success' => 'Success']);       
+        return response()->json($data);       
+        // return response()->json(['success' => 'Success']);       
     }
 
     /**
