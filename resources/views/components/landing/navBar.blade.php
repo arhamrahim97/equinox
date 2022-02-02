@@ -43,24 +43,28 @@
                         <li class="nav-item">
                             <a href="{{url('/tentang')}}" class="nav-link">{{__('pages/landing/landing.tentang')}}</a>
                         </li>
-                        {{-- <li class="nav-item dropdown simple-dropdown">
-                            <a href="#" class="nav-link">Tentang</a>
+                        <li class="nav-item dropdown simple-dropdown">
+                            <a href="#" class="nav-link">{{__('pages/landing/landing.unduh_template')}}</a>
                             <i class="fa fa-angle-down dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-hidden="true"></i>
                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown"><a href="blog-grid.html">Blog grid</a></li>
-                                <li class="dropdown"><a href="blog-masonry.html">Blog masonry</a></li>
-                                <li class="dropdown"><a href="blog-classic.html">Blog classic</a></li>
-                                <li class="dropdown"><a href="blog-simple.html">Blog simple</a></li>
-                                <li class="dropdown"><a href="blog-side-image.html">Blog side image</a></li>
-                                <li class="dropdown"><a href="blog-metro.html">Blog metro</a></li>
-                                <li class="dropdown"><a href="blog-overlay-image.html">Blog overlay image</a></li>
-                                <li class="dropdown"><a href="blog-modern.html">Blog modern</a></li>
-                                <li class="dropdown"><a href="blog-clean.html">Blog clean</a></li>
-                                <li class="dropdown"><a href="blog-widget.html">Blog widget</a></li>
-                                <li class="dropdown"><a href="blog-standard.html">Blog standard</a></li>
+                                <li class="dropdown"><a
+                                        href="{{asset('assets/documents')}}/Draft_Kesepahaman_Bersama_MoU.pdf"
+                                        target="_blank"><i class="far fa-file"></i><span class="mx-2">
+                                            {{__('pages/landing/landing.mou')}}</span>
+                                    </a></li>
+                                <li class="dropdown"><a
+                                        href="{{asset('assets/documents')}}/Draft_Perjanjian_Kerja_Sama_MoA.pdf"
+                                        target="_blank"><i class="far fa-file"></i>
+                                        <span class="mx-2">{{__('pages/landing/landing.moa')}}</span></a>
+                                </li>
+                                <li class="dropdown"><a
+                                        href="{{asset('assets/documents')}}/Draft_Kontrak_Implementasi_Kerja_Sama_IA.pdf"
+                                        target="_blank"><i class="far fa-file"></i>
+                                        <span class="mx-2">{{__('pages/landing/landing.ia')}}</span></a>
+                                </li>
                             </ul>
-                        </li> --}}
+                        </li>
                         <li class="nav-item">
                             @if (Auth::user())
                             <a href="{{url('/dashboard')}}"

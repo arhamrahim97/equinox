@@ -12,4 +12,5 @@ return [
     'mou' => 'MOU',
     'moa' => 'MOA',
     'ia' => 'IA',
+    'total_pemasukan' => 'Total Pemasukan'
 ];

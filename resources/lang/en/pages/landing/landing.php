@@ -20,5 +20,6 @@ return [
     'daftar_mou' => 'MOU List',
     'daftar_moa' => 'MOA List',
     'daftar_ia' => 'IA List',
-    'aplikasi' => 'Information Systems Management <br> Memorandum Of Understanding <br> Tadulako University'
+    'aplikasi' => 'Information Systems Management <br> Memorandum Of Understanding <br> Tadulako University',
+    'unduh_template' => 'Download Template',
 ];

@@ -21,4 +21,5 @@ return [
     'slider' => 'Slider',
     'wilayah' => 'Region',
     'borangIa' => 'Form IA',
+    'unduh_template' => 'Download Template',
 ];

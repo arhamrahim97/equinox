@@ -130,7 +130,31 @@
                     </ul>
                 </div>
             </li>
+
             @endif
+
+            <li class="nav-item submenu" id="nav-master">
+                <a class="nav-link" href="#">
+                    <i class="link-icon icon-docs"></i>
+                    <span class="menu-title">{{__('components/navBottom.unduh_template')}}</span>
+                </a>
+                <div class="navbar-dropdown animated fadeIn">
+                    <ul>
+                        <li>
+                            <a href="{{asset('assets/documents')}}/Draft_Kesepahaman_Bersama_MoU.pdf"
+                                target="_blank">{{__('components/navBottom.mou')}}</a>
+                        </li>
+                        <li>
+                            <a href="{{asset('assets/documents')}}/Draft_Perjanjian_Kerja_Sama_MoA.pdf"
+                                target="_blank">{{__('components/navBottom.moa')}}</a>
+                        </li>
+                        <li>
+                            <a href="{{asset('assets/documents')}}/Draft_Kontrak_Implementasi_Kerja_Sama_IA.pdf"
+                                target="_blank">{{__('components/navBottom.ia')}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
         </ul>
     </div>
 </div>
