@@ -17,30 +17,30 @@ class JenisKerjasamaSeeder extends Seeder
         $data = [
             [
                 'ia_id' => 1,
-                'jenis_kerjasama' => 'Pendidikan',                
-            ], 
+                'jenis_kerjasama' => 'Pendidikan',
+            ],
 
             [
                 'ia_id' => 2,
-                'jenis_kerjasama' => 'Penelitian',                
+                'jenis_kerjasama' => 'Penelitian',
             ],
             [
                 'ia_id' => 3,
-                'jenis_kerjasama' => 'Pengabdian Kepada Masyarakat',                
+                'jenis_kerjasama' => 'Pengabdian Kepada Masyarakat',
             ],
             [
                 'ia_id' => 3,
-                'jenis_kerjasama' => 'Penelitian',                
+                'jenis_kerjasama' => 'Penelitian',
             ],
             [
                 'ia_id' => 4,
-                'jenis_kerjasama' => 'Pengabdian Kepada Masyaraka',                
+                'jenis_kerjasama' => 'Pengabdian Kepada Masyarakat',
             ],
             [
                 'ia_id' => 5,
-                'jenis_kerjasama' => 'Penelitian',                
+                'jenis_kerjasama' => 'Penelitian',
             ],
-          
+
         ];
 
         DB::table('jenis_kerjasama')->insert($data);

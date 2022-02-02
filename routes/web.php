@@ -140,7 +140,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/getProdiEdit', [ListController::class, 'getProdiEdit']);
 
     Route::get('/borangIa', [BorangIaController::class, 'index']);
-    Route::get('/exportBorangIa', [BorangIaController::class, 'export']);
+    Route::post('/exportBorangIa', [BorangIaController::class, 'export']);
 });
 
 // Landing

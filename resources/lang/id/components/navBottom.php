@@ -21,4 +21,5 @@ return [
     'slider' => 'Slider',
     'wilayah' => 'Wilayah',
     'borangIa' => 'Borang IA',
+    'unduh_template' => 'Unduh Template',
 ];

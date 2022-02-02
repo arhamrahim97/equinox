@@ -64,10 +64,10 @@ class MapIaController extends Controller
                     }
                 })
                 ->addColumn('action', function (Ia $ia) {
-                    $lpjBtn = $ia->laporan_hasil_pelaksanaan ? "<a target='_blank' href='" . Storage::url("dokumen/ia_laporan_hasil_pelaksanaan/" . $ia->laporan_hasil_pelaksanaan) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_laporan_pelaksanaan') . "</a>" : '';
-                    // Belum Fix
+                    $lpjBtn = $ia->laporan_hasil_pelaksanaan ? "<a target='_blank' href='" . Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $ia->laporan_hasil_pelaksanaan) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_laporan_pelaksanaan') . "</a>" : '';
+                    $suratTugasBtn = $ia->surat_tugas ? "<a target='_blank' href='" . Storage::url("dokumen/ia-surat_tugas/" . $ia->surat_tugas) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_surat_tugas') . "</a>" : '';
 
-                    $actionBtn = "<div class='row justify-content-center'><a target='_blank' href='" . Storage::url('/dokumen/mou/' . $ia->moa->mou->dokumen) . "' class='btn btn-primary btn-sm mx-1 my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhMou') . "</a><a target='_blank' href='" . Storage::url('/dokumen/moa/' . $ia->moa->dokumen) . "' class='btn btn-warning btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhMoa') . "</a><a target='_blank' href='" . Storage::url('/dokumen/ia/' . $ia->dokumen) . "' class='btn btn-success btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhIa') . "</a>" . $lpjBtn . "</div>";
+                    $actionBtn = "<div class='row justify-content-center'><a target='_blank' href='" . Storage::url('/dokumen/mou/' . $ia->moa->mou->dokumen) . "' class='btn btn-primary btn-sm mx-1 my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhMou') . "</a><a target='_blank' href='" . Storage::url('/dokumen/moa/' . $ia->moa->dokumen) . "' class='btn btn-warning btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhMoa') . "</a><a target='_blank' href='" . Storage::url('/dokumen/ia/' . $ia->dokumen) . "' class='btn btn-success btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhIa') . "</a>" . $suratTugasBtn . $lpjBtn . "</div>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action', 'pengusul', 'alamat', 'tanggal_mulai', 'tanggal_berakhir', 'status'])
@@ -123,6 +123,7 @@ class MapIaController extends Controller
             }
 
             $lpjBtn = $ia->laporan_hasil_pelaksanaan ? "<a target='_blank' href='" . Storage::url("dokumen/ia_laporan_hasil_pelaksanaan/" . $ia->laporan_hasil_pelaksanaan) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_laporan_pelaksanaan') . "</a>" : '';
+            $suratTugasBtn = $ia->surat_tugas ? "<a target='_blank' href='" . Storage::url("dokumen/ia-surat_tugas/" . $ia->surat_tugas) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_surat_tugas') . "</a>" : '';
 
 
 
@@ -140,6 +141,7 @@ class MapIaController extends Controller
                 'dokumen_moa' =>  Storage::url('/dokumen/moa/' . $ia->moa->dokumen),
                 'dokumen_mou' =>  Storage::url('/dokumen/moa/' . $ia->moa->mou->dokumen),
                 'laporan_hasil_pelaksanaan' => $lpjBtn,
+                'surat_tugas' => $suratTugasBtn,
                 'status' => $status,
                 'namaStatus' => $namaStatus
             ];
@@ -172,6 +174,8 @@ class MapIaController extends Controller
 
         $lpjBtn = $ia->laporan_hasil_pelaksanaan ? "<a target='_blank' href='" . Storage::url("dokumen/ia_laporan_hasil_pelaksanaan/" . $ia->laporan_hasil_pelaksanaan) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_laporan_pelaksanaan') . "</a>" : '';
 
+        $suratTugasBtn = $ia->surat_tugas ? "<a target='_blank' href='" . Storage::url("dokumen/ia-surat_tugas/" . $ia->surat_tugas) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_surat_tugas') . "</a>" : '';
+
         return response()->json([
             'nomor_mou' => $ia->moa->mou->nomor_mou,
             'nomor_mou_pengusul' => $ia->moa->mou->nomor_mou_pengusul,
@@ -192,6 +196,7 @@ class MapIaController extends Controller
             'dokumen_mou' =>  Storage::url('/dokumen/mou/' . $ia->moa->mou->dokumen),
             'dokumen_ia' =>  Storage::url('/dokumen/ia/' . $ia->dokumen),
             'laporan_hasil_pelaksanaan' => $lpjBtn,
+            'surat_tugas' => $suratTugasBtn,
             'status' => $status
         ]);
     }

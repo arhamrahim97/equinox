@@ -6,5 +6,13 @@ return [
     'melewati_batas' => 'Cross The Line',
     'aktif' => 'Actived',
     'masa_tenggang' => 'Grace Period',
-    'selesai' => 'Finish'  
+    'selesai' => 'Finish',
+    'penelitian' => 'Research',
+    'pengabdian_kepada_masyarakat' => 'Community Service',
+    'pendidikan' => 'Education',
+    'tingkat' => 'Level',
+    'internasional' => 'International',
+    'nasional' => 'National',
+    'lokal' => 'Local',
+    'surat_tugas' => 'No Letter of Assignment',
 ];

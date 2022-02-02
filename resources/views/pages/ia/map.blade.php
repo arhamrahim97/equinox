@@ -201,6 +201,9 @@
                                             <div id="linkDokumenLaporanHasilPelaksanaan">
 
                                             </div>
+                                            <div id="linkDokumenLaporanSuratTugas">
+
+                                            </div>
                                         </div>
 
                                     </div>
@@ -291,7 +294,7 @@
                             "<p class='my-0'>{{__('pages/ia/map.alamat')}} " + data[0][i].alamat + "</p>" +
                             "<p class='my-0'>{{__('pages/ia/map.tanggal_berakhir')}} " + data[0][i].tanggal_berakhir + "</p>" +
                             "<p class='my-0'>{{__('pages/ia/map.status')}} " + data[0][i].namaStatus + "</p><hr>" +
-                            "<div class='row d-flex justify-content-center'><a target='_blank' href='" + data[0][i].dokumen_mou + "' class='btn btn-primary btn-sm my-1 mx-1'><i class='fas fa-file-download mr-1'> </i>{{__('pages/ia/map.unduhMou')}}</a><a target='_blank' href='" + data[0][i].dokumen_moa + "' class='btn btn-warning btn-sm my-1 mx-1'><i class='fas fa-file-download mr-1'> </i>{{__('pages/ia/map.unduhMoa')}}</a><a target='_blank' href='" + data[0][i].dokumen_ia + "' class='btn btn-success btn-sm my-1 mx-1'><i class='fas fa-file-download mr-1'> </i>{{__('pages/ia/map.unduhIa')}}</a>" + data[0][i].laporan_hasil_pelaksanaan + "</div>"
+                            "<div class='row d-flex justify-content-center'><a target='_blank' href='" + data[0][i].dokumen_mou + "' class='btn btn-primary btn-sm my-1 mx-1'><i class='fas fa-file-download mr-1'> </i>{{__('pages/ia/map.unduhMou')}}</a><a target='_blank' href='" + data[0][i].dokumen_moa + "' class='btn btn-warning btn-sm my-1 mx-1'><i class='fas fa-file-download mr-1'> </i>{{__('pages/ia/map.unduhMoa')}}</a><a target='_blank' href='" + data[0][i].dokumen_ia + "' class='btn btn-success btn-sm my-1 mx-1'><i class='fas fa-file-download mr-1'> </i>{{__('pages/ia/map.unduhIa')}}</a>" + data[0][i].surat_tugas + data[0][i].laporan_hasil_pelaksanaan + "</div>"
                         )
                         .on('click', L.bind(petaKlik, null, data[0][i].id))
                         .addTo(map);
@@ -331,6 +334,7 @@
                 $('#linkDokumenMoa').attr('href',data.dokumen_moa);
                 $('#linkDokumenIa').attr('href',data.dokumen_ia);
                 $('#linkDokumenLaporanHasilPelaksanaan').html(data.laporan_hasil_pelaksanaan);
+                $('#linkDokumenSuratTugas').html(data.surat_tugas);
             },
         })
     }
