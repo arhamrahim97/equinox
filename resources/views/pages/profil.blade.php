@@ -75,13 +75,13 @@
                     var linkUrl = '';
                     resetForm();
                     if (password) {
-                        alert = "{{__('components/sweetalert.alertBerhasil')}}";
-                        message = "{{__('components/sweetalert.msgBerhasilUpdateProfil')}}";
+                        alert = "{{__('components/sweetAlert.alertBerhasil')}}";
+                        message = "{{__('components/sweetAlert.msgBerhasilUpdateProfil')}}";
                         linkUrl = '{{url("/logout")}}';
                     } else {
-                        alert = "{{__('components/sweetalert.alertBerhasil')}}";
+                        alert = "{{__('components/sweetAlert.alertBerhasil')}}";
                         message =
-                            "{{__('components/sweetalert.msgUbahBerhasil',['nama' => __('pages/master/akun.title')])}}";
+                            "{{__('components/sweetAlert.msgUbahBerhasil',['nama' => __('pages/master/akun.title')])}}";
                         linkUrl = '{{url("/")}}';
                     }
 

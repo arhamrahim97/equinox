@@ -287,7 +287,7 @@
                             data-frames='[{"delay":1800,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
-                            style="z-index: 6;"><img src="{{asset('storage/upload/slider/' . $slider[0]->foto)}}" alt=""
+                            style="z-index: 6;"><img src="{{Storage::url('upload/slider/' . $slider[0]->foto)}}" alt=""
                                 data-ww="['800px','420px','420px','290px']" data-hh="['auto','auto','auto','auto']"
                                 width="1000" height="1000" data-no-retina></div>
 
@@ -378,7 +378,7 @@
                             data-frames='[{"delay":1800,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
-                            style="z-index: 6;"><img src="{{asset('storage/upload/slider/' . $slider[1]->foto)}}" alt=""
+                            style="z-index: 6;"><img src="{{Storage::url('upload/slider/' . $slider[1]->foto)}}" alt=""
                                 data-ww="['800px','420px','420px','290px']" data-hh="['auto','auto','auto','auto']"
                                 width="1000" height="1000" data-no-retina></div>
 
@@ -469,7 +469,7 @@
                             data-frames='[{"delay":1800,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
-                            style="z-index: 6;"><img src="{{asset('storage/upload/slider/' . $slider[2]->foto)}}" alt=""
+                            style="z-index: 6;"><img src="{{Storage::url('upload/slider/' . $slider[2]->foto)}}" alt=""
                                 data-ww="['800px','420px','420px','290px']" data-hh="['auto','auto','auto','auto']"
                                 width="1000" height="1000" data-no-retina></div>
 
@@ -560,7 +560,7 @@
                             data-frames='[{"delay":1800,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
                             data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
-                            style="z-index: 6;"><img src="{{asset('storage/upload/slider/' . $slider[3]->foto)}}" alt=""
+                            style="z-index: 6;"><img src="{{Storage::url('upload/slider/' . $slider[3]->foto)}}" alt=""
                                 data-ww="['800px','420px','420px','290px']" data-hh="['auto','auto','auto','auto']"
                                 width="1000" height="1000" data-no-retina></div>
 
@@ -783,6 +783,7 @@
 
 
 <!-- start section -->
+@if (count($daftarBerita) != 0)
 <section class="bg-light big-section">
     <div class="container">
         <div class="row justify-content-center">
@@ -806,7 +807,7 @@
                         <div class="blog-post border-radius-5px bg-white box-shadow-medium">
                             <div class="blog-post-image bg-greenish-gray">
                                 <a href="{{url('/berita/' . $berita->slug)}}" title=""><img
-                                        src="{{asset('storage/upload/sampul_berita/' . $berita->foto_sampul)}}"
+                                        src="{{Storage::url('upload/sampul_berita/' . $berita->foto_sampul)}}"
                                         alt=""></a>
                                 <a href="{{url('/daftarBerita?kategori=' . $berita->kategoriBerita->id)}}"
                                     class="blog-category alt-font">{{$berita->kategoriBerita->nama}}</a>
@@ -834,6 +835,24 @@
 
     </div>
 </section>
+@else
+<section class="bg-light big-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div
+                class="col-12 col-md-6 text-center margin-5-half-rem-bottom md-margin-3-rem-bottom wow animate__fadeIn">
+                <span
+                    class="alt-font font-weight-500 text-dark-orange text-uppercase letter-spacing-1px d-block margin-5px-bottom">{{__('pages/landing/landing.berita')}}</span>
+                <h4 class="alt-font font-weight-600 text-extra-dark-gray mb-0 letter-spacing-minus-1px">
+                    {{__('pages/landing/landing.berita_tidak_ada')}}
+                </h4>
+            </div>
+        </div>
+
+    </div>
+</section>
+@endif
+
 <!-- end section -->
 @endsection
 
@@ -983,30 +1002,6 @@
 
 
         function petaKlik(id) {
-            $.ajax({
-                url: "/getDetailMou/" + id,
-                type: "POST",
-                data: {
-                    _token: _token
-                },
-                success: function (data) {
-                    $('#informasiMap').removeAttr('hidden');
-                    $('#mapSection').removeClass('col');
-                    $('#mapSection').addClass('col-lg-8');
-                    $('#nomor_mou').html(data.nomor_mou);
-                    $('#nomor_mou_pengusul').html(data.nomor_mou_pengusul);
-                    $('#pengusul').html(data.pengusul);
-                    $('#nik_nip_pengusul').html(data.nik_nip_pengusul);
-                    $('#jabatan').html(data.jabatan_pengusul);
-                    $('#program').html(data.program);
-                    $('#alamat').html(data.alamat);
-                    $('#tanggal_mulai').html(data.tanggal_mulai);
-                    $('#tanggal_berakhir').html(data.tanggal_berakhir);
-                    $('#pertemuan').html(data.pertemuan);
-                    $('#status').html(data.status);
-                    $('#linkDokumen').attr('href', data.dokumen);
-                },
-            })
         }
         $('.loading-screen').hide();
         $('#peta').show();

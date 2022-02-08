@@ -70,7 +70,7 @@
                         <div class="blog-post border-radius-5px bg-white box-shadow-medium">
                             <div class="blog-post-image bg-medium-slate-blue">
                                 <a href="{{url('/berita/' . $berita->slug)}}" title=""><img
-                                        src="{{asset('storage/upload/sampul_berita/' . $berita->foto_sampul)}}"
+                                        src="{{Storage::url('upload/sampul_berita/' . $berita->foto_sampul)}}"
                                         alt=""></a>
                                 <a href="{{url('/daftarBerita?kategori=' . $berita->kategoriBerita->id)}}"
                                     class="blog-category alt-font">{{$berita->kategoriBerita->nama}}</a>

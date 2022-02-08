@@ -215,6 +215,10 @@ class KelolaBeritaController extends Controller
      */
     public function destroy(Berita $berita)
     {
+        if (Storage::exists('upload/sampul_berita/' . $berita->foto_sampul)) {
+            Storage::delete('upload/sampul_berita/' . $berita->foto_sampul);
+        }
+
         $berita->delete();
         return response()->json([
             'res' => 'success'

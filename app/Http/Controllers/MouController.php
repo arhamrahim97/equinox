@@ -148,7 +148,7 @@ class MouController extends Controller
             $request->all(),
             [
                 'pengusul_id' => 'required',
-                'nomor_mou' => ['required', Rule::unique('mou')->withoutTrashed()],
+                // 'nomor_mou' => ['required', Rule::unique('mou')->withoutTrashed()],
                 'nomor_mou_pengusul' => ['required', Rule::unique('mou')->withoutTrashed()],            
                 'pejabat_penandatangan' => 'required',
                 'nik_nip_pengusul' => 'required',
@@ -276,7 +276,7 @@ class MouController extends Controller
             $request->all(),
             [
                 'pengusul_id' => 'required',
-                'nomor_mou' => $nomor_mou_req,
+                // 'nomor_mou' => $nomor_mou_req,
                 'nomor_mou_pengusul' => $nomor_mou_pengusul_req,
                 'pejabat_penandatangan' => 'required',
                 'nik_nip_pengusul' => 'required',

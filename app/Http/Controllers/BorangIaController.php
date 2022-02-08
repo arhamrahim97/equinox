@@ -30,7 +30,7 @@ class BorangIaController extends Controller
                         if ($kerjaSama->jenis_kerjasama == 'Penelitian') {
                             $namaJenisKerjasama = __('pages/ia/borangIa/index.penelitian');
                         } else if ($kerjaSama->jenis_kerjasama == 'Pendidikan') {
-                            $namaJenisKerjasama = __('pages/ia/borangIa/index.penelitian');
+                            $namaJenisKerjasama = __('pages/ia/borangIa/index.pendidikan');
                         } else {
                             $namaJenisKerjasama = __('pages/ia/borangIa/index.pengabdian_kepada_masyarakat');
                         }
@@ -63,9 +63,17 @@ class BorangIaController extends Controller
                 })
                 ->addColumn('bukti_dan_kerjasama', function (Ia $ia) {
                     $lpjBtn = $ia->laporan_hasil_pelaksanaan ? "<a target='_blank' href='" . Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $ia->laporan_hasil_pelaksanaan) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_laporan_pelaksanaan') . "</a>" : '';
+
                     $suratTugasBtn = $ia->surat_tugas ? "<a target='_blank' href='" . Storage::url("dokumen/ia-surat_tugas/" . $ia->surat_tugas) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_surat_tugas') . "</a>" : '';
 
-                    $bukti_dan_kerjasama = "<div class='row justify-content-center'><a target='_blank' href='" . Storage::url('/dokumen/mou/' . $ia->moa->mou->dokumen) . "' class='btn btn-primary btn-sm mx-1 my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhMou') . "</a><a target='_blank' href='" . Storage::url('/dokumen/moa/' . $ia->moa->dokumen) . "' class='btn btn-warning btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhMoa') . "</a><a target='_blank' href='" . Storage::url('/dokumen/ia/' . $ia->dokumen) . "' class='btn btn-success btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhIa') . "</a>" .  $suratTugasBtn . $lpjBtn . "</div>";
+                    $mouBtn = $ia->moa->mou ? "<a target='_blank' href='" . Storage::url('/dokumen/mou/' . $ia->moa->mou->dokumen) . "' class='btn btn-primary btn-sm mx-1 my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhMou') . "</a>" : '';
+
+                    $moaBtn = $ia->moa ? "<a target='_blank' href='" . Storage::url('/dokumen/moa/' . $ia->moa->dokumen) . "' class='btn btn-warning btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhMoa') . "</a>" : '';
+
+                    $iaBtn = $ia->dokumen ? "<a target='_blank' href='" . Storage::url('/dokumen/ia/' . $ia->dokumen) . "' class='btn btn-success btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/ia/map.unduhIa') . "</a>" : '';
+
+
+                    $bukti_dan_kerjasama = "<div class='row justify-content-center'> " . $mouBtn . $moaBtn . $iaBtn .  $suratTugasBtn . $lpjBtn . "</div>";
                     return $bukti_dan_kerjasama;
                 })
                 ->filter(function ($ia) use ($request, $userLogin) {

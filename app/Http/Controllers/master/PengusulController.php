@@ -24,7 +24,8 @@ class PengusulController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('negara', function (Pengusul $pengusul) {
-                    return $pengusul->negara->nama;
+                    $negara = $pengusul->negara->nama ? $pengusul->negara->nama : "";
+                    return $negara;
                 })
                 ->addColumn('provinsi', function (Pengusul $pengusul) {
                     $pengusul->provinsi ? $provinsi = $pengusul->provinsi->nama : $provinsi = $pengusul->provinsi_id;

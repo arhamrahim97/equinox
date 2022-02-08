@@ -19,9 +19,9 @@ class MapMoaController extends Controller
             if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))) {
                 $data = Moa::with(['pengusul', 'user'])->whereHas('user', function ($user) use ($userLogin) {
                     $user->where('fakultas_id', $userLogin->fakultas_id);
-                })->get();
+                })->orderBy('id', 'desc')->get();
             } else {
-                $data = Moa::get();
+                $data = Moa::orderBy('id', 'desc')->get();
             }
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -54,16 +54,15 @@ class MapMoaController extends Controller
                 })
                 ->addColumn('action', function (Moa $moa) {
                     $actionBtn = '';
-                    if($moa->mou){
+                    if ($moa->mou) {
                         $actionBtn .= "<div class='row justify-content-center'>";
-                        if(($moa->mou->dokumen != '') || ($moa->mou->dokumen != NULL)){
-                            $actionBtn .= "<a target='_blank' href='" . Storage::url('/dokumen/mou/' . $moa->mou->dokumen) . "' class='btn btn-primary btn-sm mx-1 my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/moa/map.unduhMou') . "</a>";                            
+                        if (($moa->mou->dokumen != '') || ($moa->mou->dokumen != NULL)) {
+                            $actionBtn .= "<a target='_blank' href='" . Storage::url('/dokumen/mou/' . $moa->mou->dokumen) . "' class='btn btn-primary btn-sm mx-1 my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/moa/map.unduhMou') . "</a>";
                         }
-                        if(($moa->dokumen != '') || ($moa->dokumen != NULL))                        {
+                        if (($moa->dokumen != '') || ($moa->dokumen != NULL)) {
                             $actionBtn .= "<a target='_blank' href='" . Storage::url('/dokumen/moa/' . $moa->dokumen) . "' class='btn btn-success btn-sm my-1'><i class='fas fa-file-download mr-1'></i>" .  __('pages/moa/map.unduhMoa') . "</a></div>";
                         }
-                    }
-                    else{
+                    } else {
                         $actionBtn = '';
                     }
                     return $actionBtn;
@@ -107,7 +106,7 @@ class MapMoaController extends Controller
                 }
 
                 $dokumen_mou = '';
-                if($moa->mou){
+                if ($moa->mou) {
                     $dokumen_mou = Storage::url('/dokumen/mou/' . $moa->mou->dokumen);
                 }
 
@@ -156,11 +155,11 @@ class MapMoaController extends Controller
         $dokumen_mou = '';
         $nomor_mou = '';
         $nomor_mou_pengusul = '';
-        if($moa->mou){
+        if ($moa->mou) {
             $dokumen_mou = Storage::url('/dokumen/mou/' . $moa->mou->dokumen);
             $nomor_mou  = $moa->mou->nomor_mou;
             $nomor_mou_pengusul = $moa->mou->nomor_mou_pengusul;
-        }        
+        }
 
 
         return response()->json([

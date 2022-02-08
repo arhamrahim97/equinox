@@ -20,7 +20,6 @@
     #peta {
         height: 400px;
     }
-
 </style>
 @endpush
 
@@ -190,8 +189,8 @@
             },
             success: function (data) {
                 if ($.isEmptyObject(data.error)) {
-                    swal("{{__('components/sweetalert.alertBerhasil')}}",
-                        "{{__('components/sweetalert.msgUbahBerhasil',['nama' => __('pages/master/pengusul.title')])}}", {
+                    swal("{{__('components/sweetAlert.alertBerhasil')}}",
+                        "{{__('components/sweetAlert.msgUbahBerhasil',['nama' => __('pages/master/pengusul.title')])}}", {
                             icon: "success",
                             buttons: false,
                         });

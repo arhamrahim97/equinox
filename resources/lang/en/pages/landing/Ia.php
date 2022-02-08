@@ -11,7 +11,7 @@ return [
     'region' => 'Region',
     'negara' => 'Country',
     'kadaluarsa' => 'Expired',
-    'melewati_batas' => 'Cross The Line',
+    'melewati_batas' => 'Out of Date',
     'aktif' => 'Actived',
     'masa_tenggang' => 'Grace Period',
     'selesai' => 'Finish'

@@ -124,8 +124,8 @@
             },
             success: function (data) {
                 if ($.isEmptyObject(data.error)) {
-                    swal("{{__('components/sweetalert.alertBerhasil')}}",
-                        "{{__('components/sweetalert.msgTambahBerhasil',['nama' => __('pages/master/fakultas.title')])}}", {
+                    swal("{{__('components/sweetAlert.alertBerhasil')}}",
+                        "{{__('components/sweetAlert.msgTambahBerhasil',['nama' => __('pages/master/fakultas.title')])}}", {
                             icon: "success",
                             buttons: {
                                 confirm: {
@@ -160,8 +160,8 @@
             },
             success: function (data) {
                 if ($.isEmptyObject(data.error)) {
-                    swal("{{__('components/sweetalert.alertBerhasil')}}",
-                        "{{__('components/sweetalert.msgUbahBerhasil',['nama' => __('pages/master/fakultas.title')])}}", {
+                    swal("{{__('components/sweetAlert.alertBerhasil')}}",
+                        "{{__('components/sweetAlert.msgUbahBerhasil',['nama' => __('pages/master/fakultas.title')])}}", {
                             icon: "success",
                             buttons: {
                                 confirm: {

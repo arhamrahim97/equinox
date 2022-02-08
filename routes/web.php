@@ -179,3 +179,5 @@ Route::post('/cekLogin', [AuthController::class, 'cekLogin']);
 
 Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);
 // Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'create']);
+
+Route::get('/getEditJenisKerjasama', [IaController::class, 'getEditJenisKerjasama']);

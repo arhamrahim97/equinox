@@ -148,8 +148,8 @@
             data: formData,
             success: function (data) {
                 if ($.isEmptyObject(data.error)) {
-                    swal("{{__('components/sweetalert.alertBerhasil')}}",
-                        "{{__('components/sweetalert.msgTambahBerhasil',['nama' => __('pages/berita/kelolaBerita.title')])}}", {
+                    swal("{{__('components/sweetAlert.alertBerhasil')}}",
+                        "{{__('components/sweetAlert.msgTambahBerhasil',['nama' => __('pages/berita/kelolaBerita.title')])}}", {
                             icon: "success",
                             buttons: false,
                         });
