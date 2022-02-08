@@ -36,7 +36,7 @@
                         </ul>
                         <h5 class="alt-font font-weight-500 text-extra-dark-gray margin-4-half-rem-bottom">
                             {{$berita->judul}}</h5>
-                        <img src="{{asset('storage/upload/sampul_berita/' . $berita->foto_sampul)}}" alt=""
+                        <img src="{{Storage::url('upload/sampul_berita/' . $berita->foto_sampul)}}" alt=""
                             class="w-100 border-radius-6px margin-4-half-rem-bottom">
                         <div id="konten">
                             {!!$berita->konten!!}

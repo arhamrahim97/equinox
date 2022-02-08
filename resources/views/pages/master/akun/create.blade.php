@@ -142,8 +142,8 @@
             },
             success: function (data) {
                 if ($.isEmptyObject(data.error)) {
-                    swal("{{__('components/sweetalert.alertBerhasil')}}",
-                        "{{__('components/sweetalert.msgTambahBerhasil',['nama' => __('pages/master/akun.title')])}}", {
+                    swal("{{__('components/sweetAlert.alertBerhasil')}}",
+                        "{{__('components/sweetAlert.msgTambahBerhasil',['nama' => __('pages/master/akun.title')])}}", {
                             icon: "success",
                             buttons: false,
                         });

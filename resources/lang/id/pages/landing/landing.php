@@ -22,4 +22,5 @@ return [
     'daftar_ia' => 'Daftar IA',
     'aplikasi' => 'Sistem Informasi Manajemen <br> Memorandum Of Understanding <br> Universitas Tadulako',
     'unduh_template' => 'Unduh Template',
+    'berita_tidak_ada' => 'Berita Tidak Ada'
 ];

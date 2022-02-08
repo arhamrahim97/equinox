@@ -122,7 +122,7 @@
                     if ($jenisKerjasama->jenis_kerjasama == 'Penelitian' ){
                     echo __('pages/ia/borangIa/index.penelitian');
                     } else if ($jenisKerjasama->jenis_kerjasama == 'Pendidikan' ){
-                    echo __('pages/ia/borangIa/index.penelitian');
+                    echo __('pages/ia/borangIa/index.pendidikan');
                     } else {
                     echo __('pages/ia/borangIa/index.pengabdian_kepada_masyarakat');
                     }
@@ -156,7 +156,9 @@
                 @endphp
             </td>
             <td align="center" style="vertical-align: center;border: 1px solid black">
-                MOU, MOA, IA
+                {{$ia->moa->mou ? "MOU" : ""}}
+                {{$ia->moa ? ",MOA" : ""}}
+                {{$ia->dokumen ? ",IA" : ""}}
                 {{$ia->surat_tugas ? ", " . __('pages/ia/borangIa/index.surat_tugas') : ''}}
                 {{$ia->laporan_hasil_pelaksanaan ? ", " . __('pages/ia/borangIa/index.laporan_pelaksanaan') : ''}}
             </td>

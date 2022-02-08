@@ -24,7 +24,7 @@ class SliderController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('foto', function ($row) {
-                    return '<img src=' . asset('storage/upload/slider/' . $row->foto) . ' class="img-responsive" width="250px"></img>';
+                    return '<img src=' . Storage::url('upload/slider/' . $row->foto) . ' class="img-responsive" width="250px"></img>';
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<button id="btn-edit" onclick="edit(' . $row->id . ')" class="btn btn-warning btn-sm mr-1" value="' . $row->id . '" >' . __('components/button.update') . '</button>';
@@ -79,7 +79,7 @@ class SliderController extends Controller
         return response()->json([
             'id' => $slider->id,
             'namaFoto' => $slider->foto,
-            'foto' => asset('storage/upload/slider/' . $slider->foto)
+            'foto' => Storage::url('upload/slider/' . $slider->foto)
         ]);
     }
 

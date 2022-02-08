@@ -19,17 +19,17 @@ class MapIaController extends Controller
             if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU'))) {
                 $data = Ia::with(['anggotaFakultas'])->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
                     $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
-                })->get();
+                })->orderBy('id', 'desc')->get();
             } else if (Auth::user()->role == 'LPPM') {
                 $data = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
                     $user->where('role', $userLogin->role);
-                })->get();
+                })->orderBy('id', 'desc')->get();
             } else if (in_array(Auth::user()->role, array('Prodi', 'Unit Kerja'))) {
                 $data = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
                     $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
-                })->get();
+                })->orderBy('id', 'desc')->get();
             } else {
-                $data = Ia::get();
+                $data = Ia::orderBy('id', 'desc')->get();
             }
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -122,7 +122,7 @@ class MapIaController extends Controller
                 }
             }
 
-            $lpjBtn = $ia->laporan_hasil_pelaksanaan ? "<a target='_blank' href='" . Storage::url("dokumen/ia_laporan_hasil_pelaksanaan/" . $ia->laporan_hasil_pelaksanaan) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_laporan_pelaksanaan') . "</a>" : '';
+            $lpjBtn = $ia->laporan_hasil_pelaksanaan ? "<a target='_blank' href='" . Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $ia->laporan_hasil_pelaksanaan) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_laporan_pelaksanaan') . "</a>" : '';
             $suratTugasBtn = $ia->surat_tugas ? "<a target='_blank' href='" . Storage::url("dokumen/ia-surat_tugas/" . $ia->surat_tugas) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_surat_tugas') . "</a>" : '';
 
 
@@ -137,9 +137,9 @@ class MapIaController extends Controller
                 'alamat' => $ia->pengusul->alamat,
                 'no_referensi' => $ia->nomor_moa,
                 'tanggal_berakhir' => Carbon::parse($ia->tanggal_berakhir)->translatedFormat('d F Y'),
+                'dokumen_mou' =>  Storage::url('/dokumen/mou/' . $ia->moa->mou->dokumen),
                 'dokumen_ia' =>  Storage::url('/dokumen/ia/' . $ia->dokumen),
                 'dokumen_moa' =>  Storage::url('/dokumen/moa/' . $ia->moa->dokumen),
-                'dokumen_mou' =>  Storage::url('/dokumen/moa/' . $ia->moa->mou->dokumen),
                 'laporan_hasil_pelaksanaan' => $lpjBtn,
                 'surat_tugas' => $suratTugasBtn,
                 'status' => $status,
@@ -172,7 +172,7 @@ class MapIaController extends Controller
             }
         }
 
-        $lpjBtn = $ia->laporan_hasil_pelaksanaan ? "<a target='_blank' href='" . Storage::url("dokumen/ia_laporan_hasil_pelaksanaan/" . $ia->laporan_hasil_pelaksanaan) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_laporan_pelaksanaan') . "</a>" : '';
+        $lpjBtn = $ia->laporan_hasil_pelaksanaan ? "<a target='_blank' href='" . Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $ia->laporan_hasil_pelaksanaan) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_laporan_pelaksanaan') . "</a>" : '';
 
         $suratTugasBtn = $ia->surat_tugas ? "<a target='_blank' href='" . Storage::url("dokumen/ia-surat_tugas/" . $ia->surat_tugas) . "' class='btn btn-success btn-sm mx-1 my-1'>" .   __('components/button.download_surat_tugas') . "</a>" : '';
 
@@ -192,8 +192,8 @@ class MapIaController extends Controller
             'tanggal_mulai' => Carbon::parse($ia->tanggal_mulai)->translatedFormat('d F Y'),
             'tanggal_berakhir' => Carbon::parse($ia->tanggal_berakhir)->translatedFormat('d F Y'),
             'pertemuan' => $pertemuan,
-            'dokumen_moa' =>  Storage::url('/dokumen/moa/' . $ia->moa->dokumen),
             'dokumen_mou' =>  Storage::url('/dokumen/mou/' . $ia->moa->mou->dokumen),
+            'dokumen_moa' =>  Storage::url('/dokumen/moa/' . $ia->moa->dokumen),
             'dokumen_ia' =>  Storage::url('/dokumen/ia/' . $ia->dokumen),
             'laporan_hasil_pelaksanaan' => $lpjBtn,
             'surat_tugas' => $suratTugasBtn,

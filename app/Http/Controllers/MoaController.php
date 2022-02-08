@@ -28,130 +28,126 @@ class MoaController extends Controller
      */
     public function index(Request $request)
     {
-        if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Unit Kerja', 'Prodi'))){
+        if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Unit Kerja', 'Prodi'))) {
             $user = User::where('fakultas_id', Auth::user()->fakultas_id)->whereNotIn('role', ['Admin', 'Prodi', 'Unit Kerja'])->get();
-        } else{
+        } else {
             $user = User::whereIn('role', ['Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'])
-                    // ->where('role',)
-                    ->get();
+                // ->where('role',)
+                ->get();
         }
         $data = [
             'user' => $user,
         ];
         if ($request->ajax()) {
-            if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'))){
+            if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'))) {
                 $data = DB::table('moa')
-                            ->leftJoin('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')
-                            ->leftJoin('users', 'moa.users_id', '=', 'users.id')
-                            ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.fakultas_id', 'users.nama as user_nama', 'users.role as user_role')
-                            ->where('users.fakultas_id', Auth::user()->fakultas_id)
-                            ->whereNull('moa.deleted_at')
-                            ->orderBy('moa.id', 'desc');
-                            // ->get();            
+                    ->leftJoin('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')
+                    ->leftJoin('users', 'moa.users_id', '=', 'users.id')
+                    ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.fakultas_id', 'users.nama as user_nama', 'users.role as user_role')
+                    ->where('users.fakultas_id', Auth::user()->fakultas_id)
+                    ->where('users.role', '!=', 'Admin')
+                    ->whereNull('moa.deleted_at')
+                    ->orderBy('moa.id', 'desc');
+                // ->get();
             } else {
-                if(Auth::user()->role == 'Admin'){
+                if (Auth::user()->role == 'Admin') {
                     $data = DB::table('moa')
-                                ->leftJoin('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')    
-                                ->leftJoin('users', 'moa.users_id', '=', 'users.id')
-                                ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama', 'users.role as user_role')  
-                                ->whereNull('moa.deleted_at')
-                                ->orderBy('moa.id', 'asc');
-                                // ->get(); 
+                        ->leftJoin('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')
+                        ->leftJoin('users', 'moa.users_id', '=', 'users.id')
+                        ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama', 'users.role as user_role')
+                        ->whereNull('moa.deleted_at')
+                        ->orderBy('moa.id', 'desc');
+                    // ->get();
                 } else { // Role == Prodi, Unit Kerja
                     $data = DB::table('moa')
-                            ->leftJoin('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')                                
-                            ->leftJoin('users', 'moa.users_id', '=', 'users.id')
-                            ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama', 'users.role as user_role')   
-                            ->where('users.fakultas_id', Auth::user()->fakultas_id)
-                            ->whereNull('moa.deleted_at')
-                            ->orderBy('moa.id', 'desc');
-                            // ->get(); 
-                }                        
-            }            
+                        ->leftJoin('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')
+                        ->leftJoin('users', 'moa.users_id', '=', 'users.id')
+                        ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama', 'users.role as user_role')
+                        ->where('users.fakultas_id', Auth::user()->fakultas_id)
+                        ->where('users.role', '!=', 'Admin')
+                        ->whereNull('moa.deleted_at')
+                        ->orderBy('moa.id', 'desc');
+                    // ->get();
+                }
+            }
 
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('dibuat_oleh', function ($data) {                        
-                        return '<span class="badge badge-secondary">'.$data->user_nama.'</span>';                                                                                                                   
+                ->addColumn('dibuat_oleh', function ($data) {
+                    return '<span class="badge badge-secondary">' . $data->user_nama . '</span>';
                 })
                 ->addColumn('status', function ($data) {
                     $datetime1 = date_create($data->tanggal_berakhir);
-                    $datetime2 = date_create(date("Y-m-d"));            
-                    $interval = date_diff($datetime1, $datetime2);        
-                    $jumlah_tahun =  $interval->format('%y');     
-                    $jumlah_bulan =  $interval->format('%m');     
-                    if($datetime1<$datetime2){
-                        return '<span class="badge badge-danger">'.__('components/span.kadaluarsa').'</span>';                            
-                    } else{
-                        if($jumlah_tahun < 1){
-                            if($jumlah_bulan < 6){
-                                return '<span class="badge badge-warning">'.__('components/span.masa_tenggang').'</span>';                            
+                    $datetime2 = date_create(date("Y-m-d"));
+                    $interval = date_diff($datetime1, $datetime2);
+                    $jumlah_tahun =  $interval->format('%y');
+                    $jumlah_bulan =  $interval->format('%m');
+                    if ($datetime1 < $datetime2) {
+                        return '<span class="badge badge-danger">' . __('components/span.kadaluarsa') . '</span>';
+                    } else {
+                        if ($jumlah_tahun < 1) {
+                            if ($jumlah_bulan < 6) {
+                                return '<span class="badge badge-warning">' . __('components/span.masa_tenggang') . '</span>';
+                            } else {
+                                return '<span class="badge badge-success">' . __('components/span.aktif') . '</span>';
                             }
-                            else{
-                                return '<span class="badge badge-success">'.__('components/span.aktif').'</span>';                            
-                            }
-                        } else{
-                            return '<span class="badge badge-success">'.__('components/span.aktif').'</span>';                            
+                        } else {
+                            return '<span class="badge badge-success">' . __('components/span.aktif') . '</span>';
                         }
-                    }                 
+                    }
                 })
                 ->addColumn('action', function ($row) {
-                    if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Admin'))){
+                    if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Admin'))) {
                         $actionBtn = '<div class="row text-center justify-content-center">';
-                        if(($row->dokumen != '') || ($row->dokumen != NULL)){
+                        if (($row->dokumen != '') || ($row->dokumen != NULL)) {
                             $actionBtn .= '<a href="' . Storage::url("dokumen/moa/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>';
-                        }       
-                        $actionBtn .= '                            
+                        }
+                        $actionBtn .= '
                             <a href="' . url('/moa/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>
                             <a href="' . url('/moa/' . $row->id . '/edit') . '" id="btn-edit" class="btn btn-warning btn-sm mr-1 my-1">' . __('components/button.edit') . '</a>
                             <button id="btn-delete" onclick="hapus(' . $row->id . ')" class="btn btn-danger btn-sm mr-1 my-1" value="' . $row->id . '" >' . __('components/button.delete') . '</button>
-                            </div>';                        
-                    } else{ // Role == Admin, Prodi, Unit Kerja
+                            </div>';
+                    } else { // Role == Admin, Prodi, Unit Kerja
                         $actionBtn = '<div class="row text-center justify-content-center">';
-                        if(($row->dokumen != '') || ($row->dokumen != NULL)){
+                        if (($row->dokumen != '') || ($row->dokumen != NULL)) {
                             $actionBtn .= '<a href="' . Storage::url("dokumen/moa/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>';
-                        }                            
-                        $actionBtn .= '<a href="' . url('/moa/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>                            
-                        </div>';                        
+                        }
+                        $actionBtn .= '<a href="' . url('/moa/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>
+                        </div>';
                     }
                     return $actionBtn;
                 })
-                ->filter(function ($query) use ($request) {                    
+                ->filter(function ($query) use ($request) {
                     if ($request->search != '') {
-                        $query->whereRaw('(program LIKE "%'.$request->search.'%" OR pengusul.nama LIKE "%'.$request->search.'%" OR moa.nomor_moa_pengusul LIKE "%'.$request->search.'%")');                        
-                    }              
-                    if (!empty($request->dibuat_oleh)) {                        
-                        $query->where('users.nama', $request->dibuat_oleh);                       
+                        $query->whereRaw('(program LIKE "%' . $request->search . '%" OR pengusul.nama LIKE "%' . $request->search . '%" OR moa.nomor_moa_pengusul LIKE "%' . $request->search . '%")');
+                    }
+                    if (!empty($request->dibuat_oleh)) {
+                        $query->where('users.nama', $request->dibuat_oleh);
                     }
 
                     if (!empty($request->status)) {
-                        if($request->status == 'aktif'){
-                            $query->whereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) < tanggal_berakhir');                                                      
-                        } 
-                        else if($request->status == 'masa_tenggang'){
-                            $query->whereRaw('tanggal_berakhir = '.date("Y-m-d"));
-                            if((Auth::user()->role != 'Admin')){ // Selain Admin
-                                if((Auth::user()->role != 'LPPM')){ // Selain LPPM
-                                    $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND users.nama LIKE "%'.$request->dibuat_oleh.'" AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.fakultas_id = "'. Auth::user()->fakultas_id. '" AND (program LIKE "%'.$request->search.'%" OR pengusul.nama LIKE "%'.$request->search.'%" OR moa.nomor_moa_pengusul LIKE "%'.$request->search.'%")');        
-                                } else{ //LPPM
-                                    $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND users.nama LIKE "%'.$request->dibuat_oleh.'" AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.role = "'. Auth::user()->role. '" AND (program LIKE "%'.$request->search.'%" OR pengusul.nama LIKE "%'.$request->search.'%" OR moa.nomor_moa_pengusul LIKE "%'.$request->search.'%")');
-                                }                        
+                        if ($request->status == 'aktif') {
+                            $query->whereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) < tanggal_berakhir');
+                        } else if ($request->status == 'masa_tenggang') {
+                            $query->whereRaw('tanggal_berakhir = ' . date("Y-m-d"));
+                            if ((Auth::user()->role != 'Admin')) { // Selain Admin
+                                if ((Auth::user()->role != 'LPPM')) { // Selain LPPM
+                                    $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND users.nama LIKE "%' . $request->dibuat_oleh . '" AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.fakultas_id = "' . Auth::user()->fakultas_id . '" AND (program LIKE "%' . $request->search . '%" OR pengusul.nama LIKE "%' . $request->search . '%" OR moa.nomor_moa_pengusul LIKE "%' . $request->search . '%")');
+                                } else { //LPPM
+                                    $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND users.nama LIKE "%' . $request->dibuat_oleh . '" AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.role = "' . Auth::user()->role . '" AND (program LIKE "%' . $request->search . '%" OR pengusul.nama LIKE "%' . $request->search . '%" OR moa.nomor_moa_pengusul LIKE "%' . $request->search . '%")');
+                                }
+                            } else {
+                                $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.nama LIKE "%' . $request->dibuat_oleh . '" AND (program LIKE "%' . $request->search . '%" OR pengusul.nama LIKE "%' . $request->search . '%" OR moa.nomor_moa_pengusul LIKE "%' . $request->search . '%")');
                             }
-                            else{
-                                $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.nama LIKE "%'.$request->dibuat_oleh.'" AND (program LIKE "%'.$request->search.'%" OR pengusul.nama LIKE "%'.$request->search.'%" OR moa.nomor_moa_pengusul LIKE "%'.$request->search.'%")');                                    
-                            }
-
+                        } else { // expired
+                            $query->where('tanggal_berakhir', '<', date("Y-m-d"));
                         }
-                         else{ // expired
-                            $query->where('tanggal_berakhir', '<', date("Y-m-d"));                                                                   
-                        }                                                                       
-                    }                                                           
+                    }
                 })
                 ->rawColumns(['status', 'action', 'dibuat_oleh'])
                 ->make(true);
-        }  
+        }
         return view('pages/moa/index', $data);
-        
     }
 
     /**
@@ -161,16 +157,15 @@ class MoaController extends Controller
      */
     public function create()
     {
-        if(in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Admin'))){
+        if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Admin'))) {
             $data = [
                 'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->orderBy('id', 'desc')->get(),
                 'nomor_mou_pengusul' => Mou::with(['pengusul'])->orderBy('id', 'desc')->get(),
-            ];               
+            ];
             return view('pages/moa/create', $data);
-        } else{
+        } else {
             abort(404);
         }
-        
     }
 
     /**
@@ -185,9 +180,9 @@ class MoaController extends Controller
             $request->all(),
             [
                 'pengusul_id' => 'required',
-                'nomor_mou_pengusul' => 'required',                
+                'nomor_mou_pengusul' => 'required',
                 'nomor_moa' => ['required', Rule::unique('moa')->withoutTrashed()],
-                'nomor_moa_pengusul' => ['required', Rule::unique('moa')->withoutTrashed()],    
+                'nomor_moa_pengusul' => ['required', Rule::unique('moa')->withoutTrashed()],
                 'pejabat_penandatangan' => 'required',
                 'nik_nip_pengusul' => 'required',
                 'jabatan_pengusul' => 'required',
@@ -211,14 +206,14 @@ class MoaController extends Controller
                 'pejabat_penandatangan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.pejabat_penandatangan')]),
                 'nik_nip_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nik_nip_pengusul')]),
                 'jabatan_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.jabatan_pengusul')]),
-                'program.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program')]),                
-                'tanggal_mulai.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_mulai')]),                
-                'tanggal_berakhir.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_berakhir')]),                
-                'dokumen.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.dokumen')]),                           
-                'metode_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.metode_pertemuan')]),                
-                'tanggal_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_pertemuan')]),                
-                'waktu_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.waktu_pertemuan')]),                
-                'tempat_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tempat_pertemuan')]),                             
+                'program.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program')]),
+                'tanggal_mulai.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_mulai')]),
+                'tanggal_berakhir.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_berakhir')]),
+                'dokumen.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.dokumen')]),
+                'metode_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.metode_pertemuan')]),
+                'tanggal_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_pertemuan')]),
+                'waktu_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.waktu_pertemuan')]),
+                'tempat_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tempat_pertemuan')]),
             ]
         );
 
@@ -227,7 +222,7 @@ class MoaController extends Controller
         }
 
         $pengusul = Pengusul::find($request->pengusul_id);
-        $namaFileBerkas = 'MOA - '. $pengusul->nama. ' - '. Carbon::now()->format('YmdHs') . ".pdf";                  
+        $namaFileBerkas = 'MOA - ' . $pengusul->nama . ' - ' . Carbon::now()->format('YmdHs') . ".pdf";
         $request->file('dokumen')->storeAs(
             'dokumen/moa',
             $namaFileBerkas
@@ -256,7 +251,6 @@ class MoaController extends Controller
 
         Moa::create($data);
         return response()->json(['success' => 'Success']);
-
     }
 
     /**
@@ -267,13 +261,12 @@ class MoaController extends Controller
      */
     public function show(Moa $moa)
     {
-        if(($moa->user->fakultas_id == Auth::user()->fakultas_id) || (Auth::user()->role == 'Admin')){
+        if (($moa->user->fakultas_id == Auth::user()->fakultas_id) || (Auth::user()->role == 'Admin')) {
             $data = [
                 'moa' => Moa::with(['pengusul', 'mou', 'user'])->where('id', $moa->id)->first()
             ];
             return view('pages/moa/show', $data);
-        }
-        else{            
+        } else {
             abort(404);
         }
     }
@@ -285,17 +278,16 @@ class MoaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Moa $moa)
-    {        
-        if((($moa->user->fakultas_id == Auth::user()->fakultas_id) && ($moa->user->prodi_id == Auth::user()->prodi_id)) || (Auth::user()->role == 'Admin')){
+    {
+        if ((($moa->user->fakultas_id == Auth::user()->fakultas_id) && ($moa->user->prodi_id == Auth::user()->prodi_id)) || (Auth::user()->role == 'Admin')) {
             $data = [
                 'moa' => Moa::with(['pengusul'])->where('id', $moa->id)->first(),
                 'pengusul' => Pengusul::with(['negara', 'provinsi', 'kota', 'kecamatan', 'kelurahan'])->orderBy('id', 'desc')->get(),
                 'nomor_mou_pengusul' => Mou::with(['pengusul'])->orderBy('id', 'desc')->get(),
-            ];     
-            
+            ];
+
             return view('pages/moa/edit', $data);
-        }        
-        else{
+        } else {
             abort(404);
         }
     }
@@ -309,15 +301,15 @@ class MoaController extends Controller
      */
     public function update(Request $request, Moa $moa)
     {
-        if($request->nomor_moa != $moa->nomor_moa){
+        if ($request->nomor_moa != $moa->nomor_moa) {
             $nomor_moa_req = ['required', Rule::unique('moa')->withoutTrashed()];
-        } else{
+        } else {
             $nomor_moa_req = 'required';
         }
 
-        if($request->nomor_moa_pengusul != $moa->nomor_moa_pengusul){
+        if ($request->nomor_moa_pengusul != $moa->nomor_moa_pengusul) {
             $nomor_moa_pengusul_req = ['required', Rule::unique('moa')->withoutTrashed()];
-        } else{
+        } else {
             $nomor_moa_pengusul_req = 'required';
         }
 
@@ -325,10 +317,10 @@ class MoaController extends Controller
             $request->all(),
             [
                 'pengusul_id' => 'required',
-                'nomor_mou_pengusul' => 'required',                
-                'nomor_moa' => $nomor_moa_req,
-                'nomor_moa_pengusul' => $nomor_moa_pengusul_req,    
-                
+                // 'nomor_mou_pengusul' => 'required',
+                // 'nomor_moa' => $nomor_moa_req,
+                'nomor_moa_pengusul' => $nomor_moa_pengusul_req,
+
                 'pejabat_penandatangan' => 'required',
                 'nik_nip_pengusul' => 'required',
                 'jabatan_pengusul' => 'required',
@@ -351,14 +343,14 @@ class MoaController extends Controller
                 'pejabat_penandatangan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.pejabat_penandatangan')]),
                 'nik_nip_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.nik_nip_pengusul')]),
                 'jabatan_pengusul.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.jabatan_pengusul')]),
-                'program.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program')]),                
-                'tanggal_mulai.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_mulai')]),                
-                'tanggal_berakhir.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_berakhir')]),                
-                // 'dokumen.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.dokumen')]),                           
-                'metode_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.metode_pertemuan')]),                
-                'tanggal_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_pertemuan')]),                
-                'waktu_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.waktu_pertemuan')]),                
-                'tempat_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tempat_pertemuan')]),                             
+                'program.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.program')]),
+                'tanggal_mulai.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_mulai')]),
+                'tanggal_berakhir.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_berakhir')]),
+                // 'dokumen.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.dokumen')]),
+                'metode_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.metode_pertemuan')]),
+                'tanggal_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tanggal_pertemuan')]),
+                'waktu_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.waktu_pertemuan')]),
+                'tempat_pertemuan.required' => __('components/validation.required', ['nama' => __('components/form_mou_moa_ia.tempat_pertemuan')]),
             ]
         );
 
@@ -379,28 +371,28 @@ class MoaController extends Controller
             'jabatan_pengusul' => $request->jabatan_pengusul,
             'program' => $request->program,
             'tanggal_mulai' => date("Y-m-d", strtotime($request->tanggal_mulai)),
-            'tanggal_berakhir' => date("Y-m-d", strtotime($request->tanggal_berakhir)),            
+            'tanggal_berakhir' => date("Y-m-d", strtotime($request->tanggal_berakhir)),
             'metode_pertemuan' => $request->metode_pertemuan,
             'tanggal_pertemuan' => date("Y-m-d", strtotime($request->tanggal_pertemuan)),
             'waktu_pertemuan' => $request->waktu_pertemuan,
             'tempat_pertemuan' => $request->tempat_pertemuan
         ];
 
-        if($request->dokumen){            
+        if ($request->dokumen) {
             if (Storage::exists('dokumen/moa/' . $moa->dokumen)) {
                 Storage::delete('dokumen/moa/' . $moa->dokumen);
-            }            
-            $namaFileBerkas = 'MOA - '. $moa->pengusul->nama. ' - '. Carbon::now()->format('YmdHs') . ".pdf";                  
+            }
+            $namaFileBerkas = 'MOA - ' . $moa->pengusul->nama . ' - ' . Carbon::now()->format('YmdHs') . ".pdf";
             $request->file('dokumen')->storeAs(
                 'dokumen/moa',
                 $namaFileBerkas
             );
-            $data['dokumen'] = $namaFileBerkas;                        
+            $data['dokumen'] = $namaFileBerkas;
         }
-        
+
         Moa::where('id', $moa->id)->update($data);
 
-        return response()->json(['success' => 'Success']);             
+        return response()->json(['success' => 'Success']);
     }
 
     /**
@@ -414,7 +406,7 @@ class MoaController extends Controller
         if (Storage::exists('dokumen/moa/' . $moa->dokumen)) {
             Storage::delete('dokumen/moa/' . $moa->dokumen);
         }
-        
+
         $moa->delete();
         return response()->json([
             'res' => 'success'

@@ -140,11 +140,11 @@
                                         </li>
                                         <li>
                                             <span class="name-specification">{{__('components/form_mou_moa_ia.tanggal_mulai_')}}</span>
-                                            <span class="status-specification">{{$tanggal_mulai}}</span>
+                                            <span class="status-specification">{{ date('d-m-Y', strtotime($tanggal_mulai))}}</span>
                                         </li>
                                         <li>
                                             <span class="name-specification">{{__('components/form_mou_moa_ia.tanggal_berakhir_')}}</span>
-                                            <span class="status-specification">{{$tanggal_berakhir}}</span>
+                                            <span class="status-specification">{{ date('d-m-Y', strtotime($tanggal_berakhir))}}</span>
                                         </li>
                                         <li>
                                             <span class="name-specification">{{__('components/form_mou_moa_ia.dokumen')}} MOU</span>

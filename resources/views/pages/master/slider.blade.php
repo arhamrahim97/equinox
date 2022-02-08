@@ -91,8 +91,8 @@
             data: formData,
             success: function (data) {
                 if ($.isEmptyObject(data.error)) {
-                    swal("{{__('components/sweetalert.alertBerhasil')}}",
-                        "{{__('components/sweetalert.msgUbahBerhasil',['nama' => __('pages/master/slider.title')])}}", {
+                    swal("{{__('components/sweetAlert.alertBerhasil')}}",
+                        "{{__('components/sweetAlert.msgUbahBerhasil',['nama' => __('pages/master/slider.title')])}}", {
                             icon: "success",
                             buttons: {
                                 confirm: {
