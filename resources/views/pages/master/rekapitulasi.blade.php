@@ -386,6 +386,7 @@
                         }                        
                     }
                     else{
+                        $("#overlay").fadeOut(100);
                         printErrorMsg(data.error);
                         
                     }      
