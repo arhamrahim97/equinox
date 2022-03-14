@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class AnggotaProdi extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     protected $table = 'anggota_prodi';
     protected $guarded = ['id'];
 
-    public function prodi(){
+    public function prodi()
+    {
         return $this->belongsTo(Prodi::class);
     }
 }

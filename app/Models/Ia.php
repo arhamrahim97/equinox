@@ -19,11 +19,13 @@ class Ia extends Model
     use SoftDeletes;
     protected $table = 'ia';
     protected $guarded = ['id'];
+    protected $appends = ['status'];
 
-    public function pengusul(){
+    public function pengusul()
+    {
         return $this->belongsTo(Pengusul::class);
     }
-  
+
     public function moa() // Tabel IA = moa_id
     {
         return $this->belongsTo(Moa::class)->withTrashed();
@@ -33,19 +35,42 @@ class Ia extends Model
     //     return $this->belongsTo(Mou::class, 'id', moa()->mou_id);
     // }
 
-    public function anggotaFakultas(){
+    public function anggotaFakultas()
+    {
         return $this->hasMany(AnggotaFakultas::class, 'ia_id', 'id');
     }
 
-    public function anggotaProdi(){
+    public function anggotaProdi()
+    {
         return $this->hasMany(AnggotaProdi::class, 'ia_id', 'id');
     }
 
-    public function jenisKerjasama(){
+    public function jenisKerjasama()
+    {
         return $this->hasMany(JenisKerjasama::class, 'ia_id', 'id');
     }
-  
-    public function user(){
+
+    public function user()
+    {
         return $this->belongsTo(User::class, 'users_id', 'id');
+    }
+
+    public function getStatusAttribute()
+    {
+        $datetime1 = date_create($this->tanggal_berakhir);
+        $datetime2 = date_create(date("Y-m-d"));
+        if ($datetime1 < $datetime2) {
+            if (($this->laporan_hasil_pelaksanaan != '') || ($this->laporan_hasil_pelaksanaan != NULL)) {
+                return __('components/span.selesai');
+            } else {
+                return __('components/span.melewati_batas');
+            }
+        } else {
+            if (($this->laporan_hasil_pelaksanaan != '') || ($this->laporan_hasil_pelaksanaan != NULL)) {
+                return __('components/span.selesai');
+            } else {
+                return  __('components/span.aktif');
+            }
+        }
     }
 };
