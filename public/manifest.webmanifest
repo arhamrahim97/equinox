@@ -1,8 +1,8 @@
 {
-    "name": "simou untad pwa",
+    "name": "simou untad",
     "short_name": "simou",
-    "theme_color": "#1976d2",
-    "background_color": "#fafafa",
+    "theme_color": "#000000",
+    "background_color": "#000000",
     "display": "standalone",
     "start_url": "/",
     "icons": [
