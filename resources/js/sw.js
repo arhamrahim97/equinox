@@ -15,30 +15,30 @@ self.addEventListener("message", (event) => {
     }
 });
 
-// Handle images:
-const imageRoute = new Route(
-    ({ request, sameOrigin }) =>
-        sameOrigin && request.url.match(/\.(?:png|jpg|jpeg|svg)$/),
-    new CacheFirst({
-        cacheName: "images",
-        plugins: [
-            new ExpirationPlugin({
-                maxEntries: 30,
-                maxAgeSeconds: 60 * 60 * 24 * 30,
-            }),
-        ],
-    }),
-    "GET"
-);
+// // Handle images:
+// const imageRoute = new Route(
+//     ({ request, sameOrigin }) =>
+//         sameOrigin && request.url.match(/\.(?:png|jpg|jpeg|svg)$/),
+//     new CacheFirst({
+//         cacheName: "images",
+//         plugins: [
+//             new ExpirationPlugin({
+//                 maxEntries: 30,
+//                 maxAgeSeconds: 60 * 60 * 24 * 30,
+//             }),
+//         ],
+//     }),
+//     "GET"
+// );
 
-const staticsRoute = new Route(
-    ({ request }) => request.url.match(/\.(?:js|css)$/),
-    new CacheFirst({
-        cacheName: "statics",
-    }),
-    "GET"
-);
+// const staticsRoute = new Route(
+//     ({ request }) => request.url.match(/\.(?:js|css)$/),
+//     new CacheFirst({
+//         cacheName: "statics",
+//     }),
+//     "GET"
+// );
 
-registerRoute(imageRoute);
-registerRoute(staticsRoute);
+// registerRoute(imageRoute);
+// registerRoute(staticsRoute);
 offlineFallback();
