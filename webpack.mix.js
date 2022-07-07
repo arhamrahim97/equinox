@@ -1,5 +1,4 @@
-const mix = require("laravel-mix");
-require("laravel-mix-workbox");
+const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,6 +11,7 @@ require("laravel-mix-workbox");
  |
  */
 
-mix.js("resources/js/app.js", "public/js").injectManifest({
-    swSrc: "./resources/js/sw.js",
-});
+mix.js('resources/js/app.js', 'public/js')
+    .postCss('resources/css/app.css', 'public/css', [
+        //
+    ]);
