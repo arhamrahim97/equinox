@@ -60,6 +60,7 @@ class IaController extends Controller
                             ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
                             ->join('users', 'ia.users_id', '=', 'users.id')
                             ->select('ia.*', 'pengusul.nama as pengusul_nama', 'users.fakultas_id', 'users.nama as user_nama')
+                            ->whereNull('ia.deleted_at')
                             ->where('users.role', Auth::user()->role) // role == LPPM
                             ->orderBy('id', 'desc');
                         // ->get();
@@ -638,9 +639,18 @@ class IaController extends Controller
             Storage::delete('dokumen/ia-surat_tugas/' . $ia->surat_tugas);
         }
 
-        $ia->anggotaProdi()->delete();
-        $ia->anggotaFakultas()->delete();
-        $ia->jenisKerjasama()->delete();
+        if ($ia->anggotaProdi) {
+            $ia->anggotaProdi()->delete();
+        }
+
+        if ($ia->anggotaFakultas) {
+            $ia->anggotaFakultas()->delete();
+        }
+
+        if ($ia->jenisKerjasama) {
+            $ia->jenisKerjasama()->delete();
+        }
+
         $ia->delete();
         return response()->json([
             'res' => 'success'
