@@ -28,7 +28,8 @@ class Moa extends Model
 
     public function mou()
     {
-        return $this->belongsTo(Mou::class)->withTrashed();
+        return $this->belongsTo(Mou::class);
+        // ->withTrashed();
     }
 
     public function user()
