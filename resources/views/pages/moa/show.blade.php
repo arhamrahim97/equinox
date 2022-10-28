@@ -82,28 +82,22 @@
             {{ __('components/form_mou_moa_ia.nomor_moa_pengusul') }}
         @endslot
         @slot('nomor_mou')
-            @if ($moa->mou)
+            @if ($moa->mou && $moa->mou->deleted_at == '')
                 {{ $moa->mou->nomor_mou }}
             @else
             @endif
         @endslot
         @slot('nomor_mou_pengusul')
-            @if ($moa->mou)
+            @if ($moa->mou && $moa->mou->deleted_at == '')
                 {{ $moa->mou->nomor_mou_pengusul }}
             @else
             @endif
         @endslot
         @slot('nomor_moa')
-            @if ($moa->mou && $moa->mou->deleted_at == '')
-                {{ $moa->nomor_moa }}
-            @else
-            @endif
+            {{ $moa->nomor_moa }}
         @endslot
         @slot('nomor_moa_pengusul')
-            @if ($moa->mou && $moa->mou->deleted_at == '')
-                {{ $moa->nomor_moa_pengusul }}
-            @else
-            @endif
+            {{ $moa->nomor_moa_pengusul }}
         @endslot
         @slot('pejabat_penandatangan')
             {{ $moa->pejabat_penandatangan }}

@@ -28,7 +28,8 @@ class Ia extends Model
 
     public function moa() // Tabel IA = moa_id
     {
-        return $this->belongsTo(Moa::class)->withTrashed();
+        return $this->belongsTo(Moa::class);
+        // ->withTrashed();
     }
 
     // public function mou(){
