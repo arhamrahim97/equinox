@@ -68,32 +68,32 @@ class DashboardController extends Controller
         $hariIni = Carbon::now()->toDateString();
         $intervalMoa = Carbon::now()->add('6', 'month');
 
-        if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))) {
-            $totalMoa = Moa::with(['pengusul', 'user'])->whereHas('user', function ($user) use ($userLogin) {
-                $user->where('fakultas_id', $userLogin->fakultas_id);
-            })->count();
+        // if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))) {
+        //     $totalMoa = Moa::with(['pengusul', 'user'])->whereHas('user', function ($user) use ($userLogin) {
+        //         $user->where('fakultas_id', $userLogin->fakultas_id);
+        //     })->count();
 
-            $moaMasaTenggang = Moa::with(['pengusul', 'user'])->whereHas('user', function ($user) use ($userLogin) {
-                $user->where('fakultas_id', $userLogin->fakultas_id);
-            })->where('tanggal_berakhir', '=', $hariIni)->orWhere(function ($moa) use ($hariIni, $intervalMoa) {
-                $moa->where('tanggal_berakhir', '<', $intervalMoa)->where('tanggal_berakhir', '>', $hariIni);
-            })->count();
+        //     $moaMasaTenggang = Moa::with(['pengusul', 'user'])->whereHas('user', function ($user) use ($userLogin) {
+        //         $user->where('fakultas_id', $userLogin->fakultas_id);
+        //     })->where('tanggal_berakhir', '=', $hariIni)->orWhere(function ($moa) use ($hariIni, $intervalMoa) {
+        //         $moa->where('tanggal_berakhir', '<', $intervalMoa)->where('tanggal_berakhir', '>', $hariIni);
+        //     })->count();
 
-            $moaAktif = Moa::with(['pengusul', 'user'])->whereHas('user', function ($user) use ($userLogin) {
-                $user->where('fakultas_id', $userLogin->fakultas_id);
-            })->where('tanggal_berakhir', '>', $hariIni)->where('tanggal_berakhir', '>', $intervalMoa)->count();
+        //     $moaAktif = Moa::with(['pengusul', 'user'])->whereHas('user', function ($user) use ($userLogin) {
+        //         $user->where('fakultas_id', $userLogin->fakultas_id);
+        //     })->where('tanggal_berakhir', '>', $hariIni)->where('tanggal_berakhir', '>', $intervalMoa)->count();
 
-            $moaKadaluarsa = Moa::with(['pengusul', 'user'])->whereHas('user', function ($user) use ($userLogin) {
-                $user->where('fakultas_id', $userLogin->fakultas_id);
-            })->where('tanggal_berakhir', '<', $hariIni)->count();
-        } else {
-            $totalMoa = Moa::count();
-            $moaMasaTenggang = Moa::with(['pengusul', 'user'])->where('tanggal_berakhir', '=', $hariIni)->orWhere(function ($moa) use ($hariIni, $intervalMoa) {
-                $moa->where('tanggal_berakhir', '<', $intervalMoa)->where('tanggal_berakhir', '>', $hariIni);
-            })->count();
-            $moaAktif = Moa::with(['pengusul', 'user'])->where('tanggal_berakhir', '>', $hariIni)->where('tanggal_berakhir', '>', $intervalMoa)->count();
-            $moaKadaluarsa = Moa::with(['pengusul', 'user'])->where('tanggal_berakhir', '<', $hariIni)->count();
-        }
+        //     $moaKadaluarsa = Moa::with(['pengusul', 'user'])->whereHas('user', function ($user) use ($userLogin) {
+        //         $user->where('fakultas_id', $userLogin->fakultas_id);
+        //     })->where('tanggal_berakhir', '<', $hariIni)->count();
+        // } else {
+        $totalMoa = Moa::count();
+        $moaMasaTenggang = Moa::with(['pengusul', 'user'])->where('tanggal_berakhir', '=', $hariIni)->orWhere(function ($moa) use ($hariIni, $intervalMoa) {
+            $moa->where('tanggal_berakhir', '<', $intervalMoa)->where('tanggal_berakhir', '>', $hariIni);
+        })->count();
+        $moaAktif = Moa::with(['pengusul', 'user'])->where('tanggal_berakhir', '>', $hariIni)->where('tanggal_berakhir', '>', $intervalMoa)->count();
+        $moaKadaluarsa = Moa::with(['pengusul', 'user'])->where('tanggal_berakhir', '<', $hariIni)->count();
+        // }
 
         return [
             'totalMoa' => $totalMoa,
@@ -107,142 +107,142 @@ class DashboardController extends Controller
     {
         $userLogin = Auth::user();
         $hariIni = Carbon::now();
-        if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU'))) {
+        // if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU'))) {
 
-            // TotalIa
-            $totalIa = Ia::with(['anggotaFakultas'])->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
-                $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
-            })->count();
+        //     // TotalIa
+        //     $totalIa = Ia::with(['anggotaFakultas'])->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
+        //         $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
+        //     })->count();
 
-            // Aktif
-            $iaAktif = Ia::with(['anggotaFakultas'])->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
-                $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
-            })->where(function ($query) {
-                $query->where('laporan_hasil_pelaksanaan', '=', 'NULL');
-                $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
-            })->where('tanggal_berakhir', '>=', $hariIni)->count();
+        //     // Aktif
+        //     $iaAktif = Ia::with(['anggotaFakultas'])->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
+        //         $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
+        //     })->where(function ($query) {
+        //         $query->where('laporan_hasil_pelaksanaan', '=', NULL);
+        //         $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
+        //     })->where('tanggal_berakhir', '>=', $hariIni)->count();
 
-            // Selesai
-            $iaSelesai = Ia::with(['anggotaFakultas'])->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
-                $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
-            })->where(function ($query) {
-                $query->whereNotNull('laporan_hasil_pelaksanaan');
-                $query->where('laporan_hasil_pelaksanaan', '!=', '');
-            })->count();
+        //     // Selesai
+        //     $iaSelesai = Ia::with(['anggotaFakultas'])->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
+        //         $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
+        //     })->where(function ($query) {
+        //         $query->whereNotNull('laporan_hasil_pelaksanaan');
+        //         $query->where('laporan_hasil_pelaksanaan', '!=', '');
+        //     })->count();
 
-            $iaSuratTugas = "";
+        //     $iaSuratTugas = "";
 
-            // Melewati Batas
-            $iaMelewatiBatas = Ia::with(['anggotaFakultas'])->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
-                $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
-            })->where(function ($query) {
-                $query->whereNull('laporan_hasil_pelaksanaan');
-                $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
-            })->where('tanggal_berakhir', '<', $hariIni)->count();
+        //     // Melewati Batas
+        //     $iaMelewatiBatas = Ia::with(['anggotaFakultas'])->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
+        //         $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
+        //     })->where(function ($query) {
+        //         $query->whereNull('laporan_hasil_pelaksanaan');
+        //         $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
+        //     })->where('tanggal_berakhir', '<', $hariIni)->count();
 
-            $totalPemasukan = Ia::with(['anggotaFakultas'])->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
-                $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
-            })->sum('nilai_uang');
-        } else if (Auth::user()->role == 'LPPM') {
+        //     $totalPemasukan = Ia::with(['anggotaFakultas'])->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
+        //         $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
+        //     })->sum('nilai_uang');
+        // } else if (Auth::user()->role == 'LPPM') {
 
-            // Total Ia
-            $totalIa = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
-                $user->where('role', $userLogin->role);
-            })->count();
+        //     // Total Ia
+        //     $totalIa = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
+        //         $user->where('role', $userLogin->role);
+        //     })->count();
 
-            // Aktif
-            $iaAktif = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
-                $user->where('role', $userLogin->role);
-            })->where(function ($query) {
-                $query->where('laporan_hasil_pelaksanaan', '=', 'NULL');
-                $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
-            })->where('tanggal_berakhir', '>=', $hariIni)->count();
+        //     // Aktif
+        //     $iaAktif = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
+        //         $user->where('role', $userLogin->role);
+        //     })->where(function ($query) {
+        //         $query->where('laporan_hasil_pelaksanaan', '=', NULL);
+        //         $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
+        //     })->where('tanggal_berakhir', '>=', $hariIni)->count();
 
-            // Selesai
-            $iaSelesai = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
-                $user->where('role', $userLogin->role);
-            })->where(function ($query) {
-                $query->whereNotNull('laporan_hasil_pelaksanaan');
-                $query->where('laporan_hasil_pelaksanaan', '!=', '');
-            })->count();
+        //     // Selesai
+        //     $iaSelesai = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
+        //         $user->where('role', $userLogin->role);
+        //     })->where(function ($query) {
+        //         $query->whereNotNull('laporan_hasil_pelaksanaan');
+        //         $query->where('laporan_hasil_pelaksanaan', '!=', '');
+        //     })->count();
 
-            // Melewati Batas
-            $iaMelewatiBatas = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
-                $user->where('role', $userLogin->role);
-            })->where(function ($query) {
-                $query->whereNull('laporan_hasil_pelaksanaan');
-                $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
-            })->where('tanggal_berakhir', '<', $hariIni)->count();
+        //     // Melewati Batas
+        //     $iaMelewatiBatas = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
+        //         $user->where('role', $userLogin->role);
+        //     })->where(function ($query) {
+        //         $query->whereNull('laporan_hasil_pelaksanaan');
+        //         $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
+        //     })->where('tanggal_berakhir', '<', $hariIni)->count();
 
-            $iaSuratTugas = "";
+        //     $iaSuratTugas = "";
 
-            $totalPemasukan = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
-                $user->where('role', $userLogin->role);
-            })->sum('nilai_uang');
-        } else if (in_array(Auth::user()->role, array('Prodi', 'Unit Kerja'))) {
+        //     $totalPemasukan = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
+        //         $user->where('role', $userLogin->role);
+        //     })->sum('nilai_uang');
+        // } else if (in_array(Auth::user()->role, array('Prodi', 'Unit Kerja'))) {
 
-            // Total Ia
-            $totalIa = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
-                $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
-            })->count();
+        //     // Total Ia
+        //     $totalIa = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
+        //         $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
+        //     })->count();
 
-            // Aktif
-            $iaAktif = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
-                $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
-            })->where(function ($query) {
-                $query->where('laporan_hasil_pelaksanaan', '=', 'NULL');
-                $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
-            })->where('tanggal_berakhir', '>=', $hariIni)->count();
+        //     // Aktif
+        //     $iaAktif = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
+        //         $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
+        //     })->where(function ($query) {
+        //         $query->where('laporan_hasil_pelaksanaan', '=', NULL);
+        //         $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
+        //     })->where('tanggal_berakhir', '>=', $hariIni)->count();
 
-            // Selesai
-            $iaSelesai = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
-                $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
-            })->where(function ($query) {
-                $query->whereNotNull('laporan_hasil_pelaksanaan');
-                $query->where('laporan_hasil_pelaksanaan', '!=', '');
-            })->count();
+        //     // Selesai
+        //     $iaSelesai = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
+        //         $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
+        //     })->where(function ($query) {
+        //         $query->whereNotNull('laporan_hasil_pelaksanaan');
+        //         $query->where('laporan_hasil_pelaksanaan', '!=', '');
+        //     })->count();
 
-            // Melewati Batas
-            $iaMelewatiBatas = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
-                $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
-            })->where(function ($query) {
-                $query->whereNull('laporan_hasil_pelaksanaan');
-                $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
-            })->where('tanggal_berakhir', '<', $hariIni)->count();
+        //     // Melewati Batas
+        //     $iaMelewatiBatas = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
+        //         $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
+        //     })->where(function ($query) {
+        //         $query->whereNull('laporan_hasil_pelaksanaan');
+        //         $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
+        //     })->where('tanggal_berakhir', '<', $hariIni)->count();
 
-            $iaSuratTugas = "";
+        //     $iaSuratTugas = "";
 
-            $totalPemasukan = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
-                $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
-            })->sum('nilai_uang');
-        } else {
-            // Total Ia
-            $totalIa = Ia::count();
+        //     $totalPemasukan = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
+        //         $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
+        //     })->sum('nilai_uang');
+        // } else {
+        // Total Ia
+        $totalIa = Ia::count();
 
-            // Aktif
-            $iaAktif = Ia::with(['anggotaProdi'])->where(function ($query) {
-                $query->where('laporan_hasil_pelaksanaan', '=', 'NULL');
-                $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
-            })->where('tanggal_berakhir', '>=', $hariIni)->count();
+        // Aktif
+        $iaAktif = Ia::with(['anggotaProdi'])->where(function ($query) {
+            $query->where('laporan_hasil_pelaksanaan', '=', NULL);
+            $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
+        })->where('tanggal_berakhir', '>=', $hariIni)->count();
 
-            // Selesai
-            $iaSelesai = Ia::with(['anggotaProdi'])->where(function ($query) {
-                $query->whereNotNull('laporan_hasil_pelaksanaan');
-                $query->where('laporan_hasil_pelaksanaan', '!=', '');
-            })->count();
+        // Selesai
+        $iaSelesai = Ia::with(['anggotaProdi'])->where(function ($query) {
+            $query->whereNotNull('laporan_hasil_pelaksanaan');
+            $query->where('laporan_hasil_pelaksanaan', '!=', '');
+        })->count();
 
-            // Melewati Batas
-            $iaMelewatiBatas = Ia::with(['anggotaProdi'])->where(function ($query) {
-                $query->whereNull('laporan_hasil_pelaksanaan');
-                $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
-            })->where('tanggal_berakhir', '<', $hariIni)->count();
+        // Melewati Batas
+        $iaMelewatiBatas = Ia::with(['anggotaProdi'])->where(function ($query) {
+            $query->whereNull('laporan_hasil_pelaksanaan');
+            $query->orWhere('laporan_hasil_pelaksanaan', '=', '');
+        })->where('tanggal_berakhir', '<', $hariIni)->count();
 
-            // Belum Upload Surat Tugas
-            $iaSuratTugas = Ia::where('surat_tugas', '=', NULL)->orWhere('surat_tugas', '=', '')->count();
+        // Belum Upload Surat Tugas
+        $iaSuratTugas = Ia::where('surat_tugas', '=', NULL)->orWhere('surat_tugas', '=', '')->count();
 
-            // Total Pemasukan
-            $totalPemasukan = Ia::sum('nilai_uang');
-        }
+        // Total Pemasukan
+        $totalPemasukan = Ia::sum('nilai_uang');
+        // }
 
         return [
             'totalIa' => $totalIa,
@@ -281,22 +281,22 @@ class DashboardController extends Controller
     {
         $userLogin = Auth::user();
         if ($request->ajax()) {
-            if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))) {
-                $data = Moa::with('user')->whereHas('user', function ($user) use ($userLogin) {
-                    $user->where('fakultas_id', $userLogin->fakultas_id);
-                })
-                    ->join('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')
-                    ->join('negara', 'pengusul.negara_id', '=', 'negara.id')
-                    ->select('negara.nama', DB::raw('count(*) as total'))
-                    ->groupBy('pengusul.negara_id')
-                    ->get();
-            } else {
-                $data = Moa::join('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')
-                    ->join('negara', 'pengusul.negara_id', '=', 'negara.id')
-                    ->select('negara.nama', DB::raw('count(*) as total'))
-                    ->groupBy('pengusul.negara_id')
-                    ->get();
-            }
+            // if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))) {
+            //     $data = Moa::with('user')->whereHas('user', function ($user) use ($userLogin) {
+            //         $user->where('fakultas_id', $userLogin->fakultas_id);
+            //     })
+            //         ->join('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')
+            //         ->join('negara', 'pengusul.negara_id', '=', 'negara.id')
+            //         ->select('negara.nama', DB::raw('count(*) as total'))
+            //         ->groupBy('pengusul.negara_id')
+            //         ->get();
+            // } else {
+            $data = Moa::join('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')
+                ->join('negara', 'pengusul.negara_id', '=', 'negara.id')
+                ->select('negara.nama', DB::raw('count(*) as total'))
+                ->groupBy('pengusul.negara_id')
+                ->get();
+            // }
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('negara', function ($row) {
@@ -313,40 +313,40 @@ class DashboardController extends Controller
     public function getTotalNegaraIa(Request $request)
     {
         $userLogin = Auth::user();
-        if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU'))) {
-            $data = Ia::with('user')->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
-                $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
-            })
-                ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
-                ->join('negara', 'pengusul.negara_id', '=', 'negara.id')
-                ->select('negara.nama', DB::raw('count(*) as total'))
-                ->groupBy('pengusul.negara_id')
-                ->get();
-        } else if (Auth::user()->role == 'LPPM') {
-            $data = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
-                $user->where('role', $userLogin->role);
-            })
-                ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
-                ->join('negara', 'pengusul.negara_id', '=', 'negara.id')
-                ->select('negara.nama', DB::raw('count(*) as total'))
-                ->groupBy('pengusul.negara_id')
-                ->get();
-        } else if (in_array(Auth::user()->role, array('Prodi', 'Unit Kerja'))) {
-            $data = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
-                $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
-            })
-                ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
-                ->join('negara', 'pengusul.negara_id', '=', 'negara.id')
-                ->select('negara.nama', DB::raw('count(*) as total'))
-                ->groupBy('pengusul.negara_id')
-                ->get();
-        } else {
-            $data = Ia::join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
-                ->join('negara', 'pengusul.negara_id', '=', 'negara.id')
-                ->select('negara.nama', DB::raw('count(*) as total'))
-                ->groupBy('pengusul.negara_id')
-                ->get();
-        }
+        // if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU'))) {
+        //     $data = Ia::with('user')->whereHas('anggotaFakultas', function ($anggotaFakultas) use ($userLogin) {
+        //         $anggotaFakultas->where('fakultas_id', $userLogin->fakultas_id);
+        //     })
+        //         ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
+        //         ->join('negara', 'pengusul.negara_id', '=', 'negara.id')
+        //         ->select('negara.nama', DB::raw('count(*) as total'))
+        //         ->groupBy('pengusul.negara_id')
+        //         ->get();
+        // } else if (Auth::user()->role == 'LPPM') {
+        //     $data = Ia::with(['user'])->whereHas('user', function ($user) use ($userLogin) {
+        //         $user->where('role', $userLogin->role);
+        //     })
+        //         ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
+        //         ->join('negara', 'pengusul.negara_id', '=', 'negara.id')
+        //         ->select('negara.nama', DB::raw('count(*) as total'))
+        //         ->groupBy('pengusul.negara_id')
+        //         ->get();
+        // } else if (in_array(Auth::user()->role, array('Prodi', 'Unit Kerja'))) {
+        //     $data = Ia::with(['anggotaProdi'])->whereHas('anggotaProdi', function ($anggotaProdi) use ($userLogin) {
+        //         $anggotaProdi->where('prodi_id', $userLogin->prodi_id);
+        //     })
+        //         ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
+        //         ->join('negara', 'pengusul.negara_id', '=', 'negara.id')
+        //         ->select('negara.nama', DB::raw('count(*) as total'))
+        //         ->groupBy('pengusul.negara_id')
+        //         ->get();
+        // } else {
+        $data = Ia::join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
+            ->join('negara', 'pengusul.negara_id', '=', 'negara.id')
+            ->select('negara.nama', DB::raw('count(*) as total'))
+            ->groupBy('pengusul.negara_id')
+            ->get();
+        // }
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->addIndexColumn()

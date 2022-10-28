@@ -124,12 +124,12 @@ class IaController extends Controller
                                 $actionBtn = '<button id="btn-upload-surat_tugas" class="btn btn-secondary btn-sm mr-1 my-1" onclick="showModalFileTambahan(' . $row->id . ', `surat_tugas`)"  value="' . $row->id . '" >' . __('components/button.upload_surat_tugas') . '</button>';
                             }
                         }
-                        $actionBtn .= '<a href="' . Storage::url("dokumen/ia/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>';
+                        $actionBtn .= '<a href="' . Storage::url("dokumen/ia/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1" target="_blank()">' . __('components/button.download_document') . '</a>';
                         if (($row->surat_tugas != '') || ($row->surat_tugas != NULL)) {
-                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-surat_tugas/" . $row->surat_tugas) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_surat_tugas') . '</a>';
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-surat_tugas/" . $row->surat_tugas) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1" target="_blank()">' . __('components/button.download_surat_tugas') . '</a>';
                         }
                         if (($row->laporan_hasil_pelaksanaan != '') || ($row->laporan_hasil_pelaksanaan != NULL)) {
-                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $row->laporan_hasil_pelaksanaan) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_laporan_pelaksanaan') . '</a>';
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $row->laporan_hasil_pelaksanaan) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1" target="_blank()">' . __('components/button.download_laporan_pelaksanaan') . '</a>';
                         } else {
                             if (($row->surat_tugas != '') || ($row->surat_tugas != NULL)) {
                                 $actionBtn .= '<button id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-secondary btn-sm mr-1 my-1" onclick="showModalFileTambahan(' . $row->id . ', `laporan_pelaksanaan`)"  value="' . $row->id . '" >' . __('components/button.upload_laporan_pelaksanaan') . '</button>';
@@ -147,12 +147,12 @@ class IaController extends Controller
                             $actionBtn = '<button id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-secondary btn-sm mr-1 my-1" onclick="showModalFileTambahan(' . $row->id . ', `surat_tugas`)"  value="' . $row->id . '" >' . __('components/button.upload_surat_tugas') . '</button>';
                         }
                         $actionBtn .= '<div class="row text-center justify-content-center">';
-                        $actionBtn .= '<a href="' . Storage::url("dokumen/ia/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>';
+                        $actionBtn .= '<a href="' . Storage::url("dokumen/ia/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1" target="_blank()">' . __('components/button.download_document') . '</a>';
                         if (($row->surat_tugas != '') || ($row->surat_tugas != NULL)) {
-                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-surat_tugas/" . $row->surat_tugas) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_surat_tugas') . '</a>';
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-surat_tugas/" . $row->surat_tugas) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1" target="_blank()">' . __('components/button.download_surat_tugas') . '</a>';
                         }
                         if (($row->laporan_hasil_pelaksanaan != '') || ($row->laporan_hasil_pelaksanaan != NULL)) {
-                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $row->laporan_hasil_pelaksanaan) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_laporan_pelaksanaan') . '</a>';
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/ia-laporan_hasil_pelaksanaan/" . $row->laporan_hasil_pelaksanaan) . '" id="btn-upload-laporan_hasil_pelaksanaan" class="btn btn-success btn-sm mr-1 my-1" target="_blank()">' . __('components/button.download_laporan_pelaksanaan') . '</a>';
                         }
                         $actionBtn .= '<a href="' . url('/ia/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>';
                         if (Auth::user()->role == 'Admin') {

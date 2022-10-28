@@ -100,7 +100,7 @@ class MoaController extends Controller
                     if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Admin'))) {
                         $actionBtn = '<div class="row text-center justify-content-center">';
                         if (($row->dokumen != '') || ($row->dokumen != NULL)) {
-                            $actionBtn .= '<a href="' . Storage::url("dokumen/moa/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>';
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/moa/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1" target="_blank()">' . __('components/button.download_document') . '</a>';
                         }
                         $actionBtn .= '
                             <a href="' . url('/moa/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>
@@ -110,7 +110,7 @@ class MoaController extends Controller
                     } else { // Role == Admin, Prodi, Unit Kerja
                         $actionBtn = '<div class="row text-center justify-content-center">';
                         if (($row->dokumen != '') || ($row->dokumen != NULL)) {
-                            $actionBtn .= '<a href="' . Storage::url("dokumen/moa/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1">' . __('components/button.download_document') . '</a>';
+                            $actionBtn .= '<a href="' . Storage::url("dokumen/moa/" . $row->dokumen) . '" id="btn-show" class="btn btn-success btn-sm mr-1 my-1" target="_blank()">' . __('components/button.download_document') . '</a>';
                         }
                         $actionBtn .= '<a href="' . url('/moa/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . '</a>
                         </div>';
@@ -317,7 +317,7 @@ class MoaController extends Controller
             $request->all(),
             [
                 'pengusul_id' => 'required',
-                // 'nomor_mou_pengusul' => 'required',
+                'nomor_mou_pengusul' => 'required',
                 // 'nomor_moa' => $nomor_moa_req,
                 'nomor_moa_pengusul' => $nomor_moa_pengusul_req,
 
