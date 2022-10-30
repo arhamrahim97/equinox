@@ -32,49 +32,61 @@ class MoaController extends Controller
             $user = User::where('fakultas_id', Auth::user()->fakultas_id)->whereNotIn('role', ['Admin', 'Prodi', 'Unit Kerja'])->get();
         } else {
             $user = User::whereIn('role', ['Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'])
-                // ->where('role',)
                 ->get();
         }
         $data = [
             'user' => $user,
         ];
         if ($request->ajax()) {
-            if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'))) {
-                $data = DB::table('moa')
-                    ->leftJoin('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')
-                    ->leftJoin('users', 'moa.users_id', '=', 'users.id')
-                    ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.fakultas_id', 'users.nama as user_nama', 'users.role as user_role')
-                    ->where('users.fakultas_id', Auth::user()->fakultas_id)
-                    ->where('users.role', '!=', 'Admin')
-                    ->whereNull('moa.deleted_at')
-                    ->orderBy('moa.id', 'desc');
-                // ->get();
-            } else {
-                if (Auth::user()->role == 'Admin') {
-                    $data = DB::table('moa')
-                        ->leftJoin('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')
-                        ->leftJoin('users', 'moa.users_id', '=', 'users.id')
-                        ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama', 'users.role as user_role')
-                        ->whereNull('moa.deleted_at')
-                        ->orderBy('moa.id', 'desc');
-                    // ->get();
-                } else { // Role == Prodi, Unit Kerja
-                    $data = DB::table('moa')
-                        ->leftJoin('pengusul', 'moa.pengusul_id', '=', 'pengusul.id')
-                        ->leftJoin('users', 'moa.users_id', '=', 'users.id')
-                        ->select('moa.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama', 'users.role as user_role')
-                        ->where('users.fakultas_id', Auth::user()->fakultas_id)
-                        ->where('users.role', '!=', 'Admin')
-                        ->whereNull('moa.deleted_at')
-                        ->orderBy('moa.id', 'desc');
-                    // ->get();
-                }
-            }
+            $data = Moa::with('pengusul', 'user')->latest()
+                ->where(function ($q) {
+                    if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))) {
+                        $q->whereHas('user', function ($q2) {
+                            $q2->where('fakultas_id', Auth::user()->fakultas_id);
+                        });
+                    }
+                })
+
+                // filter
+                ->where(function ($query) use ($request) {
+                    if ($request->search) {
+                        $query->where(function ($q) use ($request) {
+                            $q->where('nomor_moa_pengusul', 'like', '%' . $request->search . '%');
+                            $q->orWhere('program', 'like', '%' . $request->search . '%');
+                            $q->orWhereHas('pengusul', function ($q2) use ($request) {
+                                $q2->where('nama', 'like', '%' . $request->search . '%');
+                            });
+                        });
+                    }
+
+                    if ($request->dibuat_oleh) {
+                        $query->whereHas('user', function ($q)  use ($request) {
+                            $q->where('nama', $request->dibuat_oleh);
+                        });
+                    }
+
+                    if ($request->status) {
+                        if ($request->status == 'aktif') {
+                            $query->whereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) < tanggal_berakhir');
+                        } else if ($request->status == 'masa_tenggang') {
+                            $query->where(function ($q) {
+                                $q->where('tanggal_berakhir', '=', Carbon::now());
+                                $q->orWhereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir');
+                            });
+                        } else if ($request->status == 'kadaluarsa') {
+                            $query->where('tanggal_berakhir', '<', Carbon::now());
+                        }
+                    }
+                })
+                ->get();
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('pengusul_nama', function ($data) {
+                    return $data->pengusul->nama;
+                })
                 ->addColumn('dibuat_oleh', function ($data) {
-                    return '<span class="badge badge-secondary">' . $data->user_nama . '</span>';
+                    return '<span class="badge badge-secondary">' . $data->user->nama . '</span>';
                 })
                 ->addColumn('status', function ($data) {
                     $datetime1 = date_create($data->tanggal_berakhir);
@@ -116,33 +128,6 @@ class MoaController extends Controller
                         </div>';
                     }
                     return $actionBtn;
-                })
-                ->filter(function ($query) use ($request) {
-                    if ($request->search != '') {
-                        $query->whereRaw('(program LIKE "%' . $request->search . '%" OR pengusul.nama LIKE "%' . $request->search . '%" OR moa.nomor_moa_pengusul LIKE "%' . $request->search . '%")');
-                    }
-                    if (!empty($request->dibuat_oleh)) {
-                        $query->where('users.nama', $request->dibuat_oleh);
-                    }
-
-                    if (!empty($request->status)) {
-                        if ($request->status == 'aktif') {
-                            $query->whereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) < tanggal_berakhir');
-                        } else if ($request->status == 'masa_tenggang') {
-                            $query->whereRaw('tanggal_berakhir = ' . date("Y-m-d"));
-                            if ((Auth::user()->role != 'Admin')) { // Selain Admin
-                                if ((Auth::user()->role != 'LPPM')) { // Selain LPPM
-                                    $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND users.nama LIKE "%' . $request->dibuat_oleh . '" AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.fakultas_id = "' . Auth::user()->fakultas_id . '" AND (program LIKE "%' . $request->search . '%" OR pengusul.nama LIKE "%' . $request->search . '%" OR moa.nomor_moa_pengusul LIKE "%' . $request->search . '%")');
-                                } else { //LPPM
-                                    $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND users.nama LIKE "%' . $request->dibuat_oleh . '" AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.role = "' . Auth::user()->role . '" AND (program LIKE "%' . $request->search . '%" OR pengusul.nama LIKE "%' . $request->search . '%" OR moa.nomor_moa_pengusul LIKE "%' . $request->search . '%")');
-                                }
-                            } else {
-                                $query->orWhereRaw('(tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir) AND (moa.deleted_at is NULL OR moa.deleted_at = "" OR moa.deleted_at = NULL) AND users.nama LIKE "%' . $request->dibuat_oleh . '" AND (program LIKE "%' . $request->search . '%" OR pengusul.nama LIKE "%' . $request->search . '%" OR moa.nomor_moa_pengusul LIKE "%' . $request->search . '%")');
-                            }
-                        } else { // expired
-                            $query->where('tanggal_berakhir', '<', date("Y-m-d"));
-                        }
-                    }
                 })
                 ->rawColumns(['status', 'action', 'dibuat_oleh'])
                 ->make(true);

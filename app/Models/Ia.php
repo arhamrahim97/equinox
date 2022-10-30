@@ -38,17 +38,17 @@ class Ia extends Model
 
     public function anggotaFakultas()
     {
-        return $this->hasMany(AnggotaFakultas::class, 'ia_id', 'id');
+        return $this->hasMany(AnggotaFakultas::class);
     }
 
     public function anggotaProdi()
     {
-        return $this->hasMany(AnggotaProdi::class, 'ia_id', 'id');
+        return $this->hasMany(AnggotaProdi::class);
     }
 
     public function jenisKerjasama()
     {
-        return $this->hasMany(JenisKerjasama::class, 'ia_id', 'id');
+        return $this->hasMany(JenisKerjasama::class);
     }
 
     public function user()

@@ -32,6 +32,11 @@ class Moa extends Model
         // ->withTrashed();
     }
 
+    public function ia()
+    {
+        return $this->hasMany(Ia::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'users_id', 'id')->withTrashed();

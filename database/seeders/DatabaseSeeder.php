@@ -21,12 +21,12 @@ class DatabaseSeeder extends Seeder
         // Moa::factory(3)->create();
 
         // \App\Models\User::factory(10)->create();
-        $this->call(MouSeeder::class);
-        $this->call(MoaSeeder::class);
-        $this->call(IaSeeder::class);
-        $this->call(AnggotaProdiSeeder::class);
+        // $this->call(MouSeeder::class);
+        // $this->call(MoaSeeder::class);
+        // $this->call(IaSeeder::class);
+        // $this->call(AnggotaProdiSeeder::class);
+        // $this->call(AnggotaFakultasSeeder::class);
         $this->call(JenisKerjasamaSeeder::class);
-        $this->call(AnggotaFakultasSeeder::class);
         $this->call(NegaraTableSeeder::class);
         $this->call(ProvinsiTableSeeder::class);
         $this->call(KotaTableSeeder::class);
@@ -46,5 +46,10 @@ class DatabaseSeeder extends Seeder
         // $this->call(TentangSeeder::class);
         $this->call(TentangTableSeeder::class);
         $this->call(SliderSeeder::class);
+        $this->call(MouTableSeeder::class);
+        $this->call(MoaTableSeeder::class);
+        $this->call(IaTableSeeder::class);
+        $this->call(AnggotaFakultasTableSeeder::class);
+        $this->call(AnggotaProdiTableSeeder::class);
     }
 }

@@ -104,6 +104,8 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
 
+    Route::get('/pohon-kerja-sama/mou', MouController::class . '@pohonMou');
+
     Route::resource('/rekapitulasi', RekapitulasiController::class);
     Route::get('/rekapitulasiresult', [RekapitulasiController::class, 'datatables']);
     Route::get('/getfilter', [ListController::class, 'getFilter']);

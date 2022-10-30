@@ -88,25 +88,25 @@
             {{ __('components/form_mou_moa_ia.nomor_ia_pengusul') }}
         @endslot
         @slot('nomor_mou')
-            @if ($ia->moa->mou && $ia->moa->mou->deleted_at == '')
+            @if (isset($ia->moa->mou))
                 {{ $ia->moa->mou->nomor_mou }}
             @else
             @endif
         @endslot
         @slot('nomor_mou_pengusul')
-            @if ($ia->moa->mou && $ia->moa->mou->deleted_at == '')
+            @if (isset($ia->moa->mou))
                 {{ $ia->moa->mou->nomor_mou_pengusul }}
             @else
             @endif
         @endslot
         @slot('nomor_moa')
-            @if ($ia->moa && $ia->moa->deleted_at == '')
+            @if (isset($ia->moa))
                 {{ $ia->moa->nomor_moa }}
             @else
             @endif
         @endslot
         @slot('nomor_moa_pengusul')
-            @if ($ia->moa && $ia->moa->deleted_at == '')
+            @if (isset($ia->moa))
                 {{ $ia->moa->nomor_moa_pengusul }}
             @else
             @endif
@@ -150,19 +150,15 @@
         @slot('tanggal_berakhir')
             {{ $ia->tanggal_berakhir }}
         @endslot
-        @slot('download_mou')
-            @if ($ia->moa->mou && $ia->moa->mou->deleted_at == '')
-                @if ($ia->moa->mou->dokumen == '' || $ia->moa->mou->dokumen == null)
-                    kosong
-                @else
-                    {{ Storage::url('dokumen/mou/' . $ia->moa->mou->dokumen) }}
-                @endif
-            @else
+        @slot('download_ia')
+            @if ($ia->dokumen == '' || $ia->dokumen == null)
                 kosong
+            @else
+                {{ Storage::url('dokumen/ia/' . $ia->dokumen) }}
             @endif
         @endslot
         @slot('download_moa')
-            @if ($ia->moa && $ia->moa->deleted_at == '')
+            @if (isset($ia->moa))
                 @if ($ia->moa->dokumen == '' || $ia->moa->dokumen == null)
                     kosong
                 @else
@@ -172,13 +168,18 @@
                 kosong
             @endif
         @endslot
-        @slot('download_ia')
-            @if ($ia->dokumen == '' || $ia->dokumen == null)
-                kosong
+        @slot('download_mou')
+            @if (isset($ia->moa->mou))
+                @if ($ia->moa->mou->dokumen == '' || $ia->moa->mou->dokumen == null)
+                    kosong
+                @else
+                    {{ Storage::url('dokumen/mou/' . $ia->moa->mou->dokumen) }}
+                @endif
             @else
-                {{ Storage::url('dokumen/ia/' . $ia->dokumen) }}
+                kosong
             @endif
         @endslot
+
         {{-- @slot('surat_tugas')
             {{Storage::url("dokumen/ia/" . $ia->surat_tugas)}}
         @endslot --}}

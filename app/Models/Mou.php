@@ -26,6 +26,11 @@ class Mou extends Model
         return $this->belongsTo(User::class, 'users_id', 'id')->withTrashed();
     }
 
+    public function moa()
+    {
+        return $this->hasMany(Moa::class);
+    }
+
     public function getStatusAttribute()
     {
         $datetime1 = date_create($this->tanggal_berakhir);
