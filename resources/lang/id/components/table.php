@@ -55,5 +55,8 @@ return [
     'judul_kegiatan_kerjasama' => 'Judul Kegiatan Kerjasama',
     'manfaat' => 'Manfaat Bagi Program Studi yang Diakreditasi',
     'waktu_dan_durasi' => 'Waktu dan Durasi',
-    'bukti_kerjasama' => 'Bukti Kerjasama'
+    'bukti_kerjasama' => 'Bukti Kerjasama',
+
+    'jumlah_moa' => 'Jumlah MOA',
+    'jumlah_ia' => 'Jumlah IA'
 ];

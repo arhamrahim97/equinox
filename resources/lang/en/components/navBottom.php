@@ -16,6 +16,7 @@ return [
     'petaMou' => 'MOU Map',
     'petaMoa' => 'MOA Map',
     'petaIa' => 'IA Map',
+    'pohonKerjaSama' => 'Cooperation Tree',
     'rekapitulasi' => 'Recapitulation',
     'tentang' => 'About',
     'slider' => 'Slider',

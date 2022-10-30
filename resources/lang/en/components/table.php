@@ -62,5 +62,8 @@ return [
     'judul_kegiatan_kerjasama' => 'Title of Cooperation Activities',
     'manfaat' => 'Benefits to Accredited Study Programs',
     'waktu_dan_durasi' => 'Time and Duration',
-    'bukti_kerjasama' => 'Proof of Cooperation'
+    'bukti_kerjasama' => 'Proof of Cooperation',
+
+    'jumlah_moa' => 'Total MOA',
+    'jumlah_ia' => 'Total IA'
 ];

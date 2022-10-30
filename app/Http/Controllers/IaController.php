@@ -40,60 +40,62 @@ class IaController extends Controller
         $data = [
             'user' => $user,
         ];
+
         if ($request->ajax()) {
-            if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Prodi', 'Unit Kerja'))) {
-                if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU'))) {
-                    $data = DB::table('ia')
-                        ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
-                        ->join('users', 'ia.users_id', '=', 'users.id') // User pembuat
-                        ->leftJoin('anggota_fakultas as af', 'ia.id', 'af.ia_id')
-                        ->select(DB::raw('ia.*, pengusul.nama as pengusul_nama,  GROUP_CONCAT(af.fakultas_id) as ang_fakultas, FIND_IN_SET(' . Auth::user()->fakultas_id . ', GROUP_CONCAT(af.fakultas_id)) as find'), 'users.nama as user_nama')
-                        ->whereNull('ia.deleted_at')
-                        ->whereNull('af.deleted_at')
-                        ->groupBy('ia.id')
-                        ->havingRaw('FIND_IN_SET(' . Auth::user()->fakultas_id . ', ang_fakultas)')
-                        ->orderBy('ia.id', 'desc');
-                    // ->get();
-                } else {
-                    if (Auth::user()->role == 'LPPM') {
-                        $data = DB::table('ia')
-                            ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
-                            ->join('users', 'ia.users_id', '=', 'users.id')
-                            ->select('ia.*', 'pengusul.nama as pengusul_nama', 'users.fakultas_id', 'users.nama as user_nama')
-                            ->whereNull('ia.deleted_at')
-                            ->where('users.role', Auth::user()->role) // role == LPPM
-                            ->orderBy('id', 'desc');
-                        // ->get();
-                    } else { // 'Prodi', 'Unit Kerja'
-                        $data = DB::table('ia')
-                            ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
-                            ->join('users', 'ia.users_id', '=', 'users.id') // User pembuat
-                            ->leftJoin('anggota_prodi as ap', 'ia.id', 'ap.ia_id')
-                            ->select(DB::raw('ia.*, pengusul.nama as pengusul_nama, GROUP_CONCAT(ap.prodi_id) as ang_prodi, FIND_IN_SET(' . Auth::user()->prodi_id . ', GROUP_CONCAT(ap.prodi_id)) as find'), 'users.nama as user_nama')
-                            ->whereNull('ia.deleted_at')
-                            ->whereNull('ap.deleted_at')
-                            ->groupBy('ia.id')
-                            ->havingRaw('FIND_IN_SET(' . Auth::user()->prodi_id . ', ang_prodi)')
-                            ->orderBy('ia.id', 'desc');
-                        // ->get();
+            $data = IA::with('pengusul', 'user', 'anggotaFakultas', 'anggotaProdi')->latest()
+                ->where(function ($q) {
+                    if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU'))) {
+                        $q->whereHas('anggotaFakultas', function ($q2) {
+                            $q2->where('fakultas_id', Auth::user()->fakultas_id);
+                        });
+                    } else if (in_array(Auth::user()->role, array('Prodi', 'Unit Kerja'))) {
+                        $q->whereHas('anggotaProdi', function ($q2) {
+                            $q2->where('prodi_id', Auth::user()->prodi_id);
+                        });
+                    } else if (in_array(Auth::user()->role, array('LPPM'))) {
+                        $q->whereHas('user', function ($q2) {
+                            $q2->where('role', 'LPPM');
+                        });
                     }
-                }
-            } else {
-                if (Auth::user()->role == 'Admin') {
-                    $data = DB::table('ia')
-                        ->join('pengusul', 'ia.pengusul_id', '=', 'pengusul.id')
-                        ->join('users', 'ia.users_id', '=', 'users.id') // User pembuat
-                        ->select('ia.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama')
-                        ->whereNull('ia.deleted_at')
-                        ->orderBy('id', 'desc');
-                    // ->get();
-                }
-            }
+                })
+
+                // filter
+                ->where(function ($query) use ($request) {
+                    if ($request->search) {
+                        $query->where(function ($q) use ($request) {
+                            $q->where('nomor_ia_pengusul', 'like', '%' . $request->search . '%');
+                            $q->orWhere('program', 'like', '%' . $request->search . '%');
+                            $q->orWhereHas('pengusul', function ($q2) use ($request) {
+                                $q2->where('nama', 'like', '%' . $request->search . '%');
+                            });
+                        });
+                    }
+
+                    if ($request->dibuat_oleh) {
+                        $query->whereHas('user', function ($q)  use ($request) {
+                            $q->where('nama', $request->dibuat_oleh);
+                        });
+                    }
+
+                    if ($request->status) {
+                        if ($request->status == 'aktif') {
+                            $query->where('tanggal_berakhir', '>', Carbon::now());
+                        } else if ($request->status == 'selesai') {
+                            $query->whereRaw('laporan_hasil_pelaksanaan != "" OR laporan_hasil_pelaksanaan != NULL');
+                        } else if ($request->status == 'melewati_batas') { // melewati batas
+                            $query->whereRaw('tanggal_berakhir < NOW() AND (laporan_hasil_pelaksanaan = "" OR laporan_hasil_pelaksanaan is NULL)');
+                        }
+                    }
+                })
+                ->get();
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('pengusul_nama', function ($data) {
+                    return $data->pengusul->nama;
+                })
                 ->addColumn('dibuat_oleh', function ($data) {
-                    return '<span class="badge badge-secondary">' . $data->user_nama . '</span>';
+                    return '<span class="badge badge-secondary">' . $data->user->nama . '</span>';
                 })
                 ->addColumn('status', function ($data) {
                     $datetime1 = date_create($data->tanggal_berakhir);
@@ -105,7 +107,6 @@ class IaController extends Controller
                         if (($data->laporan_hasil_pelaksanaan != '') || ($data->laporan_hasil_pelaksanaan != NULL)) {
                             return '<span class="badge badge-primary">' . __('components/span.selesai') . '</span>';
                         } else {
-                            // return '<span class="badge badge-success">'.__('components/span.aktif').'</span>';
                             return '<span class="badge badge-danger">' . __('components/span.melewati_batas') . '</span>';
                         }
                     } else {
@@ -163,26 +164,7 @@ class IaController extends Controller
                     }
                     return $actionBtn;
                 })
-                ->filter(function ($query) use ($request) {
-                    if ($request->search != '') {
-                        $query->whereRaw('(program LIKE "%' . $request->search . '%" OR pengusul.nama LIKE "%' . $request->search . '%" OR ia.nomor_ia_pengusul LIKE "%' . $request->search . '%")');
-                    }
 
-                    if (!empty($request->dibuat_oleh)) {
-                        $query->where('users.nama', $request->dibuat_oleh);
-                    }
-
-                    if (!empty($request->status)) {
-                        if ($request->status == 'aktif') {
-                            $query->where('tanggal_berakhir', '>=', date("Y-m-d"));
-                            $query->whereRaw('(laporan_hasil_pelaksanaan = "" OR laporan_hasil_pelaksanaan is NULL)');
-                        } else if ($request->status == 'selesai') {
-                            $query->whereRaw('(laporan_hasil_pelaksanaan != "" OR laporan_hasil_pelaksanaan != NULL)');
-                        } else if ($request->status == 'melewati_batas') { // melewati batas
-                            $query->whereRaw('tanggal_berakhir < NOW() AND (laporan_hasil_pelaksanaan = "" OR laporan_hasil_pelaksanaan is NULL)');
-                        }
-                    }
-                })
                 ->rawColumns(['status', 'action', 'dibuat_oleh'])
                 ->make(true);
         }

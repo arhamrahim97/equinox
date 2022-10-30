@@ -66,6 +66,7 @@
                             <label for="my-select" class="font-weight-bold">{{ __('components/table.dibuat_oleh') }}</label>
                             <select id="dibuat-oleh" class="form-control select2">
                                 <option value="">{{ __('components/table.semua') }}</option>
+                                <option value="Admin">Admin</option>
                                 @forelse ($user as $item)
                                     <option value="{{ $item->nama }}">{{ $item->nama }}</option>
                                 @empty

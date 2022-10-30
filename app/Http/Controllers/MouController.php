@@ -31,18 +31,46 @@ class MouController extends Controller
             'user' => User::where('role', 'Admin')->get(),
         ];
         if ($request->ajax()) {
-            $data = DB::table('mou')
-                ->join('pengusul', 'mou.pengusul_id', '=', 'pengusul.id')
-                ->join('users', 'mou.users_id', '=', 'users.id')
-                ->select('mou.*', 'pengusul.nama as pengusul_nama', 'users.nama as user_nama')
-                ->whereNull('mou.deleted_at')
-                ->orderBy('mou.id', 'desc');
-            // ->get();            
-            // $data = Mou::with(['pengusul'])->orderBy('id', 'desc')->get();
+            $data = Mou::with('pengusul', 'user')->latest()
+                // filtering
+                ->where(function ($query) use ($request) {
+                    if ($request->search) {
+                        $query->where(function ($q) use ($request) {
+                            $q->where('nomor_mou_pengusul', 'like', '%' . $request->search . '%');
+                            $q->orWhere('program', 'like', '%' . $request->search . '%');
+                            $q->orWhereHas('pengusul', function ($q2) use ($request) {
+                                $q2->where('nama', 'like', '%' . $request->search . '%');
+                            });
+                        });
+                    }
+
+                    if ($request->dibuat_oleh) {
+                        $query->whereHas('user', function ($q)  use ($request) {
+                            $q->where('nama', $request->dibuat_oleh);
+                        });
+                    }
+
+                    if ($request->status) {
+                        if ($request->status == 'aktif') {
+                            $query->whereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 364 DAY) < tanggal_berakhir');
+                        } else if ($request->status == 'masa_tenggang') {
+                            $query->where(function ($q) {
+                                $q->where('tanggal_berakhir', '=', Carbon::now());
+                                $q->orWhereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 364 DAY) > tanggal_berakhir');
+                            });
+                        } else if ($request->status == 'kadaluarsa') {
+                            $query->where('tanggal_berakhir', '<', Carbon::now());
+                        }
+                    }
+                })
+                ->get();
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('pengusul_nama', function ($data) {
+                    return $data->pengusul->nama;
+                })
                 ->addColumn('dibuat_oleh', function ($data) {
-                    return '<span class="badge badge-secondary">' . $data->user_nama . '</span>';
+                    return '<span class="badge badge-secondary">' . $data->user->nama . '</span>';
                 })
                 ->addColumn('status', function ($data) {
                     $datetime1 = date_create($data->tanggal_berakhir);
@@ -82,31 +110,6 @@ class MouController extends Controller
                     }
 
                     return $actionBtn;
-                })
-                ->filter(function ($query) use ($request) {
-                    if ($request->search != '') {
-                        $query->whereRaw('(program LIKE "%' . $request->search . '%" OR pengusul.nama LIKE "%' . $request->search . '%" OR mou.nomor_mou_pengusul LIKE "%' . $request->search . '%")');
-                        // $query->where('program', 'LIKE', '%'.$request->search.'%');                        
-                    }
-
-                    if (!empty($request->dibuat_oleh)) {
-                        $query->where('users.nama', $request->dibuat_oleh);
-                    }
-
-                    if (!empty($request->status)) {
-                        if ($request->status == 'aktif') {
-                            $query->whereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 364 DAY) < tanggal_berakhir');
-                        } else if ($request->status == 'masa_tenggang') {
-                            $query->where('tanggal_berakhir', '=', date("Y-m-d"));
-                            if (Auth::user()->role == 'Admin') {
-                                $query->orWhereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 364 DAY) > tanggal_berakhir AND (mou.deleted_at is NULL OR mou.deleted_at = "" OR mou.deleted_at = NULL) AND users.nama LIKE "%' . $request->dibuat_oleh . '" AND users.role = "' . Auth::user()->role . '" AND (program LIKE "%' . $request->search . '%" OR pengusul.nama LIKE "%' . $request->search . '%" OR mou.nomor_mou_pengusul LIKE "%' . $request->search . '%")');
-                            } else {
-                                $query->orWhereRaw('tanggal_berakhir > NOW() AND (mou.deleted_at is NULL OR mou.deleted_at = "" OR mou.deleted_at = NULL) AND DATE_ADD(NOW(), INTERVAL 364 DAY) > tanggal_berakhir AND users.nama LIKE "%' . $request->dibuat_oleh . '" AND (program LIKE "%' . $request->search . '%" OR pengusul.nama LIKE "%' . $request->search . '%" OR mou.nomor_mou_pengusul LIKE "%' . $request->search . '%")');
-                            }
-                        } else { // expired
-                            $query->where('tanggal_berakhir', '<', date("Y-m-d"));
-                        }
-                    }
                 })
                 ->rawColumns(['status', 'action', 'dibuat_oleh'])
                 ->make(true);
@@ -362,5 +365,86 @@ class MouController extends Controller
         return response()->json([
             'res' => 'success'
         ]);
+    }
+
+    public function pohonMou(Request $request)
+    {
+        $mouList = Mou::with('moa', 'pengusul', 'user')->latest();
+
+        $data = [
+            'user' => User::where('role', 'Admin')->get(),
+        ];
+        if ($request->ajax()) {
+            $data = $mouList
+                // filtering
+                ->where(function ($query) use ($request) {
+                    if ($request->search) {
+                        $query->where(function ($q) use ($request) {
+                            $q->where('nomor_mou_pengusul', 'like', '%' . $request->search . '%');
+                            $q->orWhere('program', 'like', '%' . $request->search . '%');
+                            $q->orWhereHas('pengusul', function ($q2) use ($request) {
+                                $q2->where('nama', 'like', '%' . $request->search . '%');
+                            });
+                        });
+                    }
+
+                    if ($request->status) {
+                        if ($request->status == 'aktif') {
+                            $query->whereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 364 DAY) < tanggal_berakhir');
+                        } else if ($request->status == 'masa_tenggang') {
+                            $query->where(function ($q) {
+                                $q->where('tanggal_berakhir', '=', Carbon::now());
+                                $q->orWhereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 364 DAY) > tanggal_berakhir');
+                            });
+                        } else if ($request->status == 'kadaluarsa') {
+                            $query->where('tanggal_berakhir', '<', Carbon::now());
+                        }
+                    }
+                })
+                ->get();
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('pengusul_nama', function ($data) {
+                    return $data->pengusul->nama;
+                })
+                ->addColumn('jumlah_moa', function ($data) {
+                    return $data->moa->count();
+                })
+                ->addColumn('jumlah_ia', function ($data) {
+                    $count = 0;
+                    foreach ($data->moa as $r) {
+                        $count += $r->ia->count();
+                    }
+                    return $count;
+                })
+                ->addColumn('status', function ($data) {
+                    $datetime1 = date_create($data->tanggal_berakhir);
+                    $datetime2 = date_create(date("Y-m-d"));
+                    $interval = date_diff($datetime1, $datetime2);
+                    $jumlah_tahun =  $interval->format('%y');
+                    if ($datetime1 < $datetime2) {
+                        return '<span class="badge badge-danger">' . __('components/span.kadaluarsa') . '</span>';
+                    } else {
+                        if ($jumlah_tahun < 1) {
+                            return '<span class="badge badge-warning">' . __('components/span.masa_tenggang') . '</span>';
+                        } else {
+                            return '<span class="badge badge-success">' . __('components/span.aktif') . '</span>';
+                        }
+                    }
+                })
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '
+                        <div class="row text-center justify-content-center">
+                            <a href="' . url('/mou/' . $row->id) . '" id="btn-show" class="btn btn-primary btn-sm mr-1 my-1">' . __('components/button.view') . ' MOA</a>
+                            <a href="' . url('/mou/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . ' IA</a>
+                        </div>';
+                    return $actionBtn;
+                })
+
+                ->rawColumns(['status', 'action', 'dibuat_oleh'])
+                ->make(true);
+        }
+        return view('pages/pohonKerjaSama/index', $data);
     }
 }

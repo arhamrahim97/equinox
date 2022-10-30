@@ -82,13 +82,13 @@
             {{ __('components/form_mou_moa_ia.nomor_moa_pengusul') }}
         @endslot
         @slot('nomor_mou')
-            @if ($moa->mou && $moa->mou->deleted_at == '')
+            @if (isset($moa->mou))
                 {{ $moa->mou->nomor_mou }}
             @else
             @endif
         @endslot
         @slot('nomor_mou_pengusul')
-            @if ($moa->mou && $moa->mou->deleted_at == '')
+            @if (isset($moa->mou))
                 {{ $moa->mou->nomor_mou_pengusul }}
             @else
             @endif
@@ -118,7 +118,7 @@
             {{ $moa->tanggal_berakhir }}
         @endslot
         @slot('download_mou')
-            @if ($moa->mou && $moa->mou->deleted_at == '')
+            @if (isset($moa->mou))
                 @if ($moa->mou->dokumen == '' || $moa->mou->dokumen == null)
                     kosong
                 @else
