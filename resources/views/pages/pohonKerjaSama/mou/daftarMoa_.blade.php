@@ -22,7 +22,7 @@
             <li class="list-group-item d-flex font-weight-bold py-2" style="font-size: 12pt">Info MOU
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center py-2">
-                {{ __('components/table.nomor_moa_pengusul') }}
+                {{ __('components/table.nomor_mou_pengusul') }}
                 <span class="font-weight-bold">{{ $mou->nomor_mou_pengusul }}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center py-2">
