@@ -6,6 +6,7 @@ return [
     'save' => 'Simpan',
     'upload' => 'Unggah',
     'proses' => 'Proses',
+    'daftar' => '<i class="fas fa-eye"></i> Daftar',
     'edit' => '<i class="fas fa-edit"></i> Ubah',
     'update' => '<i class="fas fa-save"></i> Perbarui',
     'delete' => '<i class="fas fa-trash"></i> Hapus',

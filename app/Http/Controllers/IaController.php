@@ -33,16 +33,16 @@ class IaController extends Controller
     public function index(Request $request)
     {
         if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Unit Kerja', 'Prodi'))) {
-            $user = User::where('role', '!=', 'Admin')->where('fakultas_id', Auth::user()->fakultas_id)->orWhere('role', 'LPPM')->get();
+            $user = User::where('fakultas_id', Auth::user()->fakultas_id)->orWhereIn('role', ['LPPM', 'Admin'])->get();
         } else {
-            $user = User::whereIn('role', ['Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Unit Kerja', 'Prodi'])->get();
+            $user = User::whereIn('role', ['Admin', 'Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Unit Kerja', 'Prodi'])->get();
         }
         $data = [
             'user' => $user,
         ];
 
         if ($request->ajax()) {
-            $data = IA::with('pengusul', 'user', 'anggotaFakultas', 'anggotaProdi')->latest()
+            $data = Ia::with('pengusul', 'user', 'anggotaFakultas', 'anggotaProdi')->latest()
                 ->where(function ($q) {
                     if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU'))) {
                         $q->whereHas('anggotaFakultas', function ($q2) {

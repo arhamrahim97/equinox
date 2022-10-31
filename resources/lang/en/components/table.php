@@ -65,5 +65,12 @@ return [
     'bukti_kerjasama' => 'Proof of Cooperation',
 
     'jumlah_moa' => 'Total MOA',
-    'jumlah_ia' => 'Total IA'
+    'jumlah_ia' => 'Total IA',
+
+    'daftar_moa_untuk_mou' => 'MOA List for this MOU',
+    'daftar_ia_untuk_mou' => 'IA List for this MOU',
+    'daftar_ia_untuk_mou_moa' => 'IA List for this MOU and MOA',
+
+    'daftar_ia_untuk_moa' => 'IA List for this MOA',
+
 ];

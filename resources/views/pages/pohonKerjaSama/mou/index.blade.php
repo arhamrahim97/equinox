@@ -1,15 +1,15 @@
 @extends('templates/dashboard')
 
 @section('title-tab')
-    | {{ __('pages/moa/index.title') }}
+    {{ __('components/navBottom.pohonKerjaSama') }} | {{ __('pages/mou/index.title') }}
 @endsection
 
 @section('title')
-    {{ __('pages/moa/index.title') }}
+    {{ __('components/navBottom.pohonKerjaSama') }} {{ __('pages/mou/index.title') }}
 @endsection
 
 @section('subTitle')
-    {{ __('pages/moa/index.subTitle') }}
+    {{ __('components/navBottom.pohonKerjaSama') }} {{ __('pages/mou/index.subTitle') }}
 @endsection
 
 @push('style')
@@ -17,47 +17,35 @@
 
 @section('content')
     <section>
-        @if (in_array(Auth::user()->role, ['Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Admin']))
-            <div class="row mb-3">
-                <div class="col-12">
-                    @component('components.buttons.add')
-                        @slot('href')
-                            /moa/create
-                        @endslot
-                    @endcomponent
-                </div>
-            </div>
-        @endif
-
-        @component('components.tables.mou_moa_ia')
+        @component('components.tables.pohon_kerja_sama_mou')
             @slot('thead_nomor')
                 {{ __('components/table.nomor') }}
             @endslot
             @slot('thead_nomor_mou_moa_ia')
-                {{ __('components/table.nomor_moa_pengusul') }}
+                {{ __('components/table.nomor_mou_pengusul') }}
             @endslot
             @slot('thead_pengusul')
                 {{ __('components/table.instansi_pengusul') }}
             @endslot
-            @slot('thead_tanggal_mulai')
-                {{ __('components/table.tanggal_mulai') }}
-            @endslot
-            @slot('thead_tanggal_berakhir')
-                {{ __('components/table.tanggal_berakhir') }}
-            @endslot
             @slot('thead_dibuat_oleh')
                 {{ __('components/table.dibuat_oleh') }}
+            @endslot
+            @slot('thead_jumlah_moa')
+                {{ __('components/table.jumlah_moa') }}
+            @endslot
+            @slot('thead_jumlah_ia')
+                {{ __('components/table.jumlah_ia') }}
             @endslot
             @slot('thead_aksi')
                 {{ __('components/table.aksi') }}
             @endslot
 
             @slot('tbody_nomor_mou_moa_ia')
-                nomor_moa_pengusul
+                nomor_mou_pengusul
             @endslot
 
             @slot('link')
-                moa/
+                /pohon-kerja-sama/mou
             @endslot
 
             @slot('filterStatus')
@@ -90,7 +78,6 @@
             @endslot
         @endcomponent
     </section>
-
 @endsection
 
 @push('script')

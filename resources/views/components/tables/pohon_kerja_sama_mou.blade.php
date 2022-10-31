@@ -21,6 +21,7 @@
                         <th>{{ $thead_nomor_mou_moa_ia }}</th>
                         <th>{{ $thead_pengusul }}</th>
                         <th style="width: 30%">Program</th>
+                        <th>{{ $thead_dibuat_oleh }}</th>
                         <th>{{ $thead_jumlah_moa }}</th>
                         <th>{{ $thead_jumlah_ia }}</th>
                         <th>Status</th>
@@ -42,6 +43,7 @@
                 url: "{{ $link }}",
                 data: function(d) {
                     d.status = $('#status').val();
+                    d.dibuat_oleh = $('#dibuat-oleh').val();
                     d.search = $('input[type="search"]').val();
                 }
             },
@@ -66,6 +68,11 @@
                     name: 'program'
                 },
                 {
+                    data: 'dibuat_oleh',
+                    name: 'dibuat_oleh',
+                    className: 'text-center'
+                },
+                {
                     data: 'jumlah_moa',
                     name: 'jumlah_moa',
                     className: 'text-center'
@@ -75,16 +82,6 @@
                     name: 'jumlah_ia',
                     className: 'text-center'
                 },
-                // {
-                //     data: 'tanggal_berakhir',
-                //     name: 'tanggal_berakhir',
-                //     className: 'text-center'
-                // },
-                // {
-                //     data: 'dibuat_oleh',
-                //     name: 'dibuat_oleh',
-                //     className: 'text-center'
-                // },
                 {
                     data: 'status',
                     name: 'status',
