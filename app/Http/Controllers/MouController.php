@@ -514,7 +514,7 @@ class MouController extends Controller
                     return '<span class="badge badge-secondary">' . $data->user->nama . '</span>';
                 })
                 ->addColumn('jumlah_ia', function ($data) {
-                    return $data->ia->count();
+                    return '<span class="badge badge-info">' . $data->ia->count() . '</span>';
                 })
                 ->addColumn('status', function ($data) {
                     $datetime1 = date_create($data->tanggal_berakhir);
@@ -543,7 +543,7 @@ class MouController extends Controller
                     </div>';
                     return $actionBtn;
                 })
-                ->rawColumns(['status', 'action', 'dibuat_oleh'])
+                ->rawColumns(['status', 'action', 'dibuat_oleh', 'jumlah_ia'])
                 ->make(true);
         }
 
@@ -631,7 +631,6 @@ class MouController extends Controller
 
     public function daftarMoaIa(Moa $moa, Request $request)
     {
-        // dd($moa);
         $user = User::whereIn('role', ['Admin', 'Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Unit Kerja', 'Prodi'])->get();
 
         $mou = Mou::find($moa->mou_id);

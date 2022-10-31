@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ia;
 use App\Models\Moa;
 use App\Models\Mou;
 use App\Models\User;
+use App\Models\Fakultas;
 use App\Models\Pengusul;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -13,7 +15,6 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateMoaRequest;
-use App\Models\Fakultas;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -455,7 +456,7 @@ class MoaController extends Controller
                     return '<span class="badge badge-secondary">' . $data->user->nama . '</span>';
                 })
                 ->addColumn('jumlah_ia', function ($data) {
-                    return $data->ia->count();
+                    return '<span class="badge badge-info">' . $data->ia->count() . '</span>';
                 })
                 ->addColumn('status', function ($data) {
                     $datetime1 = date_create($data->tanggal_berakhir);
@@ -480,14 +481,90 @@ class MoaController extends Controller
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
                         <div class="row text-center justify-content-center">
-                            <a href="' . url('/mou/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . ' IA</a>
+                            <a href="' . url('/pohon-kerja-sama/moa/ia/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . ' IA</a>
                         </div>';
                     return $actionBtn;
                 })
 
-                ->rawColumns(['status', 'action', 'dibuat_oleh'])
+                ->rawColumns(['status', 'action', 'dibuat_oleh', 'jumlah_ia'])
                 ->make(true);
         }
         return view('pages/pohonKerjaSama/moa/index', $data);
+    }
+
+    public function daftarIa(Moa $moa, Request $request)
+    {
+        $user = User::whereIn('role', ['Admin', 'Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Unit Kerja', 'Prodi'])->get();
+
+        $data = [
+            'user' => $user,
+            'moa' => $moa
+        ];
+
+        if ($request->ajax()) {
+            $data = Ia::with('pengusul', 'user', 'anggotaFakultas', 'anggotaProdi')->where('moa_id', $moa->id)->latest()
+                // filter
+                ->where(function ($query) use ($request) {
+                    if ($request->search) {
+                        $query->where(function ($q) use ($request) {
+                            $q->where('nomor_ia_pengusul', 'like', '%' . $request->search . '%');
+                            $q->orWhere('program', 'like', '%' . $request->search . '%');
+                            $q->orWhereHas('pengusul', function ($q2) use ($request) {
+                                $q2->where('nama', 'like', '%' . $request->search . '%');
+                            });
+                        });
+                    }
+
+                    if ($request->dibuat_oleh) {
+                        $query->whereHas('user', function ($q)  use ($request) {
+                            $q->where('nama', $request->dibuat_oleh);
+                        });
+                    }
+
+                    if ($request->status) {
+                        if ($request->status == 'aktif') {
+                            $query->where('tanggal_berakhir', '>', Carbon::now());
+                        } else if ($request->status == 'selesai') {
+                            $query->whereRaw('laporan_hasil_pelaksanaan != "" OR laporan_hasil_pelaksanaan != NULL');
+                        } else if ($request->status == 'melewati_batas') { // melewati batas
+                            $query->whereRaw('tanggal_berakhir < NOW() AND (laporan_hasil_pelaksanaan = "" OR laporan_hasil_pelaksanaan is NULL)');
+                        }
+                    }
+                })
+                ->get();
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('pengusul_nama', function ($data) {
+                    return $data->pengusul->nama;
+                })
+                ->addColumn('dibuat_oleh', function ($data) {
+                    return '<span class="badge badge-secondary">' . $data->user->nama . '</span>';
+                })
+                ->addColumn('status', function ($data) {
+                    $datetime1 = date_create($data->tanggal_berakhir);
+                    $datetime2 = date_create(date("Y-m-d"));
+                    $interval = date_diff($datetime1, $datetime2);
+                    $jumlah_tahun =  $interval->format('%y');
+                    $jumlah_bulan =  $interval->format('%m');
+                    if ($datetime1 < $datetime2) {
+                        if (($data->laporan_hasil_pelaksanaan != '') || ($data->laporan_hasil_pelaksanaan != NULL)) {
+                            return '<span class="badge badge-primary">' . __('components/span.selesai') . '</span>';
+                        } else {
+                            return '<span class="badge badge-danger">' . __('components/span.melewati_batas') . '</span>';
+                        }
+                    } else {
+                        if (($data->laporan_hasil_pelaksanaan != '') || ($data->laporan_hasil_pelaksanaan != NULL)) {
+                            return '<span class="badge badge-primary">' . __('components/span.selesai') . '</span>';
+                        } else {
+                            return '<span class="badge badge-success">' . __('components/span.aktif') . '</span>';
+                        }
+                    }
+                })
+                ->rawColumns(['status', 'action', 'dibuat_oleh'])
+                ->make(true);
+        }
+
+        return view('pages/pohonKerjaSama/moa/daftarIa_', $data);
     }
 }

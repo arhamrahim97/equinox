@@ -111,6 +111,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/pohon-kerja-sama/moa', MoaController::class . '@pohonMoa');
+    Route::get('/pohon-kerja-sama/moa/ia/{moa}', MoaController::class . '@daftarIa');
+
 
 
     Route::resource('/rekapitulasi', RekapitulasiController::class);

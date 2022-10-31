@@ -182,13 +182,18 @@
                 transform: rotate(360deg);
             }
         }
-
-        @media only screen and (max-width: 1406px) and (min-width: 988px) {
-            .main-panel {
-                margin-top: 200px;
-            }
-        }
     </style>
+
+    @if (Auth::user()->role == 'Admin')
+        <style>
+            /* @media only screen and (max-width: 1406px) and (min-width: 988px) { */
+            @media only screen and (max-width: 1446px) and (min-width: 991px) {
+                .main-panel {
+                    margin-top: 200px;
+                }
+            }
+        </style>
+    @endif
 
 </head>
 

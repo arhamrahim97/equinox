@@ -63,4 +63,7 @@ return [
     'daftar_moa_untuk_mou' => 'Daftar MOA untuk MOU berikut',
     'daftar_ia_untuk_mou' => 'Daftar IA untuk MOU berikut',
     'daftar_ia_untuk_mou_moa' => 'Daftar IA untuk MOU dan MOA berikut',
+
+    'daftar_ia_untuk_moa' => 'Daftar IA untuk MOA berikut',
+
 ];
