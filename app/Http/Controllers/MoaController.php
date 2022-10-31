@@ -31,7 +31,7 @@ class MoaController extends Controller
         if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Unit Kerja', 'Prodi'))) {
             $user = User::where('fakultas_id', Auth::user()->fakultas_id)->whereNotIn('role', ['Admin', 'Prodi', 'Unit Kerja'])->get();
         } else {
-            $user = User::whereIn('role', ['Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'])
+            $user = User::whereIn('role', ['Admin', 'Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'])
                 ->get();
         }
         $data = [
@@ -396,5 +396,98 @@ class MoaController extends Controller
         return response()->json([
             'res' => 'success'
         ]);
+    }
+
+    public function pohonMoa(Request $request)
+    {
+        $moaList = Moa::with('ia', 'pengusul', 'user')->latest();
+
+        if (in_array(Auth::user()->role, array('Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM', 'Unit Kerja', 'Prodi'))) {
+            $user = User::where('fakultas_id', Auth::user()->fakultas_id)->whereNotIn('role', ['Admin', 'Prodi', 'Unit Kerja'])->get();
+        } else {
+            $user = User::whereIn('role', ['Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'])
+                ->get();
+        }
+        $data = [
+            'user' => $user,
+        ];
+        if ($request->ajax()) {
+            $data = $moaList
+                // filtering
+                ->where(function ($query) use ($request) {
+                    if ($request->search) {
+                        $query->where(function ($q) use ($request) {
+                            $q->where('nomor_moa_pengusul', 'like', '%' . $request->search . '%');
+                            $q->orWhere('program', 'like', '%' . $request->search . '%');
+                            $q->orWhereHas('pengusul', function ($q2) use ($request) {
+                                $q2->where('nama', 'like', '%' . $request->search . '%');
+                            });
+                        });
+                    }
+
+                    if ($request->dibuat_oleh) {
+                        $query->whereHas('user', function ($q)  use ($request) {
+                            $q->where('nama', $request->dibuat_oleh);
+                        });
+                    }
+
+                    if ($request->status) {
+                        if ($request->status == 'aktif') {
+                            $query->whereRaw('(tanggal_berakhir > NOW()) AND (DATE_ADD(NOW(), INTERVAL 180 DAY) < tanggal_berakhir)');
+                        } else if ($request->status == 'masa_tenggang') {
+                            $query->where(function ($q) {
+                                $q->where('tanggal_berakhir', '=', Carbon::now());
+                                $q->orWhereRaw('tanggal_berakhir > NOW() AND DATE_ADD(NOW(), INTERVAL 180 DAY) > tanggal_berakhir');
+                            });
+                        } else if ($request->status == 'kadaluarsa') {
+                            $query->where('tanggal_berakhir', '<', Carbon::now());
+                        }
+                    }
+                })
+                ->get();
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('pengusul_nama', function ($data) {
+                    return $data->pengusul->nama;
+                })
+                ->addColumn('dibuat_oleh', function ($data) {
+                    return '<span class="badge badge-secondary">' . $data->user->nama . '</span>';
+                })
+                ->addColumn('jumlah_ia', function ($data) {
+                    return $data->ia->count();
+                })
+                ->addColumn('status', function ($data) {
+                    $datetime1 = date_create($data->tanggal_berakhir);
+                    $datetime2 = date_create(date("Y-m-d"));
+                    $interval = date_diff($datetime1, $datetime2);
+                    $jumlah_tahun =  $interval->format('%y');
+                    $jumlah_bulan =  $interval->format('%m');
+                    if ($datetime1 < $datetime2) {
+                        return '<span class="badge badge-danger">' . __('components/span.kadaluarsa') . '</span>';
+                    } else {
+                        if ($jumlah_tahun < 1) {
+                            if ($jumlah_bulan < 6) {
+                                return '<span class="badge badge-warning">' . __('components/span.masa_tenggang') . '</span>';
+                            } else {
+                                return '<span class="badge badge-success">' . __('components/span.aktif') . '</span>';
+                            }
+                        } else {
+                            return '<span class="badge badge-success">' . __('components/span.aktif') . '</span>';
+                        }
+                    }
+                })
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '
+                        <div class="row text-center justify-content-center">
+                            <a href="' . url('/mou/' . $row->id) . '" id="btn-show" class="btn btn-info btn-sm mr-1 my-1">' . __('components/button.view') . ' IA</a>
+                        </div>';
+                    return $actionBtn;
+                })
+
+                ->rawColumns(['status', 'action', 'dibuat_oleh'])
+                ->make(true);
+        }
+        return view('pages/pohonKerjaSama/moa/index', $data);
     }
 }

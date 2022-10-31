@@ -58,5 +58,9 @@ return [
     'bukti_kerjasama' => 'Bukti Kerjasama',
 
     'jumlah_moa' => 'Jumlah MOA',
-    'jumlah_ia' => 'Jumlah IA'
+    'jumlah_ia' => 'Jumlah IA',
+
+    'daftar_moa_untuk_mou' => 'Daftar MOA untuk MOU berikut',
+    'daftar_ia_untuk_mou' => 'Daftar IA untuk MOU berikut',
+    'daftar_ia_untuk_mou_moa' => 'Daftar IA untuk MOU dan MOA berikut',
 ];

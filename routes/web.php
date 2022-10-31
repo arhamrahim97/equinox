@@ -105,6 +105,13 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/pohon-kerja-sama/mou', MouController::class . '@pohonMou');
+    Route::get('/pohon-kerja-sama/mou/moa/{mou}', MouController::class . '@daftarMoa');
+    Route::get('/pohon-kerja-sama/mou/ia/{mou}', MouController::class . '@daftarIa');
+    Route::get('/pohon-kerja-sama/mou/moa/ia/{moa}', MouController::class . '@daftarMoaIa');
+
+
+    Route::get('/pohon-kerja-sama/moa', MoaController::class . '@pohonMoa');
+
 
     Route::resource('/rekapitulasi', RekapitulasiController::class);
     Route::get('/rekapitulasiresult', [RekapitulasiController::class, 'datatables']);

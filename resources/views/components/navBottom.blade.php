@@ -26,6 +26,10 @@
                         <li>
                             <a href="{{ url('mapMou') }}">{{ __('components/navBottom.petaMou') }}</a>
                         </li>
+                        {{-- <li>
+                            <a
+                                href="{{ url('/pohon-kerja-sama/mou') }}">{{ __('components/navBottom.pohonKerjaSama') }}</a>
+                        </li> --}}
                     </ul>
                 </div>
             </li>
@@ -42,6 +46,10 @@
                         <li>
                             <a href="{{ url('mapMoa') }}">{{ __('components/navBottom.petaMoa') }}</a>
                         </li>
+                        {{-- <li>
+                            <a
+                                href="{{ url('/pohon-kerja-sama/moa') }}">{{ __('components/navBottom.pohonKerjaSama') }}</a>
+                        </li> --}}
                     </ul>
                 </div>
             </li>
@@ -64,11 +72,21 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item" id="nav-rekapitulasi">
-                <a class="nav-link" href="/pohon-kerja-sama/mou">
+            <li class="nav-item submenu" id="nav-rekapitulasi">
+                <a class="nav-link" href="#">
                     <i class="link-icon icon-link"></i>
                     <span class="menu-title">{{ __('components/navBottom.pohonKerjaSama') }}</span>
                 </a>
+                <div class="navbar-dropdown animated fadeIn">
+                    <ul>
+                        <li>
+                            <a href="{{ url('/pohon-kerja-sama/mou') }}">{{ __('components/navBottom.mou') }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/pohon-kerja-sama/moa') }}">{{ __('components/navBottom.moa') }}</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
 
             @if (Auth::user()->role == 'Admin')
