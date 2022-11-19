@@ -15,7 +15,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
-    protected $guarded = ['id'];    
+    protected $guarded = ['id'];
 
 
 
@@ -26,7 +26,7 @@ class User extends Authenticatable
      */
     // protected $fillable = [
     //     'name',
-    //     'role',            
+    //     'role',
     //     'password',
     // ];
 
@@ -57,5 +57,10 @@ class User extends Authenticatable
     public function prodi()
     {
         return $this->belongsTo(Prodi::class)->withTrashed();
+    }
+
+    public function ia()
+    {
+        return $this->hasMany(Ia::class, 'users_id', 'id');
     }
 }

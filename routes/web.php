@@ -163,6 +163,8 @@ Route::get('/daftarMou', [LandingController::class, 'daftarMou']);
 Route::get('/daftarMoa', [LandingController::class, 'daftarMoa']);
 Route::get('/daftarIa', [LandingController::class, 'daftarIa']);
 Route::get('/tentang', [LandingController::class, 'tentang']);
+Route::get('/detailIa', [LandingController::class, 'detailIa']);
+Route::post('dataIa', [LandingController::class, 'dataIa']);
 
 Route::get('/listNegaraTersedia', [LandingController::class, 'listNegaraTersedia']);
 

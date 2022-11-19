@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\Fakultas;
 use App\Models\Ia;
 use App\Models\KategoriBerita;
 use App\Models\Moa;
 use App\Models\Mou;
 use App\Models\Negara;
+use App\Models\Prodi;
 use App\Models\Slider;
 use App\Models\Tentang;
+use App\Models\User;
 use DateTime;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,7 +39,128 @@ class LandingController extends Controller
             $daftarBerita = Berita::with(['kategoriBerita',])->where('bahasa', 'Inggris')->orderBy('id', 'desc')->limit(3)->get();
         }
 
-        return view('pages.landing.landing', compact(['mou', 'moa', 'ia', 'daftarBerita', 'slider']));
+        $statistik = $this->statistik();
+
+        return view('pages.landing.landing', compact(['mou', 'moa', 'ia', 'daftarBerita', 'slider', 'statistik']));
+    }
+
+    private function statistik()
+    {
+        $daftarFakultas = Fakultas::orderBy("nama", 'asc')->get();
+        $daftarUser = User::whereIn('role', ['Admin', 'Fakultas', 'Pascasarjana', 'PSDKU', 'LPPM'])
+            ->get();
+        $dataMoa = array();
+        $dataIa = array();
+        foreach ($daftarFakultas as $fakultas) {
+            $moa = Moa::with('pengusul', 'user')->latest()->whereHas('user', function ($q)  use ($fakultas) {
+                $q->where('fakultas_id', $fakultas->id);
+            })->count();
+            $dataMoa[] = $moa;
+
+            $ia = Ia::with('pengusul', 'user', 'anggotaFakultas', 'anggotaProdi')->latest()
+                ->whereHas('user', function ($q)  use ($fakultas) {
+                    $q->where('fakultas_id', $fakultas->id);
+                })
+                ->orWhereHas('anggotaFakultas', function ($q2) use ($fakultas) {
+                    $q2->where('fakultas_id', $fakultas->id);
+                })
+                ->count();
+
+            $dataIa[] = $ia;
+        }
+
+        $label = $daftarFakultas->pluck('nama')->toArray();
+        $label[] = 'Lainnya';
+        $dataMoa[] = Moa::with('pengusul', 'user')->latest()->whereHas('user', function ($q)  use ($fakultas) {
+            $q->where('fakultas_id', NULL);
+        })->count();
+
+        $dataIa[] = Ia::with('pengusul', 'user', 'anggotaFakultas', 'anggotaProdi')->latest()
+            ->whereHas('user', function ($q)  use ($fakultas) {
+                $q->where('fakultas_id', NULL);
+            })
+            ->orWhereHas('anggotaFakultas', function ($q2) use ($fakultas) {
+                $q2->where('fakultas_id', NULL);
+            })
+            ->count();
+
+        return [
+            'label' => $label,
+            'dataMoa' => $dataMoa,
+            'dataIa' => $dataIa
+        ];
+    }
+
+    public function detailIa(Request $request)
+    {
+        $fakultas = $request->fakultas;
+
+        $dataIa = $this->getDataIa($fakultas);
+
+        if ($request->ajax()) {
+            return DataTables::of($dataIa)
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+        $daftarFakultas = Fakultas::orderBy('nama', 'asc')->get();
+        return view('pages.landing.detailIa', compact(['daftarFakultas']));
+    }
+
+    private function getDataIa($fakultas)
+    {
+        $daftarProdi = Prodi::where(function ($query) use ($fakultas) {
+            if ($fakultas && $fakultas != 'semua') {
+                $query->where('fakultas_id', $fakultas);
+            }
+        })->get();
+
+        $dataIa = new Collection();
+        if ($fakultas != 'lainnya') {
+            foreach ($daftarProdi as $prodi) {
+                $ia = Ia::with('pengusul', 'user', 'anggotaFakultas', 'anggotaProdi')->latest()
+                    ->whereHas('anggotaProdi', function ($q2) use ($prodi) {
+                        $q2->where('prodi_id', $prodi->id);
+                    })
+                    ->count();
+
+                $dataIa->push([
+                    'prodi' => $prodi->nama,
+                    'total' => $ia
+                ]);
+            }
+        }
+
+
+        if ($fakultas && ($fakultas == 'semua' || $fakultas == 'lainnya')) {
+            $daftarUser = User::has('ia')->where('fakultas_id', NULL)->get();
+            foreach ($daftarUser as $user) {
+                $ia = Ia::with('pengusul', 'user', 'anggotaFakultas', 'anggotaProdi')
+                    ->where('users_id', $user->id)
+                    ->count();
+
+                $dataIa->push([
+                    'prodi' => $user->nama,
+                    'total' => $ia
+                ]);
+            }
+        }
+
+        return $dataIa;
+    }
+
+    public function dataIa(Request $request)
+    {
+        $fakultas = $request->fakultas;
+        $dataIa = $this->getDataIa($fakultas);
+
+        $label = $dataIa->pluck('prodi')->toArray();
+        $ia = $dataIa->pluck('total')->toArray();
+
+        return response()->json([
+            'label' => $label,
+            'data' => $ia,
+        ]);
     }
 
     public function berita(Berita $berita)
@@ -365,7 +490,7 @@ class LandingController extends Controller
             }
 
             $dokumen_mou = '';
-            if($moa->mou){
+            if ($moa->mou) {
                 $dokumen_mou = Storage::url('/dokumen/mou/' . $moa->mou->dokumen);
             }
 
