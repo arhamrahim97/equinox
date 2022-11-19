@@ -22,5 +22,10 @@ return [
     'daftar_ia' => 'Daftar IA',
     'aplikasi' => 'Sistem Informasi Manajemen <br> Memorandum Of Understanding <br> Universitas Tadulako',
     'unduh_template' => 'Unduh Template',
-    'berita_tidak_ada' => 'Berita Tidak Ada'
+    'berita_tidak_ada' => 'Berita Tidak Ada',
+    'statistik' => 'Statistik',
+    'mou_dan_ia' => 'MOA dan IA',
+    'detail_ia' => 'Detail IA',
+    'desc_detail_ia' => 'Total IA Berdasarkan Program Studi',
+    'lainnya' => 'Lainnya'
 ];

@@ -22,5 +22,10 @@ return [
     'daftar_ia' => 'IA List',
     'aplikasi' => 'Information Systems Management <br> Memorandum Of Understanding <br> Tadulako University',
     'unduh_template' => 'Download Template',
-    'berita_tidak_ada' => 'No News'
+    'berita_tidak_ada' => 'No News',
+    'statistik' => 'Statictic',
+    'mou_dan_ia' => 'MOA and IA',
+    'detail_ia' => 'IA Details',
+    'desc_detail_ia' => 'Number of IA Based on Study Program',
+    'lainnya' => 'Other'
 ];
