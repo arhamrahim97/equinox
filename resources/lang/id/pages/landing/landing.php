@@ -27,5 +27,6 @@ return [
     'mou_dan_ia' => 'MOA dan IA',
     'detail_ia' => 'Detail IA',
     'desc_detail_ia' => 'Total IA Berdasarkan Program Studi',
-    'lainnya' => 'Lainnya'
+    'lainnya' => 'Lainnya',
+    'panduan' => 'Panduan',
 ];
