@@ -63,52 +63,51 @@ Route::middleware(['auth'])->group(function () {
     ]);
     Route::post('/ia/upload_tambahan/{ia}', [IaController::class, 'uploadTambahan']);
 
+    Route::middleware(['admin'])->group(function () {
+        Route::resource('/negara', NegaraController::class);
+        Route::resource('/provinsi/{negara}', ProvinsiController::class)->parameters([
+            '{negara}' => 'provinsi',
+        ]);
 
-    Route::resource('/negara', NegaraController::class);
-    Route::resource('/provinsi/{negara}', ProvinsiController::class)->parameters([
-        '{negara}' => 'provinsi',
-    ]);
+        Route::resource('/kota/{provinsi}', KotaController::class)->parameters([
+            '{provinsi}' => 'kota',
+        ]);
 
-    Route::resource('/kota/{provinsi}', KotaController::class)->parameters([
-        '{provinsi}' => 'kota',
-    ]);
+        Route::resource('/kecamatan/{kota}', KecamatanController::class)->parameters([
+            '{kota}' => 'kecamatan',
+        ]);
 
-    Route::resource('/kecamatan/{kota}', KecamatanController::class)->parameters([
-        '{kota}' => 'kecamatan',
-    ]);
+        Route::resource('/kelurahan/{kecamatan}', KelurahanController::class)->parameters([
+            '{kecamatan}' => 'kelurahan',
+        ]);
 
-    Route::resource('/kelurahan/{kecamatan}', KelurahanController::class)->parameters([
-        '{kecamatan}' => 'kelurahan',
-    ]);
+        Route::resource('/fakultas', FakultasController::class)->parameters([
+            'fakultas' => 'fakultas'
+        ]);
+        Route::resource('/prodi/{fakultas}', ProdiController::class)->parameters([
+            '{fakultas}' => 'prodi',
+        ]);
+        Route::resource('/akun', AkunController::class)->parameters([
+            'akun' => 'user'
+        ]);
 
-    Route::resource('/fakultas', FakultasController::class)->parameters([
-        'fakultas' => 'fakultas'
-    ]);
-    Route::resource('/prodi/{fakultas}', ProdiController::class)->parameters([
-        '{fakultas}' => 'prodi',
-    ]);
-    Route::resource('/akun', AkunController::class)->parameters([
-        'akun' => 'user'
-    ]);
+        Route::resource('/pengusul', PengusulController::class)->parameters([
+            'pengusul' => 'pengusul'
+        ]);
 
-    Route::resource('/pengusul', PengusulController::class)->parameters([
-        'pengusul' => 'pengusul'
-    ]);
+        Route::resource('/kategoriBerita', KategoriBeritaController::class)->parameters([
+            'kategoriBerita' => 'kategori_berita'
+        ]);
 
-    Route::resource('/kategoriBerita', KategoriBeritaController::class)->parameters([
-        'kategoriBerita' => 'kategori_berita'
-    ]);
-
-    Route::resource('/kelolaBerita', KelolaBeritaController::class)->parameters([
-        'kelolaBerita' => 'berita'
-    ]);
-
+        Route::resource('/kelolaBerita', KelolaBeritaController::class)->parameters([
+            'kelolaBerita' => 'berita'
+        ]);
+    });
 
     Route::get('/pohon-kerja-sama/mou', MouController::class . '@pohonMou');
     Route::get('/pohon-kerja-sama/mou/moa/{mou}', MouController::class . '@daftarMoa');
     Route::get('/pohon-kerja-sama/mou/ia/{mou}', MouController::class . '@daftarIa');
     Route::get('/pohon-kerja-sama/mou/moa/ia/{moa}', MouController::class . '@daftarMoaIa');
-
 
     Route::get('/pohon-kerja-sama/moa', MoaController::class . '@pohonMoa');
     Route::get('/pohon-kerja-sama/moa/ia/{moa}', MoaController::class . '@daftarIa');
@@ -172,7 +171,7 @@ Route::post('/getMarkerMapMou', [LandingController::class, 'getMapDataMou']);
 Route::post('/getMarkerMapMoa', [LandingController::class, 'getMapDataMoa']);
 Route::post('/getMarkerMapIa', [LandingController::class, 'getMapDataIa']);
 
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth', 'admin']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
